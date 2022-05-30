@@ -106,23 +106,29 @@ namespace PTDuc.WhereHouse.DBContext.Models
 
                 entity.Property(e => e.UserId).ValueGeneratedNever();
 
-                entity.Property(e => e.Address).HasMaxLength(255);
-
                 entity.Property(e => e.Amount).HasColumnType("decimal(22, 4)");
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(255);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
+                entity.Property(e => e.DistrictCode).HasMaxLength(10);
+
+                entity.Property(e => e.Email).HasMaxLength(100);
+
                 entity.Property(e => e.FullName).HasMaxLength(100);
 
                 entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+
+                entity.Property(e => e.ProvinceCode).HasMaxLength(10);
 
                 entity.Property(e => e.Role).HasComment("Vai trò(1 - admin, 2-user)");
 
                 entity.Property(e => e.UserName)
                     .IsRequired()
                     .HasMaxLength(255);
+
+                entity.Property(e => e.WardCode).HasMaxLength(10);
             });
 
             OnModelCreatingPartial(modelBuilder);

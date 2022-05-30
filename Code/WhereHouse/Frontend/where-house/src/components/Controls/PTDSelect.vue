@@ -7,7 +7,6 @@
       outlined
       v-bind="$attrs"
       no-data-text="Không có dữ liệu"
-      :menu-props="{ 'offset-y': true }"
     >
     </v-select>
   </div>
@@ -84,11 +83,11 @@ export default {
 <style lang="scss">
 .PTD-select {
   width: 100% !important;
-  .v-text-field--outlined {
-    .v-label {
-      top: 10px !important;
-    }
-  }
+  // .v-text-field--outlined {
+  //   .v-label {
+  //     top: 10px !important;
+  //   }
+  // }
   // .v-input__append-inner {
   //   margin-top: 8px !important;
   // }

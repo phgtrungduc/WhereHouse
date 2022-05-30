@@ -9,19 +9,23 @@
         <div id="signup-div" class="flex-item border">
           <h2 class="pt-4 pl-4">Tạo tài khoản</h2>
           <form @submit="signup" class="pt-4 pl-4 pr-4">
-            <div class="form-group">
-              <!-- <v-text-field label="Tên đăng nhập" :value="email" outlined></v-text-field> -->
-              <PTDInput label="Tên đăng nhập" v-model="email"></PTDInput>
-            </div>
-            <div class="form-group">
-              <label>Họ và tên</label>
-              <input
-                type="text"
-                class="form-control"
-                v-model="lastName"
-                required
-              />
-            </div>
+            <PTDInput label="Tên đăng nhập" v-model="user.Username" ></PTDInput>
+            <PTDInput
+              label="Số điện thoại"
+              v-model="user.PhoneNumber"
+            ></PTDInput>
+            <PTDInput label="Họ và tên" v-model="user.FullName"></PTDInput>
+            <PTDInput label="Email" v-model="user.Email"></PTDInput>
+            <PTDInput
+              label="Mật khẩu"
+              v-model="user.Password"
+              type="password"
+            ></PTDInput>
+            <PTDInput
+              label="Xác nhận mật khẩu"
+              v-model="user.VerifyPassword"
+              type="password"
+            ></PTDInput>
             <div class="form-group">
               <label>Địa chỉ</label>
               <div class="row">
@@ -30,7 +34,7 @@
                     :apiURL="`Address/Province`"
                     item-value="Code"
                     item-text="Name"
-                    v-model="province"
+                    v-model="user.ProvinceCode"
                     label="Tỉnh/Thành phố"
                   />
                 </div>
@@ -39,7 +43,7 @@
                     :apiURL="apiDistrict"
                     item-value="Code"
                     item-text="Name"
-                    v-model="district"
+                    v-model="user.DistrictCode"
                     label="Quận/Huyện"
                   />
                 </div>
@@ -48,29 +52,11 @@
                     :apiURL="apiWard"
                     item-value="Code"
                     item-text="Name"
-                    v-model="ward"
+                    v-model="user.WardCode"
                     label="Xã/Phường"
                   />
                 </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label>Mật khẩu</label>
-              <input
-                type="password"
-                class="form-control"
-                v-model="password"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label>Xác nhận mật khẩu</label>
-              <input
-                type="password"
-                class="form-control"
-                v-model="passwordConfirm"
-                required
-              />
             </div>
             <div class="d-flex justify-content-center">
               <v-btn
@@ -110,23 +96,20 @@ import axios from "axios";
 import swal from "sweetalert";
 import PTDSelect from "../components/Controls/PTDSelect.vue";
 import PTDInput from "../components/Controls/PTDInput.vue";
-import util from '../util/util';
+import util from "../util/util";
 export default {
   name: "Signup",
-  components: { PTDSelect,PTDInput },
+  components: { PTDSelect, PTDInput },
   props: ["baseURL"],
   data() {
     return {
-      email: null,
-      firstName: null,
-      lastName: null,
-      password: null,
-      passwordConfirm: null,
+      user: {
+        ProvinceCode: null,
+        DistrictCode: null,
+        WardCode: null,
+      },
       loading2: false,
       loader: null,
-      province: null,
-      district: null,
-      ward: null,
       apiDistrict: "Address/GetDistrictByParent?parentCode=",
       apiWard: "Address/GetWardByParent?parentCode=",
     };
@@ -168,9 +151,9 @@ export default {
       }
     },
 
-    validateForm(){
+    validateForm() {
       util.validateEmail();
-    }
+    },
   },
   watch: {
     loader() {
@@ -181,26 +164,25 @@ export default {
 
       this.loader = null;
     },
-    province: {
+    'user.ProvinceCode': {
       handler(newVal) {
         if (newVal) {
           this.apiDistrict = "Address/GetDistrictByParent?parentCode=" + newVal;
-          this.ward = null;
+          this.user.DistrictCode = null;
         }
       },
-      // force eager callback execution
       immediate: true,
     },
-    district: {
+    'user.DistrictCode': {
       handler(newVal) {
         if (newVal) {
           this.apiWard = "Address/GetWardByParent?parentCode=" + newVal;
+          this.user.WardCode = null;
         }
       },
-      // force eager callback execution
       immediate: true,
     },
-  },
+  }
 };
 </script>
 
