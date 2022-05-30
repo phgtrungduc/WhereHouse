@@ -1,0 +1,14 @@
+.search-box{
+    border:1px solid #D8DEDD;
+    align-items: center;
+}
+.search-box input {
+    border: none;
+    outline: none;
+}
+.serach-box-icon{
+    background: url("../images/search.png") no-repeat;
+    height: 16px;
+    width: 16px;
+    margin-right: 10px;
+}
