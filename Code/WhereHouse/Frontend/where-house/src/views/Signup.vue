@@ -11,7 +11,7 @@
           <form @submit="signup" class="pt-4 pl-4 pr-4">
             <div class="form-group">
               <!-- <v-text-field label="Tên đăng nhập" :value="email" outlined></v-text-field> -->
-              <PTDInput label="Tên đăng nhập" :value="email"></PTDInput>
+              <PTDInput label="Tên đăng nhập" v-model="email"></PTDInput>
             </div>
             <div class="form-group">
               <label>Họ và tên</label>

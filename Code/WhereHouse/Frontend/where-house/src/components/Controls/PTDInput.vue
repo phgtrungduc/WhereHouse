@@ -14,6 +14,10 @@
 export default {
   name: "PTDInput",
   inheritAttrs: false,
+  model: {
+    prop: "value",
+    event: "change",
+  },
   props: {
     value: null,
   },

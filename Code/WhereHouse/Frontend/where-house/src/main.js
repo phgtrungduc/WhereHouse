@@ -6,7 +6,7 @@ import  '@/mixin/index'
 import store from './store/index';
 ;// import axios from 'axios' 
 Vue.config.productionTip = false
-window.axios = require('axios');
+// window.axios = require('axios');
 
 Vue.prototype.$baseURL = 'https://localhost:44304/';
 
