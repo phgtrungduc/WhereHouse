@@ -5,12 +5,10 @@
       <div class="container py-5">
         <header class="text-left text-white py-5">
           <h3 class="mb-4 rounded">
-            <a href="#start-shopping" class="bg-white px-2 py-2 rounded" id="heading">Start Shopping</a>
+            <a href="#start-shopping" class="bg-white px-2 py-2 rounded" id="heading">Bắt đẩu tìm kiếm</a>
           </h3>
           <p id="content" class="lead mb-0 bg-dark p-1 rounded">
-            Simple Coding Market is for educational purposes only. It can be
-            used by developers to learn about developing an ecommerce
-            application complete with backend and frontend for Web and Android
+            WhereHouse là trang web cung cấp các thông tin thuê nhà hàng đầu Việt Nam. Hãy bắt đầu tìm kiếm cho mình căn hộ phù hợp!
           </p>
         </header>
       </div>

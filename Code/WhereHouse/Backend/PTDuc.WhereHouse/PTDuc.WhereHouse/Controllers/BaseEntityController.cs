@@ -73,6 +73,12 @@ namespace PTDuc.WhereHouse.Controllers
 
         }
 
+        /// <summary>
+        /// Mucj ddich
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        /// Created By: PTDuc1 - 04.06.200
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] TEntity entity)
         {

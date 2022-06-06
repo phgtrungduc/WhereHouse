@@ -19,7 +19,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             _dlBase = dlBase;
         }
 
-        public bool BeforeInsert(ref TEntity entity)
+        public virtual bool BeforeInsert(ref TEntity entity)
         {
             return true;
         }
@@ -58,7 +58,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return res;
         }
 
-        public bool Insert(TEntity entity)
+        public virtual bool Insert(TEntity entity)
         {
             var res = false;
             if (this.Validate(entity))

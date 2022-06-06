@@ -20,6 +20,7 @@ using PTDuc.WhereHouse.DL.DatabaseLayer;
 using PTDuc.WhereHouse.DL.DatabaseLayer.Login;
 using PTDuc.WhereHouse.DL.Interfaces;
 using PTDuc.WhereHouse.DL.Interfaces.Login;
+using PTDuc.WhereHouse.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,8 +47,12 @@ namespace PTDuc.WhereHouse
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
-            services.AddControllers().AddJsonOptions(x =>
-                                                     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                    options.JsonSerializerOptions.WriteIndented = true;
+                });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PTDuc.WhereHouse", Version = "v1" });

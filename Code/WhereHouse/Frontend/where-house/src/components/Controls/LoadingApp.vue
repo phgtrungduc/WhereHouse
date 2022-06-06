@@ -29,7 +29,7 @@
 
     <div class="content">
       <div class="loading">
-        <p>loading</p>
+        <p>Đang tải</p>
         <span></span>
       </div>
     </div>

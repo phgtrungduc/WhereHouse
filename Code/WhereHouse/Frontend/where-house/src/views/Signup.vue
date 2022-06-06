@@ -8,8 +8,8 @@
       <div class="col-12 justify-content-center d-flex flex-row pt-2">
         <div id="signup-div" class="flex-item border">
           <h2 class="pt-4 pl-4">Tạo tài khoản</h2>
-          <form @submit="signup" class="pt-4 pl-4 pr-4">
-            <PTDInput label="Tên đăng nhập" v-model="user.Username" ></PTDInput>
+          <form class="pt-4 pl-4 pr-4">
+            <PTDInput label="Tên đăng nhập(*)" v-model="user.Username" error error-messages="Chưa điền tên đăng nhập"></PTDInput>
             <PTDInput
               label="Số điện thoại"
               v-model="user.PhoneNumber"
@@ -104,6 +104,7 @@ export default {
   data() {
     return {
       user: {
+        Username:null,
         ProvinceCode: null,
         DistrictCode: null,
         WardCode: null,
@@ -115,29 +116,21 @@ export default {
     };
   },
   methods: {
-    async signup(e) {
-      e.preventDefault();
-      // if the password matches
-      if (this.password === this.passwordConfirm) {
-        // make the post body
-        const user = {
-          email: this.email,
-          firstName: this.firstName,
-          lastName: this.lastName,
-          password: this.password,
-        };
-
+    async signup() {
+      let user = this.user;
+      if (user.Password === user.VerifyPassword) {
         // call the API
         await axios
-          .post(`${this.baseURL}user/signup`, user)
-          .then(() => {
+          .post(`${this.baseUrl}signup`, user)
+          .then((res) => {
             // redirect to home page
-            this.$router.replace("/");
-            swal({
-              text: "User signup successful. Please Login",
-              icon: "success",
-              closeOnClickOutside: false,
-            });
+            // this.$router.replace("/");
+            // swal({
+            //   text: "User signup successful. Please Login",
+            //   icon: "success",
+            //   closeOnClickOutside: false,
+            // });
+            console.log(res);
           })
           .catch((err) => {
             console.log(err);
@@ -153,6 +146,7 @@ export default {
 
     validateForm() {
       util.validateEmail();
+      return true;
     },
   },
   watch: {
