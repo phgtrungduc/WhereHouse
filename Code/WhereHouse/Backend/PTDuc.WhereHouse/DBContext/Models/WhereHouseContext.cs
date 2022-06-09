@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -105,7 +104,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.UserId).ValueGeneratedOnAdd();
+                entity.Property(e => e.UserId).HasDefaultValue();
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(22, 4)");
 
@@ -123,7 +122,9 @@ namespace PTDuc.WhereHouse.DBContext.Models
 
                 entity.Property(e => e.ProvinceCode).HasMaxLength(10);
 
-                entity.Property(e => e.Role).HasComment("Vai trò(1 - admin, 2-user)");
+                entity.Property(e => e.Role)
+                    .HasDefaultValueSql("((1))")
+                    .HasComment("Vai trò(1 - admin, 2-user)");
 
                 entity.Property(e => e.UserName)
                     .IsRequired()

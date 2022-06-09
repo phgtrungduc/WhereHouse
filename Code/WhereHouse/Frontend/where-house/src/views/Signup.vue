@@ -9,79 +9,89 @@
         <div id="signup-div" class="flex-item border">
           <h2 class="pt-4 pl-4">Tạo tài khoản</h2>
           <ValidationObserver ref="form">
-            <form class="pt-4 pl-4 pr-4">
-              <ValidationProvider
-                rules="required"
-                name = "Username"
-              >
-              <PTDInput
-                label="Tên đăng nhập(*)"
-                v-model="user.Username"
-                :error="errors.Username?true:false"
-                :error-messages="errors.Username?'Tên đăng nhập không được để trống':''"
-              ></PTDInput>
-              </ValidationProvider>
-              <PTDInput
-                label="Số điện thoại"
-                v-model="user.PhoneNumber"
-              ></PTDInput>
-              <PTDInput label="Họ và tên" v-model="user.FullName"></PTDInput>
-              <PTDInput label="Email" v-model="user.Email"></PTDInput>
-              <PTDInput
-                label="Mật khẩu"
-                v-model="user.Password"
-                type="password"
-              ></PTDInput>
-              <PTDInput
-                label="Xác nhận mật khẩu"
-                v-model="user.VerifyPassword"
-                type="password"
-              ></PTDInput>
-              <div class="form-group">
-                <label>Địa chỉ</label>
-                <div class="row">
-                  <div class="col">
-                    <PTDSelect
-                      :apiURL="`Address/Province`"
-                      item-value="Code"
-                      item-text="Name"
-                      v-model="user.ProvinceCode"
-                      label="Tỉnh/Thành phố"
-                    />
-                  </div>
-                  <div class="col">
-                    <PTDSelect
-                      :apiURL="apiDistrict"
-                      item-value="Code"
-                      item-text="Name"
-                      v-model="user.DistrictCode"
-                      label="Quận/Huyện"
-                    />
-                  </div>
-                  <div class="col">
-                    <PTDSelect
-                      :apiURL="apiWard"
-                      item-value="Code"
-                      item-text="Name"
-                      v-model="user.WardCode"
-                      label="Xã/Phường"
-                    />
+            <form class="pt-4 pl-4 pr-4 d-flex">
+              <div class="form-input">
+                <ValidationProvider rules="required" name="Username">
+                  <PTDInput
+                    label="Tên đăng nhập(*)"
+                    v-model="user.Username"
+                    name="Tên đăng nhập"
+                    :required="true"
+                  ></PTDInput>
+                </ValidationProvider>
+                <PTDInput
+                  label="Số điện thoại"
+                  v-model="user.PhoneNumber"
+                ></PTDInput>
+                <PTDInput label="Họ và tên" v-model="user.FullName"></PTDInput>
+                <PTDInput label="Email" v-model="user.Email"></PTDInput>
+                <PTDInput
+                  label="Mật khẩu"
+                  v-model="user.Password"
+                  type="password"
+                ></PTDInput>
+                <PTDInput
+                  label="Xác nhận mật khẩu"
+                  v-model="user.VerifyPassword"
+                  type="password"
+                ></PTDInput>
+                <div class="form-group">
+                  <label>Địa chỉ</label>
+                  <div class="row">
+                    <div class="col">
+                      <PTDSelect
+                        :apiURL="`Address/Province`"
+                        item-value="Code"
+                        item-text="Name"
+                        v-model="user.ProvinceCode"
+                        label="Tỉnh/Thành phố"
+                      />
+                    </div>
+                    <div class="col">
+                      <PTDSelect
+                        :apiURL="apiDistrict"
+                        item-value="Code"
+                        item-text="Name"
+                        v-model="user.DistrictCode"
+                        label="Quận/Huyện"
+                      />
+                    </div>
+                    <div class="col">
+                      <PTDSelect
+                        :apiURL="apiWard"
+                        item-value="Code"
+                        item-text="Name"
+                        v-model="user.WardCode"
+                        label="Xã/Phường"
+                      />
+                    </div>
                   </div>
                 </div>
+                <div class="d-flex justify-content-center">
+                  <v-btn
+                    class="ma-2"
+                    :loading="loading2"
+                    :disabled="loading2"
+                    color="success"
+                    @click="
+                      loader = 'loading2';
+                      validateForm();
+                    "
+                  >
+                    Đăng ký
+                    <template v-slot:loader>
+                      <span>Loading...</span>
+                    </template>
+                  </v-btn>
+                </div>
               </div>
-              <div class="d-flex justify-content-center">
-                <v-btn
-                  class="ma-2"
-                  :loading="loading2"
-                  :disabled="loading2"
-                  color="success"
-                  @click="loader = 'loading2';validateForm()"
-                >
-                  Đăng ký
-                  <template v-slot:loader>
-                    <span>Loading...</span>
-                  </template>
-                </v-btn>
+              <div class="form-avatar">
+                <v-file-input
+                  label="File input"
+                  filled
+                  prepend-icon="mdi-camera"
+                  :hide-input="true"
+                ></v-file-input>
               </div>
             </form>
           </ValidationObserver>
@@ -108,10 +118,10 @@ import axios from "axios";
 import swal from "sweetalert";
 import PTDSelect from "../components/Controls/PTDSelect.vue";
 import PTDInput from "../components/Controls/PTDInput.vue";
-import { ValidationObserver, ValidationProvider } from 'vee-validate';
+import { ValidationObserver, ValidationProvider } from "vee-validate";
 export default {
   name: "Signup",
-  components: { PTDSelect, PTDInput,ValidationObserver,ValidationProvider },
+  components: { PTDSelect, PTDInput, ValidationObserver, ValidationProvider },
   props: ["baseURL"],
   data() {
     return {
@@ -125,7 +135,7 @@ export default {
       loader: null,
       apiDistrict: "Address/GetDistrictByParent?parentCode=",
       apiWard: "Address/GetWardByParent?parentCode=",
-      errors:{}
+      errors: {},
     };
   },
   methods: {
@@ -159,21 +169,16 @@ export default {
 
     validateForm() {
       let form = this.$refs.form;
-      if (form){
+      if (form) {
         let fields = this.$refs.form.fields;
-        if (fields){
-          Object.keys(fields).forEach(x=>{
+        if (fields) {
+          Object.keys(fields).forEach((x) => {
             let controls = fields[x];
-            if (!controls.valid) this.errors[x] = true;
-            else {
-              this.errors[x] = false;
-            }
+            if (!controls.valid) return false;
           });
         }
+        return true;
       }
-      // return true;
-      console.log("bam");
-      this.$refs.form.validate().then(res=>console.log(res))
     },
   },
   watch: {
@@ -181,7 +186,7 @@ export default {
       const l = this.loader;
       this[l] = !this[l];
 
-      setTimeout(() => (this[l] = false), 3000);
+      // setTimeout(() => (this[l] = false), 3000);
 
       this.loader = null;
     },

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -25,6 +24,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public decimal? Amount { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
+        public Guid? AvatarId { get; set; }
         public int Role { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
