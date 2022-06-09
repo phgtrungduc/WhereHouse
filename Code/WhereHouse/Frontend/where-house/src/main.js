@@ -4,14 +4,29 @@ import router from './router/index.js'
 import vuetify from './plugins/vuetify'
 import  '@/mixin/index'
 import store from './store/index';
-import { ValidationProvider } from 'vee-validate';
-;// import axios from 'axios' 
+import './plugins/validation';
+// import { required } from 'vee-validate/dist/rules';
+// import axios from 'axios' 
 Vue.config.productionTip = false
 // window.axios = require('axios');
 
-Vue.prototype.$baseURL = 'https://localhost:44304/';
-Vue.component('ValidationProvider', ValidationProvider);
 
+// required.extend('required', {
+//   validate(value) {
+//     return {
+//       required: true,
+//       valid: ['', null, undefined,'a'].indexOf(value) === -1
+//     };
+//   },
+//   computesRequired: true
+// });
+Vue.prototype.$baseURL = 'https://localhost:44304/';
+
+
+// Vue.extend('required', {
+//   ...required,
+//   message: 'This field is required'
+// });
 new Vue({
   router,
   vuetify,
