@@ -5,6 +5,7 @@ import vuetify from './plugins/vuetify'
 import  '@/mixin/index'
 import store from './store/index';
 import './plugins/validation';
+import './plugins/font-awesome';
 Vue.config.productionTip = false
 Vue.prototype.$baseURL = 'https://localhost:44304/';
 new Vue({

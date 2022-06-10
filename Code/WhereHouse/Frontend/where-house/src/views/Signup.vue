@@ -67,33 +67,49 @@
                     </div>
                   </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                  <v-btn
-                    class="ma-2"
-                    :loading="loading2"
-                    :disabled="loading2"
-                    color="success"
-                    @click="
-                      loader = 'loading2';
-                      validateForm();
-                    "
-                  >
-                    Đăng ký
-                    <template v-slot:loader>
-                      <span>Loading...</span>
-                    </template>
-                  </v-btn>
+              </div>
+              <div class="form-avatar pl-5">
+                <v-img
+                  src="../assets/images/avatar-default.png"
+                  class="rounded-circle"
+                  v-if="!avatarURL"
+                >
+                </v-img>
+                <v-img :src="avatarURL" class="rounded-circle" v-if="avatarURL">
+                </v-img>
+                <font-awesome-icon icon="fa-solid fa-user-secret" />
+                <div class="chooose-avatar d-flex">
+                  <v-file-input
+                    label="File input"
+                    filled
+                    prepend-icon="mdi-camera"
+                    :hide-input="true"
+                    id="chooseFile"
+                    hint="aaaaa"
+                    suffix="aaaaaaaaaa"
+                    @change="handleChangeAvatar"
+                  ></v-file-input>
+                  <label for="chooseFile">Nhấn vào đây để chọn avatar</label>
                 </div>
               </div>
-              <div class="form-avatar">
-                <v-file-input
-                  label="File input"
-                  filled
-                  prepend-icon="mdi-camera"
-                  :hide-input="true"
-                ></v-file-input>
-              </div>
             </form>
+            <div class="d-flex justify-content-center">
+              <v-btn
+                class="ma-2"
+                :loading="loading2"
+                :disabled="loading2"
+                color="success"
+                @click="
+                  loader = 'loading2';
+                  validateForm();
+                "
+              >
+                Đăng ký
+                <template v-slot:loader>
+                  <span>Loading...</span>
+                </template>
+              </v-btn>
+            </div>
           </ValidationObserver>
           <hr class="m-0" />
           <small class="form-text text-muted pt-2 pl-4 text-center"
@@ -135,7 +151,7 @@ export default {
       loader: null,
       apiDistrict: "Address/GetDistrictByParent?parentCode=",
       apiWard: "Address/GetWardByParent?parentCode=",
-      errors: {},
+      avatarURL: "",
     };
   },
   methods: {
@@ -180,6 +196,11 @@ export default {
         return true;
       }
     },
+    handleChangeAvatar(file) {
+      if (file) {
+        this.avatarURL = URL.createObjectURL(file);
+      }
+    },
   },
   watch: {
     loader() {
@@ -222,10 +243,13 @@ export default {
   padding-right: 50px !important;
   border: 1px solid;
   border-radius: 27px;
-  width: 700px;
+  width: 800px;
   #signup-div {
     background: white !important;
     border-radius: 5px;
+    .form-avatar {
+      font-size: 13px;
+    }
   }
 }
 
