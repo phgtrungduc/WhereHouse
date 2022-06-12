@@ -29,6 +29,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
 
+        public virtual File Avatar { get; set; }
         public virtual ICollection<House> Houses { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
     }

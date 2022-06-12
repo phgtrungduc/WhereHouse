@@ -69,17 +69,8 @@
                 </div>
               </div>
               <div class="form-avatar pl-5">
-                <v-img
-                  src="../assets/images/avatar-default.png"
-                  class="rounded-circle"
-                  v-if="!avatarURL"
-                >
-                </v-img>
-                <v-img :src="avatarURL" class="rounded-circle" v-if="avatarURL">
-                </v-img>
-                <font-awesome-icon icon="fa-solid fa-user-secret" />
                 <div class="chooose-avatar d-flex">
-                  <v-file-input
+                  <!-- <v-file-input
                     label="File input"
                     filled
                     prepend-icon="mdi-camera"
@@ -89,7 +80,8 @@
                     suffix="aaaaaaaaaa"
                     @change="handleChangeAvatar"
                   ></v-file-input>
-                  <label for="chooseFile">Nhấn vào đây để chọn avatar</label>
+                  <label for="chooseFile">Nhấn vào đây để chọn avatar</label> -->
+                  <PTDInputFile label="Nhấn để chọn avatar" @change="handleChangeAvatar"/>
                 </div>
               </div>
             </form>
@@ -134,10 +126,17 @@ import axios from "axios";
 import swal from "sweetalert";
 import PTDSelect from "../components/Controls/PTDSelect.vue";
 import PTDInput from "../components/Controls/PTDInput.vue";
+import PTDInputFile from "../components/Controls/PTDInputFile.vue";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 export default {
   name: "Signup",
-  components: { PTDSelect, PTDInput, ValidationObserver, ValidationProvider },
+  components: {
+    PTDSelect,
+    PTDInput,
+    ValidationObserver,
+    ValidationProvider,
+    PTDInputFile,
+  },
   props: ["baseURL"],
   data() {
     return {
@@ -247,8 +246,12 @@ export default {
   #signup-div {
     background: white !important;
     border-radius: 5px;
+    .form-input {
+      flex: 1;
+    }
     .form-avatar {
       font-size: 13px;
+      width: 200px;
     }
   }
 }

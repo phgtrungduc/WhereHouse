@@ -68,6 +68,9 @@ namespace PTDuc.WhereHouse
             
             services.AddScoped<IBLAddress, BLAddress>();
 
+            services.AddScoped<IBLFile, BLFile>();
+            services.AddScoped<IDLFile, DLFile>();
+
             services.AddDbContext<WhereHouseContext>(
             options => options.UseSqlServer("name=ConnectionStrings:WhereHouseDatabase"));
 

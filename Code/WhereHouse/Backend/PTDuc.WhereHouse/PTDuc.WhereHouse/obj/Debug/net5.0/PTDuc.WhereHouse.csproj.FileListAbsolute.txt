@@ -91,3 +91,5 @@ D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.pdb
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\CloudinaryDotNet.dll
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.WebEncoders.dll
+D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll
+D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\System.IO.Pipelines.dll

@@ -17,6 +17,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
         {
         }
 
+        public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<House> Houses { get; set; }
         public virtual DbSet<HouseType> HouseTypes { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
@@ -34,6 +35,21 @@ namespace PTDuc.WhereHouse.DBContext.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<File>(entity =>
+            {
+                entity.ToTable("File");
+
+                entity.Property(e => e.FileId).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(255);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.FileName)
+                    .IsRequired()
+                    .HasMaxLength(255);
+            });
 
             modelBuilder.Entity<House>(entity =>
             {
@@ -104,7 +120,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.UserId).HasDefaultValue();
+                entity.Property(e => e.UserId).ValueGeneratedNever();
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(22, 4)");
 
@@ -131,6 +147,11 @@ namespace PTDuc.WhereHouse.DBContext.Models
                     .HasMaxLength(255);
 
                 entity.Property(e => e.WardCode).HasMaxLength(10);
+
+                entity.HasOne(d => d.Avatar)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.AvatarId)
+                    .HasConstraintName("FK_User_File");
             });
 
             OnModelCreatingPartial(modelBuilder);
