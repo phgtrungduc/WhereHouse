@@ -50,5 +50,30 @@ namespace PTDuc.WhereHouse.Controllers
                 return BadRequest(res); 
             }
         }
+
+        [HttpDelete("DeleteFile")]
+        public IActionResult DeleteFile(FileUpload fileUpload)
+        {
+            var res = new ServiceResult();
+            try
+            {
+                if (fileUpload != null)
+                {
+                    var folderPath = fileUpload.category != null ? Path.Combine(_env.WebRootPath, "uploads", fileUpload.category)
+                            : Path.Combine(_env.WebRootPath, "uploads");
+                    res = _blFile.DeleteFile(fileUpload, folderPath);
+                    return Ok(res);
+                }
+                else
+                {
+                    return BadRequest(res);
+                }
+            }
+            catch (System.Exception e)
+            {
+                res.Data = e;
+                return BadRequest(res);
+            }
+        }
     }
 }

@@ -19,3 +19,24 @@ D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.Utils.pdb
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.dll
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.pdb
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.BL.deps.json
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.BL.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\ref\PTDuc.WhereHouse.BL.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.BL.pdb
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.DL.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.Utils.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.pdb
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.DL.pdb
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.pdb
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\PTDuc.WhereHouse.Utils.pdb
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\PTDuc.WhereHouse.BL.csprojAssemblyReference.cache
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\PTDuc.WhereHouse.BL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\PTDuc.WhereHouse.BL.AssemblyInfoInputs.cache
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\PTDuc.WhereHouse.BL.AssemblyInfo.cs
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\PTDuc.WhereHouse.BL.csproj.CoreCompileInputs.cache
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\PTDuc.WhereHouse.BL.csproj.CopyComplete
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\PTDuc.WhereHouse.BL.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\ref\PTDuc.WhereHouse.BL.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\PTDuc.WhereHouse.BL.pdb

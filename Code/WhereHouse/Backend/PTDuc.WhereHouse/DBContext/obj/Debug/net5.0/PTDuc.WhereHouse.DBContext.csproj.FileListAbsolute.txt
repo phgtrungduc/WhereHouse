@@ -13,3 +13,18 @@ D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBCont
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\ref\PTDuc.WhereHouse.DBContext.dll
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.pdb
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.genruntimeconfig.cache
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.deps.json
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.runtimeconfig.json
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.runtimeconfig.dev.json
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Debug\net5.0\ref\PTDuc.WhereHouse.DBContext.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.pdb
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.csprojAssemblyReference.cache
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.AssemblyInfoInputs.cache
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.AssemblyInfo.cs
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.csproj.CoreCompileInputs.cache
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\ref\PTDuc.WhereHouse.DBContext.dll
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.pdb
+C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.genruntimeconfig.cache

@@ -1,6 +1,7 @@
 ﻿using PTDuc.WhereHouse.BL.Interfaces;
 using PTDuc.WhereHouse.DBContext.Models;
 using PTDuc.WhereHouse.DL.Interfaces;
+using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.EntityModels.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,31 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         public BLFile(IDLFile dlFile) : base(dlFile)
         {
             _dlFile = dlFile;
+        }
+
+        public ServiceResult DeleteFile(FileUpload fileUpload, string folderPath)
+        {
+            var res = new ServiceResult();
+            try
+            {
+                folderPath = string.IsNullOrEmpty(folderPath) ? "uploads" : folderPath;
+                var filePath = string.IsNullOrEmpty(fileUpload.filePath) ? Path.Combine(folderPath,fileUpload.fileName) : fileUpload.filePath;
+                if (!System.IO.File.Exists(filePath))
+                {
+                    res.StatusCode = (int)Enumeration.ResultCode.NotExistFile;
+                    res.Data = false;
+                }
+                else {
+                    System.IO.File.Delete(filePath);
+                    res.Data = true;
+                }
+            }
+            catch (Exception e)
+            {
+                res.Data = e;
+                res.StatusCode = (int)Enumeration.ResultCode.Failed;
+            }
+            return res;
         }
 
         public bool UploadFile(FileUpload fileUpload,string folderPath)
