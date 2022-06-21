@@ -6,7 +6,8 @@
       <div class="wrap-loading">
         <LoadingApp v-if="this.$store.state.loadingApp" />
       </div>
-      <div class="content" style="min-height: 60vh" v-if="!this.$store.state.loadingApp">
+      <LoadingFullScreen v-if="this.$store.state.loadingFullScreen"/>
+      <div class="content" style="min-height: 60vh" v-if="!this.$store.state.loadingApp&&!this.$store.state.loadingFullScreen">
         <router-view v-if="products && categories" :baseURL="baseURL" :products="products" :categories="categories"
           @fetchData="fetchData">
         </router-view>
@@ -24,6 +25,7 @@
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 import LoadingApp from "./components/Controls/LoadingApp.vue";
+import LoadingFullScreen from "./components/Controls/LoadingFullScreen.vue";
 import axios from "axios";
 export default {
   data() {
@@ -38,7 +40,7 @@ export default {
     };
   },
 
-  components: { Footer, Navbar, LoadingApp },
+  components: { Footer, Navbar, LoadingApp, LoadingFullScreen },
   methods: {
     async fetchData() {
       // fetch products

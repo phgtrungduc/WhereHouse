@@ -17,6 +17,7 @@
                     v-model="user.Username"
                     name="Tên đăng nhập"
                     :required="true"
+                    ref="Username"
                   ></PTDInput>
                 </ValidationProvider>
                 <PTDInput
@@ -25,16 +26,27 @@
                 ></PTDInput>
                 <PTDInput label="Họ và tên" v-model="user.FullName"></PTDInput>
                 <PTDInput label="Email" v-model="user.Email"></PTDInput>
-                <PTDInput
-                  label="Mật khẩu"
-                  v-model="user.Password"
-                  type="password"
-                ></PTDInput>
-                <PTDInput
-                  label="Xác nhận mật khẩu"
-                  v-model="user.VerifyPassword"
-                  type="password"
-                ></PTDInput>
+                <ValidationProvider rules="required" name="Password">
+                  <PTDInput
+                    label="Mật khẩu(*)"
+                    v-model="user.Password"
+                    type="password"
+                    name="Mật khẩu"
+                    :required="true"
+                    ref="Password"
+                  ></PTDInput>
+                </ValidationProvider>
+                <ValidationProvider rules="required" name="VerifyPassword">
+                  <PTDInput
+                    label="Xác nhận mật khẩu(*)"
+                    v-model="user.VerifyPassword"
+                    type="password"
+                    name="Xác nhận mật khẩu"
+                    :required="true"
+                    ref="VerifyPassword"
+                  ></PTDInput>
+                </ValidationProvider>
+
                 <div class="form-group">
                   <label>Địa chỉ</label>
                   <div class="row">
@@ -70,31 +82,22 @@
               </div>
               <div class="form-avatar pl-5">
                 <div class="chooose-avatar d-flex">
-                  <!-- <v-file-input
-                    label="File input"
-                    filled
-                    prepend-icon="mdi-camera"
-                    :hide-input="true"
-                    id="chooseFile"
-                    hint="aaaaa"
-                    suffix="aaaaaaaaaa"
+                  <PTDInputFile
+                    label="Nhấn để chọn avatar"
                     @change="handleChangeAvatar"
-                  ></v-file-input>
-                  <label for="chooseFile">Nhấn vào đây để chọn avatar</label> -->
-                  <PTDInputFile label="Nhấn để chọn avatar" @change="handleChangeAvatar"/>
+                    ref="avatar"
+                    category="avatar"
+                  />
                 </div>
               </div>
             </form>
             <div class="d-flex justify-content-center">
               <v-btn
                 class="ma-2"
-                :loading="loading2"
-                :disabled="loading2"
+                :loading="loading"
+                :disabled="loading"
                 color="success"
-                @click="
-                  loader = 'loading2';
-                  validateForm();
-                "
+                @click="signup"
               >
                 Đăng ký
                 <template v-slot:loader>
@@ -146,7 +149,7 @@ export default {
         DistrictCode: null,
         WardCode: null,
       },
-      loading2: false,
+      loading: false,
       loader: null,
       apiDistrict: "Address/GetDistrictByParent?parentCode=",
       apiWard: "Address/GetWardByParent?parentCode=",
@@ -156,48 +159,60 @@ export default {
   methods: {
     async signup() {
       let user = this.user;
-      if (user.Password === user.VerifyPassword) {
-        // call the API
-        await axios
-          .post(`${this.baseUrl}signup`, user)
-          .then((res) => {
-            // redirect to home page
-            // this.$router.replace("/");
-            // swal({
-            //   text: "User signup successful. Please Login",
-            //   icon: "success",
-            //   closeOnClickOutside: false,
-            // });
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
+      if (this.validateForm()) {
+        if (user.Password == user.VerifyPassword) {
+          // call the API
+          this.$store.commit('showLoadingFullScreen', true);
+          await axios
+            .post(`${this.baseUrl}user`, user)
+            .then((res) => {
+              // redirect to home page
+              // this.$router.replace("/");
+              // swal({
+              //   text: "User signup successful. Please Login",
+              //   icon: "success",
+              //   closeOnClickOutside: false,
+              // });.
+              this.$store.commit('showLoadingFullScreen', false);
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          swal({
+            text: "Xác nhận mật khẩu không chính xác!",
+            icon: "error",
+            closeOnClickOutside: false,
           });
-      } else {
-        swal({
-          text: "Xác nhận mật khẩu không chính xác!",
-          icon: "error",
-          closeOnClickOutside: false,
-        });
+        }
       }
     },
 
     validateForm() {
-      let form = this.$refs.form;
+      let form = this.$refs.form,
+        res = true,
+        me = this;
       if (form) {
         let fields = this.$refs.form.fields;
         if (fields) {
           Object.keys(fields).forEach((x) => {
             let controls = fields[x];
-            if (!controls.valid) return false;
+            if (!controls.valid) {
+              if (me.$refs[x]) {
+                me.$refs[x].handleChange();
+              }
+              res = false;
+            }
           });
         }
-        return true;
+        return res;
       }
     },
     handleChangeAvatar(file) {
       if (file) {
         this.avatarURL = URL.createObjectURL(file);
+        this.$refs.avatar.handleChangeAvatar(file);
       }
     },
   },

@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
-    
-    public class BLFile : BLBase<PTDuc.WhereHouse.DBContext.Models.File>,IBLFile
+
+    public class BLFile : BLBase<PTDuc.WhereHouse.DBContext.Models.File>, IBLFile
     {
         IDLFile _dlFile;
         public BLFile(IDLFile dlFile) : base(dlFile)
@@ -21,21 +21,30 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             _dlFile = dlFile;
         }
 
-        public ServiceResult DeleteFile(FileUpload fileUpload, string folderPath)
+        public ServiceResult DeleteFile(FileUpload fileUpload, string webRootPath)
         {
             var res = new ServiceResult();
             try
             {
-                folderPath = string.IsNullOrEmpty(folderPath) ? "uploads" : folderPath;
-                var filePath = string.IsNullOrEmpty(fileUpload.filePath) ? Path.Combine(folderPath,fileUpload.fileName) : fileUpload.filePath;
-                if (!System.IO.File.Exists(filePath))
+                var webFilePath = Path.Combine(webRootPath, fileUpload.filePath);
+                if (!System.IO.File.Exists(webFilePath))
                 {
                     res.StatusCode = (int)Enumeration.ResultCode.NotExistFile;
                     res.Data = false;
                 }
-                else {
-                    System.IO.File.Delete(filePath);
+                else
+                {
+                    System.IO.File.Delete(webFilePath);
                     res.Data = true;
+                    var insertSuccess = this.Delete(new DBContext.Models.File { FileId = fileUpload.FileId.Value });
+                    if (insertSuccess)
+                    {
+                        res.Data = true;
+                    }
+                    else
+                    {
+                        res.Data = false;
+                    }
                 }
             }
             catch (Exception e)
@@ -46,19 +55,31 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return res;
         }
 
-        public bool UploadFile(FileUpload fileUpload,string folderPath)
+        public ServiceResult UploadFile(FileUpload fileUpload, string webRootPath, string folderPath)
         {
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
+            var res = new ServiceResult();
+            var webFolderPath = Path.Combine(webRootPath, folderPath);
+            if (!Directory.Exists(webFolderPath))
+                Directory.CreateDirectory(webFolderPath);
             var file = fileUpload.file;
             var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
             var filePath = Path.Combine(folderPath, fileName);
-
-            using (var strem = System.IO.File.Create(filePath))
+            var webFilePath = Path.Combine(webRootPath, filePath);
+            using (var strem = System.IO.File.Create(webFilePath))
             {
-                file.CopyToAsync(strem);
+                file.CopyTo(strem);
             }
-            return true;
+            var fileAdd = new DBContext.Models.File { FileId = Guid.NewGuid(), FileName = fileName, FilePath = filePath };
+            var success = this.Insert(fileAdd);
+            if (success)
+            {
+                res.Data = fileAdd;
+            }
+            else
+            {
+                res.StatusCode = (int)Enumeration.ResultCode.Failed;
+            }
+            return res;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
 
         public bool Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            return _dlBase.Delete(entity);
         }
 
         public IEnumerable<TEntity> GetAll()

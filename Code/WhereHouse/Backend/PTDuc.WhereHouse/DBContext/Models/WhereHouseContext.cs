@@ -49,6 +49,8 @@ namespace PTDuc.WhereHouse.DBContext.Models
                 entity.Property(e => e.FileName)
                     .IsRequired()
                     .HasMaxLength(255);
+
+                entity.Property(e => e.FilePath).HasMaxLength(255);
             });
 
             modelBuilder.Entity<House>(entity =>
@@ -120,7 +122,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.UserId).ValueGeneratedNever();
+                entity.Property(e => e.UserId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(22, 4)");
 

@@ -7,7 +7,8 @@ const store =  new Vuex.Store({
     state () {
         return {
           snackBar:false,
-          loadingApp:true
+          loadingApp:true,
+          loadingFullScreen:false
         }
       },
       mutations: {
@@ -16,6 +17,9 @@ const store =  new Vuex.Store({
         },
         showAppLoading(state,value){
           state.loadingApp = value;
+        },
+        showLoadingFullScreen(state,value){
+          state.loadingFullScreen = value;
         }
       }
 })

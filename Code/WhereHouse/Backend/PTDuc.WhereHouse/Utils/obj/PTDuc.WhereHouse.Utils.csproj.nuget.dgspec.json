@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj": {}
+    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
+    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
+        "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
         "projectName": "PTDuc.WhereHouse.DBContext",
-        "projectPath": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
-        "packagesPath": "C:\\Users\\ptduc1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\obj\\",
+        "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
+        "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
+        "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ptduc1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -76,21 +76,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
+    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj",
+        "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj",
         "projectName": "PTDuc.WhereHouse.EntityModels",
-        "projectPath": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj",
-        "packagesPath": "C:\\Users\\ptduc1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\obj\\",
+        "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj",
+        "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
+        "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ptduc1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -104,8 +104,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
-                "projectPath": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
+              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
+                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
               }
             }
           }
@@ -140,21 +140,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj": {
+    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
+        "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
         "projectName": "PTDuc.WhereHouse.Utils",
-        "projectPath": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
-        "packagesPath": "C:\\Users\\ptduc1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\obj\\",
+        "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
+        "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
+        "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ptduc1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -168,8 +168,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
-                "projectPath": "C:\\Users\\ptduc1\\Desktop\\WhereHouse\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj"
+              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
+                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj"
               }
             }
           }
@@ -198,7 +198,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

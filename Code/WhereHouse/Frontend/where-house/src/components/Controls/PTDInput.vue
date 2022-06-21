@@ -5,13 +5,15 @@
       v-model="selectValue"
       outlined
       v-bind="$attrs"
-      :rules="rules"
       @blur="handleChange()"
+      ref="input"
+      :error="error"
+      :error-messages="errorMessages"
     >
     </v-text-field>
   </div>
 </template>
-
+<!-- :error-messages="errorMessage"     -->
 <script>
 export default {
   name: "PTDInput",
@@ -19,6 +21,8 @@ export default {
   data() {
     return {
       rules: [],
+      error: null,
+      errorMessages : null
     };
   },
   model: {
@@ -54,16 +58,16 @@ export default {
   },
   methods: {
     handleChange() {
-      let errorMessages = true;
+      let errorMessages = "",
+        error = false;
       if (!this.$props.error) {
         if (this.$props.required) {
           if (!this.selectValue) {
+            error = true;
             errorMessages = this.$props.name
               ? this.$props.name + " bắt buộc nhập"
               : "Trường thông tin bắt buộc nhập";
-          } else {
-            errorMessages = true;
-          }
+          } 
         }
         if (this.$props.hasMaxLength) {
           if (this.$props.maxLength) {
@@ -71,21 +75,21 @@ export default {
               this.selectValue &&
               this.selectValue.length > this.$props.maxLength
             ) {
+              error = true;
               errorMessages = this.$props.name
                 ? this.$props.name +
                   " có độ dài tối đa là " +
                   this.$props.maxLength.toString()
                 : "Trường thông tin bắt có độ dài tối đa là " +
                   this.$props.maxLength.toString();
-            } else {
-              errorMessages = true;
-            }
+            } 
           } else {
             console.log("Thiếu prop độ dài tối đa");
           }
         }
-        this.rules = [errorMessages];
       }
+      this.error = error;
+      this.errorMessages = errorMessages;
     },
   },
   computed: {
