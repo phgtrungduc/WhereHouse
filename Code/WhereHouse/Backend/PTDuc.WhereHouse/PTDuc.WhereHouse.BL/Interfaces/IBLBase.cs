@@ -19,5 +19,6 @@ namespace PTDuc.WhereHouse.BL.Interfaces
         bool ValidateCustom(TEntity entity);
         bool BeforeInsert(ref TEntity entity);
         bool BeforeUpdate(ref TEntity entity);
+        ServiceResult GetByPaging(int page, int pageSize);
     }
 }

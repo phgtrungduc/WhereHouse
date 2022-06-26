@@ -40,6 +40,11 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return res;
         }
 
+        public ServiceResult GetByPaging(int page, int pageSize)
+        {
+            return _dlBase.GetByPaging(page,pageSize);
+        }
+
         public TEntity GetByID(string Id)
         {
             var res = _dlBase.GetByID(Id);

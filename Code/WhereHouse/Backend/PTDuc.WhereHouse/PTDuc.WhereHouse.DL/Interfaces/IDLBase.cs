@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PTDuc.WhereHouse.EntityModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -17,5 +18,6 @@ namespace PTDuc.WhereHouse.DL.Interfaces
         IEnumerable<TEntity> GetByKey(PropertyInfo prop, TEntity entity);
         TEntity GetOneByKey(PropertyInfo prop, TEntity entity);
         TableName GetOneByKeyWithType<TableName>(PropertyInfo prop, TEntity entity) where TableName : class;
+        ServiceResult GetByPaging(int page, int pageSize);
     }
 }

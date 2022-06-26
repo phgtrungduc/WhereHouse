@@ -100,5 +100,12 @@ namespace PTDuc.WhereHouse.Controllers
         //    var res = _BLBase.GetByKey(key,value);
         //    return Ok(res);
         //}
+
+
+        [HttpGet("GetByPaging")]
+        public virtual IActionResult GetByPaging(int page,int pageSize)
+        {
+            return Ok(_BLBase.GetByPaging(page, pageSize));
+        }
     }
 }

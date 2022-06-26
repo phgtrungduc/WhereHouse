@@ -25,6 +25,14 @@
           @fetchData="fetchData"
         >
         </router-view>
+        <div class="text-center">
+            <v-pagination
+              :length="pagingData.pageLength"
+              :value="pagingData.page"
+              prev-icon="mdi-menu-left"
+              next-icon="mdi-menu-right"
+            ></v-pagination>
+          </div>
       </div>
       <Footer v-if="!['Signup', 'Signin'].includes($route.name)" />
       <v-snackbar
@@ -60,6 +68,12 @@ export default {
       token: null,
       cartCount: 0,
       houseData: null,
+      pagingData:{
+        page :1,
+        pageSize:10,
+        totalRecords:0,//Khởi tạo tạm = 0,
+        pageLength:1
+      }
     };
   },
 

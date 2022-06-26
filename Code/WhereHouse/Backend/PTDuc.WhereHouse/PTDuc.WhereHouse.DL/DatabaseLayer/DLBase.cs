@@ -25,7 +25,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
         protected String tableName = "";
 
         protected DbSet<TEntity> _dbSet;
-        
+
         public DLBase(WhereHouseContext context)
         {
             _context = context;
@@ -74,8 +74,9 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             var idKey = $"{ tableName}Id";
             var Id = entity.GetValueByKey<TEntity>(idKey);
             _dbSet = _context.Set<TEntity>();
-            var record =  _dbSet.Find(Guid.Parse(Id.ToString()));
-            if (record != null) {
+            var record = _dbSet.Find(Guid.Parse(Id.ToString()));
+            if (record != null)
+            {
                 _dbSet.Attach(record);
                 record = entity;
                 res = _context.SaveChanges();
@@ -100,7 +101,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
         public TEntity GetOneByKey(PropertyInfo prop, TEntity entity)
         {
 
-            TEntity res=null;
+            TEntity res = null;
             var key = prop.Name;
             var value = prop.GetValue(entity);
             _dbSet = _context.Set<TEntity>();
@@ -122,6 +123,23 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             res = dbSet.FromSqlRaw($"select * from [{table}] where {key} = '{value}'").FirstOrDefault();
             return res;
 
+        }
+
+        public ServiceResult GetByPaging(int page, int pageSize)
+        {
+            _dbSet = _context.Set<TEntity>();
+            var totalRecords = _dbSet.Count();
+            var skip = (page - 1) * pageSize;
+            var res = new ServiceResult();
+            if (skip >= 0 && pageSize > 0)
+            {
+                var data = _dbSet.Skip(skip).Take(pageSize);
+                if (typeof(TEntity) == typeof(House))
+                {
+                }
+                res.Data = new { TotalRecords = totalRecords, Data = data };
+            }
+            return res;
         }
     }
 }

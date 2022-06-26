@@ -23,6 +23,8 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public float? Horizontal { get; set; }
         public float? Vertical { get; set; }
         public decimal? Price { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
 
         public virtual HouseType HouseType { get; set; }
         public virtual User UserOwner { get; set; }

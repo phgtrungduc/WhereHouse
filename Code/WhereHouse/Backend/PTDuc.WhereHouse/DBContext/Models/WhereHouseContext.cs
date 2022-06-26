@@ -64,6 +64,10 @@ namespace PTDuc.WhereHouse.DBContext.Models
                     .HasMaxLength(255)
                     .HasComment("Fix tạm cột địa chỉ này, sau sẽ đổi thành các cột riêng chọn Id vị trí ");
 
+                entity.Property(e => e.CreatedBy).HasMaxLength(255);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.HouseName).HasMaxLength(255);
 
                 entity.Property(e => e.Price).HasColumnType("decimal(22, 4)");
@@ -122,7 +126,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.UserId).ValueGeneratedOnAdd();
+                entity.Property(e => e.UserId).ValueGeneratedNever();
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(22, 4)");
 
