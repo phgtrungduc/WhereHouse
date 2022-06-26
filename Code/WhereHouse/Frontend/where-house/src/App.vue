@@ -1,20 +1,42 @@
 <template>
   <v-app>
     <div id="app" data-app>
-      <Navbar :cartCount="cartCount" @resetCartCount="resetCartCount"
-        v-if="!['Signup', 'Signin'].includes($route.name)" />
+      <Navbar
+        :cartCount="cartCount"
+        @resetCartCount="resetCartCount"
+        v-if="!['Signup', 'Signin'].includes($route.name)"
+      />
       <div class="wrap-loading">
         <LoadingApp v-if="this.$store.state.loadingApp" />
       </div>
-      <LoadingFullScreen v-if="this.$store.state.loadingFullScreen"/>
-      <div class="content" style="min-height: 60vh" v-if="!this.$store.state.loadingApp&&!this.$store.state.loadingFullScreen">
-        <router-view v-if="products && categories" :baseURL="baseURL" :products="products" :categories="categories"
-          @fetchData="fetchData">
+      <LoadingFullScreen v-if="this.$store.state.loadingFullScreen" />
+      <div
+        class="content"
+        style="min-height: 60vh"
+        v-if="
+          !this.$store.state.loadingApp && !this.$store.state.loadingFullScreen
+        "
+      >
+        <router-view
+          :baseURL="baseURL"
+          :products="products"
+          :categories="categories"
+          :houseData="houseData"
+          @fetchData="fetchData"
+        >
         </router-view>
       </div>
       <Footer v-if="!['Signup', 'Signin'].includes($route.name)" />
-      <v-snackbar v-model="showSnackbar" transition="v-slide-x-reverse-transition" top right timeout="1000"
-        color="success" absolute rouded="pill">
+      <v-snackbar
+        v-model="showSnackbar"
+        transition="v-slide-x-reverse-transition"
+        top
+        right
+        timeout="1000"
+        color="success"
+        absolute
+        rouded="pill"
+      >
         Đăng nhập thành công
       </v-snackbar>
     </div>
@@ -37,6 +59,7 @@ export default {
       key: 0,
       token: null,
       cartCount: 0,
+      houseData: null,
     };
   },
 
@@ -44,20 +67,22 @@ export default {
   methods: {
     async fetchData() {
       // fetch products
-      let fetchProducts = axios
-        .get(this.baseURL + "product/");
+      let fetchProducts = axios.get(this.baseURL + "product/");
 
       //fetch categories
-      let fetchCategories = axios
-        .get(this.baseURL + "category/");
-      Promise.all([fetchProducts, fetchCategories])
-        .then(responses => {
+      let fetchCategories = axios.get(this.baseURL + "category/");
+
+      let fetchHouse = axios.get(this.baseUrl + "house");
+
+      Promise.all([fetchProducts, fetchCategories, fetchHouse])
+        .then((responses) => {
           this.products = responses[0].data;
-          this.categories = responses[0].data;
+          this.categories = responses[1].data;
+          this.houseData = responses[2].data.$values;
         })
         .catch((err) => console.log(err))
         .finally(() => {
-          this.$store.commit("showAppLoading", false)
+          this.$store.commit("showAppLoading", false);
         });
       //fetch cart items
       if (this.token) {
@@ -86,21 +111,20 @@ export default {
     showSnackbar: {
       /* By default get() is used */
       get() {
-        return this.$store.state.snackBar
+        return this.$store.state.snackBar;
       },
       /* We add a setter */
       set(value) {
         // let me = this;
-        this.$store.commit('showSnackbar', value);
+        this.$store.commit("showSnackbar", value);
         // if (value) {
         //   setTimeout(function () {
         //     me.showLoading = false;
         //   }, 3000)
         // }
-      }
-    }
+      },
+    },
   },
-
 };
 </script>
 

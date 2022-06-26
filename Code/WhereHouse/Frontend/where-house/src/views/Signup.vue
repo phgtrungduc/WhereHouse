@@ -24,8 +24,10 @@
                   label="Số điện thoại"
                   v-model="user.PhoneNumber"
                 ></PTDInput>
-                <PTDInput label="Họ và tên" v-model="user.FullName"></PTDInput>
-                <PTDInput label="Email" v-model="user.Email"></PTDInput>
+                <PTDInput label="Họ và tên" v-model="user.FullName" ref="FullName"></PTDInput>
+                <ValidationProvider rules="email">
+                  <PTDInput label="Email" v-model="user.Email" ref="Email" :email="true"> </PTDInput>
+                </ValidationProvider>
                 <ValidationProvider rules="required" name="Password">
                   <PTDInput
                     label="Mật khẩu(*)"
@@ -162,7 +164,7 @@ export default {
       if (this.validateForm()) {
         if (user.Password == user.VerifyPassword) {
           // call the API
-          this.$store.commit('showLoadingFullScreen', true);
+          this.$store.commit("showLoadingFullScreen", true);
           await axios
             .post(`${this.baseUrl}user`, user)
             .then((res) => {
@@ -173,7 +175,7 @@ export default {
               //   icon: "success",
               //   closeOnClickOutside: false,
               // });.
-              this.$store.commit('showLoadingFullScreen', false);
+              this.$store.commit("showLoadingFullScreen", false);
               console.log(res);
             })
             .catch((err) => {

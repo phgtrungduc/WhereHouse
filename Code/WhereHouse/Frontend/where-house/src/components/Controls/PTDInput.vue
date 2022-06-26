@@ -15,6 +15,7 @@
 </template>
 <!-- :error-messages="errorMessage"     -->
 <script>
+import util from '../../util/util';
 export default {
   name: "PTDInput",
   inheritAttrs: false,
@@ -55,6 +56,10 @@ export default {
       type: Number,
       default: null,
     },
+    email: {
+      type: Boolean,
+      default: null,
+    },
   },
   methods: {
     handleChange() {
@@ -85,6 +90,18 @@ export default {
             } 
           } else {
             console.log("Thiếu prop độ dài tối đa");
+          }
+        }
+        if (this.$props.email){
+          if (this.selectValue){
+            let res = util.validateEmail(this.selectValue);
+            if (!res){
+              error = true;
+              errorMessages = this.$props.name
+                ? this.$props.name +
+                  " không đúng định dạng." 
+                : "Email không đúng định dạng."
+            }
           }
         }
       }

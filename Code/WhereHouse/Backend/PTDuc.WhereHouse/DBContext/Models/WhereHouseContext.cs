@@ -144,6 +144,8 @@ namespace PTDuc.WhereHouse.DBContext.Models
                     .HasDefaultValueSql("((1))")
                     .HasComment("Vai trò(1 - admin, 2-user)");
 
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.UserName)
                     .IsRequired()
                     .HasMaxLength(255);

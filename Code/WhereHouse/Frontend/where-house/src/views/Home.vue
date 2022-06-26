@@ -1,14 +1,19 @@
 <template>
   <div id="home">
-    <!-- Page Wrapper -->
     <div id="background-div" class="page-holder bg-cover">
       <div class="container py-5">
         <header class="text-left text-white py-5">
           <h3 class="mb-4 rounded">
-            <a href="#start-shopping" class="bg-white px-2 py-2 rounded" id="heading">Bắt đẩu tìm kiếm</a>
+            <a
+              href="#start-shopping"
+              class="bg-white px-2 py-2 rounded"
+              id="heading"
+              >Bắt đẩu tìm kiếm</a
+            >
           </h3>
           <p id="content" class="lead mb-0 bg-dark p-1 rounded">
-            WhereHouse là trang web cung cấp các thông tin thuê nhà hàng đầu Việt Nam. Hãy bắt đầu tìm kiếm cho mình căn hộ phù hợp!
+            WhereHouse là trang web cung cấp các thông tin thuê nhà hàng đầu
+            Việt Nam. Hãy bắt đầu tìm kiếm cho mình căn hộ phù hợp!
           </p>
         </header>
       </div>
@@ -17,27 +22,30 @@
     <div id="start-shopping" class="container">
       <div class="row">
         <div class="col-12 text-left">
-          <h2 class="pt-3">Top Categories</h2>
+          <h2 class="pt-3">Danh mục nhà cho thuê</h2>
         </div>
       </div>
-      
+
       <div class="row">
-        <div v-for="(item, index) in this.houseData" :key="index"
-          class="col-md-6 col-xl-4 col-12 pt-3 justify-content-around d-flex">
+        <div
+          v-for="(item, index) in this.houseData"
+          :key="index"
+          class="col-md-6 col-xl-4 col-12 pt-3 justify-content-around d-flex"
+        >
           <HouseBox :house="item" />
         </div>
       </div>
 
-      <div class="row">
+      <!-- <div class="row">
         <div v-for="index in this.category_size" :key="index"
           class="col-md-6 col-xl-4 col-12 pt-3 justify-content-around d-flex">
           <CategoryBox :category="categories[index - 1]"> </CategoryBox>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <hr />
-    <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div class="col-12 text-left">
           <h2 class="pt-3">Top Products</h2>
@@ -49,32 +57,40 @@
           <ProductBox :product="products[index - 1]"> </ProductBox>
         </div>
       </div>
+    </div> -->
+    <div class="text-center">
+      <v-pagination
+        v-model="page"
+        :length="4"
+        prev-icon="mdi-menu-left"
+        next-icon="mdi-menu-right"
+      ></v-pagination>
     </div>
   </div>
 </template>
 
 <script>
-import ProductBox from "../components/Product/ProductBox";
-import CategoryBox from "../components/Category/CategoryBox";
+// import ProductBox from "../components/Product/ProductBox";
+// import CategoryBox from "../components/Category/CategoryBox";
 import HouseBox from "../components/House/HouseBox";
-import axios from "axios";
 export default {
   name: "Home",
-  components: { ProductBox, CategoryBox, HouseBox },
-  props: ["baseURL", "products", "categories"],
+  components: { HouseBox },
+  // components: { ProductBox, CategoryBox, HouseBox },
+  props: ["baseURL", "products", "categories", "houseData"],
   data() {
     return {
       category_size: 0,
       product_size: 0,
       items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me 2" },
       ],
       closeOnClick: true,
-      houseData: [],
-      valueSelect :{}
+      valueSelect: {},
+      page:1
     };
   },
   mounted() {
@@ -83,19 +99,6 @@ export default {
 
     this.product_size = this.products.length;
     this.product_size = Math.min(8, this.product_size);
-    this.fetchData();
-  },
-  methods: {
-    async fetchData() {
-      // fetch house
-      axios
-        .get(this.baseUrl + "House")
-        .then(res => {
-          this.houseData = res.data.$values;
-        })
-        .catch((err) => console.log(err));
-
-    },
   },
 };
 </script>
