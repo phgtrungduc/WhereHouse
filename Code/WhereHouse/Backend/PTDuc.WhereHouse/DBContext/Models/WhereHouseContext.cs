@@ -49,6 +49,8 @@ namespace PTDuc.WhereHouse.DBContext.Models
                 entity.Property(e => e.FileName)
                     .IsRequired()
                     .HasMaxLength(255);
+
+                entity.Property(e => e.FilePath).HasMaxLength(255);
             });
 
             modelBuilder.Entity<House>(entity =>
@@ -61,6 +63,10 @@ namespace PTDuc.WhereHouse.DBContext.Models
                     .IsRequired()
                     .HasMaxLength(255)
                     .HasComment("Fix tạm cột địa chỉ này, sau sẽ đổi thành các cột riêng chọn Id vị trí ");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(255);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.HouseName).HasMaxLength(255);
 
@@ -141,6 +147,8 @@ namespace PTDuc.WhereHouse.DBContext.Models
                 entity.Property(e => e.Role)
                     .HasDefaultValueSql("((1))")
                     .HasComment("Vai trò(1 - admin, 2-user)");
+
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.UserName)
                     .IsRequired()

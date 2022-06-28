@@ -4,6 +4,7 @@ using PTDuc.WhereHouse.DBContext.Models;
 using PTDuc.WhereHouse.BL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PTDuc.WhereHouse.Controllers
 {
@@ -14,6 +15,11 @@ namespace PTDuc.WhereHouse.Controllers
         public UserController(IBLUser blUser) : base(blUser)
         {
             _blUser = blUser;
+        }
+        [AllowAnonymous]
+        public override IActionResult Post([FromBody] User entity)
+        {
+            return base.Post(entity);
         }
     }
 }

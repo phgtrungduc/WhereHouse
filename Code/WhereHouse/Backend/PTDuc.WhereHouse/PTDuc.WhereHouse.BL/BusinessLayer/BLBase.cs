@@ -31,13 +31,18 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
 
         public bool Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            return _dlBase.Delete(entity);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
             var res = _dlBase.GetAll();
             return res;
+        }
+
+        public ServiceResult GetByPaging(int page, int pageSize)
+        {
+            return _dlBase.GetByPaging(page,pageSize);
         }
 
         public TEntity GetByID(string Id)

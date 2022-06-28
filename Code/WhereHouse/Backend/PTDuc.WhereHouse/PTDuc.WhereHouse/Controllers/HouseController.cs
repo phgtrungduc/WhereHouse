@@ -16,10 +16,17 @@ namespace PTDuc.WhereHouse.Controllers
         {
             _blHouse = blHouse;
         }
+
         [AllowAnonymous]
         public override IActionResult Get()
         {
             return base.Get();
+        }
+
+        [AllowAnonymous]
+        public override IActionResult GetByPaging(int page, int pageSize)
+        {
+            return base.GetByPaging(page, pageSize);
         }
 
         [HttpGet("GetDeepData")]

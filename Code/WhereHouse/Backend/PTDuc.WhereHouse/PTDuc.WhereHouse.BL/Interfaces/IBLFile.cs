@@ -11,7 +11,7 @@ namespace PTDuc.WhereHouse.BL.Interfaces
 {
     public interface IBLFile: IBLBase<File>
     {
-        bool UploadFile(FileUpload fileUpload,string folderPath);
-        ServiceResult DeleteFile(FileUpload fileUpload,string folderPath);
+        ServiceResult UploadFile(FileUpload fileUpload,string webRootPath,string folderPath);
+        ServiceResult DeleteFile(FileUpload fileUpload,string webRootPath);
     }
 }

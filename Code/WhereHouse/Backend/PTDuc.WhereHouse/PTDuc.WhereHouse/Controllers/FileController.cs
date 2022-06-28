@@ -11,7 +11,7 @@ using System.IO;
 namespace PTDuc.WhereHouse.Controllers
 {
     [AllowAnonymous]
-    public class FileController:BaseEntityController<DBContext.Models.File>
+    public class FileController : BaseEntityController<DBContext.Models.File>
     {
         IBLFile _blFile;
         private readonly IWebHostEnvironment _env;
@@ -21,7 +21,7 @@ namespace PTDuc.WhereHouse.Controllers
             _env = env;
         }
         [HttpPost("UploadFile")]
-        public IActionResult UploadFile([FromForm]FileUpload fileUpload)
+        public IActionResult UploadFile([FromForm] FileUpload fileUpload)
         {
             var res = new ServiceResult();
             try
@@ -30,12 +30,13 @@ namespace PTDuc.WhereHouse.Controllers
                 {
                     if (fileUpload.file != null)
                     {
-                        var folderPath = fileUpload.category != null ? Path.Combine(_env.WebRootPath, "uploads", fileUpload.category)
-                            : Path.Combine(_env.WebRootPath, "uploads");
-                        res.Data = _blFile.UploadFile(fileUpload, folderPath);
+                        var folderPath = fileUpload.category != null ? Path.Combine("uploads", fileUpload.category)
+                            : "uploads";
+                        res = _blFile.UploadFile(fileUpload, _env.WebRootPath, folderPath);
                         return Ok(res);
                     }
-                    else {
+                    else
+                    {
                         return BadRequest(res);
                     }
                 }
@@ -47,11 +48,11 @@ namespace PTDuc.WhereHouse.Controllers
             catch (System.Exception e)
             {
                 res.Data = e;
-                return BadRequest(res); 
+                return BadRequest(res);
             }
         }
 
-        [HttpDelete("DeleteFile")]
+        [HttpPost("DeleteFile")]
         public IActionResult DeleteFile(FileUpload fileUpload)
         {
             var res = new ServiceResult();
@@ -59,9 +60,7 @@ namespace PTDuc.WhereHouse.Controllers
             {
                 if (fileUpload != null)
                 {
-                    var folderPath = fileUpload.category != null ? Path.Combine(_env.WebRootPath, "uploads", fileUpload.category)
-                            : Path.Combine(_env.WebRootPath, "uploads");
-                    res = _blFile.DeleteFile(fileUpload, folderPath);
+                    res = _blFile.DeleteFile(fileUpload, _env.WebRootPath);
                     return Ok(res);
                 }
                 else

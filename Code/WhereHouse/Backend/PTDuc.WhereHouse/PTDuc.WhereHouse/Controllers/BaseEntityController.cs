@@ -55,7 +55,7 @@ namespace PTDuc.WhereHouse.Controllers
         /// <returns></returns>
         /// CreatedBy: PTDuc(4/12/2020)
         [HttpPost]
-        public IActionResult Post([FromBody] TEntity entity)
+        public virtual IActionResult Post([FromBody] TEntity entity)
         {
 
             var res = new ServiceResult();
@@ -100,5 +100,12 @@ namespace PTDuc.WhereHouse.Controllers
         //    var res = _BLBase.GetByKey(key,value);
         //    return Ok(res);
         //}
+
+
+        [HttpGet("GetByPaging")]
+        public virtual IActionResult GetByPaging(int page,int pageSize)
+        {
+            return Ok(_BLBase.GetByPaging(page, pageSize));
+        }
     }
 }

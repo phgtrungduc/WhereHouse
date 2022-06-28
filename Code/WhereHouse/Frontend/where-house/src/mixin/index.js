@@ -2,7 +2,8 @@ import Vue from 'vue'
 Vue.mixin({
     data: function () {
         return {
-            baseUrl: "https://localhost:44304/api/v1/"
+            baseUrl: "https://localhost:44304/api/v1/",
+            baseResourceUrl : "https://localhost:44304/"
         }
     }
 })
