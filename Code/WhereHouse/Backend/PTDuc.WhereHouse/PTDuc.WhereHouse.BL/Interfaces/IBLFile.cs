@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using PTDuc.WhereHouse.EntityModels.DTO;
 namespace PTDuc.WhereHouse.BL.Interfaces
 {
-    public interface IBLFile: IBLBase<File>
+    public interface IBLFile: IBLBase<File,FileDTO>
     {
         ServiceResult UploadFile(FileUpload fileUpload,string webRootPath,string folderPath);
         ServiceResult DeleteFile(FileUpload fileUpload,string webRootPath);

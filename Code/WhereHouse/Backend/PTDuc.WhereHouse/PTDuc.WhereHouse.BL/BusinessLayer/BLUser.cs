@@ -5,13 +5,15 @@ using PTDuc.WhereHouse.DL.DatabaseLayer;
 using PTDuc.WhereHouse.DL.Interfaces;
 using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.Utils;
+using PTDuc.WhereHouse.EntityModels.DTO;
+using AutoMapper;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
-    public class BLUser : BLBase<User>,IBLUser
+    public class BLUser : BLBase<User,UserDTO>,IBLUser
     {
         IDLUser _dlUser;
-        public BLUser(IDLUser dLUser):base(dLUser) 
+        public BLUser(IDLUser dLUser, IMapper mapper) : base(dLUser, mapper)
         {
             _dlUser = dLUser;
         }

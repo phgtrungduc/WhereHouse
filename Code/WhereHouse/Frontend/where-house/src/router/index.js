@@ -17,6 +17,9 @@ import Cart from '../views/Cart/Cart.vue'
 import Checkout from '../views/Checkout/Checkout.vue'
 import Order from '../views/Orders/Order.vue'
 
+
+import HouseDetail from '../views/House/HouseDetail.vue'
+
 import Category from '../views/Category/Category.vue'
 import AddCategory from '../views/Category/AddCategory.vue'
 import EditCategory from '../views/Category/EditCategory.vue'
@@ -28,6 +31,8 @@ import Success from '../helper/payment/Success.vue'
 import Failed from '../helper/payment/Failed.vue'
 
 import OrderDetails from "../views/Orders/OrderDetails";
+
+import Dialog from "../views/Chat/Dialog";
 
 Vue.use(Router);
 
@@ -79,6 +84,12 @@ const routes = [
     name: 'ShowDetails',
     component: ShowDetails
   },
+  //House routers 
+  {
+    path: '/house/:id',
+    name: 'HouseDetail',
+    component: HouseDetail
+  },
   //Category routes
   {
     path: '/category',
@@ -116,6 +127,12 @@ const routes = [
     name: 'Signin',
     component: Signin
   },
+  //fix tạm ở đây
+  {
+    path: '/chat/:id',
+    name: 'Dialog',
+    component: Dialog
+  },
   //Page Not found
   {
     path: '/:catchAll(.*)',
@@ -143,6 +160,7 @@ const routes = [
     name: 'Order',
     component: Order
   },
+  
   {
     path: '/payment/success',
     name: 'PaymentSuccess',

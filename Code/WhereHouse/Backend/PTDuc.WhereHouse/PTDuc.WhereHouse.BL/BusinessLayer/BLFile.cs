@@ -9,14 +9,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PTDuc.WhereHouse.EntityModels.DTO;
+using AutoMapper;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
 
-    public class BLFile : BLBase<PTDuc.WhereHouse.DBContext.Models.File>, IBLFile
+    public class BLFile : BLBase<DBContext.Models.File, FileDTO>, IBLFile
     {
         IDLFile _dlFile;
-        public BLFile(IDLFile dlFile) : base(dlFile)
+        public BLFile(IDLFile dlFile, IMapper mapper) : base(dlFile, mapper)
         {
             _dlFile = dlFile;
         }

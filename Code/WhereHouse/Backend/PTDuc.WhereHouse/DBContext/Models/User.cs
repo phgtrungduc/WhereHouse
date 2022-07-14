@@ -9,8 +9,12 @@ namespace PTDuc.WhereHouse.DBContext.Models
     {
         public User()
         {
+            ConversationUserId1Navigations = new HashSet<Conversation>();
+            ConversationUserId2Navigations = new HashSet<Conversation>();
             Houses = new HashSet<House>();
+            Messages = new HashSet<Message>();
             Posts = new HashSet<Post>();
+            Wishlists = new HashSet<Wishlist>();
         }
 
         public Guid UserId { get; set; }
@@ -21,7 +25,6 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public string ProvinceCode { get; set; }
         public string DistrictCode { get; set; }
         public string WardCode { get; set; }
-        public decimal? Amount { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
         public Guid? AvatarId { get; set; }
@@ -31,7 +34,11 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public string CreatedBy { get; set; }
 
         public virtual File Avatar { get; set; }
+        public virtual ICollection<Conversation> ConversationUserId1Navigations { get; set; }
+        public virtual ICollection<Conversation> ConversationUserId2Navigations { get; set; }
         public virtual ICollection<House> Houses { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Wishlist> Wishlists { get; set; }
     }
 }

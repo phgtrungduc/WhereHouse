@@ -7,16 +7,21 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AutoMapper;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
-    public class BLBase<TEntity> : IBLBase<TEntity>
+    public class BLBase<TEntity, TDTO> : IBLBase<TEntity,TDTO>
     {
-        protected IDLBase<TEntity> _dlBase;
+        protected IDLBase<TEntity,TDTO> _dlBase;
         protected ServiceResult _serviceResult = new ServiceResult();
-        public BLBase(IDLBase<TEntity> dlBase)
+
+        protected readonly IMapper _mapper;
+
+        public BLBase(IDLBase<TEntity, TDTO> dlBase, IMapper mapper)
         {
             _dlBase = dlBase;
+            _mapper = mapper;
         }
 
         public virtual bool BeforeInsert(ref TEntity entity)
@@ -34,7 +39,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return _dlBase.Delete(entity);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TDTO> GetAll()
         {
             var res = _dlBase.GetAll();
             return res;
@@ -45,21 +50,25 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return _dlBase.GetByPaging(page,pageSize);
         }
 
-        public TEntity GetByID(string Id)
+        public TDTO GetByID(string Id)
         {
-            var res = _dlBase.GetByID(Id);
+            var data = _dlBase.GetByID(Id);
+            var res = default(TDTO);
+            if (data != null) {
+                res = _mapper.Map<TDTO>(data);
+            }
             return res;
         }
 
-        public IEnumerable<TEntity> GetByKey(PropertyInfo prop, TEntity entity)
+        public IEnumerable<TEntity> GetByKey(string key, string value)
         {
-            var res = _dlBase.GetByKey(prop, entity); 
+            var res = _dlBase.GetByKey(key, value); 
             return res;
         }
 
-        public TEntity GetOneByKey(PropertyInfo prop, TEntity entity)
+        public TEntity GetOneByKey(string key, string value)
         {
-            var res = _dlBase.GetOneByKey(prop, entity);
+            var res = _dlBase.GetOneByKey(key, value);
             return res;
         }
 
@@ -96,7 +105,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             foreach (var property in properties)
             {
                 var propertyValue = property.GetValue(entity);
-
+                var propertyName = property.Name;
                 //sử dụng để kiểm tra attribute DisplayName cuả các thuộc tính Customer hay entity
                 var displayName = property.GetCustomAttributes(false)
                 .OfType<DisplayNameAttribute>()
@@ -120,7 +129,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 if (property.IsDefined(typeof(CheckDuplicate), false))
                 {
                     // Check trùng dữ liệu:
-                    var entityDuplicate = GetByKey(property, entity);
+                    var entityDuplicate = GetByKey(propertyName, propertyValue.ToString());
                     //entityDuplicate!=null tức là đã tồn tại 1 thằng có giá trị property trùng trên DB
                     if (entityDuplicate != null)
                     {

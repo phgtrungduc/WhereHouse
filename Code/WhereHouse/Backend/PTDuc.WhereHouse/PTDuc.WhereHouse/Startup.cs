@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PTDuc.WhereHouse.BL.BusinessLayer;
@@ -15,14 +15,17 @@ using PTDuc.WhereHouse.BL.BusinessLayer.Login;
 using PTDuc.WhereHouse.BL.Interfaces;
 using PTDuc.WhereHouse.BL.Interfaces.Login;
 using PTDuc.WhereHouse.BL.MIddlewares;
+using PTDuc.WhereHouse.ChatHub;
 using PTDuc.WhereHouse.DBContext.Models;
 using PTDuc.WhereHouse.DL.DatabaseLayer;
 using PTDuc.WhereHouse.DL.DatabaseLayer.Login;
 using PTDuc.WhereHouse.DL.Interfaces;
 using PTDuc.WhereHouse.DL.Interfaces.Login;
+using PTDuc.WhereHouse.MapperProfile;
 using PTDuc.WhereHouse.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -57,6 +60,9 @@ namespace PTDuc.WhereHouse
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PTDuc.WhereHouse", Version = "v1" });
             });
+            //Sử dụng signalR làm thư viện chat
+            services.AddSignalR();
+
             services.AddScoped<IBLUser, BLUser>();
             services.AddScoped<IDLUser, DLUser>();
 
@@ -65,17 +71,29 @@ namespace PTDuc.WhereHouse
 
             services.AddScoped<IBLHouse, BLHouse>();
             services.AddScoped<IDLHouse, DLHouse>();
-            
+
             services.AddScoped<IBLAddress, BLAddress>();
 
             services.AddScoped<IBLFile, BLFile>();
             services.AddScoped<IDLFile, DLFile>();
 
+            services.AddScoped<IDLWishlist, DLWishlist>();
+            services.AddScoped<IBLWishlist, BLWishlist>();
+
+            services.AddScoped<IDLPost, DLPost>();
+            services.AddScoped<IBLPost, BLPost>();
+            
+            services.AddScoped<IDLMessage, DLMessage>();
+            services.AddScoped<IBLMessage, BLMessage>();
+            
+            services.AddScoped<IDLConversation, DLConversation>();
+            services.AddScoped<IBLConversation, BLConversation>();
+
             services.AddDbContext<WhereHouseContext>(
             options => options.UseSqlServer("name=ConnectionStrings:WhereHouseDatabase"));
 
-
-            var key = Configuration.GetSection("Authentication").GetSection("Key").Value; 
+            //lấy ra key lưu trong appsettings.json
+            var key = Configuration.GetSection("Authentication").GetSection("Key").Value;
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -94,6 +112,23 @@ namespace PTDuc.WhereHouse
             });
             services.AddSingleton<IAuthenticationManager>(new AuthenticationManager(key));
 
+            services.AddAutoMapper((typeof(AutoMapperProfile).Assembly));
+
+            //var configuration = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<User, EntityModels.DTO.User>();
+            //    cfg.CreateMap<File, EntityModels.DTO.File>();
+            //    cfg.CreateMap<House, EntityModels.DTO.House>();
+            //    cfg.CreateMap<HouseType, EntityModels.DTO.HouseType>();
+            //    cfg.CreateMap<Post, EntityModels.DTO.Post>();
+            //    cfg.CreateMap<Wishlist, EntityModels.DTO.Wishlist>();
+            //});
+            //// only during development, validate your mappings; remove it before release
+            //configuration.AssertConfigurationIsValid();
+            //// use DI (http://docs.automapper.org/en/latest/Dependency-injection.html) or create the mapper yourself
+            //var mapper = configuration.CreateMapper();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,12 +143,20 @@ namespace PTDuc.WhereHouse
 
             //app.UseHttpsRedirection();
             //cors
-            app.UseCors(option => option.AllowAnyOrigin().AllowAnyHeader());
+            //lấy ra server host con vuejs
+            var serverClient = Configuration.GetSection("ServerClient").GetSection("Key").Value;
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins(serverClient)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+
             //Nhận các file static từ wwwroot
             app.UseStaticFiles();
 
             //app.UseHttpsRedirection();
-
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
@@ -121,6 +164,7 @@ namespace PTDuc.WhereHouse
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChattingHub>("/chathub");
             });
         }
     }

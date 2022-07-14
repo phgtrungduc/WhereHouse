@@ -158,7 +158,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .category {
   font-weight: 400;
 }

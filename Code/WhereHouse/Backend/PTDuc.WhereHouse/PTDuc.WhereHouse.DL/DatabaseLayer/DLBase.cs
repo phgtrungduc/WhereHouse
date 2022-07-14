@@ -14,10 +14,11 @@ using PTDuc.WhereHouse.EntityModels.Attribute;
 using PTDuc.WhereHouse.EntityModels;
 using System.Reflection;
 using System.Data.Entity.Infrastructure;
+using AutoMapper;
 
 namespace PTDuc.WhereHouse.DL.DatabaseLayer
 {
-    public class DLBase<TEntity> : IDLBase<TEntity> where TEntity : class
+    public class DLBase<TEntity, TDTO> : IDLBase<TEntity,TDTO> where TEntity : class
     {
         protected WhereHouseContext _context;
         //String _connectionString =null;
@@ -26,11 +27,12 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
 
         protected DbSet<TEntity> _dbSet;
 
-        public DLBase(WhereHouseContext context)
+        protected readonly IMapper _mapper;
+        public DLBase(WhereHouseContext context, IMapper mapper)
         {
             _context = context;
             tableName = typeof(TEntity).Name;
-
+            _mapper = mapper;
         }
 
         public bool Delete(TEntity entity)
@@ -48,16 +50,24 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             return (res > 0 ? true : false);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TDTO> GetAll()
         {
             _dbSet = _context.Set<TEntity>();
-            return _dbSet;
+            var obj = (TDTO)typeof(TDTO).GetConstructor(new Type[0]).Invoke(new object[0]);
+            //var configuration = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<TEntity, TDTO>();
+            //});
+            //var mapper = configuration.CreateMapper();
+            var res = _mapper.Map<List<TEntity>,IEnumerable<TDTO>>(_dbSet.ToList());
+            return res;
         }
 
-        public TEntity GetByID(string Id)
+        public virtual TEntity GetByID(string Id)
         {
             _dbSet = _context.Set<TEntity>();
-            return _dbSet.Find(Guid.Parse(Id));
+            var res= _dbSet.Find(Guid.Parse(Id));
+            return res;
         }
 
         public bool Insert(TEntity entity)
@@ -84,12 +94,10 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             return (res > 0 ? true : false);
         }
 
-        public IEnumerable<TEntity> GetByKey(PropertyInfo prop, TEntity entity)
+        public IEnumerable<TEntity> GetByKey(string key,string value)
         {
 
             IEnumerable<TEntity> res;
-            var key = prop.Name;
-            var value = prop.GetValue(entity);
             _dbSet = _context.Set<TEntity>();
             //var type = typeof(TEntity).GetProperty(key).PropertyType;
             //var valueFind = Convert.ChangeType(value, type);
@@ -98,12 +106,10 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             return res;
 
         }
-        public TEntity GetOneByKey(PropertyInfo prop, TEntity entity)
+        public TEntity GetOneByKey(string key, string value)
         {
 
             TEntity res = null;
-            var key = prop.Name;
-            var value = prop.GetValue(entity);
             _dbSet = _context.Set<TEntity>();
             //var type = typeof(TEntity).GetProperty(key).PropertyType;
             //var valueFind = Convert.ChangeType(value, type);
@@ -125,7 +131,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
 
         }
 
-        public ServiceResult GetByPaging(int page, int pageSize)
+        public virtual ServiceResult GetByPaging(int page, int pageSize)
         {
             _dbSet = _context.Set<TEntity>();
             var totalRecords = _dbSet.Count();
@@ -137,7 +143,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
                 if (typeof(TEntity) == typeof(House))
                 {
                 }
-                res.Data = new { TotalRecords = totalRecords, Data = data };
+                res.Data = new { TotalRecords = totalRecords, Data = data.ToList() };
             }
             return res;
         }

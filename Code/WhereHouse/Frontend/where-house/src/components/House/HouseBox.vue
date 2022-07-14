@@ -1,5 +1,10 @@
 <template>
-  <v-card :loading="loading" class="mx-auto my-12" max-width="375" width="375">
+  <v-card
+    :loading="loading"
+    class="mx-auto my-12 container"
+    max-width="375"
+    width="375"
+  >
     <template slot="progress">
       <v-progress-linear
         color="deep-purple"
@@ -10,27 +15,28 @@
     <v-img
       max-height="250"
       src="../../assets/images/house-default.png"
-      v-if="!this.house.HouseImageId"
+      v-if="!this.post.House.HouseImageId"
     ></v-img>
     <v-img
       max-height="250"
       src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-      v-if="this.house.HouseImageId"
+      v-if="this.post.House.HouseImageId"
     ></v-img>
 
-    <v-card-title>{{ this.house.name }}</v-card-title>
+    <v-card-title>{{ this.post.House.name }}</v-card-title>
 
     <v-card-text>
       <div>
-        <b>Diện tích: </b>{{ Intl.NumberFormat().format(this.house.Area) }} m2
+        <b>Diện tích: </b
+        >{{ Intl.NumberFormat().format(this.post.House.Area) }} m2
       </div>
     </v-card-text>
     <v-card-text>
-      <div><b>Địa chỉ: </b>{{ this.house.Address }}</div>
+      <div><b>Địa chỉ: </b>{{ this.post.House.Address }}</div>
     </v-card-text>
     <v-card-text>
       <div>
-        <b>Giá: </b>{{ Intl.NumberFormat().format(this.house.Price) }} VNĐ
+        <b>Giá: </b>{{ Intl.NumberFormat().format(this.post.House.Price) }} VNĐ
       </div>
     </v-card-text>
 
@@ -46,28 +52,39 @@
 export default {
   name: "HouseBox",
   props: {
-    loading: {
-      type: Boolean,
-      default: false,
-    },
     selection: {
       type: Number,
       default: 1,
     },
-    house: {
+    post: {
       type: Object,
       required: true,
     },
   },
-
+  data() {
+    return {
+      loading: false,
+    };
+  },
   methods: {
     viewDetail() {
       this.loading = true;
+      this.$router.push({
+        name:'HouseDetail',
+        params:{
+          id:this.post.PostId,
+          postData:this.$props.post
+        }
+      });
       setTimeout(() => (this.loading = false), 2000);
     },
   },
+  created() {},
 };
 </script>
 
 <style lang="scss" scoped>
+.container {
+  cursor: pointer;
+}
 </style>

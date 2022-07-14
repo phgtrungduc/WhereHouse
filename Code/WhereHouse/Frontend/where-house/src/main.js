@@ -6,6 +6,7 @@ import  '@/mixin/index'
 import store from './store/index';
 import './plugins/validation';
 import './plugins/font-awesome';
+import './ChatHub/ChatHub.js';
 Vue.config.productionTip = false
 Vue.prototype.$baseURL = 'https://localhost:44304/';
 new Vue({

@@ -5,15 +5,15 @@ using System.Reflection;
 
 namespace PTDuc.WhereHouse.BL.Interfaces
 {
-    public interface IBLBase<TEntity>
+    public interface IBLBase<TEntity,TDTO>
     {
-        IEnumerable<TEntity> GetAll();
-        TEntity GetByID(string Id);
+        IEnumerable<TDTO> GetAll();
+        TDTO GetByID(string Id);
         bool Delete(TEntity entity);
         bool Update(TEntity entity);
         bool Insert(TEntity entity);
-        IEnumerable<TEntity> GetByKey(PropertyInfo prop, TEntity entity);
-        TEntity GetOneByKey(PropertyInfo prop, TEntity entity);
+        IEnumerable<TEntity> GetByKey(string key, string value);
+        TEntity GetOneByKey(string key, string value);
         
         bool Validate(TEntity entity);
         bool ValidateCustom(TEntity entity);

@@ -11,17 +11,18 @@ using System.Reflection;
 using PTDuc.WhereHouse.Utils;
 using PTDuc.WhereHouse.DBContext.Models;
 using PTDuc.WhereHouse.DL.Interfaces;
+using AutoMapper;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer.Login
 {
-    public class BLLogin : BLBase<LoginParam>, IBLLogin
+    public class BLLogin : BLBase<LoginParam, LoginParam>, IBLLogin
     {
         IAuthenticationManager _authenticationManager;
         //public BLLogin(IDLLogin dLLogin) : base(dLLogin)
         //{
 
         //}
-        public BLLogin(IDLLogin dLLogin, IAuthenticationManager authenticationManager) : base(dLLogin)
+        public BLLogin(IDLLogin dLLogin, IAuthenticationManager authenticationManager,IMapper mapper) : base(dLLogin, mapper)
         {
             _authenticationManager = authenticationManager;
         }
@@ -82,8 +83,8 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer.Login
                     param.Salt = entity.Salt;
                     if (PasswordHash.Verify(param))
                     {
-                        var accessToken = _authenticationManager.Authenticate(entity.UserName, entity.Password);
-                        res.Data = new { accessToken = accessToken };
+                        var accessToken = _authenticationManager.Authenticate(entity.UserId.ToString(),entity.UserName, entity.Password);
+                        res.Data = new { accessToken = accessToken,User = entity };
                     }
                     else
                     {

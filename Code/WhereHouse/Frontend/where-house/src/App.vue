@@ -12,27 +12,16 @@
       <LoadingFullScreen v-if="this.$store.state.loadingFullScreen" />
       <div
         class="content"
-        style="min-height: 60vh"
-        v-if="
-          !this.$store.state.loadingApp && !this.$store.state.loadingFullScreen
-        "
+        style="min-height: calc(100vh - 177px)"
       >
         <router-view
           :baseURL="baseURL"
           :products="products"
           :categories="categories"
-          :houseData="houseData"
           @fetchData="fetchData"
         >
         </router-view>
-        <div class="text-center">
-            <v-pagination
-              :length="pagingData.pageLength"
-              :value="pagingData.page"
-              prev-icon="mdi-menu-left"
-              next-icon="mdi-menu-right"
-            ></v-pagination>
-          </div>
+        
       </div>
       <Footer v-if="!['Signup', 'Signin'].includes($route.name)" />
       <v-snackbar
@@ -86,13 +75,10 @@ export default {
       //fetch categories
       let fetchCategories = axios.get(this.baseURL + "category/");
 
-      let fetchHouse = axios.get(this.baseUrl + "house");
-
-      Promise.all([fetchProducts, fetchCategories, fetchHouse])
+      Promise.all([fetchProducts, fetchCategories])
         .then((responses) => {
           this.products = responses[0].data;
           this.categories = responses[1].data;
-          this.houseData = responses[2].data.$values;
         })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -115,11 +101,11 @@ export default {
     },
     resetCartCount() {
       this.cartCount = 0;
-    },
+    }
   },
   mounted() {
     this.token = localStorage.getItem("token");
-    this.fetchData();
+    // this.fetchData();
   },
   computed: {
     showSnackbar: {
@@ -145,5 +131,24 @@ export default {
 <style>
 html {
   overflow-y: scroll;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(146, 146, 146); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(158, 158, 158); 
 }
 </style>

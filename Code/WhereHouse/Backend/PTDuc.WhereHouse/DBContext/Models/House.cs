@@ -17,15 +17,16 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public string HouseName { get; set; }
         public Guid? HouseTypeId { get; set; }
         public float? Area { get; set; }
-        public string Address { get; set; }
         public int NumberOfBedroom { get; set; }
         public int? TotalOfFloor { get; set; }
         public float? Horizontal { get; set; }
         public float? Vertical { get; set; }
         public decimal? Price { get; set; }
+        public Guid? HouseImageId { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
 
+        public virtual File HouseImage { get; set; }
         public virtual HouseType HouseType { get; set; }
         public virtual User UserOwner { get; set; }
         public virtual ICollection<Post> Posts { get; set; }

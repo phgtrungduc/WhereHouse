@@ -17,11 +17,14 @@ namespace PTDuc.WhereHouse.DBContext.Models
         {
         }
 
+        public virtual DbSet<Conversation> Conversations { get; set; }
         public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<House> Houses { get; set; }
         public virtual DbSet<HouseType> HouseTypes { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Wishlist> Wishlists { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,6 +38,25 @@ namespace PTDuc.WhereHouse.DBContext.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Conversation>(entity =>
+            {
+                entity.ToTable("Conversation");
+
+                entity.Property(e => e.ConversationId).ValueGeneratedNever();
+
+                entity.HasOne(d => d.UserId1Navigation)
+                    .WithMany(p => p.ConversationUserId1Navigations)
+                    .HasForeignKey(d => d.UserId1)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Conversation_User");
+
+                entity.HasOne(d => d.UserId2Navigation)
+                    .WithMany(p => p.ConversationUserId2Navigations)
+                    .HasForeignKey(d => d.UserId2)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Conversation_User1");
+            });
 
             modelBuilder.Entity<File>(entity =>
             {
@@ -59,11 +81,6 @@ namespace PTDuc.WhereHouse.DBContext.Models
 
                 entity.Property(e => e.HouseId).ValueGeneratedNever();
 
-                entity.Property(e => e.Address)
-                    .IsRequired()
-                    .HasMaxLength(255)
-                    .HasComment("Fix tạm cột địa chỉ này, sau sẽ đổi thành các cột riêng chọn Id vị trí ");
-
                 entity.Property(e => e.CreatedBy).HasMaxLength(255);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -71,6 +88,11 @@ namespace PTDuc.WhereHouse.DBContext.Models
                 entity.Property(e => e.HouseName).HasMaxLength(255);
 
                 entity.Property(e => e.Price).HasColumnType("decimal(22, 4)");
+
+                entity.HasOne(d => d.HouseImage)
+                    .WithMany(p => p.Houses)
+                    .HasForeignKey(d => d.HouseImageId)
+                    .HasConstraintName("FK_House_File");
 
                 entity.HasOne(d => d.HouseType)
                     .WithMany(p => p.Houses)
@@ -93,6 +115,28 @@ namespace PTDuc.WhereHouse.DBContext.Models
                 entity.Property(e => e.HouseTypeName)
                     .IsRequired()
                     .HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<Message>(entity =>
+            {
+                entity.ToTable("Message");
+
+                entity.Property(e => e.MessageId).ValueGeneratedNever();
+
+                entity.Property(e => e.Content).IsRequired();
+
+                entity.Property(e => e.Time).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Conversation)
+                    .WithMany(p => p.Messages)
+                    .HasForeignKey(d => d.ConversationId)
+                    .HasConstraintName("FK_Message_Conversation");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Messages)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Message_User");
             });
 
             modelBuilder.Entity<Post>(entity =>
@@ -128,8 +172,6 @@ namespace PTDuc.WhereHouse.DBContext.Models
 
                 entity.Property(e => e.UserId).ValueGeneratedNever();
 
-                entity.Property(e => e.Amount).HasColumnType("decimal(22, 4)");
-
                 entity.Property(e => e.CreatedBy).HasMaxLength(255);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -160,6 +202,29 @@ namespace PTDuc.WhereHouse.DBContext.Models
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.AvatarId)
                     .HasConstraintName("FK_User_File");
+            });
+
+            modelBuilder.Entity<Wishlist>(entity =>
+            {
+                entity.ToTable("Wishlist");
+
+                entity.Property(e => e.WishlistId).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(255);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.Wishlists)
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Wishlish_Post");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Wishlists)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Wishlish_User");
             });
 
             OnModelCreatingPartial(modelBuilder);

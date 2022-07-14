@@ -10,11 +10,11 @@ namespace PTDuc.WhereHouse.Controllers
     [ApiController]
     [Route("api/v1/[controller]")]
     [Authorize]
-    public class BaseEntityController<TEntity> : Controller where TEntity : class
+    public class BaseEntityController<TEntity,TDTO> : Controller where TEntity : class
     {
-        IBLBase<TEntity> _BLBase;
+        IBLBase<TEntity, TDTO> _BLBase;
         protected WhereHouseContext context = new WhereHouseContext();
-        public BaseEntityController(IBLBase<TEntity> BLBase)
+        public BaseEntityController(IBLBase<TEntity, TDTO> BLBase)
         {
             _BLBase = BLBase;
             
@@ -41,7 +41,7 @@ namespace PTDuc.WhereHouse.Controllers
         /// <returns></returns>
         /// CreatedBy: PTDuc(4/12/2020)
         [HttpGet("{id}")]
-        public IActionResult GetByID(string id)
+        public virtual IActionResult GetByID(string id)
         {
             var res = _BLBase.GetByID(id);
             return Ok(res);

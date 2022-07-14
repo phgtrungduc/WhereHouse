@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace PTDuc.WhereHouse.DL.Interfaces
 {
-    public interface IDLBase<TEntity>
+    public interface IDLBase<TEntity,TDTO>
     {
-        IEnumerable<TEntity> GetAll();
+        IEnumerable<TDTO> GetAll();
         TEntity GetByID(string Id);
         bool Delete(TEntity entity);
         bool Update(TEntity entity);
         bool Insert(TEntity entity);
-        IEnumerable<TEntity> GetByKey(PropertyInfo prop, TEntity entity);
-        TEntity GetOneByKey(PropertyInfo prop, TEntity entity);
+        IEnumerable<TEntity> GetByKey(string key, string value);
+        TEntity GetOneByKey(string key, string value);
         TableName GetOneByKeyWithType<TableName>(PropertyInfo prop, TEntity entity) where TableName : class;
         ServiceResult GetByPaging(int page, int pageSize);
     }

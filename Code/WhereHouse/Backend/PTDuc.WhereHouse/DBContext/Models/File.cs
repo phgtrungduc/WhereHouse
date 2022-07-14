@@ -9,6 +9,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
     {
         public File()
         {
+            Houses = new HashSet<House>();
             Users = new HashSet<User>();
         }
 
@@ -18,6 +19,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public string CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
 
+        public virtual ICollection<House> Houses { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }
 }

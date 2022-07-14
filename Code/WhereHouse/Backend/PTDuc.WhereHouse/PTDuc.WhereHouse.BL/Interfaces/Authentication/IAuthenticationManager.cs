@@ -6,6 +6,6 @@ namespace PTDuc.WhereHouse.BL.Interfaces
 {
     public interface IAuthenticationManager
     {
-        public Object Authenticate(string username, string password);
+        public Object Authenticate(string userId,string username, string password);
     }
 }

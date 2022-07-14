@@ -42,6 +42,7 @@
 <script>
 import swal from "sweetalert";
 import axios from "axios";
+import util from '../util/util';
 export default {
   name: "Signin",
   props: ["baseURL", "products"],
@@ -78,7 +79,8 @@ export default {
                 swal("Đăng nhập thất bại", "Chưa điền đầy đủ thông tin đăng nhập!", "error");
                 break;
               default:
-                localStorage.setItem("token", res.data.Data.accessToken);
+                localStorage.setItem("token", res.data.Data.accessToken); 
+                util.setCookie("userConfig",JSON.stringify(res.data.Data.User));
                 // this.$emit("fetchData");
                 this.$store.commit("showSnackbar",true)
                 this.$router.push({ name: "Home" });

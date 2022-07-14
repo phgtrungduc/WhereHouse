@@ -5,11 +5,12 @@ using PTDuc.WhereHouse.BL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PTDuc.WhereHouse.EntityModels.DTO;
 
 namespace PTDuc.WhereHouse.Controllers
 {
     public class UserController
-        : BaseEntityController<User>
+        : BaseEntityController<User, UserDTO>
     {
         IBLUser _blUser;
         public UserController(IBLUser blUser) : base(blUser)

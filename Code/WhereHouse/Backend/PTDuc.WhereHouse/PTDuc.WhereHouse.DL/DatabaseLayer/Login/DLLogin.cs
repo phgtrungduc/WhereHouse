@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using PTDuc.WhereHouse.DBContext.Models;
 using PTDuc.WhereHouse.DL.Interfaces.Login;
 using PTDuc.WhereHouse.EntityModels;
@@ -10,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace PTDuc.WhereHouse.DL.DatabaseLayer.Login
 {
-    public class DLLogin: DLBase<LoginParam>, IDLLogin
+    public class DLLogin: DLBase<LoginParam,LoginParam>, IDLLogin
     {
-        public DLLogin(WhereHouseContext context) : base(context)
+        public DLLogin(WhereHouseContext context, IMapper mapper) : base(context, mapper)
         {
         }
 

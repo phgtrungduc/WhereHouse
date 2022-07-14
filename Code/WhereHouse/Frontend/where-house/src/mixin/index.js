@@ -5,5 +5,8 @@ Vue.mixin({
             baseUrl: "https://localhost:44304/api/v1/",
             baseResourceUrl : "https://localhost:44304/"
         }
+    },
+    mounted(){
+        this.$store.commit("showAppLoading", false);
     }
 })

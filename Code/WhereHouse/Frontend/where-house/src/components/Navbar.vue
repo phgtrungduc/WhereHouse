@@ -50,7 +50,7 @@
       </form>
 
       <!--      DropDowns-->
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto navbar-right">
         <li class="nav-item dropdown">
           <a
             class="nav-link text-light dropdown-toggle"
@@ -64,15 +64,12 @@
             Thêm
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <router-link class="dropdown-item" :to="{ name: 'Home' }"
-              >Trang chủ</router-link
-            >
-            <router-link class="dropdown-item" :to="{ name: 'Product' }"
-              >Product</router-link
-            >
-            <router-link class="dropdown-item" :to="{ name: 'Category' }"
-              >Category</router-link
-            >
+            <router-link class="dropdown-item" :to="{ name: 'Home' }">
+              Trang chủ
+            </router-link>
+            <router-link class="dropdown-item" :to="{ name: 'Product' }">
+              Thêm bài đăng mới
+            </router-link>
           </div>
         </li>
 
@@ -118,22 +115,27 @@
             >
           </div>
         </li>
-
-        <li class="nav-item">
-          <router-link class="nav-link text-light" :to="{ name: 'Order' }"
-            >Orders</router-link
-          >
+        <li class="nav-item mx-2">
+          <router-link class="text-light" :to="{ name: 'Order' }">
+            <font-awesome-icon
+              v-if="token"
+              icon="fa-regular fa-message"
+              class="icon-navbar"
+            />
+          </router-link>
         </li>
-        <li class="nav-item">
-          <div id="cart">
+        <li class="nav-item ml-2">
+          <div id="cart" v-if="token">
             <span id="nav-cart-count">{{ cartCount }}</span>
-            <router-link class="text-light" :to="{ name: 'Cart' }"
-              ><i class="fa fa-shopping-cart" style="font-size: 36px"></i
-            ></router-link>
+            <router-link class="text-light" :to="{ name: 'Order' }">
+              <font-awesome-icon
+                icon="fa-regular fa-heart"
+                class="icon-navbar"
+              />
+            </router-link>
           </div>
         </li>
       </ul>
-      
     </div>
   </nav>
 </template>
@@ -145,8 +147,7 @@ export default {
   props: ["cartCount"],
   data() {
     return {
-      token: null
-      
+      token: null,
     };
   },
   methods: {
@@ -196,9 +197,20 @@ export default {
   width: 15px;
   height: 15px;
   font-size: 15px;
-  margin-left: 10px;
+  margin-left: 16px;
 }
 #cart {
   position: relative;
+}
+.navbar-right {
+  margin-right: 20px !important ;
+  display: flex;
+  align-items: center;
+}
+.icon-navbar {
+  font-size: 24px;
+}
+nav{
+  height: 85px!important;
 }
 </style>

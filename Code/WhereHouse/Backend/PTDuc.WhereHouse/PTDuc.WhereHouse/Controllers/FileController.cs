@@ -7,11 +7,11 @@ using PTDuc.WhereHouse.DBContext.Models;
 using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.EntityModels.Models;
 using System.IO;
-
+using PTDuc.WhereHouse.EntityModels.DTO;
 namespace PTDuc.WhereHouse.Controllers
 {
     [AllowAnonymous]
-    public class FileController : BaseEntityController<DBContext.Models.File>
+    public class FileController : BaseEntityController<DBContext.Models.File,FileDTO>
     {
         IBLFile _blFile;
         private readonly IWebHostEnvironment _env;

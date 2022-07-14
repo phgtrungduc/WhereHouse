@@ -15,14 +15,15 @@ namespace PTDuc.WhereHouse.BL.Interfaces
             this.key = key;
         }
 
-        public object Authenticate(string username, string password)
+        public object Authenticate(string userId,string username, string password)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(key);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[] {
-                        new Claim(ClaimTypes.Name, username)
+                        new Claim("Username", username),
+                        new Claim("UserId", userId)
                     }),
                 Expires = DateTime.UtcNow.AddYears(1),
                 SigningCredentials = new SigningCredentials(

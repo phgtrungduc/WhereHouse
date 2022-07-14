@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PTDuc.WhereHouse.BL.Interfaces.Login
 {
-    public interface IBLLogin : IBLBase<LoginParam>
+    public interface IBLLogin : IBLBase<LoginParam,LoginParam>
     {
         ServiceResult Login(LoginParam entity);
         bool ChangePassword(string username, string oldPassword, string newPassword, ServiceResult serviceResult);

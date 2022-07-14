@@ -8,12 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PTDuc.WhereHouse.EntityModels.DTO;
+using AutoMapper;
 
 namespace PTDuc.WhereHouse.DL.DatabaseLayer
 {
-    public class DLHouse : DLBase<House>, IDLHouse
+    public class DLHouse : DLBase<House, HouseDTO>, IDLHouse
     {
-        public DLHouse(WhereHouseContext context) : base(context)
+        public DLHouse(WhereHouseContext context, IMapper mapper) : base(context, mapper)
         {
         }
 
@@ -22,5 +24,6 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             _dbSet = _context.Set<House>();
             return _dbSet.Include(x => x.UserOwner);
         }
+
     }
 }
