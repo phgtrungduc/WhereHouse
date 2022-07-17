@@ -6,8 +6,18 @@ import  '@/mixin/index'
 import store from './store/index';
 import './plugins/validation';
 import './plugins/font-awesome';
-import './ChatHub/ChatHub.js';
+import './chathub/ChatHub.js';
+import * as VueGoogleMaps from 'vue2-google-maps'
+
 Vue.config.productionTip = false
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg',
+    libraries: 'places',
+  }
+});
+
 Vue.prototype.$baseURL = 'https://localhost:44304/';
 new Vue({
   router,

@@ -49,93 +49,93 @@
         </div>
       </form>
 
-      <!--      DropDowns-->
-      <ul class="navbar-nav ml-auto navbar-right">
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link text-light dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Thêm
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <router-link class="dropdown-item" :to="{ name: 'Home' }">
-              Trang chủ
-            </router-link>
-            <router-link class="dropdown-item" :to="{ name: 'Product' }">
-              Thêm bài đăng mới
-            </router-link>
-          </div>
-        </li>
+      <div
+        class="navbar-right d-flex align-items-center justify-content-between"
+      >
+        <v-menu bottom :offset-y="120">
+          <template v-slot:activator="{ on, attrs }">
+            <div v-bind="attrs" v-on="on">
+              <span >Tài khoản</span>
+              <font-awesome-icon icon="fa-regular fa-circle-user" class="ml-1" style="font-size:25px"/>
+            </div>
+          </template>
 
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link text-light dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Tài khoản
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <v-list>
+            <router-link class="dropdown-item" :to="{ name: 'Wishlist' }">
+              <v-list-item>
+                <v-list-item-title> Wishlist </v-list-item-title>
+              </v-list-item>
+            </router-link>
+            <router-link class="dropdown-item" :to="{ name: 'Admin' }">
+              <v-list-item>
+                <v-list-item-title> Quản trị viên </v-list-item-title>
+              </v-list-item>
+            </router-link>
             <router-link
               class="dropdown-item"
-              v-if="!token"
               :to="{ name: 'Signin' }"
-              >Wishlist</router-link
-            >
-            <router-link class="dropdown-item" v-else :to="{ name: 'Wishlist' }"
-              >Wishlist</router-link
-            >
-            <router-link class="dropdown-item" :to="{ name: 'Admin' }"
-              >Quản trị viên</router-link
-            >
-            <router-link
-              class="dropdown-item"
               v-if="!token"
-              :to="{ name: 'Signin' }"
-              >Đăng nhập</router-link
             >
+              <v-list-item>
+                <v-list-item-title> Đăng nhập </v-list-item-title>
+              </v-list-item>
+            </router-link>
             <router-link
               class="dropdown-item"
               v-if="!token"
               :to="{ name: 'Signup' }"
-              >Đăng kí</router-link
             >
-            <a class="dropdown-item" v-if="token" href="#" @click="signout"
-              >Đăng xuất</a
-            >
-          </div>
-        </li>
-        <li class="nav-item mx-2">
-          <router-link class="text-light" :to="{ name: 'Order' }">
-            <font-awesome-icon
-              v-if="token"
-              icon="fa-regular fa-message"
-              class="icon-navbar"
-            />
-          </router-link>
-        </li>
-        <li class="nav-item ml-2">
-          <div id="cart" v-if="token">
-            <span id="nav-cart-count">{{ cartCount }}</span>
-            <router-link class="text-light" :to="{ name: 'Order' }">
-              <font-awesome-icon
-                icon="fa-regular fa-heart"
-                class="icon-navbar"
-              />
+              <v-list-item>
+                <v-list-item-title> Đăng ký </v-list-item-title>
+              </v-list-item>
             </router-link>
-          </div>
-        </li>
-      </ul>
+            <v-list-item v-if="token" @click="signout">
+              <v-list-item-title> Đăng xuất </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <router-link class="text-light" :to="{ name: 'Order' }">
+          <span class="mr-1">Tin nhắn</span>
+          <font-awesome-icon
+            v-if="token"
+            icon="fa-regular fa-message"
+            class="icon-navbar"
+          />
+        </router-link>
+        <div id="cart" v-if="token">
+          <span id="nav-cart-count">{{ cartCount }}</span>
+          <router-link class="text-light" :to="{ name: 'Order' }">
+            <span class="mr-1">Wishlist</span>
+            <font-awesome-icon icon="fa-regular fa-heart" class="icon-navbar" />
+          </router-link>
+        </div>
+        <v-menu bottom :offset-y="120">
+          <template v-slot:activator="{ on, attrs }">
+            <div v-bind="attrs" v-on="on">
+              <span >Thêm</span>
+              <font-awesome-icon icon="fa-solid fa-ellipsis-vertical" class="ml-1"/>
+            </div>
+          </template>
+
+          <v-list>
+            <router-link class="dropdown-item" :to="{ name: 'Home' }">
+              <v-list-item>
+                <v-list-item-title> Trang chủ </v-list-item-title>
+              </v-list-item>
+            </router-link>
+            <router-link class="dropdown-item" :to="{ name: 'Product' }">
+              <v-list-item>
+                <v-list-item-title> Thêm bài đăng mới </v-list-item-title>
+              </v-list-item>
+            </router-link>
+            <router-link class="dropdown-item" :to="{ name: 'GoogleMap' }">
+              <v-list-item>
+                <v-list-item-title> Đến map </v-list-item-title>
+              </v-list-item>
+            </router-link>
+          </v-list>
+        </v-menu>
+      </div>
     </div>
   </nav>
 </template>
@@ -169,7 +169,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+a {
+  padding: 0 !important;
+}
 #logo {
   width: 50px;
   margin-left: 20px;
@@ -203,14 +206,15 @@ export default {
   position: relative;
 }
 .navbar-right {
-  margin-right: 20px !important ;
+  width: 350px;
   display: flex;
   align-items: center;
+  color: #fff;
 }
 .icon-navbar {
   font-size: 24px;
 }
-nav{
-  height: 85px!important;
+nav {
+  height: 85px !important;
 }
 </style>

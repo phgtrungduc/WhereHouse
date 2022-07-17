@@ -34,9 +34,16 @@ import OrderDetails from "../views/Orders/OrderDetails";
 
 import Dialog from "../views/Chat/Dialog";
 
+import GoogleMap from "../components/GoogleMap/GoogleMap";
+
 Vue.use(Router);
 
 const routes = [
+  {
+    path: '/map',
+    name: 'GoogleMap',
+    component: GoogleMap
+  },
   {
     path: '/',
     name: 'Home',

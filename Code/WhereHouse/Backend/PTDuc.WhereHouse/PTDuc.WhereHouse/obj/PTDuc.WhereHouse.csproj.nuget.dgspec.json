@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj": {}
+    "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj": {}
   },
   "projects": {
-    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
+    "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
+        "projectUniqueName": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
         "projectName": "PTDuc.WhereHouse.DBContext",
-        "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
+        "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
         "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
-        "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\obj\\",
+        "outputPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -80,14 +80,14 @@
         }
       }
     },
-    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj": {
+    "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj",
+        "projectUniqueName": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj",
         "projectName": "PTDuc.WhereHouse.BL",
-        "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj",
+        "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj",
         "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
-        "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\obj\\",
+        "outputPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -104,11 +104,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
-                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
+              "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
+                "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
               },
-              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj": {
-                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj"
+              "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj": {
+                "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj"
               }
             }
           }
@@ -151,14 +151,14 @@
         }
       }
     },
-    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj": {
+    "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj",
+        "projectUniqueName": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj",
         "projectName": "PTDuc.WhereHouse.DL",
-        "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj",
+        "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj",
         "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
-        "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\obj\\",
+        "outputPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -175,14 +175,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
-                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
+              "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
+                "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
               },
-              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
-                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj"
+              "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
+                "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj"
               },
-              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj": {
-                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj"
+              "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj": {
+                "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj"
               }
             }
           }
@@ -257,14 +257,14 @@
         }
       }
     },
-    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
+    "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj",
+        "projectUniqueName": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj",
         "projectName": "PTDuc.WhereHouse.EntityModels",
-        "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj",
+        "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj",
         "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
-        "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\obj\\",
+        "outputPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -281,8 +281,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
-                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
+              "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
+                "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
               }
             }
           }
@@ -321,14 +321,14 @@
         }
       }
     },
-    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj": {
+    "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj",
+        "projectUniqueName": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj",
         "projectName": "PTDuc.WhereHouse",
-        "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj",
+        "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj",
         "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
-        "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\obj\\",
+        "outputPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -345,14 +345,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
-                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
+              "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
+                "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
               },
-              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj": {
-                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj"
+              "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj": {
+                "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj"
               },
-              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj": {
-                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj"
+              "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj": {
+                "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj"
               }
             }
           }
@@ -378,6 +378,10 @@
             "EntityFramework": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNet.SignalR.Core": {
+              "target": "Package",
+              "version": "[2.4.3, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -420,14 +424,14 @@
         }
       }
     },
-    "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj": {
+    "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
+        "projectUniqueName": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
         "projectName": "PTDuc.WhereHouse.Utils",
-        "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
+        "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
         "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
-        "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\obj\\",
+        "outputPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -444,8 +448,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
-                "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj"
+              "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
+                "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj"
               }
             }
           }

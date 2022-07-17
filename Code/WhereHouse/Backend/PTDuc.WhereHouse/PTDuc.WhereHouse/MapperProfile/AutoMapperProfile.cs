@@ -18,7 +18,17 @@ namespace PTDuc.WhereHouse.MapperProfile
             CreateMap<Post, PostDTO>();
             CreateMap<Wishlist, WishlistDTO>(); ;
             CreateMap<Message, MessageDTO>(); ;
-            CreateMap<Conversation, ConversationDTO>(); ;
+            CreateMap<Conversation, ConversationDTO>();
+
+
+            CreateMap<UserDTO, User>();
+            CreateMap<FileDTO, File>();
+            CreateMap<HouseDTO, House>();
+            CreateMap<HouseTypeDTO, HouseType>();
+            CreateMap<PostDTO, Post>();
+            CreateMap<WishlistDTO, Wishlist>(); ;
+            CreateMap<MessageDTO, Message>(); ;
+            CreateMap<ConversationDTO, Conversation>();
         }
     }
 }

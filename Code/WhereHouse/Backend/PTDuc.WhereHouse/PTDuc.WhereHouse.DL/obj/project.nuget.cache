@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "g6V8Z5AYHx/hKAYZd4cPOBhkf0cbmemMP1MZ2GyENH41KURb+tDz6Ji5TcbAWrF4c4hurXZqu03BHG0yk8TWcQ==",
+  "dgSpecHash": "agWyk9l/43QwMLSEUL9U5rKxpVPs6lP43HFVtW+O1Hor0VmToEuN21iaUU9iCAyCeSjUtGxAJ52VVeaKtcP9Mw==",
   "success": true,
-  "projectFilePath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj",
+  "projectFilePath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\cloudinarydotnet\\1.17.0\\cloudinarydotnet.1.17.0.nupkg.sha512",

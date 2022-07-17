@@ -86,6 +86,15 @@
           "lib/netstandard2.0/Humanizer.dll": {}
         }
       },
+      "Microsoft.AspNet.SignalR.Core/2.4.3": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.AspNet.SignalR.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AspNet.SignalR.Core.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/5.0.16": {
         "type": "package",
         "dependencies": {
@@ -2711,6 +2720,21 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Microsoft.AspNet.SignalR.Core/2.4.3": {
+      "sha512": "zxvv9HhsUa3nfyC7rIwFxHVcGffyQrjqNUO6pBKLyv3eFigkEy3N+6KbbSedzIyCfthglTbvU+m4sg8tawRlvA==",
+      "type": "package",
+      "path": "microsoft.aspnet.signalr.core/2.4.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Microsoft.AspNet.SignalR.Core.dll",
+        "lib/net45/Microsoft.AspNet.SignalR.Core.pdb",
+        "lib/net45/Microsoft.AspNet.SignalR.Core.xml",
+        "microsoft.aspnet.signalr.core.2.4.3.nupkg.sha512",
+        "microsoft.aspnet.signalr.core.nuspec",
+        "packageIcon.png"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/5.0.16": {
@@ -8451,6 +8475,7 @@
       "AutoMapper >= 11.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 11.0.0",
       "EntityFramework >= 5.0.0",
+      "Microsoft.AspNet.SignalR.Core >= 2.4.3",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 5.0.16",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.15",
       "Nancy >= 2.0.0",
@@ -8466,11 +8491,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj",
+      "projectUniqueName": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj",
       "projectName": "PTDuc.WhereHouse",
-      "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj",
+      "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\PTDuc.WhereHouse.csproj",
       "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
-      "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\obj\\",
+      "outputPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8487,14 +8512,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
-              "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
+            "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj": {
+              "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj"
             },
-            "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj": {
-              "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj"
+            "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj": {
+              "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.BL\\PTDuc.WhereHouse.BL.csproj"
             },
-            "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj": {
-              "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj"
+            "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj": {
+              "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.DL\\PTDuc.WhereHouse.DL.csproj"
             }
           }
         }
@@ -8520,6 +8545,10 @@
           "EntityFramework": {
             "target": "Package",
             "version": "[5.0.0, )"
+          },
+          "Microsoft.AspNet.SignalR.Core": {
+            "target": "Package",
+            "version": "[2.4.3, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
@@ -8569,6 +8598,16 @@
       "warningLevel": 1,
       "message": "Package 'EntityFramework 5.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "EntityFramework",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.SignalR.Core 2.4.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.SignalR.Core",
       "targetGraphs": [
         "net5.0"
       ]

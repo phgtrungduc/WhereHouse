@@ -25,6 +25,7 @@ namespace PTDuc.WhereHouse.EntityModels.DTO
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public virtual File Avatar { get; set; }
+        public bool? IsOnline { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ namespace PTDuc.WhereHouse.BL.Interfaces
         IEnumerable<TDTO> GetAll();
         TDTO GetByID(string Id);
         bool Delete(TEntity entity);
-        bool Update(TEntity entity);
+        bool Update(TDTO entity);
         bool Insert(TEntity entity);
         IEnumerable<TEntity> GetByKey(string key, string value);
         TEntity GetOneByKey(string key, string value);

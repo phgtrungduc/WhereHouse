@@ -62,9 +62,9 @@ namespace PTDuc.WhereHouse
             });
             //Sử dụng signalR làm thư viện chat
             services.AddSignalR();
-
-            services.AddScoped<IBLUser, BLUser>();
             services.AddScoped<IDLUser, DLUser>();
+            services.AddScoped<IBLUser, BLUser>();
+            
 
             services.AddScoped<IBLLogin, BLLogin>();
             services.AddScoped<IDLLogin, DLLogin>();

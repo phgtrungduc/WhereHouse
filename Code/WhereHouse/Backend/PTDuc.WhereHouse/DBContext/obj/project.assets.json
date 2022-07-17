@@ -5841,11 +5841,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
+      "projectUniqueName": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
       "projectName": "PTDuc.WhereHouse.DBContext",
-      "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
+      "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\PTDuc.WhereHouse.DBContext.csproj",
       "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
-      "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\obj\\",
+      "outputPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\DBContext\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -5,7 +5,6 @@ D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.runtimeconfig.json
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.runtimeconfig.dev.json
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.dll
-D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\ref\PTDuc.WhereHouse.dll
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.pdb
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.OpenApi.dll
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Newtonsoft.Json.dll
@@ -22,7 +21,6 @@ D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.MvcApplicationPartsAssemblyInfo.cs
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.MvcApplicationPartsAssemblyInfo.cache
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\staticwebassets\PTDuc.WhereHouse.StaticWebAssets.Manifest.cache
-D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\staticwebassets\PTDuc.WhereHouse.StaticWebAssets.xml
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\scopedcss\bundle\PTDuc.WhereHouse.styles.css
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.RazorTargetAssemblyInfo.cache
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.csproj.CopyComplete
@@ -192,3 +190,104 @@ D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\refint\PTDuc.WhereHouse.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\appsettings.Development.json
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\appsettings.json
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.exe
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.deps.json
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.runtimeconfig.json
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.runtimeconfig.dev.json
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\AutoMapper.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\CloudinaryDotNet.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Dapper.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Dynamic.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Scripting.Metadata.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Scripting.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\EntityFramework.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Humanizer.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.PlatformAbstractions.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Extensions.WebEncoders.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Nancy.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\System.CodeDom.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\System.Data.SqlClient.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\System.IO.Pipelines.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\System.Runtime.Caching.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-arm64\native\sni.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.BL.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.DL.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.Utils.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.BL.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.DL.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\PTDuc.WhereHouse.Utils.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.csproj.AssemblyReference.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.AssemblyInfoInputs.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.AssemblyInfo.cs
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.csproj.CoreCompileInputs.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.MvcApplicationPartsAssemblyInfo.cs
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.MvcApplicationPartsAssemblyInfo.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\scopedcss\bundle\PTDuc.WhereHouse.styles.css
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\staticwebassets\PTDuc.WhereHouse.StaticWebAssets.Manifest.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.RazorTargetAssemblyInfo.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.csproj.CopyComplete
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.genruntimeconfig.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\ref\PTDuc.WhereHouse.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\ref\PTDuc.WhereHouse.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.AspNet.SignalR.Core.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\staticwebassets\PTDuc.WhereHouse.StaticWebAssets.xml

@@ -7,16 +7,20 @@ using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.Utils;
 using PTDuc.WhereHouse.EntityModels.DTO;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
     public class BLUser : BLBase<User,UserDTO>,IBLUser
     {
         IDLUser _dlUser;
+        List<UserDTO> userOnline;
         public BLUser(IDLUser dLUser, IMapper mapper) : base(dLUser, mapper)
         {
             _dlUser = dLUser;
+            userOnline = new List<UserDTO>();
         }
+
         public override bool BeforeInsert(ref User entity)
         {
             var res = false;
@@ -30,6 +34,27 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 }
             }
             return res;
+        }
+        public void AddUserToListOnline(UserDTO user)
+        {
+            if (user != null) {
+                var isExist =  userOnline.FindIndex(x => x.UserId == user.UserId);
+                if (isExist == -1) {
+                    userOnline.Add(user);
+                }
+            }
+        }
+
+        public void RemoveUserFromListOnline(UserDTO user)
+        {
+            if (user != null) {
+                userOnline.RemoveAll(x => x.UserId == user.UserId);
+            }
+        }
+
+        public List<UserDTO> GetListUserOnline()
+        {
+            return this.userOnline;
         }
     }
 }

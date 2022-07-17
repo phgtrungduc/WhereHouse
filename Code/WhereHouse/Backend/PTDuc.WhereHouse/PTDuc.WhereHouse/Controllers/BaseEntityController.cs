@@ -80,7 +80,7 @@ namespace PTDuc.WhereHouse.Controllers
         /// <returns></returns>
         /// Created By: PTDuc1 - 04.06.200
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody] TEntity entity)
+        public IActionResult Put([FromBody] TDTO entity)
         {
             var res = _BLBase.Update(entity);
             return Ok(res);

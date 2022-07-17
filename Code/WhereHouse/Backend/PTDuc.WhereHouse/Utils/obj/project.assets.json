@@ -5849,11 +5849,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
+      "projectUniqueName": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
       "projectName": "PTDuc.WhereHouse.Utils",
-      "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
+      "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
       "packagesPath": "C:\\Users\\PhuongTrungDuc\\.nuget\\packages\\",
-      "outputPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\obj\\",
+      "outputPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PhuongTrungDuc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5870,8 +5870,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
-              "projectPath": "D:\\Tài liệu\\Project đồ án\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj"
+            "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj": {
+              "projectPath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\PTDuc.WhereHouse.EntityModels\\PTDuc.WhereHouse.EntityModels.csproj"
             }
           }
         }

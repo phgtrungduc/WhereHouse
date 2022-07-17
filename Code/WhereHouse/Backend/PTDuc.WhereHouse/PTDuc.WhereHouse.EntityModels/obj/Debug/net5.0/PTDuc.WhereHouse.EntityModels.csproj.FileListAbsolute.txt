@@ -1,6 +1,5 @@
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.deps.json
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.dll
-D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\ref\PTDuc.WhereHouse.EntityModels.dll
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.pdb
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.GeneratedMSBuildEditorConfig.editorconfig
 D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.AssemblyInfoInputs.cache
@@ -28,3 +27,19 @@ C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDu
 C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.dll
 C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\ref\PTDuc.WhereHouse.EntityModels.dll
 C:\Users\ptduc1\Desktop\WhereHouse\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.pdb
+D:\Tài liệu\Project đồ án\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\refint\PTDuc.WhereHouse.EntityModels.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.deps.json
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\PTDuc.WhereHouse.EntityModels.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\PTDuc.WhereHouse.DBContext.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.csproj.AssemblyReference.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.AssemblyInfoInputs.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.AssemblyInfo.cs
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.csproj.CoreCompileInputs.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.csproj.CopyComplete
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\ref\PTDuc.WhereHouse.EntityModels.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\ref\PTDuc.WhereHouse.EntityModels.dll
