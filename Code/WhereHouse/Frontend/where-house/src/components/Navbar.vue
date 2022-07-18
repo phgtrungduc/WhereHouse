@@ -50,91 +50,103 @@
       </form>
 
       <div
-        class="navbar-right d-flex align-items-center justify-content-between"
+        class="navbar-right d-flex align-items-center justify-content-end"
       >
-        <v-menu bottom :offset-y="120">
-          <template v-slot:activator="{ on, attrs }">
-            <div v-bind="attrs" v-on="on">
-              <span >Tài khoản</span>
-              <font-awesome-icon icon="fa-regular fa-circle-user" class="ml-1" style="font-size:25px"/>
-            </div>
-          </template>
+        <div class="nav-item">
+          <v-menu bottom :offset-y="120">
+            <template v-slot:activator="{ on, attrs }">
+              <div v-bind="attrs" v-on="on">
+                <span>Tài khoản</span>
+                <font-awesome-icon
+                  icon="fa-regular fa-circle-user"
+                  class="ml-1"
+                  style="font-size: 25px"
+                />
+              </div>
+            </template>
 
-          <v-list>
-            <router-link class="dropdown-item" :to="{ name: 'Wishlist' }">
-              <v-list-item>
-                <v-list-item-title> Wishlist </v-list-item-title>
+            <v-list>
+              <router-link class="dropdown-item" :to="{ name: 'Wishlist' }">
+                <v-list-item>
+                  <v-list-item-title> Wishlist </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link class="dropdown-item" :to="{ name: 'Admin' }">
+                <v-list-item>
+                  <v-list-item-title> Quản trị viên </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link
+                class="dropdown-item"
+                :to="{ name: 'Signin' }"
+                v-if="!token"
+              >
+                <v-list-item>
+                  <v-list-item-title> Đăng nhập </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link
+                class="dropdown-item"
+                v-if="!token"
+                :to="{ name: 'Signup' }"
+              >
+                <v-list-item>
+                  <v-list-item-title> Đăng ký </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <v-list-item v-if="token" @click="signout">
+                <v-list-item-title> Đăng xuất </v-list-item-title>
               </v-list-item>
-            </router-link>
-            <router-link class="dropdown-item" :to="{ name: 'Admin' }">
-              <v-list-item>
-                <v-list-item-title> Quản trị viên </v-list-item-title>
-              </v-list-item>
-            </router-link>
-            <router-link
-              class="dropdown-item"
-              :to="{ name: 'Signin' }"
-              v-if="!token"
-            >
-              <v-list-item>
-                <v-list-item-title> Đăng nhập </v-list-item-title>
-              </v-list-item>
-            </router-link>
-            <router-link
-              class="dropdown-item"
-              v-if="!token"
-              :to="{ name: 'Signup' }"
-            >
-              <v-list-item>
-                <v-list-item-title> Đăng ký </v-list-item-title>
-              </v-list-item>
-            </router-link>
-            <v-list-item v-if="token" @click="signout">
-              <v-list-item-title> Đăng xuất </v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-        <router-link class="text-light" :to="{ name: 'Order' }">
+            </v-list>
+          </v-menu>
+        </div>
+
+        <router-link v-if="token" class="text-light nav-item" :to="{ name: 'Order' }">
           <span class="mr-1">Tin nhắn</span>
           <font-awesome-icon
-            v-if="token"
+            
             icon="fa-regular fa-message"
             class="icon-navbar"
           />
         </router-link>
-        <div id="cart" v-if="token">
+        <div id="cart" v-if="token" class="nav-item">
           <span id="nav-cart-count">{{ cartCount }}</span>
           <router-link class="text-light" :to="{ name: 'Order' }">
             <span class="mr-1">Wishlist</span>
             <font-awesome-icon icon="fa-regular fa-heart" class="icon-navbar" />
           </router-link>
         </div>
-        <v-menu bottom :offset-y="120">
-          <template v-slot:activator="{ on, attrs }">
-            <div v-bind="attrs" v-on="on">
-              <span >Thêm</span>
-              <font-awesome-icon icon="fa-solid fa-ellipsis-vertical" class="ml-1"/>
-            </div>
-          </template>
+        <div class="nav-item">
+          <v-menu bottom :offset-y="120">
+            <template v-slot:activator="{ on, attrs }">
+              <div v-bind="attrs" v-on="on">
+                <span>Thêm</span>
+                <font-awesome-icon
+                  icon="fa-solid fa-ellipsis-vertical"
+                  class="ml-1"
+                />
+              </div>
+            </template>
 
-          <v-list>
-            <router-link class="dropdown-item" :to="{ name: 'Home' }">
-              <v-list-item>
-                <v-list-item-title> Trang chủ </v-list-item-title>
-              </v-list-item>
-            </router-link>
-            <router-link class="dropdown-item" :to="{ name: 'Product' }">
-              <v-list-item>
-                <v-list-item-title> Thêm bài đăng mới </v-list-item-title>
-              </v-list-item>
-            </router-link>
-            <router-link class="dropdown-item" :to="{ name: 'GoogleMap' }">
-              <v-list-item>
-                <v-list-item-title> Đến map </v-list-item-title>
-              </v-list-item>
-            </router-link>
-          </v-list>
-        </v-menu>
+            <v-list>
+              <router-link class="dropdown-item" :to="{ name: 'Home' }">
+                <v-list-item>
+                  <v-list-item-title> Trang chủ </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link class="dropdown-item" :to="{ name: 'Product' }">
+                <v-list-item>
+                  <v-list-item-title> Thêm bài đăng mới </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link class="dropdown-item" :to="{ name: 'GoogleMap' }">
+                <v-list-item>
+                  <v-list-item-title> Đến map </v-list-item-title>
+                </v-list-item>
+              </router-link>
+            </v-list>
+          </v-menu>
+        </div>
       </div>
     </div>
   </nav>
@@ -206,10 +218,23 @@ a {
   position: relative;
 }
 .navbar-right {
-  width: 350px;
+  width: 400px;
   display: flex;
   align-items: center;
   color: #fff;
+  a {
+    text-decoration: none !important;
+    color: unset !important;
+  }
+  .nav-item {
+    padding: 5px !important;
+    margin-right: 5px;
+    &:hover {
+      padding: 5px !important;
+      background-color: #707274 !important;
+      border-radius: 5px;
+    }
+  }
 }
 .icon-navbar {
   font-size: 24px;
