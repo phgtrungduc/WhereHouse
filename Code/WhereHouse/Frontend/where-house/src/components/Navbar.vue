@@ -53,7 +53,7 @@
         class="navbar-right d-flex align-items-center justify-content-end"
       >
         <div class="nav-item">
-          <v-menu bottom :offset-y="120">
+          <v-menu bottom :offset-y="true">
             <template v-slot:activator="{ on, attrs }">
               <div v-bind="attrs" v-on="on">
                 <span>Tài khoản</span>
@@ -117,7 +117,7 @@
           </router-link>
         </div>
         <div class="nav-item">
-          <v-menu bottom :offset-y="120">
+          <v-menu bottom :offset-y="true">
             <template v-slot:activator="{ on, attrs }">
               <div v-bind="attrs" v-on="on">
                 <span>Thêm</span>

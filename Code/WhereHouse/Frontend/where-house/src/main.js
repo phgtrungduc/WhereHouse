@@ -6,7 +6,7 @@ import  '@/mixin/index'
 import store from './store/index';
 import './plugins/validation';
 import './plugins/font-awesome';
-import './chathub/ChatHub.js';
+// import './chathub/ChatHub.js';
 import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.config.productionTip = false

@@ -23,6 +23,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public float? Vertical { get; set; }
         public decimal? Price { get; set; }
         public Guid? HouseImageId { get; set; }
+        public string AddressByGoogle { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
 
