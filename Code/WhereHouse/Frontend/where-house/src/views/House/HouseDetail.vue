@@ -108,7 +108,7 @@
             }}
           </li>
           <li>
-            Kiểu nhà:
+            Loại hình nhà ở:
             {{ this.houseData.HouseType ? this.houseData.HouseType.HouseTypeName : "" }}
           </li>
         </ul>

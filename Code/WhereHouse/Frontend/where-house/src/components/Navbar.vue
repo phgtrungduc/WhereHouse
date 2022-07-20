@@ -19,7 +19,6 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!--      Search Bar-->
       <form class="form-inline ml-auto mr-auto">
         <div class="input-group">
           <input
@@ -49,9 +48,7 @@
         </div>
       </form>
 
-      <div
-        class="navbar-right d-flex align-items-center justify-content-end"
-      >
+      <div class="navbar-right d-flex align-items-center justify-content-end">
         <div class="nav-item">
           <v-menu bottom :offset-y="true">
             <template v-slot:activator="{ on, attrs }">
@@ -66,30 +63,17 @@
             </template>
 
             <v-list>
-              <router-link class="dropdown-item" :to="{ name: 'Wishlist' }">
-                <v-list-item>
-                  <v-list-item-title> Wishlist </v-list-item-title>
-                </v-list-item>
-              </router-link>
-              <router-link class="dropdown-item" :to="{ name: 'Admin' }">
+              <router-link :to="{ name: 'Admin' }">
                 <v-list-item>
                   <v-list-item-title> Quản trị viên </v-list-item-title>
                 </v-list-item>
               </router-link>
-              <router-link
-                class="dropdown-item"
-                :to="{ name: 'Signin' }"
-                v-if="!token"
-              >
+              <router-link :to="{ name: 'Signin' }" v-if="!token">
                 <v-list-item>
                   <v-list-item-title> Đăng nhập </v-list-item-title>
                 </v-list-item>
               </router-link>
-              <router-link
-                class="dropdown-item"
-                v-if="!token"
-                :to="{ name: 'Signup' }"
-              >
+              <router-link v-if="!token" :to="{ name: 'Signup' }">
                 <v-list-item>
                   <v-list-item-title> Đăng ký </v-list-item-title>
                 </v-list-item>
@@ -101,13 +85,13 @@
           </v-menu>
         </div>
 
-        <router-link v-if="token" class="text-light nav-item" :to="{ name: 'Order' }">
+        <router-link
+          v-if="token"
+          class="text-light nav-item"
+          :to="{ name: 'Order' }"
+        >
           <span class="mr-1">Tin nhắn</span>
-          <font-awesome-icon
-            
-            icon="fa-regular fa-message"
-            class="icon-navbar"
-          />
+          <font-awesome-icon icon="fa-regular fa-message" class="icon-navbar" />
         </router-link>
         <div id="cart" v-if="token" class="nav-item">
           <span id="nav-cart-count">{{ cartCount }}</span>
@@ -120,26 +104,21 @@
           <v-menu bottom :offset-y="true">
             <template v-slot:activator="{ on, attrs }">
               <div v-bind="attrs" v-on="on">
-                <span>Thêm</span>
+                <span>Bài đăng</span>
                 <font-awesome-icon
-                  icon="fa-solid fa-ellipsis-vertical"
-                  class="ml-1"
+                  icon="fa-regular fa-file"
+                  class="ml-1 icon-navbar"
                 />
               </div>
             </template>
 
             <v-list>
-              <router-link class="dropdown-item" :to="{ name: 'Home' }">
-                <v-list-item>
-                  <v-list-item-title> Trang chủ </v-list-item-title>
-                </v-list-item>
-              </router-link>
-              <router-link class="dropdown-item" :to="{ name: 'Product' }">
+              <router-link :to="{ name: 'AddHouse' }">
                 <v-list-item>
                   <v-list-item-title> Thêm bài đăng mới </v-list-item-title>
                 </v-list-item>
               </router-link>
-              <router-link class="dropdown-item" :to="{ name: 'GoogleMap' }">
+              <router-link :to="{ name: 'GoogleMap' }">
                 <v-list-item>
                   <v-list-item-title> Đến map </v-list-item-title>
                 </v-list-item>
@@ -218,7 +197,7 @@ a {
   position: relative;
 }
 .navbar-right {
-  width: 400px;
+  width: 450px;
   display: flex;
   align-items: center;
   color: #fff;

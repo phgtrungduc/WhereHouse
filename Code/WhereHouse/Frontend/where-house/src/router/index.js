@@ -19,6 +19,7 @@ import Order from '../views/Orders/Order.vue'
 
 
 import HouseDetail from '../views/House/HouseDetail.vue'
+import AddHouse from '../views/House/AddHouse.vue'
 
 import Category from '../views/Category/Category.vue'
 import AddCategory from '../views/Category/AddCategory.vue'
@@ -134,11 +135,17 @@ const routes = [
     name: 'Signin',
     component: Signin
   },
-  //fix tạm ở đây
+  //fix tạm ở đây sau chuyển xuống dưới catchAll
   {
     path: '/chat/:id',
     name: 'Dialog',
     component: Dialog
+  },
+  //fix tạm ở đây tiếp sau chuyển xuống dưới catchAll
+  {
+    path: '/addhouse',
+    name: 'AddHouse',
+    component: AddHouse
   },
   //Page Not found
   {
