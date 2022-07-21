@@ -22,6 +22,11 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             _bLWishlist = bLWishlist;
         }
 
+        public bool AddNewPost(HouseDTO dataForPost)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<House> GetDeepData()
         {
             return _dlHouse.GetDeepData();

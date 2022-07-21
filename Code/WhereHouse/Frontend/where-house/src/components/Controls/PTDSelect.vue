@@ -7,6 +7,7 @@
       outlined
       v-bind="$attrs"
       no-data-text="Không có dữ liệu"
+      :menu-props="{ auto: true, overflowY: true }"
     >
     </v-select>
   </div>

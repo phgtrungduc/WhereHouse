@@ -23,5 +23,10 @@ namespace PTDuc.WhereHouse.EntityModels.DTO
         public string CreatedBy { get; set; }
 
         public bool? IsInWishList { get; set; }
+
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

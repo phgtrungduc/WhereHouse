@@ -7,6 +7,8 @@ namespace PTDuc.WhereHouse.BL.Interfaces
     public interface IBLHouse : IBLBase<House,HouseDTO>
     {
         IEnumerable<House> GetDeepData();
+
+        bool AddNewPost(HouseDTO dataForPost);
     }
     
 }
