@@ -29,7 +29,7 @@ const util = {
         let c_value = encodeURI(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
         document.cookie = c_name + "=" + c_value;
     },
-    
+
     getCookie(c_name) {
         let i, x, y, ARRcookies = document.cookie.split(";");
         for (i = 0; i < ARRcookies.length; i++) {
@@ -41,14 +41,37 @@ const util = {
             }
         }
     },
-    getUserConfig(){
+    getUserConfig() {
         let config = this.getCookie("userConfig");
         if (config) return JSON.parse(config);
         return {};
     },
-    getCurrentUserId(){
+    getCurrentUserId() {
         let user = this.getUserConfig();
-        return user?user.UserId:'';
+        return user ? user.UserId : '';
+    },
+    checkObjectHasData(obj) {
+        let res = false;
+        if (!obj) {
+            res = false;
+        } else {
+            let arrayValue = Object.values(obj);
+            if (arrayValue && arrayValue.length > 0) {
+                arrayValue.forEach(x => {
+                    if (x) res = true;
+                })
+            } else {
+                res = false;
+            }
+        }
+        return res;
+    },
+    alertSuccess(title) {
+        return swal(title, {
+            buttons: false,
+            timer: 1000,
+            icon: "success",
+        })
     }
 
 }

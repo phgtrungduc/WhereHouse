@@ -40,10 +40,6 @@ footer {
   font-family: "Roboto", sans-serif;
   background-color: #232f3e;
   font-size: 16px;
-  position: relative;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
   height: 90px!important;
 }
 </style>

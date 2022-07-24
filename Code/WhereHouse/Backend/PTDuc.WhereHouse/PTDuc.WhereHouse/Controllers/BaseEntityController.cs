@@ -55,7 +55,7 @@ namespace PTDuc.WhereHouse.Controllers
         /// <returns></returns>
         /// CreatedBy: PTDuc(4/12/2020)
         [HttpPost]
-        public virtual IActionResult Post([FromBody] TEntity entity)
+        public virtual IActionResult Post([FromBody] TDTO entity)
         {
 
             var res = new ServiceResult();

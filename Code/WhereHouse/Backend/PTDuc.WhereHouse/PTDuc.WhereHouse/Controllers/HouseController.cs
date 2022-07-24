@@ -10,6 +10,8 @@ using PTDuc.WhereHouse.BL.Interfaces;
 using PTDuc.WhereHouse.DBContext.Models;
 using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.EntityModels.DTO;
+using static PTDuc.WhereHouse.EntityModels.Enumeration;
+
 namespace PTDuc.WhereHouse.Controllers
 {
     public class HouseController : BaseEntityController<House, HouseDTO>
@@ -59,6 +61,33 @@ namespace PTDuc.WhereHouse.Controllers
             }
 
             return Ok(res);
+        }
+
+
+        [HttpPost("AddNewPost")]
+        public virtual IActionResult AddNewPost(HouseDTO dataForPost)
+        {
+            var res = new ServiceResult();
+            try
+            {
+                var  resutl = _blHouse.AddNewPost(dataForPost);
+                if (resutl)
+                {
+                    res.Data = true;
+                    return Ok(res);
+                }
+                else {
+                    res.StatusCode = (int)ResultCode.Failed;
+                    res.Messenger = "Thêm post thất bại";
+                    return BadRequest(res);
+                }
+            }
+            catch (Exception e)
+            {
+                res.StatusCode = (int)ResultCode.Failed;
+                res.Messenger = e.Message;
+                return BadRequest(res);
+            }
         }
     }
 }

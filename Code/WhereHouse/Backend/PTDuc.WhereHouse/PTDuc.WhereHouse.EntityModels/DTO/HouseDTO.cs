@@ -28,5 +28,8 @@ namespace PTDuc.WhereHouse.EntityModels.DTO
 
         public string Description { get; set; }
         public Guid? UserId { get; set; }
+
+        public string Address { get; set; }
+        public string AddressByGoogle { get; set; }
     }
 }

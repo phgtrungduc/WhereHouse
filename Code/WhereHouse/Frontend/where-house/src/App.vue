@@ -10,10 +10,19 @@
         <LoadingApp v-if="this.$store.state.loadingApp" />
       </div>
       <LoadingFullScreen v-if="this.$store.state.loadingFullScreen" />
-      <div
-        class="content"
-        style="min-height: calc(100vh - 177px)"
-      >
+      <div class="content" style="min-height: calc(100vh - 177px)">
+        <v-snackbar
+          v-model="showSnackbar"
+          transition="v-slide-x-reverse-transition"
+          top
+          right
+          timeout="1000"
+          color="success"
+          absolute
+          rouded="pill"
+        >
+          Đăng nhập thành công
+        </v-snackbar>
         <router-view
           :baseURL="baseURL"
           :products="products"
@@ -21,21 +30,8 @@
           @fetchData="fetchData"
         >
         </router-view>
-        
       </div>
       <Footer v-if="!['Signup', 'Signin'].includes($route.name)" />
-      <v-snackbar
-        v-model="showSnackbar"
-        transition="v-slide-x-reverse-transition"
-        top
-        right
-        timeout="1000"
-        color="success"
-        absolute
-        rouded="pill"
-      >
-        Đăng nhập thành công
-      </v-snackbar>
     </div>
   </v-app>
 </template>
@@ -57,12 +53,12 @@ export default {
       token: null,
       cartCount: 0,
       houseData: null,
-      pagingData:{
-        page :1,
-        pageSize:10,
-        totalRecords:0,//Khởi tạo tạm = 0,
-        pageLength:1
-      }
+      pagingData: {
+        page: 1,
+        pageSize: 10,
+        totalRecords: 0, //Khởi tạo tạm = 0,
+        pageLength: 1,
+      },
     };
   },
 
@@ -101,7 +97,7 @@ export default {
     },
     resetCartCount() {
       this.cartCount = 0;
-    }
+    },
   },
   mounted() {
     this.token = localStorage.getItem("token");
@@ -139,16 +135,19 @@ html {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(146, 146, 146); 
+  background: rgb(146, 146, 146);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(158, 158, 158); 
+  background: rgb(158, 158, 158);
+}
+hr{
+  margin: 0!important;
 }
 </style>

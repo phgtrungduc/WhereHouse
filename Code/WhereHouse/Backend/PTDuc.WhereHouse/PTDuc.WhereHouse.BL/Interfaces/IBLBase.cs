@@ -11,13 +11,13 @@ namespace PTDuc.WhereHouse.BL.Interfaces
         TDTO GetByID(string Id);
         bool Delete(TEntity entity);
         bool Update(TDTO entity);
-        bool Insert(TEntity entity);
+        bool Insert(TDTO entity);
         IEnumerable<TEntity> GetByKey(string key, string value);
         TEntity GetOneByKey(string key, string value);
         
-        bool Validate(TEntity entity);
-        bool ValidateCustom(TEntity entity);
-        bool BeforeInsert(ref TEntity entity);
+        bool Validate(TDTO entity);
+        bool ValidateCustom(TDTO entity);
+        bool BeforeInsert(ref TDTO entity);
         bool BeforeUpdate(ref TEntity entity);
         ServiceResult GetByPaging(int page, int pageSize);
     }

@@ -72,8 +72,7 @@ export default {
       this.$router.push({
         name:'HouseDetail',
         params:{
-          id:this.post.PostId,
-          postData:this.$props.post
+          id:this.post.PostId
         }
       });
       setTimeout(() => (this.loading = false), 2000);

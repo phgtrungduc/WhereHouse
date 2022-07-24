@@ -17,7 +17,8 @@ namespace PTDuc.WhereHouse.EntityModels
             PasswordNotCorrect = 206,
             NotTrueParam = 199,
             NotExistFile  = 207,
-            NotExistFolder = 208
+            NotExistFolder = 208,
+            NotHaveRight = 209
         }
 
         public enum HouseType

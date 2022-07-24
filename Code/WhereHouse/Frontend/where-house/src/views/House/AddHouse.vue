@@ -33,84 +33,90 @@
               :required="true"
               :dense="true"
               height="10"
+              type="number"
             >
             </PTDInput>
           </ValidationProvider>
           <h2>Chi tiết</h2>
           <ValidationProvider rules="required" name="Area">
             <PTDInput
-              label="Diện tích"
+              label="Diện tích(m2)(*)"
               v-model="houseData.Area"
               ref="Area"
               name="Diện tích"
               :required="true"
               :dense="true"
               height="10"
+              type="number"
             >
             </PTDInput>
           </ValidationProvider>
-          <ValidationProvider rules="required" name="Horizontal">
+          <ValidationProvider name="Horizontal">
             <PTDInput
               label="Chiều rộng"
               v-model="houseData.Horizontal"
               ref="Horizontal"
               name="Chiều rộng"
-              :required="true"
               :dense="true"
               height="10"
+              type="number"
             >
             </PTDInput>
           </ValidationProvider>
-          <ValidationProvider rules="required" name="Vertical">
+          <ValidationProvider name="Vertical">
             <PTDInput
               label="Chiều dài"
               v-model="houseData.Vertical"
               ref="Vertical"
               name="Chiều dài"
-              :required="true"
               :dense="true"
               height="10"
+              type="number"
             >
             </PTDInput>
           </ValidationProvider>
           <ValidationProvider rules="required" name="TotalOfFloor">
             <PTDInput
-              label="Số tầng"
+              label="Số tầng(*)"
               v-model="houseData.TotalOfFloor"
               ref="TotalOfFloor"
               name="Số tầng"
               :required="true"
               :dense="true"
               height="10"
+              type="number"
             >
             </PTDInput>
           </ValidationProvider>
           <ValidationProvider rules="required" name="NumberOfBedroom">
             <PTDInput
-              label="Số lượng phòng ngủ"
+              label="Số lượng phòng ngủ(*)"
               v-model="houseData.NumberOfBedroom"
               ref="NumberOfBedroom"
               name="Số lượng phòng ngủ"
               :required="true"
               :dense="true"
               height="10"
+              type="number"
             >
             </PTDInput>
           </ValidationProvider>
           <ValidationProvider rules="required" name="HouseType">
             <PTDSelect
-                        :apiURL="`HouseType`"
-                        item-value="HouseTypeId"
-                        item-text="HouseTypeName"
-                        v-model="houseData.HouseTypeId"
-                        label="Loại hình nhà"
-                      />
+              :apiURL="`HouseType`"
+              item-value="HouseTypeId"
+              item-text="HouseTypeName"
+              v-model="houseData.HouseTypeId"
+              label="Loại hình nhà"
+              :dense="true"
+              height="10"
+            />
           </ValidationProvider>
           <h2>Chi tiết bài đăng</h2>
           <ValidationProvider rules="required" name="Title">
             <PTDInput
               label="Tiêu đề bài đăng(*)"
-              v-model="postData.Title"
+              v-model="houseData.Title"
               ref="Title"
               name="Tiêu đề bài đăng"
               :required="true"
@@ -119,18 +125,20 @@
             >
             </PTDInput>
           </ValidationProvider>
-          <ValidationProvider rules="required" name="Descrtiption">
-            <v-textarea
-              outlined
-              name="input-7-4"
+          <ValidationProvider>
+            <PTDTextArea
+              name="Mô tả chi tiết"
               label="Mô tả chi tiết"
-              :value="postData.Descrtiption"
-            ></v-textarea>
+              :value="houseData.Descrtiption"
+              ref="Descrtiption"
+            >
+            </PTDTextArea>
           </ValidationProvider>
         </ValidationObserver>
         <div class="form-button">
-          <v-btn class="mr-3 button">Hủy</v-btn>
-          <v-btn class="success button">Lưu</v-btn>
+          <v-btn class="mr-3 button" @click="Cancel">Hủy</v-btn>
+          <v-btn class="success button" @click="SavePost">Lưu</v-btn>
+          <v-btn class="success button" @click="CheckTest">Check</v-btn>
         </div>
       </div>
     </div>
@@ -158,10 +166,12 @@
 <script>
 import PTDInputFile from "@/components/Controls/PTDInputFile.vue";
 import PTDInput from "@/components/Controls/PTDInput.vue";
+import PTDTextArea from "@/components/Controls/PTDTextArea.vue";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
-// import axios from "axios";
-// import swal from "sweetalert";
+import axios from "axios";
+import swal from "sweetalert";
 import PTDSelect from "@/components/Controls/PTDSelect.vue";
+import util from "@/util/util";
 export default {
   name: "AddHouse",
   components: {
@@ -170,14 +180,15 @@ export default {
     ValidationObserver,
     ValidationProvider,
     PTDInputFile,
+    PTDTextArea,
   },
   data() {
     return {
       houseAddress: {},
       markers: [],
       center: { lat: 21.028511, lng: 105.804817 }, //khởi tạo center là hà nội tránh lỗi
-      postData: {},
       houseData: {},
+      token: null,
     };
   },
   methods: {
@@ -206,26 +217,97 @@ export default {
             let controls = fields[x];
             if (!controls.valid) {
               if (me.$refs[x]) {
-                me.$refs[x].handleChange();
+                if (
+                  me.$refs[x].handleChange &&
+                  typeof me.$refs[x].handleChange == "function"
+                ) {
+                  me.$refs[x].handleChange();
+                }
               }
               res = false;
             }
           });
         }
-        return res;
       }
+      if (!this.houseData.Address) {
+        swal("Chưa chọn địa chỉ", "Vui lòng chọn địa chỉ ở bản đồ!", "error");
+        res = false;
+      }
+      return res;
     },
     setHouseAddress(place) {
-      this.houseAddress = place.geometry.location;
-      let marker = {
+      let location = {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
+        place_id: place.place_id,
       };
+      this.houseAddress = { ...location };
+      this.houseData.Address = place.formatted_address;
+      this.houseData.AddressByGoogle = JSON.stringify(location);
+      let marker = { ...location };
       this.markers.push({ position: marker });
       this.center = place.geometry.location;
     },
+    async SavePost() {
+      if (this.validateForm()) {
+        let config = {
+          headers: {
+            Authorization: "Bearer " + this.token,
+          },
+        };
+        await axios
+          .post(`${this.baseUrl}House/AddNewPost`, this.houseData, config)
+          .then((res) => {
+            if (res.StatusCode) {
+              swal("Thêm bài đăng thành công", {
+                buttons: false,
+                timer: 500,
+                icon: "success",
+              }).then(() => {
+                this.$$router.push({ name: "Home" });
+              });
+            }
+          })
+          .catch((err) => {
+            swal({
+              text: "Lỗi hệ thống không thể thêm bài đăng!",
+              icon: "error",
+              closeOnClickOutside: false,
+            });
+            console.log(err);
+          })
+          .finally(() => {});
+      }
+    },
+    Cancel() {
+      if (this.houseData && !util.checkObjectHasData(this.houseData)) {
+        swal({
+          title: "Hủy thêm bài đăng",
+          text: "Dữ liệu đã thay đổi, bạn có muốn hủy?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then((willDelete) => {
+          if (willDelete) {
+            console.log("hủy");
+          } else {
+            console.log("hủy");
+          }
+        });
+      } else {
+        this.$router.back();
+      }
+    },
+    CheckTest() {
+      util.alertSuccess("Yêu em");
+    },
   },
   mounted() {},
+  created() {
+    let userId = util.getCurrentUserId();
+    this.houseData.UserOwnerId = userId;
+    this.token = localStorage.getItem("token");
+  },
 };
 </script>
 
@@ -246,11 +328,11 @@ export default {
       height: 100%;
       overflow: auto;
     }
-    .wrap-form{
-      .form-button{
+    .wrap-form {
+      .form-button {
         display: flex;
         justify-content: flex-end;
-        .button{
+        .button {
           width: 100px;
         }
         margin-bottom: 10px;

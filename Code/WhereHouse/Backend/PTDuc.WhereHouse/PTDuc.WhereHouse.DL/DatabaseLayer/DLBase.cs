@@ -18,7 +18,7 @@ using AutoMapper;
 
 namespace PTDuc.WhereHouse.DL.DatabaseLayer
 {
-    public class DLBase<TEntity, TDTO> : IDLBase<TEntity,TDTO> where TEntity : class
+    public class DLBase<TEntity, TDTO> : IDLBase<TEntity, TDTO> where TEntity : class
     {
         protected WhereHouseContext _context;
         //String _connectionString =null;
@@ -59,14 +59,14 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             //    cfg.CreateMap<TEntity, TDTO>();
             //});
             //var mapper = configuration.CreateMapper();
-            var res = _mapper.Map<List<TEntity>,IEnumerable<TDTO>>(_dbSet.ToList());
+            var res = _mapper.Map<List<TEntity>, IEnumerable<TDTO>>(_dbSet.ToList());
             return res;
         }
 
         public virtual TEntity GetByID(string Id)
         {
             _dbSet = _context.Set<TEntity>();
-            var res= _dbSet.Find(Guid.Parse(Id));
+            var res = _dbSet.Find(Guid.Parse(Id));
             return res;
         }
 
@@ -96,7 +96,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             return (res > 0 ? true : false);
         }
 
-        public IEnumerable<TEntity> GetByKey(string key,string value)
+        public IEnumerable<TEntity> GetByKey(string key, string value)
         {
 
             IEnumerable<TEntity> res;
@@ -148,6 +148,19 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
                 res.Data = new { TotalRecords = totalRecords, Data = data.ToList() };
             }
             return res;
+        }
+
+        public bool DeleteById(string id)
+        {
+            _dbSet = _context.Set<TEntity>();
+            var res = 0;
+            var entity = _dbSet.Find(Guid.Parse(id));
+            if (entity != null)
+            {
+                _dbSet.Remove(entity);
+                res = _context.SaveChanges();
+            }
+            return (res > 0 ? true : false);
         }
     }
 }

@@ -2,13 +2,13 @@
   <div class="wrapper-container">
     <div class="house-images">
       <v-img
-        v-if="houseImageUrl"
+        v-if="!houseImageUrl"
         src="../../assets/images/house-default.png"
         max-width="300"
         max-height="300"
       ></v-img>
       <v-img
-        v-if="!houseImageUrl"
+        v-if="houseImageUrl"
         :src="houseImageUrl"
         max-width="300"
         max-height="300"
@@ -81,7 +81,7 @@
             Tên nhà : {{ this.houseData ? this.houseData.HouseName : "" }}
           </li>
           <li>
-            Địa chỉ : {{ this.houseData ? this.houseData.HouseName : "" }}
+            Địa chỉ : {{ this.houseData ? this.houseData.Address : "" }}
           </li>
           <li>
             Tổng số tầng:

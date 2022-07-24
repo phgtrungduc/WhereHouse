@@ -17,6 +17,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public string Descrtiption { get; set; }
         public Guid UserId { get; set; }
         public Guid HouseId { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         public virtual House House { get; set; }
         public virtual User User { get; set; }

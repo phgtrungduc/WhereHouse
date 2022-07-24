@@ -21,7 +21,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             userOnline = new List<UserDTO>();
         }
 
-        public override bool BeforeInsert(ref User entity)
+        public override bool BeforeInsert(ref UserDTO entity)
         {
             var res = false;
             if (!string.IsNullOrEmpty(entity.Password)) {

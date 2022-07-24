@@ -81,6 +81,7 @@ export default {
               default:
                 localStorage.setItem("token", res.data.Data.accessToken); 
                 util.setCookie("userConfig",JSON.stringify(res.data.Data.User));
+                this.$store.dispatch('setUser',res.data.Data.User)
                 // this.$emit("fetchData");
                 this.$store.commit("showSnackbar",true)
                 this.$router.push({ name: "Home" });

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PTDuc.WhereHouse.EntityModels.DTO;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace PTDuc.WhereHouse.DL.DatabaseLayer
 {
@@ -14,6 +15,18 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
     {
         public DLWishlist(WhereHouseContext context, IMapper mapper) : base(context, mapper)
         {
+        }
+
+        public IEnumerable<Wishlist> GetWishlistByUserId(Guid userId)
+        {
+            var res = default(IEnumerable<Wishlist>);
+            _dbSet = _context.Set<Wishlist>();
+            var data = _dbSet.Where(x => x.UserId == userId);
+            if (data != null && data.Count() > 0)
+            {
+                res = data.Include(x => x.Post).ThenInclude(post => post.House).ThenInclude(house=>house.HouseImage);
+            }
+            return res;
         }
     }
 }

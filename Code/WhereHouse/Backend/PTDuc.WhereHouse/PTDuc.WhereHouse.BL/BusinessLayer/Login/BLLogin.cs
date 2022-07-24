@@ -18,13 +18,11 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer.Login
     public class BLLogin : BLBase<LoginParam, LoginParam>, IBLLogin
     {
         IAuthenticationManager _authenticationManager;
-        //public BLLogin(IDLLogin dLLogin) : base(dLLogin)
-        //{
-
-        //}
-        public BLLogin(IDLLogin dLLogin, IAuthenticationManager authenticationManager,IMapper mapper) : base(dLLogin, mapper)
+        IDLUser _dlUser;
+        public BLLogin(IDLLogin dLLogin, IAuthenticationManager authenticationManager,IMapper mapper,IDLUser dLUser) : base(dLLogin, mapper)
         {
             _authenticationManager = authenticationManager;
+            _dlUser = dLUser;
         }
 
         public bool ChangePassword(string username, string oldPassword, string newPassword, ServiceResult serviceResult)
@@ -75,8 +73,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer.Login
             var res = new ServiceResult();
             if (!string.IsNullOrEmpty(param.Username))
             {
-                var propUsername = typeof(LoginParam).GetProperty("Username");
-                var entity = _dlBase.GetOneByKeyWithType<User>(propUsername, param);
+                var entity = _dlUser.GetUserByUserName(param.Username);
                 if (entity != null)
                 {
                     param.HashPassword = entity.Password;

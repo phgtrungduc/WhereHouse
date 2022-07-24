@@ -14,6 +14,7 @@ namespace PTDuc.WhereHouse.EntityModels.DTO
         public string Descrtiption { get; set; }
         public Guid UserId { get; set; }
         public Guid HouseId { get; set; }
+        public DateTime? CeeatedDate { get; set; }
         public virtual House House { get; set; }
         public virtual User User { get; set; }
     }

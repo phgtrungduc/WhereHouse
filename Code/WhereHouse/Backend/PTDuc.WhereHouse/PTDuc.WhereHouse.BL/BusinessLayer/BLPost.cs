@@ -7,6 +7,7 @@ using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.Utils;
 using PTDuc.WhereHouse.EntityModels.DTO;
 using AutoMapper;
+using System;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
@@ -16,6 +17,14 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         public BLPost(IDLPost DLPost, IMapper mapper) : base(DLPost, mapper)
         {
             _DLPost = DLPost;
+        }
+
+
+        public ServiceResult GetUserPost(Guid userId)
+        {
+            var res = new ServiceResult();
+            res.Data = _DLPost.GetUserPost(userId);
+            return res;
         }
     }
 }

@@ -19,5 +19,6 @@ namespace PTDuc.WhereHouse.DL.Interfaces
         TEntity GetOneByKey(string key, string value);
         TableName GetOneByKeyWithType<TableName>(PropertyInfo prop, TEntity entity) where TableName : class;
         ServiceResult GetByPaging(int page, int pageSize);
+        bool DeleteById(string id);
     }
 }

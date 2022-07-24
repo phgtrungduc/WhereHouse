@@ -5,6 +5,6 @@ namespace PTDuc.WhereHouse.DL.Interfaces
     public interface IDLUser :IDLBase<User, UserDTO>
 
     {
-
+        User GetUserByUserName(string userName);
     }
 }

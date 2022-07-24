@@ -18,7 +18,7 @@ namespace PTDuc.WhereHouse.Controllers
             _blUser = blUser;
         }
         [AllowAnonymous]
-        public override IActionResult Post([FromBody] User entity)
+        public override IActionResult Post([FromBody] UserDTO entity)
         {
             return base.Post(entity);
         }
