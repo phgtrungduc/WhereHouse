@@ -72,6 +72,12 @@ const util = {
             timer: 1000,
             icon: "success",
         })
+    },
+    checkLogin(){
+        let userId = this.getCurrentUserId();
+        let token = localStorage.getItem("token");
+        if (userId&& token) return true;
+        return false;
     }
 
 }

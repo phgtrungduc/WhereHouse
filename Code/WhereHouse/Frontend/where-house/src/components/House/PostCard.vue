@@ -92,9 +92,12 @@ export default {
     wishListId: {
       type: String,
     },
-    updateParentComponent:{
-      type: Function
-    }
+    postId: {
+      type: String,
+    },
+    updateParentComponent: {
+      type: Function,
+    },
   },
   methods: {
     viewDetail() {
@@ -126,7 +129,7 @@ export default {
           let url = "";
           switch (this.$props.type) {
             case "mypost":
-              url = "Post/GetUserPost";
+              url = "Post/DeletePostUser/" + this.$props.postId;
               break;
             case "wishlist":
               url = "Wishlist/DeletePostWishlist/" + this.$props.wishListId;
@@ -144,7 +147,7 @@ export default {
                     this.$props.type == "mypost"
                       ? "Xóa bài đăng thành công"
                       : "Xóa khỏi danh sách yêu thích thành công";
-                  this.$props.updateParentComponent()
+                  this.$props.updateParentComponent();
                   util.alertSuccess(title);
                 }
               }

@@ -78,20 +78,12 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             return (res > 0 ? true : false);
         }
 
-        public bool Update(TEntity entity)
+        public bool Update(TEntity entity, string id)
         {
             var res = 0;
-            var idKey = $"{ tableName}Id";
-            //var Id = entity.GetValueByKey<TEntity>(idKey);
             _dbSet = _context.Set<TEntity>();
-            //var record = _dbSet.Find(Guid.Parse(Id.ToString()));
-            //if (record != null)
-            //{
-            //    record = entity;
-            //    _context.Entry(entity).State = EntityState.Modified;
-            //    res = _context.SaveChanges();
-            //}
-            _context.Entry(entity).State = EntityState.Modified;
+            var data = _dbSet.Find(Guid.Parse(id));
+            _context.Entry(data).CurrentValues.SetValues(entity);
             res = _context.SaveChanges();
             return (res > 0 ? true : false);
         }

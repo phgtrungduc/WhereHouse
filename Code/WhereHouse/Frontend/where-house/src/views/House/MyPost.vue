@@ -19,7 +19,7 @@
           :key="index"
           class="list-post"
         >
-          <PostCard :post="item" type="mypost" :updateParentComponent="getListPost"/>
+          <PostCard :post="item" type="mypost" :updateParentComponent="getListPost" :postId="item.PostId"/>
         </div>
       </div>
       <div v-if="!this.listPost || !this.listPost.length" class="wrap-no-data">

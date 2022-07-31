@@ -47,8 +47,9 @@
           </div>
         </div>
       </form>
+      
 
-      <div class="navbar-right d-flex align-items-center justify-content-end">
+      <div class="navbar-right d-flex align-items-center justify-content-end" v-if="role===1">
         <router-link
           v-if="token"
           class="text-light nav-item"
@@ -149,6 +150,56 @@
           </v-menu>
         </div>
       </div>
+      <div class="navbar-right d-flex align-items-center justify-content-end" v-else>
+        <div class="nav-item">
+          <v-menu bottom :offset-y="true">
+            <template v-slot:activator="{ on, attrs }">
+              <div v-bind="attrs" v-on="on">
+                <span>Bài đăng</span>
+                <font-awesome-icon
+                  icon="fa-regular fa-file"
+                  class="ml-1 icon-navbar"
+                />
+              </div>
+            </template>
+
+            <v-list>
+              <router-link :to="{ name: 'MyPost' }">
+                <v-list-item>
+                  <v-list-item-title> Quản lý bài đăng</v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link :to="{ name: 'MyPost' }">
+                <v-list-item>
+                  <v-list-item-title> Báo cáo bài đăng</v-list-item-title>
+                </v-list-item>
+              </router-link>
+            </v-list>
+          </v-menu>
+        </div>
+        <div class="nav-item">
+          <v-menu bottom :offset-y="true">
+            <template v-slot:activator="{ on, attrs }">
+              <div v-bind="attrs" v-on="on">
+                <span>Tài khoản</span>
+                <font-awesome-icon
+                  icon="fa-regular fa-circle-user"
+                  class="ml-1"
+                  style="font-size: 25px"
+                />
+              </div>
+            </template>
+
+            <v-list>
+              <router-link :to="{ name: 'Admin' }">
+                <v-list-item>
+                  <v-list-item-title> Quản lý người dùng </v-list-item-title>
+                </v-list-item>
+              </router-link>
+            </v-list>
+          </v-menu>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
@@ -157,7 +208,15 @@
 import swal from "sweetalert";
 export default {
   name: "Navbar",
-  props: ["cartCount"],
+  props: {
+    cartCount: {
+      type: Number,
+    },
+    role: {
+      type: Number,
+      default: 1,
+    },
+  },
   data() {
     return {
       token: null,
@@ -167,6 +226,7 @@ export default {
   methods: {
     signout() {
       localStorage.removeItem("token");
+      document.cookie = "userConfig=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       this.token = null;
       swal("Bạn đã đăng xuất", {
         buttons: false,
@@ -240,7 +300,7 @@ a {
   .v-list-item__icon:first-child {
     margin-right: 5px;
   }
-  .navbar-info-user{
+  .navbar-info-user {
     background: #dad9d9;
     border-radius: 20px;
   }

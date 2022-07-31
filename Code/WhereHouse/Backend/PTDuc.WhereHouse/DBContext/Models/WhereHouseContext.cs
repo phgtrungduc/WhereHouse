@@ -110,7 +110,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("HouseType");
 
-                entity.Property(e => e.HouseTypeId).ValueGeneratedOnAdd();
+                entity.Property(e => e.HouseTypeId).ValueGeneratedNever();
 
                 entity.Property(e => e.HouseTypeName)
                     .IsRequired()
@@ -148,6 +148,8 @@ namespace PTDuc.WhereHouse.DBContext.Models
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Descrtiption).HasMaxLength(255);
+
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Title)
                     .IsRequired()

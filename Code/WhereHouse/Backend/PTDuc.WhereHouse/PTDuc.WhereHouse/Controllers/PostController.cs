@@ -50,7 +50,37 @@ namespace PTDuc.WhereHouse.Controllers
                 IEnumerable<Claim> claims = identity.Claims;
                 var userId = User.Claims.Where(c => c.Type == "UserId")
     .Select(x => x.Value).FirstOrDefault();
-                return Ok(_blPost.GetUserPost(Guid.Parse(userId)));
+                var res = _blPost.GetUserPost(Guid.Parse(userId));
+                return this.HandleResponse(res);
+            }
+            return Ok(null);
+        }
+
+        [HttpDelete("DeletePostUser/{id}")]
+        public IActionResult DeletePostUser(string id)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = _blPost.DeletePostUser(id, userId);
+                return this.HandleResponse(res);
+            }
+            return Ok(null);
+        }
+        [HttpPost("AcceptPost/{id}")]
+        public IActionResult AcceptPost(string id)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = _blPost.DeletePostUser(id, userId);
+                return this.HandleResponse(res);
             }
             return Ok(null);
         }

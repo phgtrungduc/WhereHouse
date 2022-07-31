@@ -18,29 +18,32 @@
       <div
         class="d-flex flex-column justify-content-between mb-3 align-items-end"
       >
-        <v-menu bottom left transition="slide-y-transition">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-item-group>
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-icon>mdi-pencil</v-icon>
-                </v-list-item-icon>
-                <v-list-item-title>Sửa thông tin bài đăng</v-list-item-title>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-icon>mdi-delete</v-icon>
-                </v-list-item-icon>
-                <v-list-item-title>Xoá bài đăng</v-list-item-title>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-        </v-menu>
+        <div :style="{ display: displayForUser }" class="more">
+          <v-menu bottom left transition="slide-y-transition">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon v-bind="attrs" v-on="on">
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item-group>
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon>mdi-pencil</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>Sửa thông tin bài đăng</v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-icon>mdi-delete</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-title>Xoá bài đăng</v-list-item-title>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-menu>
+        </div>
+
         <v-card max-width="300" outlined>
           <v-list-item one-line>
             <v-list-item-content>
@@ -80,9 +83,7 @@
           <li>
             Tên nhà : {{ this.houseData ? this.houseData.HouseName : "" }}
           </li>
-          <li>
-            Địa chỉ : {{ this.houseData ? this.houseData.Address : "" }}
-          </li>
+          <li>Địa chỉ : {{ this.houseData ? this.houseData.Address : "" }}</li>
           <li>
             Tổng số tầng:
             {{ this.houseData ? this.houseData.TotalOfFloor : "" }}
@@ -109,16 +110,23 @@
           </li>
           <li>
             Loại hình nhà ở:
-            {{ this.houseData.HouseType ? this.houseData.HouseType.HouseTypeName : "" }}
+            {{
+              this.houseData.HouseType
+                ? this.houseData.HouseType.HouseTypeName
+                : ""
+            }}
           </li>
         </ul>
       </div>
-      <div class="d-flex flex-row justify-content-end">
+      <div
+        class="d-flex flex-row justify-content-end"
+        :style="{ display: displayForUser }"
+      >
         <v-btn
           type="button"
           id="add-to-cart-button"
           class="btn d-flex flex-row justify-content-between mr-4"
-          @click="addToCart(this.id)"
+          @click="addToWistlist()"
         >
           Thêm vào wishlist
           <font-awesome-icon icon="fa-regular fa-heart" />
@@ -166,6 +174,7 @@
 import axios from "axios";
 import util from "../../util/util";
 import DirectionsRenderer from "@/components/GoogleMap/DirectionsRenderer";
+import swal from "sweetalert";
 export default {
   name: "HouseDetail",
   components: { DirectionsRenderer },
@@ -186,6 +195,7 @@ export default {
       houseAddress: { lat: 450.508, lng: -730.587 }, //khởi tạo tạm để không bị báo lỗi
       markers: [], //khởi tạo tạm để không bị báo lỗi
       directionObject: {},
+      displayForUser: "unset",
     };
   },
   props: ["baseURL", "products", "categories"],
@@ -215,6 +225,7 @@ export default {
             this.houseAddress = address;
             this.markers.push(address);
           }
+          this.checkRoleUser();
         },
         (error) => {
           console.log(error);
@@ -229,13 +240,55 @@ export default {
             lng: position.coords.longitude,
           };
           this.directionObject.origin = pos;
-          this.directionObject.destination = JSON.parse(JSON.stringify(this.houseAddress));
+          this.directionObject.destination = JSON.parse(
+            JSON.stringify(this.houseAddress)
+          );
           if (this.markers.length > 1) {
             this.markers.pop();
           }
           this.markers.push(pos);
         });
       }
+    },
+    checkRoleUser() {
+      let userId = util.getCurrentUserId();
+      if (userId == this.userOwner.UserId)
+        this.displayForUser = "none!important";
+    },
+    async addToWistlist() {
+      let wishList = {
+        UserId: util.getCurrentUserId(),
+        PostId: this.postData.PostId,
+      };
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      };
+      await axios
+        .post(`${this.baseUrl}Wishlist`, wishList, config)
+        .then((res) => {
+          if (res.data.StatusCode) {
+            if (res.data.Data) {
+              util.alertSuccess("Đã thêm vào danh sách yêu thích");
+            } else {
+              swal({
+                text: "Lỗi hệ thống!",
+                icon: "error",
+                closeOnClickOutside: false,
+              });
+            }
+          }
+        })
+        .catch((err) => {
+          swal({
+            text: "Lỗi hệ thống!",
+            icon: "error",
+            closeOnClickOutside: false,
+          });
+          console.log(err);
+        })
+        .finally(() => {});
     },
   },
   created() {

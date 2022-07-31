@@ -25,7 +25,7 @@ namespace PTDuc.WhereHouse.ChatHub
             
             if (user != null) {
                 user.FullName = "Phương Trung Đức";
-                _bLUser.Update(user);
+                _bLUser.Update(user, "123");
 
                 _bLUser.AddUserToListOnline(user);
                 //user sẽ được add vào room có id chính là id của user

@@ -18,7 +18,9 @@ namespace PTDuc.WhereHouse.EntityModels
             NotTrueParam = 199,
             NotExistFile  = 207,
             NotExistFolder = 208,
-            NotHaveRight = 209
+            NotHaveRight = 209,
+            PostNotPay = 210,
+
         }
 
         public enum HouseType
@@ -27,6 +29,24 @@ namespace PTDuc.WhereHouse.EntityModels
             Alley = 2 , //Ngõ, hẻm
             Villa = 3, //Nhà biệt thự
             AdjoiningStreet =4 // Nhà phố liền kề
+        }
+        public enum StatusPost // Trạng thái bài đăng 
+        {
+            Created = 1,//Được tạo chưa phê duyệt
+            Pay = 2,//Được tạo chưa phê duyệt
+            Accepted = 3, //bài dăng đã được duyệt 
+            Closed = 4, //Đóng bài đăng khi đã có người thuê
+        }
+        public enum StatusUser // Trạng thái người dùng 
+        {
+            Active = 1,//Người dùng hoạt động bình thường 
+            Blocked = 2, //Bị chặn bởi admin
+        }
+
+        public enum Role // Vai trò trên trang
+        {
+            User = 1,//Người dùng bình thường 
+            Admin = 2, //Quản trị hệ thống 
         }
     }
 }

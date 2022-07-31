@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PTDuc.WhereHouse.EntityModels.DTO
 {
-    public class HouseDTO
+    public class HouseDTO : BaseEntity
     {
 
         public Guid HouseId { get; set; }

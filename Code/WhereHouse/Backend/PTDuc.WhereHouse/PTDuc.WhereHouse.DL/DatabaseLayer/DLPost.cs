@@ -44,6 +44,14 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             return res;
         }
 
+        public IEnumerable<Post> GetListPostForAdmin()
+        {
+            _dbSet = _context.Set<Post>();
+            var data = _dbSet.Include(x => x.User).Include(x => x.House).ThenInclude(house => house.HouseType)
+                .Include(z => z.House).ThenInclude(i => i.HouseImage);
+            return data;
+        }
+
         public IEnumerable<Post> GetUserPost(Guid userId)
         {
             var res = default(IEnumerable<Post>);

@@ -9,5 +9,7 @@ namespace PTDuc.WhereHouse.DL.Interfaces
 
     {
         public IEnumerable<Post> GetUserPost(Guid userId);
+        public IEnumerable<Post> GetListPostForAdmin();
+
     }
 }

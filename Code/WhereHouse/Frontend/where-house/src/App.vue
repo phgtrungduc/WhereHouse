@@ -5,6 +5,7 @@
         :cartCount="cartCount"
         @resetCartCount="resetCartCount"
         v-if="!['Signup', 'Signin'].includes($route.name)"
+        :role="roleUser"
       />
       <div class="wrap-loading">
         <LoadingApp v-if="this.$store.state.loadingApp" />
@@ -42,6 +43,8 @@ import Footer from "./components/Footer.vue";
 import LoadingApp from "./components/Controls/LoadingApp.vue";
 import LoadingFullScreen from "./components/Controls/LoadingFullScreen.vue";
 import axios from "axios";
+import util from "@/util/util.js";
+import PTDConstants from "@/mixin/consants.js";
 export default {
   data() {
     return {
@@ -59,6 +62,7 @@ export default {
         totalRecords: 0, //Khởi tạo tạm = 0,
         pageLength: 1,
       },
+      roleUser: PTDConstants.Role.User,
     };
   },
 
@@ -100,8 +104,16 @@ export default {
     },
   },
   mounted() {
-    this.token = localStorage.getItem("token");
-    // this.fetchData();
+    let token = localStorage.getItem("token");
+    this.token = token;
+    if (token) {
+      let user = util.getUserConfig();
+      if (user) {
+        this.$store.dispatch("setUser", user);
+        this.roleUser = user.Role;
+      }
+    }
+    this.$store.dispatch("getWishListUser");
   },
   computed: {
     showSnackbar: {
@@ -147,7 +159,7 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(158, 158, 158);
 }
-hr{
-  margin: 0!important;
+hr {
+  margin: 0 !important;
 }
 </style>

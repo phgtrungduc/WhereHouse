@@ -1,6 +1,8 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-
+import util from '@/util/util.js';
+import axios from 'axios';
+import swal from 'sweetalert';
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -10,8 +12,9 @@ const store = new Vuex.Store({
       loadingApp: true,
       loadingFullScreen: false,
       user: {
-        FullName:""
-      }
+        FullName: ""
+      },
+      wishList: []
     }
   },
   getters: {
@@ -31,13 +34,13 @@ const store = new Vuex.Store({
       let res = "";
       let user = state.user;
       if (user) {
-        if (user.AvatarId){
-          res = "https://localhost:44304/"+ user.Avatar.FilePath;
+        if (user.AvatarId) {
+          res = "https://localhost:44304/" + user.Avatar.FilePath;
         }
       }
       return res;
     },
-    userFullName :state => {
+    userFullName: state => {
       let res = "";
       let user = state.user;
       if (user) {
@@ -55,13 +58,46 @@ const store = new Vuex.Store({
     },
     showLoadingFullScreen(state, value) {
       state.loadingFullScreen = value;
+    },
+    setWishList(state, value) {
+      state.wishList = value;
     }
   },
   actions: {
     setUser(context, user) {
-      console.log(user)
       context.state.user = { ...user };
-    }
+    },
+    async getWishListUser({ commit }) {
+      try {
+        if (util.checkLogin()) {
+          let config = {
+            headers: {
+              Authorization: "Bearer " + this.token,
+            },
+          };
+          await axios
+            .get(`${this.baseUrl}Wishlist/GetWishlistByUserId`, config)
+            .then((res) => {
+              if (res.data.StatusCode) {
+                if (res.data.Data) {
+                  commit('setWishList', res.data.Data);
+                  console.log(res.data.Data);
+                }
+              }
+            })
+            .catch(() => {
+              swal({
+                text: "Lỗi hệ thống không lấy được thông tin!",
+                icon: "error",
+                closeOnClickOutside: false,
+              });
+            })
+            .finally(() => { });
+        }
+      } catch (e) {
+        console.error('Problem with fetching data ' + e);
+      }
+    },
   }
 })
 export default store;

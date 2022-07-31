@@ -4,20 +4,21 @@ using Microsoft.EntityFrameworkCore;
 using PTDuc.WhereHouse.BL.Interfaces;
 using PTDuc.WhereHouse.DBContext.Models;
 using PTDuc.WhereHouse.EntityModels;
+using System;
 
 namespace PTDuc.WhereHouse.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
     [Authorize]
-    public class BaseEntityController<TEntity,TDTO> : Controller where TEntity : class
+    public class BaseEntityController<TEntity, TDTO> : Controller where TEntity : class where TDTO : BaseEntity
     {
         IBLBase<TEntity, TDTO> _BLBase;
         protected WhereHouseContext context = new WhereHouseContext();
         public BaseEntityController(IBLBase<TEntity, TDTO> BLBase)
         {
             _BLBase = BLBase;
-            
+
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace PTDuc.WhereHouse.Controllers
         [HttpGet]
         public virtual IActionResult Get()
         {
-            
+
             return Ok(_BLBase.GetAll());
         }
 
@@ -61,15 +62,16 @@ namespace PTDuc.WhereHouse.Controllers
             var res = new ServiceResult();
             try
             {
+                entity.CreatedDate = DateTime.Now;
                 res.Data = _BLBase.Insert(entity);
                 return Ok(res);
             }
-            catch (System.Exception e )
+            catch (System.Exception e)
             {
                 return BadRequest(e);
                 throw;
             }
-            
+
 
         }
 
@@ -80,9 +82,9 @@ namespace PTDuc.WhereHouse.Controllers
         /// <returns></returns>
         /// Created By: PTDuc1 - 04.06.200
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody] TDTO entity)
+        public IActionResult Put([FromBody] TDTO entity,string id)
         {
-            var res = _BLBase.Update(entity);
+            var res = _BLBase.Update(entity,id);
             return Ok(res);
         }
 
@@ -103,9 +105,25 @@ namespace PTDuc.WhereHouse.Controllers
 
 
         [HttpGet("GetByPaging")]
-        public virtual IActionResult GetByPaging(int page,int pageSize)
+        public virtual IActionResult GetByPaging(int page, int pageSize)
         {
             return Ok(_BLBase.GetByPaging(page, pageSize));
+        }
+
+        [NonAction]
+        public IActionResult HandleResponse(ServiceResult res) {
+            var status = res.StatusCode;
+            IActionResult response = default(IActionResult);
+            switch (status)
+            {
+                case (int)Enumeration.ResultCode.Success:
+                    response = Ok(res);
+                    break;
+                default:
+                    response = BadRequest(res);
+                    break;
+            }
+            return response;
         }
     }
 }

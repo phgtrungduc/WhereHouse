@@ -89,10 +89,10 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return res;
         }
 
-        public bool Update(TDTO entity)
+        public bool Update(TDTO entity,string id )
         {
             var mapEntity = _mapper.Map<TEntity>(entity);
-            return _dlBase.Update(mapEntity);
+            return _dlBase.Update(mapEntity,id);
         }
 
 
