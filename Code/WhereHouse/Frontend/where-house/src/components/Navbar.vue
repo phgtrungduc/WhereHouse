@@ -59,7 +59,7 @@
           <font-awesome-icon icon="fa-regular fa-message" class="icon-navbar" />
         </router-link>
         <div id="cart" v-if="token" class="nav-item">
-          <span id="nav-cart-count">{{ cartCount }}</span>
+          <span id="nav-cart-count">{{ this.$store.state.wishList.length }}</span>
           <router-link class="text-light" :to="{ name: 'Wishlist' }">
             <span class="mr-1">Wishlist</span>
             <font-awesome-icon icon="fa-regular fa-heart" class="icon-navbar" />

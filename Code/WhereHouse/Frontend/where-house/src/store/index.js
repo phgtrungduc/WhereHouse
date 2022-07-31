@@ -1,6 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import util from '@/util/util.js';
+// import util from '@/util/util.js';
 import axios from 'axios';
 import swal from 'sweetalert';
 Vue.use(Vuex)
@@ -67,33 +67,30 @@ const store = new Vuex.Store({
     setUser(context, user) {
       context.state.user = { ...user };
     },
-    async getWishListUser({ commit }) {
+    async getWishListUser({ commit }, token) {
       try {
-        if (util.checkLogin()) {
-          let config = {
-            headers: {
-              Authorization: "Bearer " + this.token,
-            },
-          };
-          await axios
-            .get(`${this.baseUrl}Wishlist/GetWishlistByUserId`, config)
-            .then((res) => {
-              if (res.data.StatusCode) {
-                if (res.data.Data) {
-                  commit('setWishList', res.data.Data);
-                  console.log(res.data.Data);
-                }
+        let config = {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        };
+        await axios
+          .get(`https://localhost:44304/api/v1/Wishlist/GetWishlistByUserId`, config)
+          .then((res) => {
+            if (res.data.StatusCode) {
+              if (res.data.Data) {
+                commit('setWishList', res.data.Data.$values);
               }
-            })
-            .catch(() => {
-              swal({
-                text: "Lỗi hệ thống không lấy được thông tin!",
-                icon: "error",
-                closeOnClickOutside: false,
-              });
-            })
-            .finally(() => { });
-        }
+            }
+          })
+          .catch(() => {
+            swal({
+              text: "Lỗi hệ thống không lấy được thông tin!",
+              icon: "error",
+              closeOnClickOutside: false,
+            });
+          })
+          .finally(() => { });
       } catch (e) {
         console.error('Problem with fetching data ' + e);
       }

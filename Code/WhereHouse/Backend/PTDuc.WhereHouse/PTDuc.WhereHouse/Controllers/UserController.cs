@@ -69,5 +69,20 @@ namespace PTDuc.WhereHouse.Controllers
             }
             return Ok(null);
         }
+
+        [HttpGet("GetUserConfig")]
+        public IActionResult GetUserConfig()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+                    .Select(x => x.Value).FirstOrDefault();
+                var res = _blUser.GetByID(userId);
+                return Ok(res);
+            }
+            return Ok(null);
+        }
     }
 }

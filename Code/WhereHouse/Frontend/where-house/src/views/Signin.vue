@@ -66,7 +66,6 @@
 <script>
 import swal from "sweetalert";
 import axios from "axios";
-import util from "../util/util";
 export default {
   name: "Signin",
   props: ["baseURL", "products"],
@@ -111,17 +110,8 @@ export default {
                 break;
               default:
                 localStorage.setItem("token", res.data.Data.accessToken);
-                //Set cookie
-                var now = new Date();
-                var expiresDate = new Date(
-                  new Date(now).setMonth(now.getMonth() + 1)
-                );
 
-                util.setCookie(
-                  "userConfig",
-                  JSON.stringify(res.data.Data.User),
-                  expiresDate
-                );
+                
                 this.$store.dispatch("setUser", res.data.Data.User);
                 // this.$emit("fetchData");
                 this.$store.commit("showSnackbar", true);

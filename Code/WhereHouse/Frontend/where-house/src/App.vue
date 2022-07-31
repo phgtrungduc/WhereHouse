@@ -99,6 +99,30 @@ export default {
         );
       }
     },
+    async getUserConfig() {
+      let token = localStorage.getItem("token");
+      if (token) {
+        let config = {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        };
+        await axios
+          .get(`${this.baseUrl}user/getuserconfig`, config)
+          .then((res) => {
+            let user = res.data;
+            this.$store.dispatch("setUser", user);
+            util.setCookie(
+              "userConfig",
+              JSON.stringify(user)
+            );
+            this.roleUser = user.Role;
+            this.$store.dispatch("getWishListUser", this.token);
+          })
+          .catch((err) => console.log(err))
+          .finally(() => {});
+      }
+    },
     resetCartCount() {
       this.cartCount = 0;
     },
@@ -106,14 +130,8 @@ export default {
   mounted() {
     let token = localStorage.getItem("token");
     this.token = token;
-    if (token) {
-      let user = util.getUserConfig();
-      if (user) {
-        this.$store.dispatch("setUser", user);
-        this.roleUser = user.Role;
-      }
-    }
-    this.$store.dispatch("getWishListUser");
+
+    this.getUserConfig();
   },
   computed: {
     showSnackbar: {
