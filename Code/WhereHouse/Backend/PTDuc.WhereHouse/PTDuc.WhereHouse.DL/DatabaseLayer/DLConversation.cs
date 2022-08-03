@@ -23,5 +23,14 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             var data = _dbSet.Where(x => x.ConversationId == Guid.Parse(Id)).Include(x => x.Messages).FirstOrDefault();
             return data;
         }
+
+        public Conversation GetConversation(string userId1, string userId2)
+        {
+            _dbSet = _context.Set<Conversation>();
+            var id1 = Guid.Parse(userId1);
+            var id2 = Guid.Parse(userId2);
+            var data = _dbSet.Where(x => (x.UserId1 == id1 && x.UserId2 == id2)|| (x.UserId1 == id2 && x.UserId2 == id1)).FirstOrDefault();
+            return data;
+        }
     }
 }

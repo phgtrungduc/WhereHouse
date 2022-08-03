@@ -66,6 +66,7 @@
 <script>
 import swal from "sweetalert";
 import axios from "axios";
+import {start} from "@/chathub/ChatHub.js";
 export default {
   name: "Signin",
   props: ["baseURL", "products"],
@@ -108,15 +109,16 @@ export default {
                   "error"
                 );
                 break;
-              default:
+              default: {
+                let userData = res.data.Data.User;
                 localStorage.setItem("token", res.data.Data.accessToken);
-
-                
-                this.$store.dispatch("setUser", res.data.Data.User);
+                this.$store.dispatch("setUser", userData);
                 // this.$emit("fetchData");
                 this.$store.commit("showSnackbar", true);
                 this.$router.push({ name: "Home" });
+                start(userData.UserId);
                 break;
+              }
             }
           })
           .catch((err) => {

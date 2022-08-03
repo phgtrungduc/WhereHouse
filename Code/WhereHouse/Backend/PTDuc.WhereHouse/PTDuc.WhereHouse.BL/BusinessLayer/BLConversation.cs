@@ -17,5 +17,10 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         {
             _DLConversation = DLConversation;
         }
+
+        public Conversation GetConversation(string userId1, string userId2)
+        {
+            return _DLConversation.GetConversation(userId1,userId2);
+        }
     }
 }

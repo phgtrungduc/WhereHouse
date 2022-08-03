@@ -139,7 +139,7 @@ const routes = [
   },
   //fix tạm ở đây sau chuyển xuống dưới catchAll
   {
-    path: '/chat/:id',
+    path: '/chat',
     name: 'Dialog',
     component: Dialog
   },

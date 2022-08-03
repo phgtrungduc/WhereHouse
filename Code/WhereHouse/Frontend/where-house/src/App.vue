@@ -45,6 +45,7 @@ import LoadingFullScreen from "./components/Controls/LoadingFullScreen.vue";
 import axios from "axios";
 import util from "@/util/util.js";
 import PTDConstants from "@/mixin/consants.js";
+import {start} from "@/chathub/ChatHub.js";
 export default {
   data() {
     return {
@@ -116,6 +117,7 @@ export default {
               "userConfig",
               JSON.stringify(user)
             );
+            start(user.UserId);
             this.roleUser = user.Role;
             this.$store.dispatch("getWishListUser", this.token);
           })
