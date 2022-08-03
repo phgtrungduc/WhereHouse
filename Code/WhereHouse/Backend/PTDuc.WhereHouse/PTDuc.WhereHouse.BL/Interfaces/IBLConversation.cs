@@ -4,5 +4,6 @@ namespace PTDuc.WhereHouse.BL.Interfaces
 {
     public interface IBLConversation : IBLBase<Conversation, ConversationDTO>
     {
+        Conversation GetConversation(string userId1, string userId2);
     }
 }

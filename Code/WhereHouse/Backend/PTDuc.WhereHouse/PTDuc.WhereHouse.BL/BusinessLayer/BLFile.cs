@@ -71,7 +71,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             {
                 file.CopyTo(strem);
             }
-            var fileAdd = new DBContext.Models.File { FileId = Guid.NewGuid(), FileName = fileName, FilePath = filePath };
+            var fileAdd = new FileDTO { FileId = Guid.NewGuid(), FileName = fileName, FilePath = filePath };
             var success = this.Insert(fileAdd);
             if (success)
             {

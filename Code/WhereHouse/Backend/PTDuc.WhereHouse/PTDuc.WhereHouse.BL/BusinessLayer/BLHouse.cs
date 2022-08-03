@@ -16,10 +16,29 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
     {
         IDLHouse _dlHouse;
         IBLWishlist _bLWishlist;
-        public BLHouse(IDLHouse dLHouse,IBLWishlist bLWishlist, IMapper mapper) : base(dLHouse, mapper)
+        IBLPost _bLPost;
+        public BLHouse(IDLHouse dLHouse,IBLWishlist bLWishlist, IMapper mapper, IBLPost bLPost) : base(dLHouse, mapper)
         {
             _dlHouse = dLHouse;
             _bLWishlist = bLWishlist;
+            _bLPost = bLPost;
+        }
+
+        public bool AddNewPost(HouseDTO dataForPost)
+        {
+            var res = false;
+            if (this.Validate(dataForPost)) {
+                var houseId = Guid.NewGuid();
+                dataForPost.HouseId = houseId;
+                res = this.Insert(dataForPost);
+                dataForPost.CreatedDate = DateTime.Now;
+                if (res) {
+                    PostDTO post = new PostDTO { Title = dataForPost.Title, Descrtiption = dataForPost.Description, UserId = dataForPost.UserOwnerId,HouseId = houseId };
+                    res =  _bLPost.Insert(post);
+                }
+                return res;
+            }
+            return res;
         }
 
         public IEnumerable<House> GetDeepData()

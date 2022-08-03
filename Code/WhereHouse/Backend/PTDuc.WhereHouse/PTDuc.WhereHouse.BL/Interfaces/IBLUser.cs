@@ -1,4 +1,5 @@
 ﻿using PTDuc.WhereHouse.DBContext.Models;
+using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.EntityModels.DTO;
 using System.Collections.Generic;
 
@@ -9,5 +10,9 @@ namespace PTDuc.WhereHouse.BL.Interfaces
         void AddUserToListOnline(UserDTO user);
         void RemoveUserFromListOnline(UserDTO user);
         List<UserDTO> GetListUserOnline();
+        public ServiceResult BlockUser(string blockUserId, string adminId);
+        public ServiceResult InsertAdmin(UserDTO user, string adminId);
+        public ServiceResult GetListUserForAdmin(string adminId);
+        
     }
 }

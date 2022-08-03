@@ -20,7 +20,7 @@ namespace PTDuc.WhereHouse.Controllers
         public PostController(IBLPost blPost) : base(blPost)
         {
             _blPost = blPost;
-            
+
         }
 
         [AllowAnonymous]
@@ -41,5 +41,48 @@ namespace PTDuc.WhereHouse.Controllers
             return base.GetByID(id);
         }
 
+        [HttpGet("GetUserPost")]
+        public IActionResult GetUserPost()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = _blPost.GetUserPost(Guid.Parse(userId));
+                return this.HandleResponse(res);
+            }
+            return Ok(null);
+        }
+
+        [HttpDelete("DeletePostUser/{id}")]
+        public IActionResult DeletePostUser(string id)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = _blPost.DeletePostUser(id, userId);
+                return this.HandleResponse(res);
+            }
+            return Ok(null);
+        }
+        [HttpPost("AcceptPost/{id}")]
+        public IActionResult AcceptPost(string id)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = _blPost.DeletePostUser(id, userId);
+                return this.HandleResponse(res);
+            }
+            return Ok(null);
+        }
     }
 }

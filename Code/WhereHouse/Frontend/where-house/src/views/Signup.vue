@@ -214,7 +214,7 @@ export default {
     handleChangeAvatar(file) {
       if (file) {
         this.avatarURL = URL.createObjectURL(file);
-        this.$refs.avatar.handleChangeAvatar(file);
+        this.$refs.avatar.handleChange(file);
       }
     },
   },

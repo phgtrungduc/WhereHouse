@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PTDuc.WhereHouse.EntityModels.DTO
 {
-    public class PostDTO
+    public class PostDTO : BaseEntity
     {
 
         public Guid PostId { get; set; }
@@ -16,5 +16,6 @@ namespace PTDuc.WhereHouse.EntityModels.DTO
         public Guid HouseId { get; set; }
         public virtual House House { get; set; }
         public virtual User User { get; set; }
+        public int Status { get; set; }
     }
 }

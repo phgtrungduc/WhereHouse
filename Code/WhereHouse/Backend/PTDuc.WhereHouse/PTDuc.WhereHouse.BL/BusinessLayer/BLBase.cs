@@ -24,7 +24,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             _mapper = mapper;
         }
 
-        public virtual bool BeforeInsert(ref TEntity entity)
+        public virtual bool BeforeInsert(ref TDTO entity)
         {
             return true;
         }
@@ -72,7 +72,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return res;
         }
 
-        public virtual bool Insert(TEntity entity)
+        public virtual bool Insert(TDTO entity)
         {
             var res = false;
             if (this.Validate(entity))
@@ -81,21 +81,22 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 {
                     if (this.BeforeInsert(ref entity))
                     {
-                        res = _dlBase.Insert(entity);
+                        var mapEntity = _mapper.Map<TEntity>(entity);
+                        res = _dlBase.Insert(mapEntity);
                     }
                 }
             }
             return res;
         }
 
-        public bool Update(TDTO entity)
+        public bool Update(TDTO entity,string id )
         {
             var mapEntity = _mapper.Map<TEntity>(entity);
-            return _dlBase.Update(mapEntity);
+            return _dlBase.Update(mapEntity,id);
         }
 
 
-        public bool Validate(TEntity entity)
+        public bool Validate(TDTO entity)
         {
             var mesArrayError = new List<string>();
             var isValidate = true;
@@ -179,7 +180,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return isValidate;
         }
 
-        public bool ValidateCustom(TEntity entity)
+        public bool ValidateCustom(TDTO entity)
         {
             return true;
         }

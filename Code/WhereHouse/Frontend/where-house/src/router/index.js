@@ -12,13 +12,16 @@ import Product from '../views/Product/Product.vue'
 import AddProduct from '../views/Product/AddProduct.vue'
 import EditProduct from '../views/Product/EditProduct.vue'
 import ShowDetails from '../views/Product/ShowDetails.vue'
-import Wishlist from '../views/Product/Wishlist.vue'
 import Cart from '../views/Cart/Cart.vue'
 import Checkout from '../views/Checkout/Checkout.vue'
 import Order from '../views/Orders/Order.vue'
 
 
 import HouseDetail from '../views/House/HouseDetail.vue'
+import AddHouse from '../views/House/AddHouse.vue'
+
+import Wishlist from '../views/Wishlist/Wishlist.vue'
+import MyPost from '../views/House/MyPost.vue'
 
 import Category from '../views/Category/Category.vue'
 import AddCategory from '../views/Category/AddCategory.vue'
@@ -134,23 +137,35 @@ const routes = [
     name: 'Signin',
     component: Signin
   },
-  //fix tạm ở đây
+  //fix tạm ở đây sau chuyển xuống dưới catchAll
   {
-    path: '/chat/:id',
+    path: '/chat',
     name: 'Dialog',
     component: Dialog
+  },
+  //fix tạm ở đây tiếp sau chuyển xuống dưới catchAll
+  {
+    path: '/addhouse',
+    name: 'AddHouse',
+    component: AddHouse
+  },
+  //fix tạm ở đây tiếp sau chuyển xuống dưới catchAll
+  {
+    path: '/wishlist',
+    name: 'Wishlist',
+    component: Wishlist
+  },
+  //fix tạm ở đây tiếp sau chuyển xuống dưới catchAll
+  {
+    path: '/mypost',
+    name: 'MyPost',
+    component: MyPost
   },
   //Page Not found
   {
     path: '/:catchAll(.*)',
     name: 'PageNotFound',
     component: PageNotFound
-  },
-  
-  {
-    path: '/wishlist',
-    name: 'Wishlist',
-    component: Wishlist
   },
   {
     path: '/cart',

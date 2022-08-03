@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PTDuc.WhereHouse.EntityModels.DTO
 {
-    public partial class ConversationDTO
+    public partial class ConversationDTO : BaseEntity
     {
 
         public Guid ConversationId { get; set; }

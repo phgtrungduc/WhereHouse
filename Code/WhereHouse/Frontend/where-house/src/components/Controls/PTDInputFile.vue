@@ -48,7 +48,7 @@ export default {
     };
   },
   methods: {
-    async handleChangeAvatar(file) {
+    async handleChange(file) {
       if (file) {
         if (this.file) this.deleteFile();
         this.uploadFile(file);

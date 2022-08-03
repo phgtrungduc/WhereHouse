@@ -19,7 +19,6 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!--      Search Bar-->
       <form class="form-inline ml-auto mr-auto">
         <div class="input-group">
           <input
@@ -48,12 +47,57 @@
           </div>
         </div>
       </form>
+      
 
-      <div
-        class="navbar-right d-flex align-items-center justify-content-end"
-      >
+      <div class="navbar-right d-flex align-items-center justify-content-end" v-if="role===1">
+        <router-link
+          v-if="token"
+          class="text-light nav-item"
+          :to="{ name: 'Dialog' }"
+        >
+          <span class="mr-1">Tin nhắn</span>
+          <font-awesome-icon icon="fa-regular fa-message" class="icon-navbar" />
+        </router-link>
+        <div id="cart" v-if="token" class="nav-item">
+          <span id="nav-cart-count">{{ this.$store.state.wishList.length }}</span>
+          <router-link class="text-light" :to="{ name: 'Wishlist' }">
+            <span class="mr-1">Wishlist</span>
+            <font-awesome-icon icon="fa-regular fa-heart" class="icon-navbar" />
+          </router-link>
+        </div>
         <div class="nav-item">
-          <v-menu bottom :offset-y="120">
+          <v-menu bottom :offset-y="true">
+            <template v-slot:activator="{ on, attrs }">
+              <div v-bind="attrs" v-on="on">
+                <span>Bài đăng</span>
+                <font-awesome-icon
+                  icon="fa-regular fa-file"
+                  class="ml-1 icon-navbar"
+                />
+              </div>
+            </template>
+
+            <v-list>
+              <router-link :to="{ name: 'MyPost' }">
+                <v-list-item>
+                  <v-list-item-title> Bài đăng của tôi </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link :to="{ name: 'AddHouse' }">
+                <v-list-item>
+                  <v-list-item-title> Thêm bài đăng mới </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link :to="{ name: 'GoogleMap' }">
+                <v-list-item>
+                  <v-list-item-title> Đến map </v-list-item-title>
+                </v-list-item>
+              </router-link>
+            </v-list>
+          </v-menu>
+        </div>
+        <div class="nav-item">
+          <v-menu bottom :offset-y="true">
             <template v-slot:activator="{ on, attrs }">
               <div v-bind="attrs" v-on="on">
                 <span>Tài khoản</span>
@@ -66,30 +110,35 @@
             </template>
 
             <v-list>
-              <router-link class="dropdown-item" :to="{ name: 'Wishlist' }">
-                <v-list-item>
-                  <v-list-item-title> Wishlist </v-list-item-title>
+              <div class="navbar-info-user">
+                <v-list-item v-if="this.$store.getters.isUserHasAvatar">
+                  <v-list-item-icon>
+                    <v-img
+                      height="25"
+                      width="25"
+                      :src="this.$store.getters.userAvatar"
+                      class="rounded-circle"
+                    ></v-img>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title
+                      :v-text="this.$store.getters.userFullName"
+                      >{{ this.$store.getters.userFullName }}</v-list-item-title
+                    >
+                  </v-list-item-content>
                 </v-list-item>
-              </router-link>
-              <router-link class="dropdown-item" :to="{ name: 'Admin' }">
+              </div>
+              <router-link :to="{ name: 'Admin' }">
                 <v-list-item>
                   <v-list-item-title> Quản trị viên </v-list-item-title>
                 </v-list-item>
               </router-link>
-              <router-link
-                class="dropdown-item"
-                :to="{ name: 'Signin' }"
-                v-if="!token"
-              >
+              <router-link :to="{ name: 'Signin' }" v-if="!token">
                 <v-list-item>
                   <v-list-item-title> Đăng nhập </v-list-item-title>
                 </v-list-item>
               </router-link>
-              <router-link
-                class="dropdown-item"
-                v-if="!token"
-                :to="{ name: 'Signup' }"
-              >
+              <router-link v-if="!token" :to="{ name: 'Signup' }">
                 <v-list-item>
                   <v-list-item-title> Đăng ký </v-list-item-title>
                 </v-list-item>
@@ -100,48 +149,51 @@
             </v-list>
           </v-menu>
         </div>
-
-        <router-link v-if="token" class="text-light nav-item" :to="{ name: 'Order' }">
-          <span class="mr-1">Tin nhắn</span>
-          <font-awesome-icon
-            
-            icon="fa-regular fa-message"
-            class="icon-navbar"
-          />
-        </router-link>
-        <div id="cart" v-if="token" class="nav-item">
-          <span id="nav-cart-count">{{ cartCount }}</span>
-          <router-link class="text-light" :to="{ name: 'Order' }">
-            <span class="mr-1">Wishlist</span>
-            <font-awesome-icon icon="fa-regular fa-heart" class="icon-navbar" />
-          </router-link>
-        </div>
+      </div>
+      <div class="navbar-right d-flex align-items-center justify-content-end" v-else>
         <div class="nav-item">
-          <v-menu bottom :offset-y="120">
+          <v-menu bottom :offset-y="true">
             <template v-slot:activator="{ on, attrs }">
               <div v-bind="attrs" v-on="on">
-                <span>Thêm</span>
+                <span>Bài đăng</span>
                 <font-awesome-icon
-                  icon="fa-solid fa-ellipsis-vertical"
-                  class="ml-1"
+                  icon="fa-regular fa-file"
+                  class="ml-1 icon-navbar"
                 />
               </div>
             </template>
 
             <v-list>
-              <router-link class="dropdown-item" :to="{ name: 'Home' }">
+              <router-link :to="{ name: 'MyPost' }">
                 <v-list-item>
-                  <v-list-item-title> Trang chủ </v-list-item-title>
+                  <v-list-item-title> Quản lý bài đăng</v-list-item-title>
                 </v-list-item>
               </router-link>
-              <router-link class="dropdown-item" :to="{ name: 'Product' }">
+              <router-link :to="{ name: 'MyPost' }">
                 <v-list-item>
-                  <v-list-item-title> Thêm bài đăng mới </v-list-item-title>
+                  <v-list-item-title> Báo cáo bài đăng</v-list-item-title>
                 </v-list-item>
               </router-link>
-              <router-link class="dropdown-item" :to="{ name: 'GoogleMap' }">
+            </v-list>
+          </v-menu>
+        </div>
+        <div class="nav-item">
+          <v-menu bottom :offset-y="true">
+            <template v-slot:activator="{ on, attrs }">
+              <div v-bind="attrs" v-on="on">
+                <span>Tài khoản</span>
+                <font-awesome-icon
+                  icon="fa-regular fa-circle-user"
+                  class="ml-1"
+                  style="font-size: 25px"
+                />
+              </div>
+            </template>
+
+            <v-list>
+              <router-link :to="{ name: 'Admin' }">
                 <v-list-item>
-                  <v-list-item-title> Đến map </v-list-item-title>
+                  <v-list-item-title> Quản lý người dùng </v-list-item-title>
                 </v-list-item>
               </router-link>
             </v-list>
@@ -156,22 +208,32 @@
 import swal from "sweetalert";
 export default {
   name: "Navbar",
-  props: ["cartCount"],
+  props: {
+    cartCount: {
+      type: Number,
+    },
+    role: {
+      type: Number,
+      default: 1,
+    },
+  },
   data() {
     return {
       token: null,
+      user: {},
     };
   },
   methods: {
     signout() {
       localStorage.removeItem("token");
+      document.cookie = "userConfig=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       this.token = null;
-      // this.$emit("resetCartCount");
-      // this.$router.push({ name: "Home" });
-      swal({
-        text: "Bạn đã đăng xuất.",
+      swal("Bạn đã đăng xuất", {
+        buttons: false,
+        timer: 1500,
         icon: "success",
-        closeOnClickOutside: false,
+      }).then(() => {
+        this.$router.push({ name: "Home" });
       });
     },
   },
@@ -212,13 +274,13 @@ a {
   width: 15px;
   height: 15px;
   font-size: 15px;
-  margin-left: 16px;
+  right: 0;
 }
 #cart {
   position: relative;
 }
 .navbar-right {
-  width: 400px;
+  width: 450px;
   display: flex;
   align-items: center;
   color: #fff;
@@ -234,6 +296,13 @@ a {
       background-color: #707274 !important;
       border-radius: 5px;
     }
+  }
+  .v-list-item__icon:first-child {
+    margin-right: 5px;
+  }
+  .navbar-info-user {
+    background: #dad9d9;
+    border-radius: 20px;
   }
 }
 .icon-navbar {

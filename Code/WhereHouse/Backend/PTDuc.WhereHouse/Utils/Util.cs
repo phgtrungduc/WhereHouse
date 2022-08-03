@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using PTDuc.WhereHouse.EntityModels;
+using System;
 using System.Linq;
 
 namespace PTDuc.WhereHouse.Utils
@@ -21,7 +23,5 @@ namespace PTDuc.WhereHouse.Utils
 
             return objto;
         }
-
-        
     }
 }

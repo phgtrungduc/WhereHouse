@@ -39,10 +39,29 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             if (skip >= 0 && pageSize > 0)
             {
                 var data = _dbSet.Skip(skip).Take(pageSize).Include(x => x.House).ThenInclude(y => y.HouseImage);
-                data?.Include(x => x.House).ThenInclude(y => y.HouseImage);
-                res.Data = new { TotalRecords = totalRecords, Data = data.ToList() };
+                res.Data = new { TotalRecords = totalRecords, Data = data.ToList().OrderBy(x=>x.CreatedDate) };
             }
             return res;
+        }
+
+        public IEnumerable<Post> GetListPostForAdmin()
+        {
+            _dbSet = _context.Set<Post>();
+            var data = _dbSet.Include(x => x.User).Include(x => x.House).ThenInclude(house => house.HouseType)
+                .Include(z => z.House).ThenInclude(i => i.HouseImage);
+            return data;
+        }
+
+        public IEnumerable<Post> GetUserPost(Guid userId)
+        {
+            var res = default(IEnumerable<Post>);
+            _dbSet = _context.Set<Post>();
+            var data = _dbSet.Where(x=>x.UserId==userId);
+            if (data != null && data.Count() > 0) {
+                res = data.Include(x => x.House).ThenInclude(y => y.HouseImage);
+            }
+            return res;
+                
         }
     }
 }

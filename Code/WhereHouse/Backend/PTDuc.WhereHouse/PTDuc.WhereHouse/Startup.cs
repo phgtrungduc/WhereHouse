@@ -89,6 +89,9 @@ namespace PTDuc.WhereHouse
             services.AddScoped<IDLConversation, DLConversation>();
             services.AddScoped<IBLConversation, BLConversation>();
 
+            services.AddScoped<IDLHouseType, DLHouseType>();
+            services.AddScoped<IBLHouseType, BLHouseType>();
+
             services.AddDbContext<WhereHouseContext>(
             options => options.UseSqlServer("name=ConnectionStrings:WhereHouseDatabase"));
 

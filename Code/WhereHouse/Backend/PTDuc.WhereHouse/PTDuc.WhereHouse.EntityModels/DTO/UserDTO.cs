@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PTDuc.WhereHouse.EntityModels.DTO
 {
-    public class UserDTO
+    public class UserDTO : BaseEntity
     {
 
         public Guid UserId { get; set; }
@@ -22,8 +22,6 @@ namespace PTDuc.WhereHouse.EntityModels.DTO
         public Guid? AvatarId { get; set; }
         public int Role { get; set; }
         public int Status { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
         public virtual File Avatar { get; set; }
         public bool? IsOnline { get; set; }
 

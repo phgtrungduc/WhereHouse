@@ -5,12 +5,10 @@ using System.Collections.Generic;
 
 namespace PTDuc.WhereHouse.EntityModels.DTO
 {
-    public class FileDTO
+    public class FileDTO : BaseEntity
     {
         public Guid FileId { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? CreatedDate { get; set; }
     }
 }

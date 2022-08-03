@@ -2,7 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-12 justify-content-center d-flex flex-column p-0">
-        <router-link :to="{ name: 'Home' }" class="justify-content-center d-flex">
+        <router-link
+          :to="{ name: 'Home' }"
+          class="justify-content-center d-flex"
+        >
           <img id="logo" src="../assets/images/wherehouselogo.svg" />
         </router-link>
         <div id="signin-div" class="flex-item">
@@ -10,15 +13,32 @@
           <form @submit="signin" class="pt-4 pl-4 pr-4">
             <div class="form-group">
               <label>Tên đăng nhập</label>
-              <input type="text" class="form-control" v-model="username" placeholder="Tên đăng nhập" required />
+              <input
+                type="text"
+                class="form-control"
+                v-model="username"
+                placeholder="Tên đăng nhập"
+                required
+              />
             </div>
             <div class="form-group">
               <label>Mật khẩu</label>
-              <input type="password" class="form-control" v-model="password" placeholder="Mật khẩu" required />
+              <input
+                type="password"
+                class="form-control"
+                v-model="password"
+                placeholder="Mật khẩu"
+                required
+              />
             </div>
             <div class="form-group d-flex justify-content-center">
-              <v-btn class="ma-2" :loading="loading" :disabled="loading" color="success"
-                @click="loader = 'loading', signin()">
+              <v-btn
+                class="ma-2"
+                :loading="loading"
+                :disabled="loading"
+                color="success"
+                @click="(loader = 'loading'), signin()"
+              >
                 Đăng nhập
                 <template v-slot:loader>
                   <span>Loading...</span>
@@ -27,22 +47,26 @@
             </div>
           </form>
           <hr />
-          <small class="form-text text-muted pt-2 pl-4 text-center">Chưa có tài khoản?</small>
+          <small class="form-text text-muted pt-2 pl-4 text-center"
+            >Chưa có tài khoản?</small
+          >
           <p class="text-center">
-            <router-link :to="{ name: 'Signup' }" class="mx-auto px-5 py-1 mb-2">
+            <router-link
+              :to="{ name: 'Signup' }"
+              class="mx-auto px-5 py-1 mb-2"
+            >
               <v-btn>Đăng ký </v-btn>
             </router-link>
           </p>
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 <script>
 import swal from "sweetalert";
 import axios from "axios";
-import util from '../util/util';
+import {start} from "@/chathub/ChatHub.js";
 export default {
   name: "Signin",
   props: ["baseURL", "products"],
@@ -51,7 +75,7 @@ export default {
       username: null,
       password: null,
       loading: false,
-      loader: null
+      loader: null,
     };
   },
   methods: {
@@ -67,24 +91,34 @@ export default {
         await axios
           .post(`${this.baseUrl}Login`, user)
           .then((res) => {
-
             switch (res.data.StatusCode) {
               case 205:
-                swal("Đăng nhập thất bại", "Tên đăng nhập chưa tồn tại!", "error");
+                swal(
+                  "Đăng nhập thất bại",
+                  "Tên đăng nhập chưa tồn tại!",
+                  "error"
+                );
                 break;
               case 206:
                 swal("Đăng nhập thất bại", "Sai mật khẩu!", "error");
                 break;
               case 199:
-                swal("Đăng nhập thất bại", "Chưa điền đầy đủ thông tin đăng nhập!", "error");
+                swal(
+                  "Đăng nhập thất bại",
+                  "Chưa điền đầy đủ thông tin đăng nhập!",
+                  "error"
+                );
                 break;
-              default:
-                localStorage.setItem("token", res.data.Data.accessToken); 
-                util.setCookie("userConfig",JSON.stringify(res.data.Data.User));
+              default: {
+                let userData = res.data.Data.User;
+                localStorage.setItem("token", res.data.Data.accessToken);
+                this.$store.dispatch("setUser", userData);
                 // this.$emit("fetchData");
-                this.$store.commit("showSnackbar",true)
+                this.$store.commit("showSnackbar", true);
                 this.$router.push({ name: "Home" });
+                start(userData.UserId);
                 break;
+              }
             }
           })
           .catch((err) => {
@@ -95,8 +129,7 @@ export default {
             });
             console.log(err);
           })
-          .finally(() => {
-          });
+          .finally(() => {});
       }
     },
   },
@@ -112,7 +145,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/css/color"as color;
+@use "../assets/css/color" as color;
 
 @-moz-keyframes loader {
   from {

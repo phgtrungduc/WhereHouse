@@ -43,7 +43,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("Conversation");
 
-                entity.Property(e => e.ConversationId).ValueGeneratedNever();
+                entity.Property(e => e.ConversationId).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.UserId1Navigation)
                     .WithMany(p => p.ConversationUserId1Navigations)
@@ -62,7 +62,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("File");
 
-                entity.Property(e => e.FileId).ValueGeneratedNever();
+                entity.Property(e => e.FileId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(255);
 
@@ -79,7 +79,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("House");
 
-                entity.Property(e => e.HouseId).ValueGeneratedNever();
+                entity.Property(e => e.HouseId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(255);
 
@@ -121,7 +121,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("Message");
 
-                entity.Property(e => e.MessageId).ValueGeneratedNever();
+                entity.Property(e => e.MessageId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Content).IsRequired();
 
@@ -143,11 +143,13 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("Post");
 
-                entity.Property(e => e.PostId).ValueGeneratedNever();
+                entity.Property(e => e.PostId).ValueGeneratedOnAdd();
 
-                entity.Property(e => e.Descrtiption)
-                    .IsRequired()
-                    .HasMaxLength(255);
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Descrtiption).HasMaxLength(255);
+
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Title)
                     .IsRequired()
@@ -170,7 +172,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.UserId).ValueGeneratedNever();
+                entity.Property(e => e.UserId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(255);
 
@@ -208,7 +210,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("Wishlist");
 
-                entity.Property(e => e.WishlistId).ValueGeneratedNever();
+                entity.Property(e => e.WishlistId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(255);
 

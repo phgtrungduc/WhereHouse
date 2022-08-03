@@ -23,5 +23,12 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             var data = _dbSet.Where(x => x.UserId == Guid.Parse(Id)).Include(x => x.Avatar).FirstOrDefault();
             return data;
         }
+
+        public User GetUserByUserName(string userName)
+        {
+            _dbSet = _context.Set<User>();
+            var data = _dbSet.Where(x => x.UserName == userName).Include(user=>user.Avatar).FirstOrDefault();
+            return data;
+        }
     }
 }

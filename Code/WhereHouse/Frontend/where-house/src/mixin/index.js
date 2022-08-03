@@ -8,5 +8,8 @@ Vue.mixin({
     },
     mounted(){
         this.$store.commit("showAppLoading", false);
+    },
+    created(){
+        this.token = localStorage.getItem("token")
     }
 })
