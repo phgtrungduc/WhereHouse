@@ -6,7 +6,8 @@ XD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\Model
 YD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\Models\House.csutf-8f
 ]D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\Models\HouseType.csutf-8d
 [D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\Models\Message.csutf-8a
-XD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\Models\Post.csutf-8a
+XD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\Models\Post.csutf-8c
+ZD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\Models\Report.csutf-8a
 XD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\Models\User.csutf-8n
 eD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\Models\WhereHouseContext.csutf-8e
 \D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\Models\Wishlist.csutf-8•

@@ -13,12 +13,14 @@ namespace PTDuc.WhereHouse.ChatHub
     {
         IBLUser _bLUser;
         IBLConversation _bLConversation;
+        IBLMessage _bLMessage;
         //IBLConversation bLConversation;
         //IBLMessage _bLMessage;
-        public ChattingHub(IBLUser bLUser, IBLConversation bLConversation)
+        public ChattingHub(IBLUser bLUser, IBLConversation bLConversation, IBLMessage bLMessage)
         {
             _bLUser = bLUser;
             _bLConversation = bLConversation;
+            _bLMessage = bLMessage;
         }
 
         public async Task UserOnConnected(string userId)
@@ -28,6 +30,12 @@ namespace PTDuc.WhereHouse.ChatHub
             {
                 //user sẽ được add vào room có id chính là id của user
                 await this.AddToGroup(userId);
+                var allConversation = _bLConversation.GetAllConversationUser(userId);
+                //Add user vào tất cả các cuộc trò chuyện đã tham gia  
+                allConversation.ForEach(async x =>
+                {
+                    await this.AddToGroup(x.ConversationId.ToString());
+                });
             }
         }
 
@@ -43,35 +51,24 @@ namespace PTDuc.WhereHouse.ChatHub
             await Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId} has left the group {groupName}.");
         }
 
-        public async Task SendPrivateMessage(string userReceivedId, string userSendId, string message)
+        public async Task SendPrivateMessage(string userSendId, string groupName, string message)
         {
-            var groupName = userReceivedId;
-            
             //Vì user đã được thêm vào room là id của chính nó nên user gửi tin nhắn riêng tư cũng sẽ được add vào room này
             await Clients.Group(groupName).SendAsync("ReceivedPrivateMessage", userSendId, message);
+            var newMessage = new MessageDTO()
+            {
+                ConversationId = Guid.Parse(groupName),
+                UserId = Guid.Parse(userSendId),
+                Content = message,
+                Time = DateTime.Now
+            };
+            _bLMessage.Insert(newMessage);
         }
 
-        public async Task InitPrivateChat(string userSendId,string userReceivedId)
+        public async Task InitPrivateChat(string userSendId, string userReceivedId, string connectionId)
         {
-            var conversation = _bLConversation.GetConversation(userSendId, userReceivedId);
-            if (conversation != null)
-            {
-                await Clients.Group(userReceivedId).SendAsync("InitPrivateRoomChat", conversation.ConversationId);
-                await Clients.Group(userSendId).SendAsync("InitPrivateRoomChat", conversation.ConversationId);
-            }
-            else
-            {
-                var conversationId = Guid.NewGuid();
-                var newConversation = new ConversationDTO()
-                {
-                    ConversationId = conversationId,
-                    UserId1 = Guid.Parse(userSendId),
-                    UserId2 = Guid.Parse(userReceivedId)
-                };
-                _bLConversation.Insert(newConversation);
-                await Clients.Group(userReceivedId).SendAsync("InitPrivateRoomChat", conversationId.ToString());
-                await Clients.Group(userSendId).SendAsync("InitPrivateRoomChat", conversationId.ToString());
-            }
+            await Clients.Group(userReceivedId).SendAsync("InitPrivateRoomChat", connectionId);
+            await Clients.Group(userSendId).SendAsync("InitPrivateRoomChat", connectionId);
         }
     }
 }

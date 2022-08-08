@@ -7,5 +7,6 @@ namespace PTDuc.WhereHouse.DL.Interfaces
     public interface IDLMessage : IDLBase<Message, MessageDTO>
     {
         object GetConversation(MessageDTO message);
+        List<Message> GetMessagesByConversationId(string conversationId);
     }
 }

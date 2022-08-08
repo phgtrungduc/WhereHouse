@@ -12,122 +12,33 @@
           <div class="col-content">
             <div class="messages">
               <h2 class="ml-4">Danh sách chat</h2>
-              <DialogChat />
-              <DialogChat />
+              <DialogChat
+                v-for="(item, index) in listConversation"
+                :key="index"
+                :conversation="item"
+                @click="changeConversation(item.ConversationId)"
+              />
             </div>
           </div>
         </div>
 
         <div class="col">
-          <div class="col-content">
-            <section class="message">
-              <div class="grid-message">
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>Ok.</p>
-                  </div>
-                  <div class="message-received">
-                    <p>Do you play EVE Online?</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>Not anymore.</p>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>But, can you?</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>
-                      I guess if I had some practice I could again. It's been
-                      years.
-                    </p>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>Dat titan though...</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>Trombone, guitar, titan?</p>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>Niiiiice.</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <div class="">
-                      <p>
-                        Do you care if I use the last few minutes of our
-                        conversation as dummy text for this thing I'm coding?
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>Sure go ahead.</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>Okay.</p>
-                  </div>
-                  <div class="message-sent">
-                    <p>I'll send you some ISK when I'm done.</p>
-                  </div>
-                  <div class="message-sent">
-                    <p>It's cool.</p>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>Ok.</p>
-                  </div>
-                  <div class="message-received">
-                    <p>Do you play EVE Online?</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>Not anymore.</p>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>But, can you?</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>
-                      I guess if I had some practice I could again. It's been
-                      years.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
+          <div class="col-content" ref="chatContent">
+            <DetailChat
+              :listMessage="listMessage"
+              :scrollToBottom="scrollToBottom"
+            />
           </div>
-
           <div class="col-foot">
             <div class="compose">
-              <input placeholder="Nhập tin nhắn ..." />
+              <input placeholder="Nhập tin nhắn ..." v-model="message" />
               <div class="compose-dock">
                 <div class="dock">
                   <font-awesome-icon
                     icon="fa-solid fa-paper-plane"
                     size="2x"
                     id="sendMessage"
+                    @click="sendMessage"
                   />
                 </div>
               </div>
@@ -157,18 +68,189 @@
 <script>
 import DialogChat from "../../components/Chat/DialogChat.vue";
 import util from "../../util/util";
+import { connection } from "@/chathub/ChatHub.js";
+import axios from "axios";
+import DetailChat from "../../components/Chat/DetailChat.vue";
 export default {
   name: "Dialog",
-  components: { DialogChat },
+  components: { DialogChat, DetailChat },
   data() {
     return {
-      currentUserSendId: util.getCurrentUserId(),
-      currentUserReceivedId: null,
+      currentUserId: util.getCurrentUserId(),
+      otherUserId: null,
+      listMessage: [],
+      message: "",
+      currentConversationId: "",
+      listConversation: [],
     };
   },
-  created(){
-    this.currentUserReceivedId = this.$route.params.id;
-  }
+  methods: {
+    waitForChat() {
+      let me = this;
+      connection.on("ReceivedPrivateMessage", (userSendId, message) => {
+        if (me.currentUserId && me.currentUserId != userSendId) {
+          me.listMessage.push({ message: message, type: 2 });
+          this.scrollToBottom();
+        }
+      });
+    },
+    sendMessage() {
+      if (this.message) {
+        connection.invoke(
+          "SendPrivateMessage",
+          this.currentUserId,
+          this.currentConversationId,
+          this.message
+        );
+        this.listMessage.push({ message: this.message, type: 1 });
+        this.message = "";
+        this.scrollToBottom();
+      }
+    },
+    async initChat(curentUserId, otherUserId) {
+      let config1 = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+        params: { userReceivedId: otherUserId },
+      };
+      let conversationIdData = await axios.get(
+        `${this.baseUrl}conversation/initchat`,
+        config1
+      );
+      let conversationId = conversationIdData.data.Data;
+      this.currentConversationId = conversationId;
+      let config2 = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      };
+      await axios
+        .get(
+          `${this.baseUrl}message/GetMessagesByConversationId/${conversationId}`,
+          config2
+        )
+        .then(
+          (res) => {
+            if (res.data.StatusCode) {
+              if (res.data.Data) {
+                let listChat = res.data.Data.$values;
+                if (listChat && listChat.length) {
+                  listChat.forEach((message) => {
+                    if (message.UserId == curentUserId) {
+                      this.listMessage.push({
+                        message: message.Content,
+                        type: 1,
+                      });
+                    } else {
+                      this.listMessage.push({
+                        message: message.Content,
+                        type: 2,
+                      });
+                    }
+                  });
+                }
+              }
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    async changeConversation(id) {
+      console.log(id);
+      this.listMessage = [];
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      };
+      await axios
+        .get(
+          `${this.baseUrl}message/GetMessagesByConversationId/${id}`,
+          config
+        )
+        .then(
+          (res) => {
+            if (res.data.StatusCode) {
+              if (res.data.Data) {
+                let listChat = res.data.Data.$values;
+                if (listChat && listChat.length) {
+                  let curentUserId = util.getCurrentUserId();
+                  listChat.forEach((message) => {
+                    if (message.UserId == curentUserId) {
+                      this.listMessage.push({
+                        message: message.Content,
+                        type: 1,
+                      });
+                    } else {
+                      this.listMessage.push({
+                        message: message.Content,
+                        type: 2,
+                      });
+                    }
+                  });
+                }
+              }
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    async getListConversationForUser() {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      };
+      await axios
+        .get(`${this.baseUrl}Conversation/GetAllConversationUser`, config)
+        .then(
+          (res) => {
+            if (res.data.StatusCode) {
+              if (res.data.Data) {
+                let list = res.data.Data.$values;
+                let userID = util.getCurrentUserId();
+                list.forEach((x) => {
+                  let indexUser = x.UserId1 == userID ? 1 : 2;
+                  let conversation = {
+                    ConversationId: x.ConversationId,
+                    User:
+                      indexUser == 1
+                        ? x.UserId1Navigation
+                        : x.UserId2Navigation,
+                  };
+                  this.listConversation.push(conversation);
+                });
+              }
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    scrollToBottom() {
+      let contentChat = this.$refs.chatContent;
+      contentChat.scrollTop = contentChat.scrollHeight;
+    },
+  },
+  created() {
+    let otherUserId =
+      this.$route.params.userRecievedId ||
+      "3f66f2d6-688b-4161-5f92-08c864661f9c";
+    let currentUserId = this.currentUserId || util.getCurrentUserId();
+    if (otherUserId && currentUserId) {
+      this.initChat(currentUserId, otherUserId);
+      this.waitForChat();
+    }
+    this.getListConversationForUser();
+  },
+
+  mounted() {},
 };
 </script>
 
@@ -494,20 +576,6 @@ main {
   flex: 0 0 50px;
 }
 
-.message-sent,
-.message-received {
-  clear: both;
-  position: relative;
-}
-
-.message-sent::before,
-.message-received::before,
-.message-sent::after,
-.message-received::after {
-  content: "";
-  display: table;
-}
-
 [class^="grid-"] {
   display: -ms-flexbox;
   display: -webkit-box;
@@ -518,97 +586,6 @@ main {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   flex-direction: row;
-}
-
-.grid-message > [class^="col-"] {
-  margin-top: 1em;
-  margin-right: 1em;
-}
-
-.grid-message > [class^="col-"]:nth-child(-n + 1) {
-  margin-top: 0;
-}
-
-.grid-message > [class^="col-"]:nth-child(1n) {
-  margin-right: 0;
-}
-
-.col-message-sent {
-  margin-left: calc(8.33333333% + 0.08333333em) !important;
-}
-
-.col-message-received {
-  margin-right: calc(8.33333333% + 0.08333333em) !important;
-}
-
-.col-message-sent,
-.col-message-received {
-  width: calc(91.66666667% - 0.08235677em);
-}
-
-.message-sent,
-.message-received {
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
-  padding: 0.5em 0.6em;
-}
-
-.message-sent p,
-.message-received p {
-  margin: 0;
-  line-height: 1.5;
-}
-
-.message-sent {
-  float: right;
-  color: white;
-  background-color: #0181ff;
-  border-radius: 0.5em 0.25em 0.25em 0.5em;
-}
-
-.message-sent:first-child {
-  border-radius: 0.5em 0.5em 0.25em 0.5em;
-}
-
-.message-sent:last-child {
-  border-radius: 0.25em 0.25em 0.5em 0.5em;
-}
-
-.message-sent:only-child {
-  border-radius: 0.5em;
-}
-
-.message-received {
-  float: left;
-  color: black;
-  background-color: #e6e6e6;
-  border-radius: 0.25em 0.5em 0.5em 0.25em;
-}
-
-.message-received:first-child {
-  border-radius: 0.5em 0.5em 0.5em 0.25em;
-  margin-top: 0px;
-}
-
-.message-received:last-child {
-  border-radius: 0.25em 0.5em 0.5em 0.5em;
-}
-
-.message-received:only-child {
-  border-radius: 0.5em;
-}
-
-.col-message-sent,
-.col-message-received {
-  margin-top: 0.25em !important;
-}
-
-.message {
-  min-height: 53.33203125em;
-  display: -ms-flexbox;
-  display: -webkit-box;
-  display: flex;
-  padding: 20px;
 }
 
 .wrapper-mobile {
@@ -644,14 +621,14 @@ main {
 .compose input {
   width: 100%;
   border: 0px;
-  font-size: 17px;
+  font-size: 14px;
   padding-right: 80px;
 }
 
 .compose .compose-dock .dock {
   position: absolute;
   right: 25px;
-  top: 20px;
+  top: 15px;
 }
 
 .compose .compose-dock img {
@@ -666,7 +643,7 @@ main {
 #sendMessage {
   cursor: pointer;
 }
-@media only screen and (max-width: 1250px) {
+/* @media only screen and (max-width: 1250px) {
   .wrapper {
     display: none;
   }
@@ -674,5 +651,5 @@ main {
   .wrapper-mobile {
     display: block;
   }
-}
+} */
 </style>

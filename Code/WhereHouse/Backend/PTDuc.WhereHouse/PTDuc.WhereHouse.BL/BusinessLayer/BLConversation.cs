@@ -7,6 +7,8 @@ using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.Utils;
 using PTDuc.WhereHouse.EntityModels.DTO;
 using AutoMapper;
+using System.Collections.Generic;
+using System;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
@@ -18,9 +20,31 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             _DLConversation = DLConversation;
         }
 
+        public List<Conversation> GetAllConversationUser(string userId)
+        {
+            return _DLConversation.GetAllConversationUser(userId);
+        }
+
         public Conversation GetConversation(string userId1, string userId2)
         {
-            return _DLConversation.GetConversation(userId1,userId2);
+            return _DLConversation.GetConversation(userId1, userId2);
+        }
+
+        public Guid InitChat(string userRecievedId, string userSendId)
+        {
+            var conversation = this.GetConversation(userSendId, userRecievedId);
+            if (conversation != null) return conversation.ConversationId;
+            else
+            {
+                var newid = Guid.NewGuid();
+                this.Insert(new ConversationDTO()
+                {
+                    ConversationId = newid,
+                    UserId1 = Guid.Parse(userSendId),
+                    UserId2 = Guid.Parse(userRecievedId)
+                });
+                return newid;
+            }
         }
     }
 }

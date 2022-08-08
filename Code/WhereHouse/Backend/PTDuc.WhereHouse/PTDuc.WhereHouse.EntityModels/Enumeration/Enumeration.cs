@@ -48,5 +48,11 @@ namespace PTDuc.WhereHouse.EntityModels
             User = 1,//Người dùng bình thường 
             Admin = 2, //Quản trị hệ thống 
         }
+
+        public enum StatusReport // Trạng thái báo cáo 
+        {
+            Created = 1,//Chưa giải quyết 
+            Solved = 2, //Đã giải quyết 
+        }
     }
 }

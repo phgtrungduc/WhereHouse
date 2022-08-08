@@ -258,13 +258,13 @@ export default {
         await axios
           .post(`${this.baseUrl}House/AddNewPost`, this.houseData, config)
           .then((res) => {
-            if (res.StatusCode) {
+            if (res.data.StatusCode && res.data.Data) {
               swal("Thêm bài đăng thành công", {
                 buttons: false,
                 timer: 500,
                 icon: "success",
               }).then(() => {
-                this.$$router.push({ name: "Home" });
+                this.$router.push({ name: "Home" });
               });
             }
           })

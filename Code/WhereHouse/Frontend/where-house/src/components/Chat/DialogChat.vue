@@ -1,18 +1,26 @@
 <template>
-  <li class="chat-dialog">
+  <li class="chat-dialog" v-on="$listeners">
     <div class="avatar">
       <div class="avatar-image">
-        <img src="../../assets/images/img/avatar-2.png" />
+        <img src="../../assets/images/avatar-default.png" />
       </div>
     </div>
-    <h3>Nancy Scott</h3>
-    <p>Be there soon.</p>
+    <h3>{{this.$props.conversation.User?this.$props.conversation.User.FullName:''}}</h3>
+    <p>{{this.$props.conversation.User?this.$props.conversation.User.UserName:''}}</p>
   </li>
 </template>
 
 <script>
 export default {
   name: "DialogChat",
+  props:{
+    conversation:{
+      type:Object,
+      default(){
+        return {};
+      }
+    }
+  }
 };
 </script>
 

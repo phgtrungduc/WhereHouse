@@ -7,5 +7,6 @@ namespace PTDuc.WhereHouse.BL.Interfaces
     public interface IBLMessage : IBLBase<Message, MessageDTO>
     {
         object GetConversation(MessageDTO message);
+        List<Message> GetMessagesByConversationId(string conversationId);
     }
 }

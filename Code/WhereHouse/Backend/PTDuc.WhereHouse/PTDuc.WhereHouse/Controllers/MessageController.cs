@@ -26,6 +26,12 @@ namespace PTDuc.WhereHouse.Controllers
 
             return Ok(_blMessage.GetConversation(message));
         }
-
+        [HttpGet("GetMessagesByConversationId/{id}")]
+        public virtual IActionResult GetMessagesByConversationId(string id)
+        {
+            var res = new ServiceResult();
+            res.Data = _blMessage.GetMessagesByConversationId(id);
+            return Ok(res);
+        }
     }
 }

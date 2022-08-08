@@ -18,7 +18,12 @@
       <div
         class="d-flex flex-column justify-content-between mb-3 align-items-end"
       >
-        <div :style="{ display: displayForUser }" class="more">
+        <div
+          :style="{
+            display: displayForUser == 'unset' ? 'none!important' : 'unset',
+          }"
+          class="more"
+        >
           <v-menu bottom left transition="slide-y-transition">
             <template v-slot:activator="{ on, attrs }">
               <v-btn icon v-bind="attrs" v-on="on">
@@ -33,7 +38,7 @@
                   </v-list-item-icon>
                   <v-list-item-title>Sửa thông tin bài đăng</v-list-item-title>
                 </v-list-item>
-                <v-list-item>
+                <v-list-item @click="deletePost">
                   <v-list-item-icon>
                     <v-icon>mdi-delete</v-icon>
                   </v-list-item-icon>
@@ -202,7 +207,10 @@ export default {
   methods: {
     chatWithUser() {
       if (this.token) {
-        this.$router.push("/chat/" + this.userOwner.UserId);
+        this.$router.push({
+          name: "Dialog",
+          params: { userRecievedId: this.userOwner.UserId },
+        });
       } else {
         util.notifyRequiredLogin(this.$router);
       }
@@ -289,6 +297,47 @@ export default {
           console.log(err);
         })
         .finally(() => {});
+    },
+    async deletePost() {
+      let text = "Bạn có muốn xóa bài đăng?";
+      swal({
+        title: "Xóa bài đăng",
+        text: text,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          let config = {
+            headers: {
+              Authorization: "Bearer " + this.token,
+            },
+          };
+          let url = "Post/DeletePostUser/" + this.postData.PostId;
+          url = this.baseUrl + url;
+          axios
+            .delete(url, config)
+            .then((res) => {
+              if (res.data.StatusCode) {
+                if (res.data.Data) {
+                  let title = "Xóa bài đăng thành công";
+                  util.alertSuccess(title).then(() => this.$router.push({ name: "Home" }));
+                }
+              }
+            })
+            .catch((err) => {
+              swal({
+                text: "Lỗi hệ thống không lấy được thông tin!",
+                icon: "error",
+                closeOnClickOutside: false,
+              });
+              console.log(err);
+            })
+            .finally(() => {});
+        } else {
+          console.log("hủy");
+        }
+      });
     },
   },
   created() {

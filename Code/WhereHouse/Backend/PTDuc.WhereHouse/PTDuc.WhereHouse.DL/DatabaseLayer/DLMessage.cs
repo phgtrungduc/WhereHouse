@@ -30,5 +30,13 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             //var res = new { Message = resMessage.OrderBy(x => x.Time), UserReceived = userReceived };
             return null;
         }
+
+        public List<Message> GetMessagesByConversationId(string conversationId)
+        {
+            _dbSet = _context.Set<Message>();
+            var data = _dbSet.Where(x => x.ConversationId == Guid.Parse(conversationId));
+            data = data.OrderBy(x => x.Time);
+            return data.ToList();
+        }
     }
 }

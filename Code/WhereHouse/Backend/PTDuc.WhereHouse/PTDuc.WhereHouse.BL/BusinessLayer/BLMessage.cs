@@ -23,5 +23,10 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         {
             return _DLMessage.GetConversation(message);
         }
+
+        public List<Message> GetMessagesByConversationId(string conversationId)
+        {
+            return _DLMessage.GetMessagesByConversationId(conversationId);
+        }
     }
 }
