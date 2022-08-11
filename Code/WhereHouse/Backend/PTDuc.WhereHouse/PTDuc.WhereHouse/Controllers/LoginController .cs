@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Nancy.Json;
 using PTDuc.WhereHouse.BL.Interfaces.Login;
-using PTDuc.WhereHouse.DL.Models;
 using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.Utils;
 using System;
@@ -24,57 +23,28 @@ namespace PTDuc.WhereHouse.Controllers
         {
             _bLLogin = bLLogin;
         }
-        // GET: api/<LoginController>
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    var identity = HttpContext.User.Identity as ClaimsIdentity;
-        //    if (identity != null)
-        //    {
-        //        IEnumerable<Claim> claims = identity.Claims;
-        //        // or
-        //        var username = identity.FindFirst(ClaimTypes.Name).Value;
 
-        //    }
-        //    return new string[] { "value1", "value2" };
-        //}
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public IActionResult Login([FromBody] LoginEntity entity)
-        //{
-        //    //var token = _authenticationManager.Authenticate(username, password);
-        //    var res = _loginService.Login(entity, _employeeService);
-        //    if (res.StatusCode == BusinessLayer.Enums.StatusCode.Success)
-        //    {
-        //        return Ok(res);
-        //    }
-        //    return BadRequest(res);
-        //}
-
-        //[HttpPost("changepassword")]
-        //public IActionResult ChangePassword([FromBody] string objectPass)
-        //{
-        //    var res = new ServiceResult();
-        //    string username = "";
-        //    var identity = HttpContext.User.Identity as ClaimsIdentity;
-        //    if (identity != null)
-        //    {
-        //        IEnumerable<Claim> claims = identity.Claims;
-        //        username = identity.FindFirst(ClaimTypes.Name).Value;
-
-        //    }
-        //    var serializer = new JavaScriptSerializer();
-        //    var desObject = serializer.Deserialize<dynamic>(objectPass);
-        //    var updateRes = _loginService.ChangePassword(username, desObject.oldPass, desObject.newPass, res);
-        //    if (res.StatusCode == BusinessLayer.Enums.StatusCode.Success)
-        //    {
-        //        return Ok(res);
-        //    }
-        //    else
-        //    {
-        //        return BadRequest(res);
-        //    }
-        //}
+        [HttpPost("ChangePassword")]
+        public IActionResult ChangePassword([FromBody] LoginParam loginParam)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = _bLLogin.ChangePassword(userId,loginParam.Password,loginParam.NewPassword);
+                if (res.StatusCode == (int)Enumeration.ResultCode.Success)
+                {
+                    return Ok(res);
+                }
+                else {
+                    res.Data = false;
+                    return BadRequest(res);
+                }
+            }
+            return BadRequest(new ServiceResult() { Data = false });
+        }
 
 
 
@@ -92,15 +62,6 @@ namespace PTDuc.WhereHouse.Controllers
                 res.Messenger = e.Message;
             }
             return Ok(res);
-            //_bLLogin.Login();
-            //var check = PasswordHash.Verify(param);
-            ////var text = System.Text.Encoding.UTF8.GetString(abc.HashPassword, 0, abc.HashPassword.Length);
-            //return Ok(check);
-            //Check password against a stored hash
-            //byte[] hashBytes = //read from store.
-            //PasswordHash hash = new PasswordHash(hashBytes);
-            //if (!hash.Verify("newly entered password"))
-            //    throw new System.UnauthorizedAccessException();
         }
     }
 }

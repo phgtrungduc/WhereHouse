@@ -226,6 +226,8 @@ namespace PTDuc.WhereHouse.DBContext.Models
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.AvatarId)
                     .HasConstraintName("FK_User_File");
+                entity.Property(e => e.Password).IsRequired();
+                entity.Property(e => e.Salt).IsRequired();
             });
 
             modelBuilder.Entity<Wishlist>(entity =>

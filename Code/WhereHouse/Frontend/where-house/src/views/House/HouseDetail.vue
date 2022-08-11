@@ -1,23 +1,51 @@
 <template>
   <div class="wrapper-container">
-    <div class="house-images">
+    <div class="house-images my-auto border">
       <v-img
-        v-if="!houseImageUrl"
+        v-if="!this.postData.HouseImageUrl"
         src="../../assets/images/house-default.png"
         max-width="300"
-        max-height="300"
+        max-height="400"
+        height="400"
+        width="300"
+        aspect-ratio="1.7"
       ></v-img>
       <v-img
-        v-if="houseImageUrl"
-        :src="houseImageUrl"
+        v-if="this.postData.HouseImageUrl"
+        :src="this.postData.HouseImageUrl"
         max-width="300"
-        max-height="300"
+        max-height="400"
+        height="400"
+        width="300"
+        aspect-ratio="1.7"
       ></v-img>
     </div>
     <div class="house-detail">
-      <div
-        class="d-flex flex-column justify-content-between mb-3 align-items-end"
-      >
+      <div class="d-flex justify-content-between mb-3 align-items-start">
+        <v-card max-width="300" outlined class="rounded-xl">
+          <v-list-item one-line>
+            <v-list-item-avatar size="50" color="grey" rounded="50">
+              <v-img
+                src="../../assets/images/avatar-default.png"
+                max-width="50"
+                max-height="50"
+              ></v-img>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title
+                class="text-overline text-h mb-1 font-weight-bold"
+              >
+                Chủ sở hữu
+              </v-list-item-title>
+              <v-list-item-subtitle class="font-weight-bold">{{
+                userOwnerName
+              }}</v-list-item-subtitle>
+              <v-list-item-subtitle class="font-weight-bold">
+                {{ this.userOwner.PhoneNumber }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
         <div
           :style="{
             display: displayForUser == 'unset' ? 'none!important' : 'unset',
@@ -48,30 +76,6 @@
             </v-list>
           </v-menu>
         </div>
-
-        <v-card max-width="300" outlined>
-          <v-list-item one-line>
-            <v-list-item-content>
-              <v-list-item-title
-                class="text-overline text-h mb-1 font-weight-bold"
-              >
-                Chủ sở hữu
-              </v-list-item-title>
-              <v-list-item-subtitle class="font-weight-bold text-danger">{{
-                userOwnerName
-              }}</v-list-item-subtitle>
-            </v-list-item-content>
-
-            <v-list-item-avatar size="50" color="grey" rounded="50">
-              <v-img
-                v-if="userOwnerAvatar"
-                :src="userOwnerAvatar"
-                max-width="50"
-                max-height="50"
-              ></v-img>
-            </v-list-item-avatar>
-          </v-list-item>
-        </v-card>
       </div>
 
       <h5>
@@ -79,47 +83,56 @@
       </h5>
       <h6 class="font-italic">{{ this.postData.Descrtiption }}</h6>
       <div class="features pt-3">
-        <h6><b>Chi tiết</b></h6>
-        <ul>
+        <h6><b>Thông tin chi tiết</b></h6>
+        <ul class="ml-2">
           <li class="text-danger font-weight-bold">
             {{ Intl.NumberFormat().format(this.houseData.Price || 0) }} VND -
-            {{ Intl.NumberFormat().format(this.houseData.Area || 0) }} m2
+            {{ Intl.NumberFormat().format(this.houseData.Area || 0) }}
+            <span>m<sup>2</sup></span>
           </li>
           <li>
-            Tên nhà : {{ this.houseData ? this.houseData.HouseName : "" }}
-          </li>
-          <li>Địa chỉ : {{ this.houseData ? this.houseData.Address : "" }}</li>
-          <li>
-            Tổng số tầng:
-            {{ this.houseData ? this.houseData.TotalOfFloor : "" }}
+            <span class="title-item">Tên nhà: </span>
+            <span>{{ this.houseData ? this.houseData.HouseName : "" }}</span>
           </li>
           <li>
-            Số lượng phòng ngủ:
-            {{ this.houseData ? this.houseData.NumberOfBedroom : "" }}
+            <span class="title-item">Địa chỉ: </span>
+            <span>{{ this.houseData ? this.houseData.Address : "" }}</span>
           </li>
           <li>
-            Chiều dọc:
-            {{
+            <span class="title-item">Tổng số tầng: </span>
+            <span>{{ this.houseData ? this.houseData.TotalOfFloor : "" }}</span>
+          </li>
+          <li>
+            <span class="title-item">Số lượng phòng ngủ: </span>
+            <span>{{
+              this.houseData ? this.houseData.NumberOfBedroom : ""
+            }}</span>
+          </li>
+          <li>
+            <span class="title-item">Chiều dọc: </span>
+            <span>{{
               this.houseData
                 ? Intl.NumberFormat().format(this.houseData.Vertical || 0)
                 : ""
-            }}
+            }}</span>
+            <span>m<sup>2</sup></span>
           </li>
           <li>
-            Chiều ngang:
+            <span class="title-item">Chiều ngang: </span>
             {{
               this.houseData
                 ? Intl.NumberFormat().format(this.houseData.Horizontal || 0)
                 : ""
             }}
+            <span>m<sup>2</sup></span>
           </li>
           <li>
-            Loại hình nhà ở:
-            {{
+            <span class="title-item">Loại hình nhà ở: </span>
+            <span>{{
               this.houseData.HouseType
                 ? this.houseData.HouseType.HouseTypeName
                 : ""
-            }}
+            }}</span>
           </li>
         </ul>
       </div>
@@ -133,7 +146,7 @@
           class="btn d-flex flex-row justify-content-between mr-4"
           @click="addToWistlist()"
         >
-          Thêm vào wishlist
+          <span class="mr-1">Thêm vào wishlist</span>
           <font-awesome-icon icon="fa-regular fa-heart" />
         </v-btn>
         <v-btn
@@ -142,12 +155,12 @@
           class="btn mr-3 p-3 d-flex flex-row justify-content-between"
           @click="chatWithUser()"
         >
-          <span>Liên hệ với chủ sở hữu</span>
+          <span class="mr-1">Liên hệ với chủ sở hữu</span>
           <font-awesome-icon icon="fa-regular fa-message" />
         </v-btn>
       </div>
     </div>
-    <div class="house-map">
+    <div class="house-map my-auto">
       <GmapMap
         :center="houseAddress"
         :zoom="12"
@@ -221,8 +234,8 @@ export default {
           this.postData = res.data;
           this.houseData = res.data.House;
           this.userOwner = res.data.House?.UserOwner;
-          this.houseImageUrl = res.data.House?.HouseImage?.FilePath
-            ? this.baseResourceUrl + res.data.House?.HouseImage?.FilePath
+          this.postData.HouseImageUrl = res.data.HouseImageUrl
+            ? this.baseResourceUrl + res.data.HouseImageUrl
             : "";
           this.userOwnerAvatar = this.userOwner?.Avatar?.FilePath
             ? this.baseResourceUrl + this.userOwner?.Avatar?.FilePath
@@ -289,12 +302,19 @@ export default {
           }
         })
         .catch((err) => {
-          swal({
-            text: "Lỗi hệ thống!",
-            icon: "error",
-            closeOnClickOutside: false,
-          });
-          console.log(err);
+          let statusCode = err.response.data.StatusCode;
+          switch (statusCode) {
+            case 211:
+              swal(
+                "Thêm thất bại",
+                "Bài đăng đã nằm trong danh sách yêu thích của bạn!",
+                "error"
+              );
+              break;
+            default:
+              swal("Thêm thất bại", "", "error");
+              break;
+          }
         })
         .finally(() => {});
     },
@@ -321,7 +341,9 @@ export default {
               if (res.data.StatusCode) {
                 if (res.data.Data) {
                   let title = "Xóa bài đăng thành công";
-                  util.alertSuccess(title).then(() => this.$router.push({ name: "Home" }));
+                  util
+                    .alertSuccess(title)
+                    .then(() => this.$router.push({ name: "Home" }));
                 }
               }
             })
@@ -365,14 +387,21 @@ export default {
   padding: 20px 100px 0 100px;
   .house-images {
     width: 300px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   }
   .house-detail {
     flex: 1;
     padding-left: 50px;
     padding-right: 50px;
+    .title-item {
+      font-weight: bold;
+    }
   }
   .house-map {
     width: 300px;
+    height: 400px;
   }
   .category {
     font-weight: 400;

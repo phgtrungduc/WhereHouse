@@ -104,6 +104,24 @@ export default {
             }
           }
         }
+        if (this.$props.hasMinLength) {
+          if (this.$props.minLength) {
+            if (
+              this.selectValue &&
+              this.selectValue.length < this.$props.minLength
+            ) {
+              error = true;
+              errorMessages = this.$props.name
+                ? this.$props.name +
+                  " có độ dài tối thiểu là " +
+                  this.$props.minLength.toString()
+                : "Trường thông tin bắt có độ dài tối thiểu là " +
+                  this.$props.minLength.toString();
+            } 
+          } else {
+            console.log("Thiếu prop độ dài tối thiểu");
+          }
+        }
       }
       this.error = error;
       this.errorMessages = errorMessages;
@@ -119,6 +137,10 @@ export default {
       },
     },
   },
+  created(){
+    this.error = false;
+    this.errorMessages = '';
+  }
 };
 </script>
 

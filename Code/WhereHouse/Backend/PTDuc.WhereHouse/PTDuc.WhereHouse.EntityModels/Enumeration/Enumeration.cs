@@ -20,7 +20,8 @@ namespace PTDuc.WhereHouse.EntityModels
             NotExistFolder = 208,
             NotHaveRight = 209,
             PostNotPay = 210,
-
+            IsInWishlist = 211,
+            HasReport = 212
         }
 
         public enum HouseType

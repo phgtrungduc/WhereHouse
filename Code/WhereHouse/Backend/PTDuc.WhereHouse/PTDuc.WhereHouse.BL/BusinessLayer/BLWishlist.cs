@@ -51,5 +51,20 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             res.Data = _DLWishlist.GetWishlistByUserId(userId);
             return res;
         }
+
+        public ServiceResult InserToWishlist(string userId, WishlistDTO wishlist)
+        {
+            var res = new ServiceResult();
+            var isInWishList = _DLWishlist.CheckInWishlist(userId, wishlist.PostId.ToString());
+            if (!isInWishList)
+            {
+                res.Data = this.Insert(wishlist);
+            }
+            else {
+                res.Data = false;
+                res.StatusCode = (int)Enumeration.ResultCode.IsInWishlist;
+            }
+            return res;
+        }
     }
 }

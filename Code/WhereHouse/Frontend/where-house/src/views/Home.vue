@@ -1,5 +1,5 @@
 <template>
-  <div id="home" v-if="!this.$store.state.loadingApp">
+  <div id="home">
     <div id="background-div" class="page-holder bg-cover">
       <div class="container py-5">
         <header class="text-left text-white py-5">
@@ -39,10 +39,13 @@
     <div class="text-center">
       <v-pagination
         :length="pagingData.pageLength"
-        :value="pagingData.page"
+        v-model="pagingData.page"
         prev-icon="mdi-menu-left"
         next-icon="mdi-menu-right"
         :circle="true"
+        @next="nextPage"
+        @previous="previousPage"
+        @input="inputPage"
       ></v-pagination>
     </div>
   </div>
@@ -75,17 +78,18 @@ export default {
       postData: [],
       pagingData: {
         page: 1,
-        pageSize: 10,
+        pageSize: 5,
         totalRecords: 0, //Khởi tạo tạm = 0,
         pageLength: 1,
       },
     };
   },
   mounted() {
-    this.fetchHouseDataPaging(1,10);
+    this.fetchHouseDataPaging(1, 5);
   },
   methods: {
     fetchHouseDataPaging(page, pageSize) {
+      this.$store.commit("showLoadingFullScreen", true);
       let url =
         this.baseUrl + `post/GetByPaging?page=${page}&pagesize=${pageSize}`;
       return axios
@@ -93,13 +97,24 @@ export default {
         .then((res) => {
           this.postData = res.data.Data.Data.$values;
           let totalRecords = res.data.Data.TotalRecords;
-          this.pagingData.pageLength = Math.ceil(totalRecords/(this.pagingData.pageSize));
+          this.pagingData.pageLength = Math.ceil(
+            totalRecords / this.pagingData.pageSize
+          );
         })
         .catch((err) => console.log(err))
         .finally(() => {
-          this.$store.commit("showAppLoading", false);
+          this.$store.commit("showLoadingFullScreen", false);
         });
     },
+    nextPage() {
+      this.fetchHouseDataPaging(this.pagingData.page, this.pagingData.pageSize);
+    },
+    previousPage() {
+      this.fetchHouseDataPaging(this.pagingData.page, this.pagingData.pageSize);
+    },
+    inputPage(page){
+      this.fetchHouseDataPaging(page, this.pagingData.pageSize);
+    }
   },
 };
 </script>

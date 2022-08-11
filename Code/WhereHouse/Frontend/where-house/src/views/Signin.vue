@@ -67,7 +67,7 @@
 import swal from "sweetalert";
 import axios from "axios";
 import { start } from "@/chathub/ChatHub.js";
-import util from '@/util/util.js';
+import util from "@/util/util.js";
 export default {
   name: "Signin",
   props: ["baseURL", "products"],
@@ -115,6 +115,7 @@ export default {
                 localStorage.setItem("token", res.data.Data.accessToken);
                 this.$store.dispatch("setUser", userData);
                 util.setCookie("userConfig", JSON.stringify(userData));
+                this.$store.commit("setUserRole", userData.Role || 1)
                 // this.$emit("fetchData");
                 this.$store.commit("showSnackbar", true);
                 this.$router.push({ name: "Home" });

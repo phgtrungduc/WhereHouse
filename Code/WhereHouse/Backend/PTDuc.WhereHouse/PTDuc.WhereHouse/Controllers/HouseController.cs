@@ -57,7 +57,7 @@ namespace PTDuc.WhereHouse.Controllers
                 IEnumerable<Claim> claims = identity.Claims;
                 var userId = User.Claims.Where(c => c.Type == "UserId")
     .Select(x => x.Value).FirstOrDefault();
-                res.Data = null; 
+                res.Data = null;
             }
 
             return Ok(res);
@@ -70,13 +70,14 @@ namespace PTDuc.WhereHouse.Controllers
             var res = new ServiceResult();
             try
             {
-                var  resutl = _blHouse.AddNewPost(dataForPost);
+                var resutl = _blHouse.AddNewPost(dataForPost);
                 if (resutl)
                 {
                     res.Data = true;
                     return Ok(res);
                 }
-                else {
+                else
+                {
                     res.StatusCode = (int)ResultCode.Failed;
                     res.Messenger = "Thêm post thất bại";
                     return BadRequest(res);
@@ -89,5 +90,34 @@ namespace PTDuc.WhereHouse.Controllers
                 return BadRequest(res);
             }
         }
-    }
+
+        [HttpPost("UpdatePost")]
+        public virtual IActionResult UpdatePost(HouseDTO dataForPost)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                try
+                {
+                    var resutl = _blHouse.UpdatePost(userId, dataForPost);
+                    if (resutl.StatusCode == (int)Enumeration.ResultCode.Success)
+                    {
+                        return Ok(resutl);
+                    }
+                    else
+                    {
+                        return BadRequest(resutl);
+                    }
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(new ServiceResult() { StatusCode = (int)ResultCode.Failed, Messenger = e.Message });
+                };
+            }
+            return BadRequest(new ServiceResult() { Data = false });
+        }
+}
 }

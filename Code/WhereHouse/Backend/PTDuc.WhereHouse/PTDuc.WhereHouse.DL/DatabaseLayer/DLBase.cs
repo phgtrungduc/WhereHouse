@@ -35,13 +35,11 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             _mapper = mapper;
         }
 
-        public bool Delete(TEntity entity)
+        public bool Delete(string id)
         {
             var res = 0;
-            var idKey = $"{ tableName}Id";
-            var Id = entity.GetValueByKey<TEntity>(idKey);
             _dbSet = _context.Set<TEntity>();
-            var record = _dbSet.Find(Guid.Parse(Id.ToString()));
+            var record = _dbSet.Find(Guid.Parse(id));
             if (record != null)
             {
                 _dbSet.Remove(record);
@@ -50,7 +48,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             return (res > 0 ? true : false);
         }
 
-        public IEnumerable<TDTO> GetAll()
+        public virtual IEnumerable<TDTO> GetAll()
         {
             _dbSet = _context.Set<TEntity>();
             var obj = (TDTO)typeof(TDTO).GetConstructor(new Type[0]).Invoke(new object[0]);

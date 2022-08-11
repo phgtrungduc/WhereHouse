@@ -12,6 +12,7 @@ using PTDuc.WhereHouse.Utils;
 using PTDuc.WhereHouse.DBContext.Models;
 using PTDuc.WhereHouse.DL.Interfaces;
 using AutoMapper;
+using PTDuc.WhereHouse.EntityModels.DTO;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer.Login
 {
@@ -19,53 +20,44 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer.Login
     {
         IAuthenticationManager _authenticationManager;
         IDLUser _dlUser;
-        public BLLogin(IDLLogin dLLogin, IAuthenticationManager authenticationManager,IMapper mapper,IDLUser dLUser) : base(dLLogin, mapper)
+        IBLUser _bLUser;
+        public BLLogin(IDLLogin dLLogin, IAuthenticationManager authenticationManager, IMapper mapper, IDLUser dLUser, IBLUser bLUser) : base(dLLogin, mapper)
         {
             _authenticationManager = authenticationManager;
             _dlUser = dLUser;
+            _bLUser = bLUser;
         }
 
-        public bool ChangePassword(string username, string oldPassword, string newPassword, ServiceResult serviceResult)
+        public ServiceResult ChangePassword(string userId, string oldPassword, string newPassword)
         {
-            //var loginEntity = _loginRepository.Login(username);
-            //if (loginEntity != null)
-            //{
-            //    var isPasswordOk = CommonFunction.validatePassword(oldPassword, loginEntity.Password, loginEntity.Salt);
-            //    if (isPasswordOk)
-            //    {
-            //        var passObject = CommonFunction.hashPassWord(newPassword);
-            //        var newPass = passObject.GetType().GetProperty("Password").GetValue(passObject);
-            //        var salt = passObject.GetType().GetProperty("Salt").GetValue(passObject);
-            //        var updateRows = _loginRepository.UpdatePasswordByEmployeeCode(username, newPass.ToString(), salt.ToString());
-            //        if (updateRows > 0)
-            //        {
-            //            serviceResult.Messenger = "Đổi mật khẩu thành công";
-            //            //serviceResult.StatusCode = Enums.StatusCode.Success;
-            //            return true;
-            //        }
-            //        else
-            //        {
-            //            serviceResult.Messenger = "Đổi mật khẩu thất bại";
-            //            //serviceResult.StatusCode = Enums.StatusCode.NotValid;
-            //            return false;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        serviceResult.Messenger = "Mật khẩu cũ không chính xác";
-            //        serviceResult.Data = null;
-            //        //serviceResult.StatusCode = Enums.StatusCode.NotValid;
-            //        return false;
-            //    }
-            //}
-            //else
-            //{
-            //    serviceResult.Data = null;
-            //    //serviceResult.StatusCode = Enums.StatusCode.NotValid;
-            //    serviceResult.Messenger = "Username không tồn tại";
-            //    return false;
-            //}
-            return true;
+            var res = new ServiceResult();
+            var user = _bLUser.GetByID(userId);
+            if (user != null)
+            {
+                var passCheck = new LoginParam() { Password = oldPassword, HashPassword = user.Password, Salt = user.Salt };
+                if (PasswordHash.Verify(passCheck))
+                {
+                    var loginParam = PasswordHash.HashPassword(newPassword);
+                    user.Password = loginParam.HashPassword;
+                    user.Salt = loginParam.Salt;
+                    var userUpdate = _mapper.Map<UserDTO>(user);
+                    var success = _bLUser.Update(userUpdate,userId);
+                    if (success)
+                    {
+                        var accessToken = _authenticationManager.Authenticate(user.UserId.ToString(), user.UserName, newPassword);
+                        res.Data = new { accessToken = accessToken, User = user };
+                    }
+                    else {
+                        res.Data = false;
+                    }
+                    
+                }
+                else
+                {
+                    res.StatusCode = (int)Enumeration.ResultCode.PasswordNotCorrect;
+                }
+            }
+            return res;
         }
 
         public ServiceResult Login(LoginParam param)
@@ -80,8 +72,8 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer.Login
                     param.Salt = entity.Salt;
                     if (PasswordHash.Verify(param))
                     {
-                        var accessToken = _authenticationManager.Authenticate(entity.UserId.ToString(),entity.UserName, entity.Password);
-                        res.Data = new { accessToken = accessToken,User = entity };
+                        var accessToken = _authenticationManager.Authenticate(entity.UserId.ToString(), entity.UserName, entity.Password);
+                        res.Data = new { accessToken = accessToken, User = entity };
                     }
                     else
                     {

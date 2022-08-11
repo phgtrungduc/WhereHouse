@@ -30,7 +30,7 @@ namespace PTDuc.WhereHouse.Controllers
     .Select(x => x.Value).FirstOrDefault();
                 return Ok(_blWishlist.GetWishlistByUserId(Guid.Parse(userId)));
             }
-            return Ok(null);
+            return BadRequest(new ServiceResult() { Data = false });
         }
         [HttpDelete("DeletePostWishlist/{id}")]
         public IActionResult DeletePostWishlist(string id)
@@ -43,9 +43,19 @@ namespace PTDuc.WhereHouse.Controllers
     .Select(x => x.Value).FirstOrDefault();
                 return Ok(_blWishlist.DeletePostWishlist(id, userId));
             }
-            return Ok(null);
+            return BadRequest(new ServiceResult() { Data = false });
         }
-
-
+        public override IActionResult Post([FromBody] WishlistDTO entity)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                return this.HandleResponse(_blWishlist.InserToWishlist(userId,entity));
+            }
+            return BadRequest(new ServiceResult() { Data = false });
+        }
     }
 }

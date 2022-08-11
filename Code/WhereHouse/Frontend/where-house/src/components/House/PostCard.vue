@@ -27,6 +27,7 @@
                 <div>Địa chỉ: {{ this.post.House.Address }}</div>
               </v-card-text>
             </div>
+
             <v-btn
               color="white"
               text
@@ -35,18 +36,31 @@
               @click="deletePost"
               >Xóa</v-btn
             >
+            <v-btn
+              v-if="this.$props.type == 'mypost'"
+              color="white"
+              text
+              class="btn-edit"
+              :small="true"
+              @click="editPost"
+              >Sửa</v-btn
+            >
             <v-divider></v-divider>
             <div class="footer d-flex justify-content-between">
               <div class="d-flex">
-                <div class="price text-danger font-weight-bold">
-                  Giá:
-                  {{ Intl.NumberFormat().format(this.post.House.Price || 0) }}
-                  VNĐ
+                <div class="price text-danger font-weight-bold mr-2">
+                  {{
+                    "Giá:" +
+                    Intl.NumberFormat().format(this.post.House.Price || 0) +
+                    "  VNĐ"
+                  }}
                 </div>
-                <div class="col-1"></div>
                 <div class="area text-sucess font-weight-bold">
-                  Diện tích:
-                  {{ Intl.NumberFormat().format(this.post.House.Area || 0) }} m2
+                  {{
+                    "Diện tích: " +
+                    Intl.NumberFormat().format(this.post.House.Area || 0) 
+                  }}
+                  <span>m<sup>2</sup></span>
                 </div>
               </div>
               <div>
@@ -161,18 +175,19 @@ export default {
               console.log(err);
             })
             .finally(() => {});
-        } else {
-          console.log("hủy");
         }
       });
     },
+    editPost() {
+      this.$router.push({
+        name: "EditHouse",
+        params: {
+          id: this.$props.post.PostId,
+        },
+      });
+    },
   },
-  created() {
-    let post = this.$props.post;
-    this.houseImageUrl = post.House?.HouseImage?.FilePath
-      ? this.baseResourceUrl + post.House?.HouseImage?.FilePath
-      : "";
-  },
+  created() {},
 };
 </script>
 
@@ -188,9 +203,15 @@ export default {
       align-self: stretch;
       .btn-delete {
         position: absolute;
-        top: 0;
+        top: 10px;
         right: 10px;
         background: #f44336;
+      }
+      .btn-edit {
+        position: absolute;
+        top: 40px;
+        right: 10px;
+        background: #000;
       }
       .content {
         height: 75%;

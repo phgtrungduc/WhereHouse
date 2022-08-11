@@ -1,34 +1,45 @@
 <template>
   <v-card
     :loading="loading"
-    class="mx-auto my-12 container"
+    class="house-box"
     max-width="375"
     width="375"
   >
-    <template slot="progress">
-      <v-progress-linear
-        color="deep-purple"
-        height="10"
-        indeterminate
-      ></v-progress-linear>
-    </template>
-    <v-img
-      max-height="250"
-      src="../../assets/images/house-default.png"
-      v-if="!this.post.House.HouseImageId"
-    ></v-img>
-    <v-img
-      max-height="250"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-      v-if="this.post.House.HouseImageId"
-    ></v-img>
+    <div class="header">
+      <template slot="progress">
+        <v-progress-linear
+          color="deep-purple"
+          height="10"
+          indeterminate
+        ></v-progress-linear>
+      </template>
+      <v-img
+        max-height="250"
+        height="250"
+        max-width="250"
+        width="250"
+        center
+        src="../../assets/images/no-pictures.png"
+        v-if="!this.$props.post.HouseImageUrl"
+      ></v-img>
+      <v-img
+        max-height="250"
+        height="250"
+        max-width="250"
+        width="250"
+        :src="houseImageUrl"
+        v-if="this.$props.post.HouseImageUrl"
+      ></v-img>
+    </div>
 
-    <v-card-title>{{ this.post.House.name }}</v-card-title>
+    <div class="content">
+      <v-card-title>{{ this.post.House.name }}</v-card-title>
 
     <v-card-text>
       <div>
         <b>Diện tích: </b
-        >{{ Intl.NumberFormat().format(this.post.House.Area) }} m2
+        >{{ Intl.NumberFormat().format(this.post.House.Area) }} 
+        <span>m<sup>2</sup></span>
       </div>
     </v-card-text>
     <v-card-text>
@@ -45,6 +56,7 @@
         Xem chi tiết
       </v-btn>
     </v-card-actions>
+    </div>
   </v-card>
 </template>
 
@@ -64,26 +76,44 @@ export default {
   data() {
     return {
       loading: false,
+      houseImageUrl: "",
     };
   },
   methods: {
     viewDetail() {
       this.loading = true;
       this.$router.push({
-        name:'HouseDetail',
-        params:{
-          id:this.post.PostId
-        }
+        name: "HouseDetail",
+        params: {
+          id: this.post.PostId,
+        },
       });
       setTimeout(() => (this.loading = false), 2000);
     },
   },
-  created() {},
+  beforeUpdate() {
+    if (this.$props.post && this.$props.post.HouseImageUrl) {
+      this.houseImageUrl =
+        this.baseResourceUrl + this.$props.post.HouseImageUrl;
+    }
+  },
+  created() {
+    if (this.$props.post && this.$props.post.HouseImageUrl) {
+      this.houseImageUrl =
+        this.baseResourceUrl + this.$props.post.HouseImageUrl;
+    }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.container {
+.house-box {
   cursor: pointer;
+  .header{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>

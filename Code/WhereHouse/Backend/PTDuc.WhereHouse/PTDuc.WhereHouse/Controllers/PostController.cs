@@ -53,7 +53,7 @@ namespace PTDuc.WhereHouse.Controllers
                 var res = _blPost.GetUserPost(Guid.Parse(userId));
                 return this.HandleResponse(res);
             }
-            return Ok(null);
+            return BadRequest(new ServiceResult() { Data = false });
         }
 
         [HttpDelete("DeletePostUser/{id}")]
@@ -68,7 +68,7 @@ namespace PTDuc.WhereHouse.Controllers
                 var res = _blPost.DeletePostUser(id, userId);
                 return this.HandleResponse(res);
             }
-            return Ok(null);
+            return BadRequest(new ServiceResult() { Data = false });
         }
         [HttpPost("AcceptPost/{id}")]
         public IActionResult AcceptPost(string id)
@@ -82,7 +82,52 @@ namespace PTDuc.WhereHouse.Controllers
                 var res = _blPost.DeletePostUser(id, userId);
                 return this.HandleResponse(res);
             }
-            return Ok(null);
+            return BadRequest(new ServiceResult() { Data = false });
+        }
+
+        [HttpGet("GetListPostForAdmin")]
+        public IActionResult GetListPostForAdmin()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = _blPost.GetListPostForAdmin(userId);
+                return this.HandleResponse(res);
+            }
+            return BadRequest(new ServiceResult() { Data = false });
+        }
+
+        [HttpPost("ReportPost")]
+        public IActionResult ReportPost([FromBody] ReportDTO report)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = _blPost.ReportPost(userId, report);
+                return this.HandleResponse(res);
+            }
+            return BadRequest(new ServiceResult() { Data = false });
+        }
+
+        [HttpPost("ChangeStatusReport")]
+        public IActionResult ChangeStatusReport([FromBody] ReportDTO report)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = _blPost.ChangeStatusReport(userId, report.ReportId.ToString());
+                return this.HandleResponse(res);
+            }
+            return BadRequest(new ServiceResult() { Data = false });
         }
     }
 }

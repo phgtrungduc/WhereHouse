@@ -3,6 +3,7 @@ import Vue from 'vue'
 // import util from '@/util/util.js';
 import axios from 'axios';
 import swal from 'sweetalert';
+import PTDConstants from '@/mixin/consants.js' ;
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -14,7 +15,8 @@ const store = new Vuex.Store({
       user: {
         FullName: ""
       },
-      wishList: []
+      wishList: [],
+      userRole : PTDConstants.Role.User
     }
   },
   getters: {
@@ -61,6 +63,9 @@ const store = new Vuex.Store({
     },
     setWishList(state, value) {
       state.wishList = value;
+    },
+    setUserRole(state, value){
+      state.userRole = value;
     }
   },
   actions: {

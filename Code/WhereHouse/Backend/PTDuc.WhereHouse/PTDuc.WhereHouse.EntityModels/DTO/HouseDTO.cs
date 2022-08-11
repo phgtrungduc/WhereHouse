@@ -19,17 +19,16 @@ namespace PTDuc.WhereHouse.EntityModels.DTO
         public float? Vertical { get; set; }
         public decimal? Price { get; set; }
         public Guid? HouseImageId { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
 
         public bool? IsInWishList { get; set; }
 
         public string Title { get; set; }
 
-        public string Description { get; set; }
+        public string Descrtiption { get; set; }
         public Guid? UserId { get; set; }
 
         public string Address { get; set; }
         public string AddressByGoogle { get; set; }
+        public Guid? PostId { get; set; }
     }
 }
