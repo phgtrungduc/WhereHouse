@@ -20,9 +20,32 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             _DLConversation = DLConversation;
         }
 
-        public List<Conversation> GetAllConversationUser(string userId)
+        public List<ConversationDTO> GetAllConversationUser(string userId)
         {
-            return _DLConversation.GetAllConversationUser(userId);
+            var data = _DLConversation.GetAllConversationUser(userId);
+            var dataDTO = _mapper.Map<List<ConversationDTO>>(data);
+            dataDTO.ForEach(x=> {
+                if (x.UserId1.ToString() == userId)
+                {
+                    x.UserId = x.UserId2;
+                    x.FullName = x.UserId2Navigation.FullName;
+                    x.UserName = x.UserId2Navigation.UserName;
+                    if (x.UserId2Navigation.Avatar != null)
+                    {
+                        x.AvatarUrl = x.UserId2Navigation.Avatar.FilePath;
+                    }
+                }
+                else {
+                    x.UserId = x.UserId1;
+                    x.FullName = x.UserId1Navigation.FullName;
+                    x.UserName = x.UserId1Navigation.UserName;
+                    if (x.UserId1Navigation.Avatar != null)
+                    {
+                        x.AvatarUrl = x.UserId1Navigation.Avatar.FilePath;
+                    }
+                }
+            });
+            return dataDTO;
         }
 
         public Conversation GetConversation(string userId1, string userId2)

@@ -29,6 +29,9 @@ export default {
   mounted() {
     this.$props.scrollToBottom();
   },
+  updated(){
+    this.$props.scrollToBottom();
+  }
 };
 </script>
 
@@ -118,7 +121,7 @@ p {
   display: -ms-flexbox;
   display: -webkit-box;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   .grid-message {
     width: 100%;
   }

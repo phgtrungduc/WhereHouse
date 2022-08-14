@@ -6,6 +6,6 @@ namespace PTDuc.WhereHouse.DL.Interfaces
 {
     public interface IDLReport : IDLBase<Report, ReportDTO>
     {
-        bool IsUserHasReported(Guid userId, Guid postId);
+        Report UserHasReported(Guid userId, Guid postId);
     }
 }

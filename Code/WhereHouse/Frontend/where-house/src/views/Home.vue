@@ -30,7 +30,7 @@
         <div
           v-for="(item, index) in this.postData"
           :key="index"
-          class="col-md-6 col-xl-4 col-12 pt-3 justify-content-around d-flex"
+          class="col-4 pt-3 justify-content-around d-flex"
         >
           <HouseBox :post="item" />
         </div>

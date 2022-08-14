@@ -38,7 +38,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             var res = new ServiceResult();
             if (skip >= 0 && pageSize > 0)
             {
-                var data = _dbSet.Skip(skip).Take(pageSize).Include(x => x.House).ThenInclude(y => y.HouseImage).ToList();
+                var data = _dbSet.Skip(skip).Take(pageSize).Include(x => x.House).ThenInclude(y => y.HouseImage).Where(post=>post.Status==(int)Enumeration.StatusPost.Accepted)?.ToList();
                 var dataDTO = _mapper.Map<List<PostDTO>>(data);
                 dataDTO.ForEach(x =>
                 {
@@ -60,13 +60,13 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             return data;
         }
 
-        public IEnumerable<Post> GetUserPost(Guid userId)
+        public List<Post> GetUserPost(Guid userId)
         {
-            var res = default(IEnumerable<Post>);
+            var res = new List<Post>();
             _dbSet = _context.Set<Post>();
             var data = _dbSet.Where(x=>x.UserId==userId);
             if (data != null && data.Count() > 0) {
-                res = data.Include(x => x.House).ThenInclude(y => y.HouseImage);
+                res = data.Include(x => x.House).ThenInclude(y => y.HouseImage)?.ToList();
             }
             return res;
                 

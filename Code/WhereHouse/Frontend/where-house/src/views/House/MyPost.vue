@@ -1,7 +1,7 @@
 <template>
   <div class="my-post row">
-    <div class="col-3"></div>
-    <div class="col-6">
+    <div class="col-2"></div>
+    <div class="col-8">
       <div class="header d-flex justify-content-between">
         <h2>Bài đăng của tôi</h2>
         <v-tooltip bottom>
@@ -27,7 +27,7 @@
         <h6>Bạn chưa có bài đăng nào, hãy thêm bài đăng</h6>
       </div>
     </div>
-    <div class="col-3"></div>
+    <div class="col-2"></div>
   </div>
 </template>
 
@@ -62,13 +62,12 @@ export default {
             
           }
         })
-        .catch((err) => {
+        .catch(() => {
           swal({
             text: "Lỗi hệ thống không lấy được thông tin!",
             icon: "error",
             closeOnClickOutside: false,
           });
-          console.log(err);
         })
         .finally(() => {});
     },

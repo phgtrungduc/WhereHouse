@@ -9,6 +9,7 @@ using PTDuc.WhereHouse.EntityModels.DTO;
 using AutoMapper;
 using System;
 using static PTDuc.WhereHouse.EntityModels.Enumeration;
+using System.Collections.Generic;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
@@ -30,7 +31,15 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         public ServiceResult GetUserPost(Guid userId)
         {
             var res = new ServiceResult();
-            res.Data = _DLPost.GetUserPost(userId);
+            var data = _DLPost.GetUserPost(userId);
+            var dataDTO = _mapper.Map<List<PostDTO>>(data);
+            dataDTO.ForEach(post =>
+            {
+                if (post.House != null && post.House.HouseImage != null) {
+                    post.HouseImageUrl = post.House.HouseImage.FilePath;
+                }
+            });
+            res.Data = dataDTO;
             return res;
         }
         public ServiceResult DeletePostUser(string postId, string userId)
@@ -84,7 +93,15 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                     if (post.Status == (int)Enumeration.StatusPost.Pay)
                     {
                         post.Status = (int)Enumeration.StatusPost.Accepted;
-                        res.Data = post;
+                        var isSuccess = this.Update(post,postId);
+                        if (isSuccess)
+                        {
+                            res.Data = true;
+                        }
+                        else {
+                            res.Data = false;
+                            res.StatusCode = (int)Enumeration.ResultCode.Failed;
+                        }
                     }
                     else
                     {
@@ -151,9 +168,10 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         }
         public override PostDTO GetByID(string Id)
         {
-            var post =  base.GetByID(Id);
+            var post = base.GetByID(Id);
             var postDTO = _mapper.Map<PostDTO>(post);
-            if (post.House != null && post.House.HouseImage != null) {
+            if (post.House != null && post.House.HouseImage != null)
+            {
                 postDTO.HouseImageUrl = post.House.HouseImage.FilePath;
             }
             return postDTO;
@@ -162,22 +180,35 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         public ServiceResult ReportPost(string userId, ReportDTO report)
         {
             var res = new ServiceResult();
-            var isReported = _dLReport.IsUserHasReported(Guid.Parse(userId),report.PostId);
-            if (!isReported)
+            var userReport = _dLReport.UserHasReported(Guid.Parse(userId), report.PostId);
+            if (userReport == null)
             {
-                var dataForInsert = _mapper.Map<Report>(report);
-                var success = _dLReport.Insert(dataForInsert);
-                if (success)
+                var post = this.GetByID(report.PostId.ToString());
+                if (post != null)
                 {
-                    res.Data = true;
-                }
-                else
-                {
-                    res.StatusCode = (int)Enumeration.ResultCode.Failed;
-                    res.Data = false;
+                    if (post.UserId.ToString() != userId)
+                    {
+                        var dataForInsert = _mapper.Map<Report>(report);
+                        var success = _dLReport.Insert(dataForInsert);
+                        if (success)
+                        {
+                            res.Data = true;
+                        }
+                        else
+                        {
+                            res.StatusCode = (int)ResultCode.Failed;
+                            res.Data = false;
+                        }
+                    }
+                    else
+                    {
+                        res.StatusCode = (int)ResultCode.NotHaveRight;
+                        res.Data = false;
+                    }
                 }
             }
-            else {
+            else
+            {
                 res.Data = false;
                 res.StatusCode = (int)ResultCode.HasReport;
             }
@@ -190,28 +221,26 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             var user = _BLUser.GetByID(userId);
             if (user != null && user.Role == (int)Enumeration.Role.Admin)
             {
-                var report = _DLPost.GetByID(reportId);
+                var report = _dLReport.GetByID(reportId);
                 if (report != null)
                 {
                     if (report.Status == (int)Enumeration.StatusReport.Created)
                     {
                         report.Status = (int)Enumeration.StatusReport.Solved;
-                        var isSucess = _DLPost.Update(report,reportId);
-                        if (isSucess)
-                        {
-                            res.Data = true;
-                        }
-                        else
-                        {
-                            res.StatusCode = (int)Enumeration.ResultCode.Failed;
-                            res.Data = false;
-                        }
                     }
                     else
                     {
+                        report.Status = (int)Enumeration.StatusReport.Created;
+                    }
+                    var isSucess = _dLReport.Update(report, reportId);
+                    if (isSucess)
+                    {
+                        res.Data = true;
+                    }
+                    else
+                    {
+                        res.StatusCode = (int)Enumeration.ResultCode.Failed;
                         res.Data = false;
-                        res.StatusCode = (int)Enumeration.StatusReport.Created;
-                        res.Messenger = "Không thể phê duyệt bài đăng chưa được thanh toán";
                     }
                 }
             }
@@ -220,6 +249,45 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 res.Data = false;
                 res.StatusCode = (int)Enumeration.ResultCode.NotHaveRight;
                 res.Messenger = "Tài khoản không có quyền chuyển trạng thái báo cáo";
+            }
+            return res;
+        }
+
+        public ServiceResult GetPublicPost(string postId)
+        {
+            var res = new ServiceResult();
+            var post = this.GetByID(postId);
+            if (post.Status == (int)Enumeration.StatusPost.Accepted)
+            {
+                res.Data = post;
+            }
+            else {
+                res.Data = false;
+                res.StatusCode = (int)ResultCode.NotHaveRight;
+            }
+            return res;
+        }
+
+        public ServiceResult GetDetailPost(string postId, string userId)
+        {
+            var res = new ServiceResult();
+            var post = this.GetByID(postId);
+            if (post.Status == (int)Enumeration.StatusPost.Accepted)
+            {
+                res.Data = post;
+            }
+            else {
+                var user = _BLUser.GetByID(userId);
+                if (user != null) {
+                    if (user.UserId.ToString() == userId || user.Role == (int)Role.Admin)
+                    {
+                        res.Data = post;
+                    }
+                    else {
+                        res.Data = false;
+                        res.StatusCode = res.StatusCode = (int)ResultCode.NotHaveRight;
+                    }
+                }
             }
             return res;
         }

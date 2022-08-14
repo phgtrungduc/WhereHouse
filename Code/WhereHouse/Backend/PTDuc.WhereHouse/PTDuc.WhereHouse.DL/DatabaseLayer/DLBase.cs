@@ -57,7 +57,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             //    cfg.CreateMap<TEntity, TDTO>();
             //});
             //var mapper = configuration.CreateMapper();
-            var res = _mapper.Map<List<TEntity>, IEnumerable<TDTO>>(_dbSet.ToList());
+            var res = _mapper.Map<List<TEntity>, IEnumerable<TDTO>>(_dbSet?.ToList());
             return res;
         }
 
@@ -135,7 +135,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
                 if (typeof(TEntity) == typeof(House))
                 {
                 }
-                res.Data = new { TotalRecords = totalRecords, Data = data.ToList() };
+                res.Data = new { TotalRecords = totalRecords, Data = data?.ToList() };
             }
             return res;
         }

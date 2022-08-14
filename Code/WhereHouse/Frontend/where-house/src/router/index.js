@@ -13,8 +13,11 @@ import Wishlist from '../views/Wishlist/Wishlist.vue'
 import MyPost from '../views/House/MyPost.vue'
 
 import Signup from '../views/Signup.vue'
+import SignupAdmin from '../views/SignupAdmin.vue'
 import Signin from '../views/Signin.vue'
 import EditUser from '../views/EditUser.vue'
+
+import PaymentResult from '../views/Payment/PaymentResult.vue'
 
 
 
@@ -24,6 +27,7 @@ import GoogleMap from "../components/GoogleMap/GoogleMap";
 
 import ManageAccount from "../views/Admin/ManageAccount.vue";
 import ManagePost from "../views/Admin/ManagePost.vue";
+import ManageReport from "../views/Admin/ManageReport.vue";
 import NotHaveRole from "../views/NotHaveRole.vue";
 
 import store from '@/store/index.js';
@@ -51,7 +55,13 @@ const routes = [
   {
     path: '/signup',
     name: 'Signup',
-    component: Signup
+    component: Signup,
+  },
+  {
+    path: '/signupadmin',
+    name: 'SignupAdmin',
+    component: SignupAdmin,
+    params: true
   },
   {
     path: '/signin',
@@ -99,6 +109,16 @@ const routes = [
     path: '/admin/managepost',
     name: 'ManagePost',
     component: ManagePost
+  },
+  {
+    path: '/admin/ManageReport',
+    name: 'ManageReport',
+    component: ManageReport
+  },
+  {
+    path: '/payment/PaymentResult',
+    name: 'PaymentResult',
+    component: PaymentResult
   },
   {
     path: '/notehaverole',

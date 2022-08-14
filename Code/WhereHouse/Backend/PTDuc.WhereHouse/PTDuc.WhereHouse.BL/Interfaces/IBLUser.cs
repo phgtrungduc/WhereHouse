@@ -12,6 +12,7 @@ namespace PTDuc.WhereHouse.BL.Interfaces
         List<UserDTO> GetListUserOnline();
         public ServiceResult ChangeStatus(string blockUserId, string adminId);
         public ServiceResult InsertAdmin(UserDTO user, string adminId);
+        public ServiceResult InsertUser(UserDTO user);
         public ServiceResult GetListUserForAdmin(string adminId);
         public ServiceResult UpdateUser(string userId,UserDTO user);
         

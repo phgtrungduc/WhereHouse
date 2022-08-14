@@ -31,7 +31,6 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public Guid? AvatarId { get; set; }
         public int Role { get; set; }
         public byte Status { get; set; }
-        public bool? IsOnline { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
 

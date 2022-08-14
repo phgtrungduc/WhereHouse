@@ -275,9 +275,11 @@ export default {
             .post(`${this.baseUrl}House/UpdatePost`, params, config)
             .then((res) => {
               if (res.data.StatusCode) {
-                util.alertSuccess("Lưu thông tin bài đăng thành công").then(()=>{
-                  this.getData(this.$route.params.id);
-                });
+                util
+                  .alertSuccess("Lưu thông tin bài đăng thành công")
+                  .then(() => {
+                    this.getData(this.$route.params.id);
+                  });
               }
             })
             .catch((err) => {
@@ -304,31 +306,65 @@ export default {
       }
     },
     Cancel() {
-      // this.$router.back();
-      console.log(this.checkChange());
+      if (this.checkChange()) {
+        swal({
+          title: "Dữ liệu đã thay đổi",
+          text: "Dữ liệu bài đăng đã thay đổi, bạn có muốn lưu?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then((isSave) => {
+          if (isSave) {
+            this.SavePost();
+          } else {
+            this.$router.back();
+          }
+        });
+      } else {
+        this.$router.back();
+      }
     },
     getData(id) {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      };
       this.$store.commit("showLoadingFullScreen", true);
-      axios.get(`${this.baseUrl}post/${id}`).then(
-        (res) => {
-          this.postData = res.data;
-          this.houseData = res.data.House;
-          this.originalPostData = { ...res.data };
-          this.originalHouseData = { ...res.data.House };
-          if (res.data.House.AddressByGoogle) {
-            let address = JSON.parse(res.data.House.AddressByGoogle);
+      axios
+        .get(`${this.baseUrl}Post/GetDetailPost/${id}`, config)
+        .then((res) => {
+          let data = res.data.Data;
+          this.postData = data;
+          this.houseData = data.House;
+          this.originalPostData = { ...data };
+          this.originalHouseData = { ...data.House };
+          if (data.House.AddressByGoogle) {
+            let address = JSON.parse(data.House.AddressByGoogle);
             this.houseAddress = address;
             this.markers = address;
             this.center = address;
-            this.$refs.Address.$refs.input.value = res.data.House.Address;
+            this.$refs.Address.$refs.input.value = data.House.Address;
           }
-        },
-        (error) => {
-          console.log(error);
-        }
-      ).finally(()=>{
-        this.$store.commit("showLoadingFullScreen", false);
-      });
+        })
+        .catch((err) => {
+          let statusCode = err.response.data.StatusCode;
+          switch (statusCode) {
+            case 209:
+              swal(
+                "Không thể sửa bài đăng",
+                "Tài khoản không có quyền sửa bài đăng này!",
+                "error"
+              );
+              break;
+            default:
+              swal("Không thể sửa bài đăng", "", "error");
+              break;
+          }
+        })
+        .finally(() => {
+          this.$store.commit("showLoadingFullScreen", false);
+        });
     },
     changeImageSuccess(id) {
       this.houseData.HouseImageId = id;

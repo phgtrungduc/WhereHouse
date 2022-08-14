@@ -9,7 +9,7 @@
           :key="index"
           class="list-post"
         >
-          <PostCard
+          <WistlistCard
             :post="item.Post"
             type="wishlist"
             :wishListId="item.WishlistId"
@@ -32,7 +32,7 @@
 <script>
 import axios from "axios";
 import swal from "sweetalert";
-import PostCard from "@/components/House/PostCard.vue";
+import WistlistCard from "@/components/House/WistlistCard.vue";
 export default {
   name: "Wistlist",
   data() {
@@ -40,7 +40,7 @@ export default {
       wishList: [],
     };
   },
-  components: { PostCard },
+  components: { WistlistCard },
   methods: {
     async getWishList() {
       let config = {

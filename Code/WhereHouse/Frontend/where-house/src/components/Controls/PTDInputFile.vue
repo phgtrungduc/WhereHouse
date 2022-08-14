@@ -4,6 +4,9 @@
       v-if="!avatarURL && !urlProps"
       src="../../assets/images/no-pictures.png"
       class="rounded-circle img"
+      aspect-ratio="1.7"
+      max-height="150"
+      max-width="150"
     >
     </v-img>
     <v-img
@@ -164,6 +167,12 @@ export default {
   .img {
     width: 150px;
     height: 150px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+  .v-image__image {
+    background-size: auto !important;
   }
 }
 </style>

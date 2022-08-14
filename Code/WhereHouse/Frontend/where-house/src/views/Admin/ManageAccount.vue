@@ -120,13 +120,12 @@ export default {
                   }
                 }
               })
-              .catch((err) => {
+              .catch(() => {
                 swal({
                   text: "Lỗi hệ thống",
                   icon: "error",
                   closeOnClickOutside: false,
                 });
-                console.log(err);
               })
               .finally(() => {});
           }
@@ -161,13 +160,12 @@ export default {
                   }
                 }
               })
-              .catch((err) => {
+              .catch(() => {
                 swal({
                   text: "Lỗi hệ thống",
                   icon: "error",
                   closeOnClickOutside: false,
                 });
-                console.log(err);
               })
               .finally(() => {});
           }

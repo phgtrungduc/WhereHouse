@@ -46,13 +46,8 @@
             </v-list-item-content>
           </v-list-item>
         </v-card>
-        <div
-          :style="{
-            display: displayForUser == 'unset' ? 'none!important' : 'unset',
-          }"
-          class="more"
-        >
-          <v-menu bottom left transition="slide-y-transition">
+        <div>
+          <v-menu bottom left transition="slide-y-transition" class="more">
             <template v-slot:activator="{ on, attrs }">
               <v-btn icon v-bind="attrs" v-on="on">
                 <v-icon>mdi-dots-vertical</v-icon>
@@ -60,17 +55,62 @@
             </template>
             <v-list>
               <v-list-item-group>
-                <v-list-item>
+                <v-list-item @click="viewDetail" v-if="isOwnUser == 1">
                   <v-list-item-icon>
                     <v-icon>mdi-pencil</v-icon>
                   </v-list-item-icon>
                   <v-list-item-title>Sửa thông tin bài đăng</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="deletePost">
+                <v-list-item @click="deletePost" v-if="isOwnUser == 1">
                   <v-list-item-icon>
                     <v-icon>mdi-delete</v-icon>
                   </v-list-item-icon>
                   <v-list-item-title>Xoá bài đăng</v-list-item-title>
+                </v-list-item>
+                <v-list-item v-if="isOwnUser !== 1">
+                  <v-list-item-icon>
+                    <font-awesome-icon icon="fa-solid fa-flag" />
+                  </v-list-item-icon>
+                  <v-dialog
+                    v-model="openDialogReport"
+                    persistent
+                    max-width="600px"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-list-item-title v-bind="attrs" v-on="on">
+                        Báo cáo bài đăng
+                      </v-list-item-title>
+                    </template>
+                    <v-card>
+                      <v-card-title>
+                        <span class="text-h5">Báo cáo bài đăng</span>
+                      </v-card-title>
+                      <v-card-text>
+                        <v-container>
+                          <PTDInput
+                            label="Nội dung báo cáo(*)"
+                            v-model="contentReport"
+                            name="Nội dung báo cáo"
+                            :required="true"
+                            ref="contentReport"
+                          ></PTDInput>
+                        </v-container>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          color="blue darken-1"
+                          text
+                          @click="openDialogReport = false"
+                        >
+                          Hủy
+                        </v-btn>
+                        <v-btn color="blue darken-1" text @click="reportPost">
+                          Xác nhận
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
                 </v-list-item>
               </v-list-item-group>
             </v-list>
@@ -136,10 +176,7 @@
           </li>
         </ul>
       </div>
-      <div
-        class="d-flex flex-row justify-content-end"
-        :style="{ display: displayForUser }"
-      >
+      <div class="d-flex flex-row justify-content-end" v-if="isOwnUser !== 1">
         <v-btn
           type="button"
           id="add-to-cart-button"
@@ -190,12 +227,13 @@
 
 <script>
 import axios from "axios";
-import util from "../../util/util";
+import util from "@/util/util";
 import DirectionsRenderer from "@/components/GoogleMap/DirectionsRenderer";
 import swal from "sweetalert";
+import PTDInput from "@/components/Controls/PTDInput.vue";
 export default {
   name: "HouseDetail",
-  components: { DirectionsRenderer },
+  components: { DirectionsRenderer, PTDInput },
   data() {
     return {
       product: {},
@@ -213,7 +251,9 @@ export default {
       houseAddress: { lat: 450.508, lng: -730.587 }, //khởi tạo tạm để không bị báo lỗi
       markers: [], //khởi tạo tạm để không bị báo lỗi
       directionObject: {},
-      displayForUser: "unset",
+      contentReport: "",
+      openDialogReport: false,
+      isOwnUser: null,
     };
   },
   props: ["baseURL", "products", "categories"],
@@ -229,31 +269,60 @@ export default {
       }
     },
     getData(id) {
-      axios.get(`${this.baseUrl}post/${id}`).then(
-        (res) => {
-          this.postData = res.data;
-          this.houseData = res.data.House;
-          this.userOwner = res.data.House?.UserOwner;
-          this.postData.HouseImageUrl = res.data.HouseImageUrl
-            ? this.baseResourceUrl + res.data.HouseImageUrl
-            : "";
-          this.userOwnerAvatar = this.userOwner?.Avatar?.FilePath
-            ? this.baseResourceUrl + this.userOwner?.Avatar?.FilePath
-            : "";
+      let url = "",
+        config = {};
+      if (!this.token) {
+        url = `${this.baseUrl}Post/GetPublicPost/${id}`;
+      } else {
+        (url = `${this.baseUrl}Post/GetDetailPost/${id}`),
+          (config = {
+            headers: {
+              Authorization: "Bearer " + this.token,
+            },
+          });
+      }
 
-          if (res.data.House.AddressByGoogle) {
-            let address = JSON.parse(res.data.House.AddressByGoogle);
-            this.houseAddress = address;
-            this.markers.push(address);
+      axios
+        .get(url, config)
+        .then((res) => {
+          if (res.data.Data) {
+            let data = res.data.Data;
+            this.postData = data;
+            this.houseData = data.House;
+            this.userOwner = data.House?.UserOwner;
+            this.postData.HouseImageUrl = data.HouseImageUrl
+              ? this.baseResourceUrl + data.HouseImageUrl
+              : "";
+            this.userOwnerAvatar = this.userOwner?.Avatar?.FilePath
+              ? this.baseResourceUrl + this.userOwner?.Avatar?.FilePath
+              : "";
+
+            if (data.House.AddressByGoogle) {
+              let address = JSON.parse(data.House.AddressByGoogle);
+              this.houseAddress = address;
+              this.markers.push(address);
+            }
+            this.checkRoleUser();
           }
-          this.checkRoleUser();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        })
+        .catch((err) => {
+          let statusCode = err.response.data.StatusCode;
+          switch (statusCode) {
+            case 209:
+              swal(
+                "Không thể xem bài đăng",
+                "Tài khoản không có quyền xem bài đăng này!",
+                "error"
+              );
+              break;
+            default:
+              swal("Lỗi hệ thống", "", "error");
+              break;
+          }
+        });
     },
     directFromCurrentPostion() {
+      this.directionObject = {};
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           const pos = {
@@ -273,50 +342,53 @@ export default {
     },
     checkRoleUser() {
       let userId = util.getCurrentUserId();
-      if (userId == this.userOwner.UserId)
-        this.displayForUser = "none!important";
+      if (userId && userId == this.userOwner.UserId) this.isOwnUser = 1;
     },
     async addToWistlist() {
-      let wishList = {
-        UserId: util.getCurrentUserId(),
-        PostId: this.postData.PostId,
-      };
-      let config = {
-        headers: {
-          Authorization: "Bearer " + this.token,
-        },
-      };
-      await axios
-        .post(`${this.baseUrl}Wishlist`, wishList, config)
-        .then((res) => {
-          if (res.data.StatusCode) {
-            if (res.data.Data) {
-              util.alertSuccess("Đã thêm vào danh sách yêu thích");
-            } else {
-              swal({
-                text: "Lỗi hệ thống!",
-                icon: "error",
-                closeOnClickOutside: false,
-              });
+      if (this.token) {
+        let wishList = {
+          UserId: util.getCurrentUserId(),
+          PostId: this.postData.PostId,
+        };
+        let config = {
+          headers: {
+            Authorization: "Bearer " + this.token,
+          },
+        };
+        await axios
+          .post(`${this.baseUrl}Wishlist`, wishList, config)
+          .then((res) => {
+            if (res.data.StatusCode) {
+              if (res.data.Data) {
+                util.alertSuccess("Đã thêm vào danh sách yêu thích");
+              } else {
+                swal({
+                  text: "Lỗi hệ thống!",
+                  icon: "error",
+                  closeOnClickOutside: false,
+                });
+              }
             }
-          }
-        })
-        .catch((err) => {
-          let statusCode = err.response.data.StatusCode;
-          switch (statusCode) {
-            case 211:
-              swal(
-                "Thêm thất bại",
-                "Bài đăng đã nằm trong danh sách yêu thích của bạn!",
-                "error"
-              );
-              break;
-            default:
-              swal("Thêm thất bại", "", "error");
-              break;
-          }
-        })
-        .finally(() => {});
+          })
+          .catch((err) => {
+            let statusCode = err.response.data.StatusCode;
+            switch (statusCode) {
+              case 211:
+                swal(
+                  "Thêm thất bại",
+                  "Bài đăng đã nằm trong danh sách yêu thích của bạn!",
+                  "error"
+                );
+                break;
+              default:
+                swal("Thêm thất bại", "", "error");
+                break;
+            }
+          })
+          .finally(() => {});
+      } else {
+        util.notifyRequiredLogin(this.$router);
+      }
     },
     async deletePost() {
       let text = "Bạn có muốn xóa bài đăng?";
@@ -348,18 +420,115 @@ export default {
               }
             })
             .catch((err) => {
-              swal({
-                text: "Lỗi hệ thống không lấy được thông tin!",
-                icon: "error",
-                closeOnClickOutside: false,
-              });
-              console.log(err);
+              let statusCode = err.response.data.StatusCode;
+              switch (statusCode) {
+                case 209:
+                  swal(
+                    "Xoá bài đăng thất bại",
+                    "Tài khoản không có quyền!",
+                    "error"
+                  );
+                  break;
+                default:
+                  swal("Xoá bài đăng thất bại", "", "error");
+                  break;
+              }
             })
             .finally(() => {});
-        } else {
-          console.log("hủy");
         }
       });
+    },
+    async reportPost() {
+      if (this.token) {
+        if (this.contentReport) {
+          swal({
+            title: "Báo cáo bài đăng",
+            text: "Bạn có muốn báo cáo bài đăng?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          }).then(async (accept) => {
+            if (accept) {
+              let params = {
+                PostId: this.postData.PostId,
+                UserReportId: util.getCurrentUserId(),
+                Content: this.contentReport,
+              };
+              this.$store.commit("showLoadingFullScreen", true);
+
+              // call the API
+              this.$store.commit("showLoadingFullScreen", true);
+              let config = {
+                headers: {
+                  Authorization: "Bearer " + this.token,
+                },
+              };
+              await axios
+                .post(`${this.baseUrl}Post/ReportPost`, params, config)
+                .then((res) => {
+                  if (res.data.Data) {
+                    util
+                      .alertSuccess("Báo cáo bài đăng thành công")
+                      .then(() => (this.openDialogReport = false));
+                  }
+                  this.$store.commit("showLoadingFullScreen", false);
+                })
+                .catch((err) => {
+                  let statusCode = err.response.data.StatusCode;
+                  this.$store.commit("showLoadingFullScreen", false);
+                  switch (statusCode) {
+                    case 209:
+                      swal(
+                        "Báo cáo bài đăng thất bại",
+                        "Tài khoản không có quyền!",
+                        "error"
+                      ).then(() => (this.openDialogReport = false));
+                      break;
+                    case 212:
+                      swal(
+                        "Báo cáo bài đăng thất bại",
+                        "Đã tồn tại một báo cáo bạn gửi đang được giải quyết!",
+                        "error"
+                      ).then(() => (this.openDialogReport = false));
+                      break;
+                    default:
+                      swal("Báo cáo bài đăng thất bại", "", "error").then(
+                        () => (this.openDialogReport = false)
+                      );
+                      break;
+                  }
+                })
+                .finally(() => {
+                  this.contentReport = "";
+                });
+            }
+          });
+        } else {
+          this.$refs.contentReport.handleChange();
+        }
+      } else {
+        util.notifyRequiredLogin(this.$router);
+      }
+    },
+    viewDetail() {
+      this.$router.push({
+        name: "EditHouse",
+        params: {
+          id: this.postData.PostId,
+        },
+      });
+    },
+    getMoreAboutLocation() {
+      //   let directionsService = new window.google.maps.DirectionsService(),
+      //     request = {
+      //       location: "-33.8670522%2C151.1957362",
+      //       fields: ["name", "formatted_address", "place_id", "geometry"],
+      //     };
+      //   directionsService.nearby(request, (place, status) => {
+      //     console.log(place);
+      //     console.log(status);
+      //   });
+      console.log("fix tam");
     },
   },
   created() {
@@ -367,6 +536,7 @@ export default {
     this.id = id;
     this.getData(id);
     this.token = localStorage.getItem("token");
+    this.getMoreAboutLocation();
   },
   computed: {
     userOwnerName() {

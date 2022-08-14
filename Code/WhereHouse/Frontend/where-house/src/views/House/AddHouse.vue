@@ -6,6 +6,7 @@
         @change="handleChangeHouseImage"
         ref="houseImage"
         category="house"
+        :changeSuccess="changeImageSuccess"
       />
     </div>
     <div class="house-detail">
@@ -101,7 +102,7 @@
             >
             </PTDInput>
           </ValidationProvider>
-          <ValidationProvider rules="required" name="HouseType">
+          <ValidationProvider name="HouseType">
             <PTDSelect
               :apiURL="`HouseType`"
               item-value="HouseTypeId"
@@ -125,12 +126,14 @@
             >
             </PTDInput>
           </ValidationProvider>
-          <ValidationProvider>
+          <ValidationProvider rules="max:200">
             <PTDTextArea
               name="Mô tả chi tiết"
               label="Mô tả chi tiết"
-              :value="houseData.Descrtiption"
+              v-model="houseData.Descrtiption"
               ref="Descrtiption"
+              :hasMaxLength="true"
+              :maxLength="200"
             >
             </PTDTextArea>
           </ValidationProvider>
@@ -138,7 +141,6 @@
         <div class="form-button">
           <v-btn class="mr-3 button" @click="Cancel">Hủy</v-btn>
           <v-btn class="success button" @click="SavePost">Lưu</v-btn>
-          <v-btn class="success button" @click="CheckTest">Check</v-btn>
         </div>
       </div>
     </div>
@@ -192,10 +194,15 @@ export default {
     };
   },
   methods: {
+    changeImageSuccess(id) {
+      this.houseData.HouseImageId = id;
+    },
     handleChangeHouseImage(file) {
       if (file) {
         this.avatarURL = URL.createObjectURL(file);
         this.$refs.houseImage.handleChange(file);
+      } else {
+        this.houseData.HouseImageId = null;
       }
     },
     initMap() {
@@ -250,33 +257,43 @@ export default {
     },
     async SavePost() {
       if (this.validateForm()) {
-        let config = {
-          headers: {
-            Authorization: "Bearer " + this.token,
-          },
-        };
-        await axios
-          .post(`${this.baseUrl}House/AddNewPost`, this.houseData, config)
-          .then((res) => {
-            if (res.data.StatusCode && res.data.Data) {
-              swal("Thêm bài đăng thành công", {
-                buttons: false,
-                timer: 500,
-                icon: "success",
-              }).then(() => {
-                this.$router.push({ name: "Home" });
-              });
-            }
-          })
-          .catch((err) => {
-            swal({
-              text: "Lỗi hệ thống không thể thêm bài đăng!",
-              icon: "error",
-              closeOnClickOutside: false,
-            });
-            console.log(err);
-          })
-          .finally(() => {});
+        swal({
+          title: "Thêm bài đăng",
+          text: "Khi thêm bài đăng, bạn sẽ phải thanh toán một khoản phí là 3000d. Tiếp tục?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then(async (isContinue) => {
+          if (isContinue) {
+            let config = {
+              headers: {
+                Authorization: "Bearer " + this.token,
+              },
+            };
+            await axios
+              .post(`${this.baseUrl}House/AddNewPost`, this.houseData, config)
+              .then((res) => {
+                if (res.data.StatusCode && res.data.Data) {
+                  swal("Thêm bài đăng thành công", {
+                    buttons: false,
+                    timer: 500,
+                    icon: "success",
+                  }).then(() => {
+                    this.$router.push({ name: "Home" });
+                  });
+                }
+              })
+              .catch((err) => {
+                swal({
+                  text: "Lỗi hệ thống không thể thêm bài đăng!",
+                  icon: "error",
+                  closeOnClickOutside: false,
+                });
+                console.log(err);
+              })
+              .finally(() => {});
+          }
+        });
       }
     },
     Cancel() {

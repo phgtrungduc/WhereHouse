@@ -2,8 +2,8 @@
   <v-card
     :loading="loading"
     class="house-box"
-    max-width="375"
-    width="375"
+    max-width="300"
+    width="300"
   >
     <div class="header">
       <template slot="progress">

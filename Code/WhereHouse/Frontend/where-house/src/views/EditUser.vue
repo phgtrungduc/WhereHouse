@@ -7,11 +7,18 @@
           <ValidationObserver ref="form">
             <form class="pt-4 pl-4 pr-4 d-flex">
               <div class="form-input">
-                <ValidationProvider rules="required" name="PhoneNumber">
+                <ValidationProvider
+                  :rules="{
+                    required: true,
+                    regex: /(84|0[3|5|7|8|9])+([0-9]{8})\b/,
+                  }"
+                  name="PhoneNumber"
+                >
                   <PTDInput
                     label="Số điện thoại"
                     v-model="user.PhoneNumber"
                     :isRequired="true"
+                    ref="PhoneNumber"
                   ></PTDInput>
                 </ValidationProvider>
                 <PTDInput
@@ -121,9 +128,23 @@ export default {
   },
   methods: {
     Cancel() {
-      //   this.$router.back();
-      console.log(util.objectEquals(this.originalData, this.user));
-      console.log(this.$refs.avatar);
+      if (!util.objectEquals(this.originalData, this.user)) {
+        swal({
+          title: "Dữ liệu đã thay đổi",
+          text: "Dữ liệu người dùng đã thay đổi, bạn có muốn lưu?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then((isSave) => {
+          if (isSave) {
+            this.Accept();
+          } else {
+            this.$router.back();
+          }
+        });
+      } else {
+        this.$router.back();
+      }
     },
     async Accept() {
       let user = this.user;
@@ -213,9 +234,9 @@ export default {
           .finally(() => {});
       }
     },
-    changeImageSuccess(id){
-        this.user.AvatarId = id;
-    }
+    changeImageSuccess(id) {
+      this.user.AvatarId = id;
+    },
   },
   watch: {
     loader() {

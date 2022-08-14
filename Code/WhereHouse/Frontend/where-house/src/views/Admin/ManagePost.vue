@@ -38,28 +38,49 @@
           </div>
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" v-on="on" @click="detailPost(item)">
-                <font-awesome-icon
-                  icon="fa-regular fa-eye"
-                  class="action-table"
-                />
-              </v-btn>
-            </template>
-            <span>Xem chi tiết bài đăng</span>
-          </v-tooltip>
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" v-on="on" @click="deletePost(item)">
-                <font-awesome-icon
-                  icon="fa-solid fa-trash-can"
-                  class="action-table"
-                />
-              </v-btn>
-            </template>
-            <span>Xóa bài đăng</span>
-          </v-tooltip>
+          <div class="action d-flex justify-content-end">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="acceptPost(item)"
+                  v-if="item.Status == 2"
+                >
+                  <font-awesome-icon
+                    icon="fa-solid fa-check"
+                    class="action-table"
+                    style="font-size: 15px"
+                  />
+                </v-btn>
+              </template>
+
+              <span>Phê duyệt bài đăng</span>
+            </v-tooltip>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on" @click="detailPost(item)">
+                  <font-awesome-icon
+                    icon="fa-regular fa-eye"
+                    class="action-table"
+                  />
+                </v-btn>
+              </template>
+              <span>Xem chi tiết bài đăng</span>
+            </v-tooltip>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on" @click="deletePost(item)">
+                  <font-awesome-icon
+                    icon="fa-solid fa-trash-can"
+                    class="action-table"
+                  />
+                </v-btn>
+              </template>
+              <span>Xóa bài đăng</span>
+            </v-tooltip>
+          </div>
         </template>
       </v-data-table>
     </div>
@@ -107,27 +128,26 @@ export default {
               Authorization: "Bearer " + this.token,
             },
           };
-          let url = this.baseUrl + "Post/DeletePostUser/" + post.postId;
+          let url = this.baseUrl + "Post/DeletePostUser/" + post.PostId;
           axios
             .delete(url, config)
             .then((res) => {
               if (res.data.StatusCode) {
                 if (res.data.Data) {
-                  util.alertSuccess("Xóa bài đăng thành công");
+                  util
+                    .alertSuccess("Xóa bài đăng thành công")
+                    .then(() => this.getListUserForAdmin());
                 }
               }
             })
-            .catch((err) => {
+            .catch(() => {
               swal({
                 text: "Lỗi hệ thống không lấy được thông tin!",
                 icon: "error",
                 closeOnClickOutside: false,
               });
-              console.log(err);
             })
             .finally(() => {});
-        } else {
-          console.log("hủy");
         }
       });
     },
@@ -141,7 +161,12 @@ export default {
         axios.get(`${this.baseUrl}Post/GetListPostForAdmin`, config).then(
           (res) => {
             if (res.data.StatusCode == 1) {
-              this.listPost = res.data.Data.$values;
+              if (res.data.Data){
+                res.data.Data.$values.forEach(x=>{
+                  x.CreatedDate = util.formatDate(x.CreatedDate);
+                })
+              }
+               this.listPost = res.data.Data.$values;
             }
           },
           (error) => {
@@ -149,6 +174,58 @@ export default {
           }
         );
       }
+    },
+    acceptPost(post) {
+      swal({
+        title: "Phê duyệt bài đăng",
+        text: "Bạn có muốn phê duyệt bài đăng?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          let config = {
+            headers: {
+              Authorization: "Bearer " + this.token,
+            },
+          };
+          let url = this.baseUrl + "Post/AcceptPost/" + post.PostId;
+          axios
+            .post(url, {}, config)
+            .then((res) => {
+              if (res.data.StatusCode) {
+                if (res.data.Data) {
+                  util
+                    .alertSuccess("Phê duyệt bài đăng thành công")
+                    .then(() => this.getListUserForAdmin());
+                }
+              }
+            })
+            .catch((err) => {
+              let statusCode = err.response.data.StatusCode;
+              switch (statusCode) {
+                case 209:
+                  swal(
+                    "Phê duyệt bài đăng thất bại",
+                    "Tài khoản không có quyền!",
+                    "error"
+                  );
+                  break;
+                case 210:
+                  swal(
+                    "Phê duyệt bài đăng thất bại",
+                    "Không thể phê duyệt bài đăng chưa thanh toán!",
+                    "error"
+                  );
+                  break;
+                default:
+                  swal("Phê duyệt bài đăng thất bại", "", "error");
+                  break;
+              }
+            })
+            .finally(() => {});
+        }
+      });
     },
   },
   created() {

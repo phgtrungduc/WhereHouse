@@ -4,6 +4,7 @@ using PTDuc.WhereHouse.BL.Interfaces;
 using PTDuc.WhereHouse.EntityModels.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 

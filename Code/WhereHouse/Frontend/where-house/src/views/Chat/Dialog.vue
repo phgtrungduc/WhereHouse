@@ -1,65 +1,88 @@
 <template>
   <div class="dialog-chat">
-    <div class="wrapper-mobile">
-      <div class="mobile">
-        <img src="../../assets/images/img/lone-logo.svg" />Chưa đáp ứng màn hình
-        mobile devices.
-      </div>
-    </div>
     <div class="wrapper">
-      <main>
-        <div class="col-left">
+      <main class="row">
+        <div class="col-left col-2">
           <div class="col-content">
             <div class="messages">
-              <h2 class="ml-4">Danh sách chat</h2>
+              <h3 class="ml-4">Danh sách chat</h3>
               <DialogChat
                 v-for="(item, index) in listConversation"
                 :key="index"
                 :conversation="item"
-                @click="changeConversation(item.ConversationId)"
+                @click="changeConversation(item)"
               />
             </div>
           </div>
         </div>
 
-        <div class="col">
-          <div class="col-content" ref="chatContent">
-            <DetailChat
-              :listMessage="listMessage"
-              :scrollToBottom="scrollToBottom"
-            />
+        <div class="detail-info col-10 d-flex" v-if="otherUser">
+          <div class="d-flex col-9 flex-column">
+            <div class="col-content" ref="chatContent">
+              <DetailChat
+                :listMessage="listMessage"
+                :scrollToBottom="scrollToBottom"
+              />
+            </div>
+            <div class="col-foot">
+              <div class="compose">
+                <input placeholder="Nhập tin nhắn ..." v-model="message" />
+                <div class="compose-dock">
+                  <div class="dock">
+                    <font-awesome-icon
+                      icon="fa-solid fa-paper-plane"
+                      size="2x"
+                      id="sendMessage"
+                      @click="sendMessage"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-foot">
-            <div class="compose">
-              <input placeholder="Nhập tin nhắn ..." v-model="message" />
-              <div class="compose-dock">
-                <div class="dock">
-                  <font-awesome-icon
-                    icon="fa-solid fa-paper-plane"
-                    size="2x"
-                    id="sendMessage"
-                    @click="sendMessage"
-                  />
+
+          <div class="col-right col-3">
+            <div class="col-content">
+              <div class="user-panel" v-if="otherUser">
+                <div class="avatar">
+                  <div class="avatar-image">
+                    <v-img
+                      v-if="!otherUserAvatarUrl"
+                      src="../../assets/images/no-pictures.png"
+                      class="rounded-circle img border"
+                      aspect-ratio="1.7"
+                      width="60"
+                      height="60"
+                      max-height="60"
+                      max-width="60"
+                    >
+                    </v-img>
+                    <v-img
+                      v-if="otherUserAvatarUrl"
+                      class="rounded-circle img border"
+                      :src="otherUserAvatarUrl"
+                      width="60"
+                      height="60"
+                      max-height="60"
+                      max-width="60"
+                    >
+                    </v-img>
+                  </div>
+
+                  <h3>{{ otherUser.FullName }}</h3>
+                  <p>{{ otherUser.UserName }}</p>
+                  <p>{{ otherUser.PhoneNumber }}</p>
+                  <p>{{ otherUser.Email }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="col-right">
-          <div class="col-content">
-            <div class="user-panel">
-              <div class="avatar">
-                <div class="avatar-image">
-                  <img src="../../assets/images/img/avatar.png" />
-                </div>
-
-                <h3>Theresa Hudson</h3>
-                <p>London, United Kingdom</p>
-              </div>
-            </div>
-          </div>
+        <div class="no-detail-info col-10" v-if="!otherUser">
+          <div class="icon"></div>
+          <h4 class="content">Chọn một cuộc hội thoại trong danh sách chat</h4>
         </div>
+        <div></div>
       </main>
     </div>
   </div>
@@ -82,6 +105,8 @@ export default {
       message: "",
       currentConversationId: "",
       listConversation: [],
+      otherUser: null,
+      otherUserAvatarUrl: "",
     };
   },
   methods: {
@@ -104,7 +129,6 @@ export default {
         );
         this.listMessage.push({ message: this.message, type: 1 });
         this.message = "";
-        this.scrollToBottom();
       }
     },
     async initChat(curentUserId, otherUserId) {
@@ -158,17 +182,25 @@ export default {
           }
         );
     },
-    async changeConversation(id) {
-      console.log(id);
-      this.listMessage = [];
+    async changeConversation(conversation) {
       let config = {
-        headers: {
-          Authorization: "Bearer " + this.token,
+          headers: {
+            Authorization: "Bearer " + this.token,
+          },
         },
-      };
+        curentUserId = util.getCurrentUserId(),
+        otherUserId = "";
+      this.currentConversationId = conversation.ConversationId;
+      this.listMessage = [];
+      if (conversation.UserId1 == this.currentUserId) {
+        otherUserId = conversation.UserId2;
+      } else {
+        otherUserId = conversation.UserId1;
+      }
+      this.getOtherUserInfo(otherUserId);
       await axios
         .get(
-          `${this.baseUrl}message/GetMessagesByConversationId/${id}`,
+          `${this.baseUrl}message/GetMessagesByConversationId/${conversation.ConversationId}`,
           config
         )
         .then(
@@ -177,7 +209,6 @@ export default {
               if (res.data.Data) {
                 let listChat = res.data.Data.$values;
                 if (listChat && listChat.length) {
-                  let curentUserId = util.getCurrentUserId();
                   listChat.forEach((message) => {
                     if (message.UserId == curentUserId) {
                       this.listMessage.push({
@@ -212,19 +243,7 @@ export default {
           (res) => {
             if (res.data.StatusCode) {
               if (res.data.Data) {
-                let list = res.data.Data.$values;
-                let userID = util.getCurrentUserId();
-                list.forEach((x) => {
-                  let indexUser = x.UserId1 == userID ? 1 : 2;
-                  let conversation = {
-                    ConversationId: x.ConversationId,
-                    User:
-                      indexUser == 1
-                        ? x.UserId1Navigation
-                        : x.UserId2Navigation,
-                  };
-                  this.listConversation.push(conversation);
-                });
+                this.listConversation = res.data.Data.$values;
               }
             }
           },
@@ -237,15 +256,34 @@ export default {
       let contentChat = this.$refs.chatContent;
       contentChat.scrollTop = contentChat.scrollHeight;
     },
+    async getOtherUserInfo(userId) {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      };
+      await axios
+        .get(`${this.baseUrl}user/` + userId, config)
+        .then((res) => {
+          this.otherUser = res.data;
+          if (res.data.AvatarPath) {
+            this.otherUserAvatarUrl =
+              this.baseResourceUrl + res.data.AvatarPath;
+          }
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {});
+    },
   },
   created() {
-    let otherUserId =
-      this.$route.params.userRecievedId ||
-      "3f66f2d6-688b-4161-5f92-08c864661f9c";
-    let currentUserId = this.currentUserId || util.getCurrentUserId();
-    if (otherUserId && currentUserId) {
-      this.initChat(currentUserId, otherUserId);
-      this.waitForChat();
+    let otherUserId = this.$route.params.userRecievedId;
+    if (otherUserId) {
+      let currentUserId = this.currentUserId || util.getCurrentUserId();
+      if (otherUserId && currentUserId) {
+        this.initChat(currentUserId, otherUserId);
+        this.waitForChat();
+        this.getOtherUserInfo(otherUserId);
+      }
     }
     this.getListConversationForUser();
   },
@@ -254,57 +292,48 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
   outline: 0;
   -webkit-box-sizing: inherit;
   box-sizing: inherit;
+  &:before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+  }
+  &:after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+  }
 }
-
-*:before,
-*:after {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-}
-
 html {
   height: 100%;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 body {
   height: 100%;
   color: #3b414d;
   font-family: sans-serif;
   letter-spacing: 0.03em;
 }
-
-h3 {
-  font-size: 15px;
-  font-weight: 600;
-}
-
 p {
   font-size: 82%;
 }
-
-input::-webkit-input-placeholder {
-  color: #cccccc;
+input {
+  &::-webkit-input-placeholder {
+    color: #cccccc;
+  }
+  &::-moz-placeholder {
+    color: #cccccc;
+  }
+  &:-ms-input-placeholder {
+    color: #cccccc;
+  }
+  &:-moz-placeholder {
+    color: #cccccc;
+  }
 }
-
-input::-moz-placeholder {
-  color: #cccccc;
-}
-
-input:-ms-input-placeholder {
-  color: #cccccc;
-}
-
-input:-moz-placeholder {
-  color: #cccccc;
-}
-
 .wrapper {
   height: 100%;
   display: -webkit-box;
@@ -315,194 +344,52 @@ input:-moz-placeholder {
   -ms-flex-direction: column;
   flex-direction: column;
 }
-
-header {
-  -webkit-box-shadow: 0 0px 13px rgba(0, 0, 0, 0.06);
-  box-shadow: 0 0px 13px rgba(0, 0, 0, 0.06);
-  -webkit-box-flex: 0;
-  width: 100%;
-  overflow: hidden;
-  z-index: 2;
-  position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  -ms-flex: 0 0 70px;
-  flex: 0 0 70px;
-}
-
 .container {
   position: relative;
   display: block;
   padding-left: 20px;
   padding-right: 20px;
 }
-
-header > div {
-  z-index: 2;
-  height: 70px;
-  margin: 0 auto;
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-header .middle {
-  position: absolute;
-  text-align: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-}
-
-header .middle h3 {
-  margin-bottom: 3px;
-}
-
-header .middle p {
-  margin-bottom: 0px;
-  color: #9197a5;
-}
-
-header .right {
-  height: 70px;
-  overflow: hidden;
-  line-height: 70px;
-  text-align: right;
-  width: auto;
-  float: right;
-  position: relative;
-}
-
-header .avatar {
-  margin-left: 15px;
-  display: inline-block;
-  float: right;
-}
-
-header .avatar img {
-  vertical-align: middle;
-  width: 30px;
-  border-radius: 100%;
-  height: 30px;
-}
-
-header .settings {
-  display: inline-block;
-  float: left;
-  position: relative;
-}
-
-header .settings:after {
-  content: "";
-  background-color: #000;
-  opacity: 0.2;
-  height: 20px;
-  width: 1px;
-  margin-top: 25px;
-  margin-left: 25px;
-  display: inline-block;
-  margin-right: 25px;
-}
-
-header .username {
-  display: inline-block;
-  height: 70px;
-  font-size: 14px;
-  line-height: 72px;
-  font-weight: 600;
-}
-
-header .username img {
-  width: 16px;
-  float: left;
-  height: 70px;
-  opacity: 0.5;
-}
-
-header .left {
-  width: 130px;
-  float: left;
-  position: relative;
-}
-
-header .left img {
-  display: inline-block;
-  height: 70px;
-  width: 100%;
-}
-
 .user-panel {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px;
+  .avatar {
+    text-align: center;
+    position: relative;
+    .avatar-image {
+      position: relative;
+      width: 60px;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  p {
+    color: #9197a5;
+  }
+  h3 {
+    margin-bottom: 7px;
+  }
 }
-
-.user-panel .avatar {
-  text-align: center;
-  position: relative;
+.col-left {
+  .messages {
+    li {
+      padding-top: 10px;
+      width: 100%;
+      display: block;
+      overflow: hidden;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+    }
+  }
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px);
 }
-
-.user-panel .avatar .avatar-image {
-  position: relative;
-  width: 60px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.user-panel .avatar img {
-  width: 60px;
-  border-radius: 100%;
-  height: 60px;
-}
-
-.user-panel p {
-  color: #9197a5;
-}
-
-.user-panel h3 {
-  margin-bottom: 7px;
-}
-
-.col-left .messages li {
-  padding-top: 10px;
-  width: 100%;
-  display: block;
-  overflow: hidden;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 10px;
-}
-
-/* .col-left .messages li .avatar {
-  position: relative;
-}
-
-.col-left .messages li .avatar .avatar-image {
-  position: relative;
-  width: 40px;
-  overflow: hidden;
-  float: left;
-  margin-right: 13px;
-}
-
-.col-left .messages li .avatar .status {
-  height: 12px;
-  width: 12px;
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  border-radius: 100%;
-  border: 3px solid #ffffff;
-}
-
-.col-left .messages li .avatar img {
-  width: 36px;
-  border-radius: 100%;
-  height: 36px;
-} */
-
 main {
   -webkit-box-flex: 1;
   -ms-flex: 1;
@@ -515,52 +402,31 @@ main {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  .detail-info {
+    height: calc(100vh - 70px);
+    display: flex;
+    padding: 0 !important;
+  }
+  .no-detail-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .icon {
+      background: url("../../assets/images/message.png") no-repeat;
+      background-position: center;
+      width: 100%;
+      height: 200px;
+    }
+    height: calc(100vh - 70px);
+  }
 }
-
-.col-left {
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 300px;
-  flex: 0 0 300px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: calc(100vh - 70px);
-}
-
 .col-right {
   border-left: 1px solid rgba(0, 0, 0, 0.1);
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 300px;
-  flex: 0 0 300px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
   height: calc(100vh - 70px);
 }
-
-.col {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 60%;
-  flex: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: calc(100vh - 70px);
-}
-
 .col-content {
   -webkit-box-flex: 1;
   padding: 0px;
@@ -568,80 +434,42 @@ main {
   flex: 1;
   overflow-y: auto;
 }
-
 .col-foot {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 50px;
   flex: 0 0 50px;
-}
-
-[class^="grid-"] {
-  display: -ms-flexbox;
-  display: -webkit-box;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex-direction: row;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-}
-
-.wrapper-mobile {
-  height: 100vh;
-  display: none;
-  position: relative;
-  color: #9197a5;
-  text-align: center;
-  line-height: 22px;
-}
-
-.wrapper-mobile .mobile {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-}
-
-.wrapper-mobile .mobile img {
-  width: 54px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
 }
 
 .compose {
   padding: 20px;
   position: relative;
-}
-
-.compose input {
-  width: 100%;
-  border: 0px;
-  font-size: 14px;
-  padding-right: 80px;
-}
-
-.compose .compose-dock .dock {
-  position: absolute;
-  right: 25px;
-  top: 15px;
-}
-
-.compose .compose-dock img {
-  width: 20px;
-  margin-left: 12px;
-  opacity: 0.2;
-}
-
-.compose .compose-dock img:hover {
-  opacity: 0.5;
+  input {
+    width: 100%;
+    border: 0px;
+    font-size: 14px;
+    padding-right: 80px;
+  }
+  .compose-dock {
+    .dock {
+      position: absolute;
+      right: 25px;
+      top: 15px;
+    }
+    img {
+      width: 20px;
+      margin-left: 12px;
+      opacity: 0.2;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
 }
 #sendMessage {
   cursor: pointer;
+}
+p {
+  padding: 0 !important;
+  margin: 0 !important;
 }
 /* @media only screen and (max-width: 1250px) {
   .wrapper {

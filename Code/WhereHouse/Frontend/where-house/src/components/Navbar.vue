@@ -70,9 +70,9 @@
                   <v-list-item-title> Quản lý bài đăng</v-list-item-title>
                 </v-list-item>
               </router-link>
-              <router-link :to="{ name: 'MyPost' }">
+              <router-link :to="{ name: 'ManageReport' }">
                 <v-list-item>
-                  <v-list-item-title> Báo cáo bài đăng</v-list-item-title>
+                  <v-list-item-title> Quản lý báo cáo</v-list-item-title>
                 </v-list-item>
               </router-link>
             </v-list>
@@ -157,11 +157,16 @@
                   </v-card>
                 </v-dialog>
               </v-list-item>
-              <router-link :to="{ name: 'EditUser' }" v-if="token">
-                <v-list-item>
+              <router-link :to="{ name: 'SignupAdmin' }">
+                <v-list-item >
                   <v-list-item-title>
-                    Chỉnh sửa thông tin tài khoản
+                    Đăng ký tài khoản admin
                   </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link :to="{ name: 'ManageAccount' }">
+                <v-list-item>
+                  <v-list-item-title> Quản lý người dùng </v-list-item-title>
                 </v-list-item>
               </router-link>
               <v-list-item v-if="token" @click="signout">
@@ -371,8 +376,7 @@ export default {
   methods: {
     signout() {
       localStorage.removeItem("token");
-      document.cookie =
-        "userConfig=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      util.deleteCookie("userConfig");
       this.token = null;
       this.$store.commit("setUserRole", null);
       this.$store.dispatch("setUser", {});
@@ -411,7 +415,7 @@ export default {
               if (res.data.Data.accessToken) {
                 localStorage.setItem("token", res.data.Data.accessToken);
               }
-              util.alertSuccess("Đổi mật khẩu thành công").then(()=>{
+              util.alertSuccess("Đổi mật khẩu thành công").then(() => {
                 this.openDialogChangePass = false;
               });
             }

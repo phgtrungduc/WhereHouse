@@ -21,7 +21,8 @@ namespace PTDuc.WhereHouse.EntityModels
             NotHaveRight = 209,
             PostNotPay = 210,
             IsInWishlist = 211,
-            HasReport = 212
+            HasReport = 212,
+            UserExist = 213,
         }
 
         public enum HouseType

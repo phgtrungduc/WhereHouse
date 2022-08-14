@@ -60,6 +60,10 @@ export default {
       type: Boolean,
       default: null,
     },
+    phoneNumber: {
+      type: Boolean,
+      default: null,
+    },
   },
   methods: {
     handleChange() {
@@ -101,6 +105,18 @@ export default {
                 ? this.$props.name +
                   " không đúng định dạng." 
                 : "Email không đúng định dạng."
+            }
+          }
+        }
+        if (this.$props.phoneNumber){
+          if (this.selectValue){
+            let res = util.validatePhoneNumber(this.selectValue);
+            if (!res){
+              error = true;
+              errorMessages = this.$props.name
+                ? this.$props.name +
+                  " không đúng định dạng." 
+                : "Số điện thoại không đúng định dạng."
             }
           }
         }

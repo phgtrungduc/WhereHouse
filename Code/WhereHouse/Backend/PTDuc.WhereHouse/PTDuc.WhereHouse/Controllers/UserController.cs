@@ -148,5 +148,18 @@ namespace PTDuc.WhereHouse.Controllers
             }
             return BadRequest(new ServiceResult() { Data = false });
         }
+
+        [AllowAnonymous]
+        [HttpPost("InsertUser")]
+        public IActionResult InsertUser([FromBody] UserDTO user)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                var res = _blUser.InsertUser(user);
+                return this.HandleResponse(res);
+            }
+            return BadRequest(new ServiceResult() { Data = false });
+        }
     }
 }

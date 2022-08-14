@@ -91,10 +91,10 @@ const util = {
         // test there constructor.
 
         for (var p in x) {
-            if (!Object.prototype.hasOwnProperty.call(x,p)) continue;
+            if (!Object.prototype.hasOwnProperty.call(x, p)) continue;
             // other properties were tested using x.constructor === y.constructor
 
-            if (!Object.prototype.hasOwnProperty.call(y,p)) return false;
+            if (!Object.prototype.hasOwnProperty.call(y, p)) return false;
             // allows to compare x[ p ] and y[ p ] when set to undefined
 
             if (x[p] === y[p]) continue;
@@ -108,11 +108,40 @@ const util = {
         }
 
         for (p in y)
-            if (Object.prototype.hasOwnProperty.call(y,p) && !Object.prototype.hasOwnProperty.call(x,p))
+            if (Object.prototype.hasOwnProperty.call(y, p) && !Object.prototype.hasOwnProperty.call(x, p))
                 return false;
         // allows x[ p ] to be set to undefined
 
         return true;
+    },
+    formatDate(data) {
+        if (data) {
+            let date = new Date(data);
+            let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            let month =
+                date.getMonth() + 1 < 10
+                    ? "0" + (date.getMonth() + 1)
+                    : date.getMonth() + 1;
+            let year = date.getFullYear();
+            let hour = date.getHours();
+            hour = hour < 10 ? "0" + hour : hour;
+            let minute = date.getMinutes();
+            minute = minute < 10 ? "0" + minute : minute;
+            let second = date.getSeconds();
+            second = second < 10 ? "0" + second : second;
+            return hour + ":" + minute + ":" + second + " " + day + "/" + month + "/" + year;
+        }
+    },
+    validatePhoneNumber(phoneNumber) {
+        return String(phoneNumber)
+            .toLowerCase()
+            .match(
+                /(84|0[3|5|7|8|9])+([0-9]{8})\b/
+            );
+    },
+    deleteCookie(c_name) {
+        document.cookie = c_name+'=' + ";expires=Thu, 01 Jan 1970 00:00:01 GMT ;domain=.yourdomain.com;path=/";
+        document.cookie = c_name+'=' + ";expires=Thu, 01 Jan 1970 00:00:01 GMT ;";
     }
 
 }

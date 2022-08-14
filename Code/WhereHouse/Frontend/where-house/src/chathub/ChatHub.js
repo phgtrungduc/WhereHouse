@@ -7,8 +7,10 @@ export let connection = new signalR.HubConnectionBuilder()
 
 export async function start(userId) {
     try {
-        await connection.start();
-        console.log("SignalR Connected.");
+        if (connection.state!='Connected'){
+            await connection.start();
+            console.log("SignalR Connected.");
+        }
         userId = userId || util.getCurrentUserId();
         if (userId) {
             await connection.invoke("UserOnConnected", userId);

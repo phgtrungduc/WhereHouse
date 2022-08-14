@@ -120,6 +120,9 @@ export default {
                 this.$store.commit("showSnackbar", true);
                 this.$router.push({ name: "Home" });
                 start(userData.UserId);
+                if (userData.Role==1){
+                  this.$store.dispatch("getWishListUser", res.data.Data.accessToken);
+                }
                 break;
               }
             }

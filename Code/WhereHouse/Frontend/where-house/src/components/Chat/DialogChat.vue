@@ -1,26 +1,57 @@
 <template>
-  <li class="chat-dialog" v-on="$listeners">
+  <li class="chat-dialog d-flex" v-on="$listeners">
     <div class="avatar">
       <div class="avatar-image">
-        <img src="../../assets/images/avatar-default.png" />
+        <v-img
+          v-if="!avatarURL"
+          src="../../assets/images/no-pictures.png"
+          class="rounded-circle img"
+          aspect-ratio="1.7"
+          width="20"
+          height="20"
+        >
+        </v-img>
+        <v-img
+          v-if="avatarURL"
+          class="rounded-circle img"
+          :src="avatarURL"
+          aspect-ratio="1.7"
+          width="50"
+          height="50"
+        >
+        </v-img>
       </div>
     </div>
-    <h3>{{this.$props.conversation.User?this.$props.conversation.User.FullName:''}}</h3>
-    <p>{{this.$props.conversation.User?this.$props.conversation.User.UserName:''}}</p>
+    <div class="col-sm-1"></div>
+    <div>
+      <h3>{{ this.$props.conversation.FullName }}</h3>
+      <p>{{ this.$props.conversation.UserName }}</p>
+    </div>
   </li>
 </template>
 
 <script>
 export default {
   name: "DialogChat",
-  props:{
-    conversation:{
-      type:Object,
-      default(){
+  data() {
+    return {
+      avatarURL: "",
+    };
+  },
+  props: {
+    conversation: {
+      type: Object,
+      default() {
         return {};
-      }
+      },
+    },
+  },
+  created() {
+    if (this.$props.conversation && this.$props.conversation.AvatarUrl) {
+      this.avatarURL =
+        this.baseResourceUrl + this.$props.conversation.AvatarUrl;
     }
-  }
+  },
 };
 </script>
 
@@ -41,31 +72,6 @@ export default {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-  .avatar {
-    position: relative;
-
-    .avatar-image {
-      position: relative;
-      width: 40px;
-      overflow: hidden;
-      float: left;
-      margin-right: 13px;
-    }
-    .status {
-      height: 12px;
-      width: 12px;
-      position: absolute;
-      bottom: 2px;
-      right: 2px;
-      border-radius: 100%;
-      border: 3px solid #ffffff;
-    }
-    img {
-      width: 36px;
-      border-radius: 100%;
-      height: 36px;
-    }
   }
   &:hover {
     background-color: antiquewhite;

@@ -8,7 +8,7 @@ namespace PTDuc.WhereHouse.DL.Interfaces
     public interface IDLPost : IDLBase<Post, PostDTO>
 
     {
-        public IEnumerable<Post> GetUserPost(Guid userId);
+        public List<Post> GetUserPost(Guid userId);
         public IEnumerable<Post> GetListPostForAdmin();
 
     }

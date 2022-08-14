@@ -34,7 +34,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
         public override IEnumerable<UserDTO> GetAll()
         {
             _dbSet = _context.Set<User>();
-            var data = _dbSet.Include(user => user.Avatar).ToList();
+            var data = _dbSet.Include(user => user.Avatar)?.ToList();
             var dataMapper = _mapper.Map<List<User>, List<UserDTO>>(data);
             dataMapper.ForEach(x =>
             {
@@ -52,7 +52,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
         public List<UserDTO> GetAllForAdmin()
         {
             _dbSet = _context.Set<User>();
-            var data = _dbSet.Include(user => user.Avatar).Include(user=>user.Posts).ToList();
+            var data = _dbSet.Include(user => user.Avatar).Include(user=>user.Posts)?.ToList();
             var dataMapper = _mapper.Map<List<User>, List<UserDTO>>(data);
             dataMapper.ForEach(x =>
             {

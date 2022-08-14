@@ -21,7 +21,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
         public List<Conversation> GetAllConversationUser(string userId)
         {
             _dbSet = _context.Set<Conversation>();
-            var data = _dbSet.Where(x => (x.UserId1 == Guid.Parse(userId))||(x.UserId2 == Guid.Parse(userId))).Include(x=>x.UserId1Navigation).Include(x=>x.UserId2Navigation);
+            var data = _dbSet.Where(x => (x.UserId1 == Guid.Parse(userId))||(x.UserId2 == Guid.Parse(userId))).Include(x=>x.UserId1Navigation).ThenInclude(user=>user.Avatar).Include(x=>x.UserId2Navigation).ThenInclude(user2=>user2.Avatar);
             return data.ToList();
         }
 

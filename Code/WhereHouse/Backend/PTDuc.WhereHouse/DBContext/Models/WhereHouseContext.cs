@@ -148,8 +148,6 @@ namespace PTDuc.WhereHouse.DBContext.Models
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Descrtiption).HasMaxLength(255);
-
                 entity.Property(e => e.Status).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Title)
@@ -175,6 +173,11 @@ namespace PTDuc.WhereHouse.DBContext.Models
 
                 entity.Property(e => e.ReportId).ValueGeneratedOnAdd();
 
+                entity.Property(e => e.Content).IsRequired();
+
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.Reports)
                     .HasForeignKey(d => d.PostId)
@@ -204,6 +207,8 @@ namespace PTDuc.WhereHouse.DBContext.Models
 
                 entity.Property(e => e.FullName).HasMaxLength(100);
 
+                entity.Property(e => e.Password).IsRequired();
+
                 entity.Property(e => e.PhoneNumber)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -213,6 +218,8 @@ namespace PTDuc.WhereHouse.DBContext.Models
                 entity.Property(e => e.Role)
                     .HasDefaultValueSql("((1))")
                     .HasComment("Vai trò(1 - admin, 2-user)");
+
+                entity.Property(e => e.Salt).IsRequired();
 
                 entity.Property(e => e.Status).HasDefaultValueSql("((1))");
 
@@ -226,8 +233,6 @@ namespace PTDuc.WhereHouse.DBContext.Models
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.AvatarId)
                     .HasConstraintName("FK_User_File");
-                entity.Property(e => e.Password).IsRequired();
-                entity.Property(e => e.Salt).IsRequired();
             });
 
             modelBuilder.Entity<Wishlist>(entity =>

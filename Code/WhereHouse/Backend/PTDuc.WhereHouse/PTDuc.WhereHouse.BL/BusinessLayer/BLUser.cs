@@ -32,6 +32,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 if (loginParam != null) {
                     entity.Password = loginParam.HashPassword;
                     entity.Salt = loginParam.Salt;
+                    entity.CreatedDate = DateTime.Now;
                     res =  true;
                 }
             }
@@ -147,7 +148,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                     if (admin.Role == (int)Enumeration.Role.Admin)
                     {
                         var listUser = _dlUser.GetAllForAdmin();
-                        listUser = listUser.Where(x=>x.Role==(int)Enumeration.Role.User).ToList();
+                        listUser = listUser.Where(x=>x.Role==(int)Enumeration.Role.User)?.ToList();
                         res.Data = listUser;
                     }
                     else
@@ -202,6 +203,30 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             else {
                 res.StatusCode = (int)Enumeration.ResultCode.NotHaveRight;
                 res.Data = false;
+            }
+            return res;
+        }
+
+        public ServiceResult InsertUser(UserDTO user)
+        {
+            var res = new ServiceResult();
+            try
+            {
+                var entity = _dlUser.GetUserByUserName(user.UserName);
+                if (entity == null)
+                {
+                    res.Data = this.Insert(user);
+                }
+                else {
+                    res.Data = false;
+                    res.StatusCode = (int)(Enumeration.ResultCode.UserExist);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                res.Messenger = ex.Message;
+                res.StatusCode = (int)(Enumeration.ResultCode.Failed);
             }
             return res;
         }

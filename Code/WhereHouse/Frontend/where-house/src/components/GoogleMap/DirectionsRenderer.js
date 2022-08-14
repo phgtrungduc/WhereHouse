@@ -28,9 +28,9 @@ export default MapElementFactory({
 
         directionsService.route(
           {
-            origin,
-            destination,
-            travelMode
+            origin: new window.google.maps.LatLng(origin),
+            destination: new window.google.maps.LatLng(destination),
+            travelMode: window.google.maps.TravelMode.DRIVING,
           },
           (response, status) => {
             if (status !== "OK") return;
