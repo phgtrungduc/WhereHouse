@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PTDuc.WhereHouse.DBContext.Models;
+using System;
 using System.Collections.Generic;
 
 #nullable disable

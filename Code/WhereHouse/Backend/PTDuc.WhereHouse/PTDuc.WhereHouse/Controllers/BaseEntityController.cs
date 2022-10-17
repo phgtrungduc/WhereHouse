@@ -90,9 +90,9 @@ namespace PTDuc.WhereHouse.Controllers
 
         // DELETE api/<CustomersController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromBody] TEntity entity)
+        public virtual IActionResult Delete(string id)
         {
-            var res = _BLBase.Delete(entity);
+            var res = _BLBase.Delete(id);
             return Ok(res);
         }
 

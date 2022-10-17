@@ -9,6 +9,7 @@ using PTDuc.WhereHouse.EntityModels.DTO;
 using AutoMapper;
 using System;
 using static PTDuc.WhereHouse.EntityModels.Enumeration;
+using System.Collections.Generic;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
@@ -17,18 +18,28 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         IDLPost _DLPost;
         IDLHouse _dLHouse;
         IBLUser _BLUser;
-        public BLPost(IDLPost DLPost, IMapper mapper, IDLHouse dLHouse, IBLUser BLUser) : base(DLPost, mapper)
+        IDLReport _dLReport;
+        public BLPost(IDLPost DLPost, IMapper mapper, IDLHouse dLHouse, IBLUser BLUser, IDLReport dLReport) : base(DLPost, mapper)
         {
             _DLPost = DLPost;
             _dLHouse = dLHouse;
             _BLUser = BLUser;
+            _dLReport = dLReport;
         }
 
 
         public ServiceResult GetUserPost(Guid userId)
         {
             var res = new ServiceResult();
-            res.Data = _DLPost.GetUserPost(userId);
+            var data = _DLPost.GetUserPost(userId);
+            var dataDTO = _mapper.Map<List<PostDTO>>(data);
+            dataDTO.ForEach(post =>
+            {
+                if (post.House != null && post.House.HouseImage != null) {
+                    post.HouseImageUrl = post.House.HouseImage.FilePath;
+                }
+            });
+            res.Data = dataDTO;
             return res;
         }
         public ServiceResult DeletePostUser(string postId, string userId)
@@ -38,7 +49,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             var post = _DLPost.GetByID(postId);
             if (post != null)
             {
-                if (post.UserId.ToString() == userId)
+                if (post.UserId.ToString() == userId || post.User.Role == 2)
                 {
                     var delSuccess = _DLPost.DeleteById(postId);
                     if (delSuccess)
@@ -48,11 +59,13 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                         {
                             res.Data = true;
                         }
-                        else {
+                        else
+                        {
                             res.Messenger = "Xóa thông tin bài đăng";
                         }
                     }
-                    else {
+                    else
+                    {
                         res.Messenger = "Xóa thông tin nhà thất bại";
                     }
                 }
@@ -79,8 +92,16 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 {
                     if (post.Status == (int)Enumeration.StatusPost.Pay)
                     {
-                        post.Status = (int)Enumeration.StatusPost.Accepted; 
-                        res.Data = post;
+                        post.Status = (int)Enumeration.StatusPost.Accepted;
+                        var isSuccess = this.Update(post,postId);
+                        if (isSuccess)
+                        {
+                            res.Data = true;
+                        }
+                        else {
+                            res.Data = false;
+                            res.StatusCode = (int)Enumeration.ResultCode.Failed;
+                        }
                     }
                     else
                     {
@@ -89,7 +110,8 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                     }
                 }
             }
-            else {
+            else
+            {
                 res.StatusCode = (int)Enumeration.ResultCode.NotHaveRight;
                 res.Messenger = "Tài khoản không có quyền phê duyệt bài đăng";
             }
@@ -107,7 +129,8 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                     post.Status = (int)Enumeration.StatusPost.Closed;
                     res.Data = post;
                 }
-                else {
+                else
+                {
                     res.StatusCode = (int)Enumeration.ResultCode.NotHaveRight;
                     res.Messenger = "Tài khoản không có quyền phê duyệt bài đăng";
                 }
@@ -120,7 +143,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             var post = this.GetByID(postId);
             if (post != null)
             {
-                
+
             }
             return res;
         }
@@ -132,22 +155,139 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             {
                 if (admin != null)
                 {
-                    if (admin.Role == (int)Enumeration.Role.Admin)
-                    {
-                        var listPost = _DLPost.GetListPostForAdmin();
-                        res.Data = listPost;
-                    }
-                    else
-                    {
-                        res.StatusCode = (int)Enumeration.ResultCode.NotHaveRight;
-                        res.Messenger = "Tài khoản không có quyền phê duyệt bài đăng";
-                    }
+                    var listPost = _DLPost.GetListPostForAdmin();
+                    res.Data = listPost;
                 }
             }
             catch (Exception ex)
             {
                 res.Messenger = ex.Message;
                 res.StatusCode = (int)(Enumeration.ResultCode.Failed);
+            }
+            return res;
+        }
+        public override PostDTO GetByID(string Id)
+        {
+            var post = base.GetByID(Id);
+            var postDTO = _mapper.Map<PostDTO>(post);
+            if (post.House != null && post.House.HouseImage != null)
+            {
+                postDTO.HouseImageUrl = post.House.HouseImage.FilePath;
+            }
+            return postDTO;
+        }
+
+        public ServiceResult ReportPost(string userId, ReportDTO report)
+        {
+            var res = new ServiceResult();
+            var userReport = _dLReport.UserHasReported(Guid.Parse(userId), report.PostId);
+            if (userReport == null)
+            {
+                var post = this.GetByID(report.PostId.ToString());
+                if (post != null)
+                {
+                    if (post.UserId.ToString() != userId)
+                    {
+                        var dataForInsert = _mapper.Map<Report>(report);
+                        var success = _dLReport.Insert(dataForInsert);
+                        if (success)
+                        {
+                            res.Data = true;
+                        }
+                        else
+                        {
+                            res.StatusCode = (int)ResultCode.Failed;
+                            res.Data = false;
+                        }
+                    }
+                    else
+                    {
+                        res.StatusCode = (int)ResultCode.NotHaveRight;
+                        res.Data = false;
+                    }
+                }
+            }
+            else
+            {
+                res.Data = false;
+                res.StatusCode = (int)ResultCode.HasReport;
+            }
+            return res;
+        }
+
+        public ServiceResult ChangeStatusReport(string userId, string reportId)
+        {
+            var res = new ServiceResult();
+            var user = _BLUser.GetByID(userId);
+            if (user != null && user.Role == (int)Enumeration.Role.Admin)
+            {
+                var report = _dLReport.GetByID(reportId);
+                if (report != null)
+                {
+                    if (report.Status == (int)Enumeration.StatusReport.Created)
+                    {
+                        report.Status = (int)Enumeration.StatusReport.Solved;
+                    }
+                    else
+                    {
+                        report.Status = (int)Enumeration.StatusReport.Created;
+                    }
+                    var isSucess = _dLReport.Update(report, reportId);
+                    if (isSucess)
+                    {
+                        res.Data = true;
+                    }
+                    else
+                    {
+                        res.StatusCode = (int)Enumeration.ResultCode.Failed;
+                        res.Data = false;
+                    }
+                }
+            }
+            else
+            {
+                res.Data = false;
+                res.StatusCode = (int)Enumeration.ResultCode.NotHaveRight;
+                res.Messenger = "Tài khoản không có quyền chuyển trạng thái báo cáo";
+            }
+            return res;
+        }
+
+        public ServiceResult GetPublicPost(string postId)
+        {
+            var res = new ServiceResult();
+            var post = this.GetByID(postId);
+            if (post.Status == (int)Enumeration.StatusPost.Accepted)
+            {
+                res.Data = post;
+            }
+            else {
+                res.Data = false;
+                res.StatusCode = (int)ResultCode.NotHaveRight;
+            }
+            return res;
+        }
+
+        public ServiceResult GetDetailPost(string postId, string userId)
+        {
+            var res = new ServiceResult();
+            var post = this.GetByID(postId);
+            if (post.Status == (int)Enumeration.StatusPost.Accepted)
+            {
+                res.Data = post;
+            }
+            else {
+                var user = _BLUser.GetByID(userId);
+                if (user != null) {
+                    if (user.UserId.ToString() == userId || user.Role == (int)Role.Admin)
+                    {
+                        res.Data = post;
+                    }
+                    else {
+                        res.Data = false;
+                        res.StatusCode = res.StatusCode = (int)ResultCode.NotHaveRight;
+                    }
+                }
             }
             return res;
         }

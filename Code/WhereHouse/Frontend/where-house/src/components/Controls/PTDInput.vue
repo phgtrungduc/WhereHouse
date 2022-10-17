@@ -60,6 +60,10 @@ export default {
       type: Boolean,
       default: null,
     },
+    phoneNumber: {
+      type: Boolean,
+      default: null,
+    },
   },
   methods: {
     handleChange() {
@@ -104,6 +108,36 @@ export default {
             }
           }
         }
+        if (this.$props.phoneNumber){
+          if (this.selectValue){
+            let res = util.validatePhoneNumber(this.selectValue);
+            if (!res){
+              error = true;
+              errorMessages = this.$props.name
+                ? this.$props.name +
+                  " không đúng định dạng." 
+                : "Số điện thoại không đúng định dạng."
+            }
+          }
+        }
+        if (this.$props.hasMinLength) {
+          if (this.$props.minLength) {
+            if (
+              this.selectValue &&
+              this.selectValue.length < this.$props.minLength
+            ) {
+              error = true;
+              errorMessages = this.$props.name
+                ? this.$props.name +
+                  " có độ dài tối thiểu là " +
+                  this.$props.minLength.toString()
+                : "Trường thông tin bắt có độ dài tối thiểu là " +
+                  this.$props.minLength.toString();
+            } 
+          } else {
+            console.log("Thiếu prop độ dài tối thiểu");
+          }
+        }
       }
       this.error = error;
       this.errorMessages = errorMessages;
@@ -119,6 +153,10 @@ export default {
       },
     },
   },
+  created(){
+    this.error = false;
+    this.errorMessages = '';
+  }
 };
 </script>
 

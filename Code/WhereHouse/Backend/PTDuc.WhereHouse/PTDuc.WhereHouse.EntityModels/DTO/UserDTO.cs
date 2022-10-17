@@ -22,8 +22,11 @@ namespace PTDuc.WhereHouse.EntityModels.DTO
         public Guid? AvatarId { get; set; }
         public int Role { get; set; }
         public int Status { get; set; }
+        public string AvatarPath { get; set; }
         public virtual File Avatar { get; set; }
+        public int? NumberOfPosts { get; set; }
         public bool? IsOnline { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
 
     }
 }

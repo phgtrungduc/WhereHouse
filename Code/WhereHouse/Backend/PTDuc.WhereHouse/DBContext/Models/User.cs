@@ -14,6 +14,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             Houses = new HashSet<House>();
             Messages = new HashSet<Message>();
             Posts = new HashSet<Post>();
+            Reports = new HashSet<Report>();
             Wishlists = new HashSet<Wishlist>();
         }
 
@@ -29,8 +30,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public string Salt { get; set; }
         public Guid? AvatarId { get; set; }
         public int Role { get; set; }
-        public int Status { get; set; }
-        public bool? IsOnline { get; set; }
+        public byte Status { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
 
@@ -40,6 +40,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public virtual ICollection<House> Houses { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Report> Reports { get; set; }
         public virtual ICollection<Wishlist> Wishlists { get; set; }
     }
 }

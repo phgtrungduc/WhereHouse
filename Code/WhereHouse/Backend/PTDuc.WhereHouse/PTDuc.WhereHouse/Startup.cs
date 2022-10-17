@@ -92,6 +92,9 @@ namespace PTDuc.WhereHouse
             services.AddScoped<IDLHouseType, DLHouseType>();
             services.AddScoped<IBLHouseType, BLHouseType>();
 
+            services.AddScoped<IDLReport, DLReport>();
+            services.AddScoped<IBLReport, BLReport>();
+
             services.AddDbContext<WhereHouseContext>(
             options => options.UseSqlServer("name=ConnectionStrings:WhereHouseDatabase"));
 

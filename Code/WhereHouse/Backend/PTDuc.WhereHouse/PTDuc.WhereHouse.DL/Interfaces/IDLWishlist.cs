@@ -7,6 +7,7 @@ namespace PTDuc.WhereHouse.DL.Interfaces
 {
     public interface IDLWishlist : IDLBase<Wishlist, WishlistDTO>
     {
-        public IEnumerable<Wishlist> GetWishlistByUserId(Guid userId);
+        public List<Wishlist> GetWishlistByUserId(Guid userId);
+        public bool CheckInWishlist(string userId,string postId);
     }
 }

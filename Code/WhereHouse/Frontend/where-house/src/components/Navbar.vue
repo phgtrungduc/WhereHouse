@@ -47,9 +47,139 @@
           </div>
         </div>
       </form>
-      
 
-      <div class="navbar-right d-flex align-items-center justify-content-end" v-if="role===1">
+      <div
+        class="navbar-right d-flex align-items-center justify-content-end"
+        v-if="this.$store.state.userRole == 2"
+      >
+        <div class="nav-item">
+          <v-menu bottom :offset-y="true">
+            <template v-slot:activator="{ on, attrs }">
+              <div v-bind="attrs" v-on="on">
+                <span>Bài đăng</span>
+                <font-awesome-icon
+                  icon="fa-regular fa-file"
+                  class="ml-1 icon-navbar"
+                />
+              </div>
+            </template>
+
+            <v-list>
+              <router-link :to="{ name: 'ManagePost' }">
+                <v-list-item>
+                  <v-list-item-title> Quản lý bài đăng</v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link :to="{ name: 'ManageReport' }">
+                <v-list-item>
+                  <v-list-item-title> Quản lý báo cáo</v-list-item-title>
+                </v-list-item>
+              </router-link>
+            </v-list>
+          </v-menu>
+        </div>
+        <div class="nav-item">
+          <v-menu bottom :offset-y="true">
+            <template v-slot:activator="{ on, attrs }">
+              <div v-bind="attrs" v-on="on">
+                <span>Tài khoản</span>
+                <font-awesome-icon
+                  icon="fa-regular fa-circle-user"
+                  class="ml-1"
+                  style="font-size: 25px"
+                />
+              </div>
+            </template>
+
+            <v-list>
+              <router-link :to="{ name: 'ManageAccount' }">
+                <v-list-item>
+                  <v-list-item-title> Quản lý người dùng </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <v-list-item>
+                <v-dialog
+                  v-model="openDialogChangePass"
+                  persistent
+                  max-width="600px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-list-item-title v-bind="attrs" v-on="on">
+                      Đổi mật khẩu
+                    </v-list-item-title>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">Đổi mật khẩu</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-container>
+                        <PTDInput
+                          label="Mật khẩu(*)"
+                          type="password"
+                          v-model="password.Password"
+                          name="Mật khẩu"
+                          :required="true"
+                          :hasMinLength="true"
+                          :minLength="8"
+                        ></PTDInput>
+                        <PTDInput
+                          label="Mật khẩu mới(*)"
+                          type="password"
+                          v-model="password.NewPassword"
+                          name="Mật khẩu"
+                          :required="true"
+                          :hasMinLength="true"
+                          :minLength="8"
+                        ></PTDInput>
+                        <PTDInput
+                          label="Xác nhận mật khẩu(*)"
+                          type="password"
+                          name="Xác nhận mật khẩu"
+                          :required="true"
+                          v-model="password.VerifyPassword"
+                        ></PTDInput>
+                      </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="openDialogChangePass = false"
+                      >
+                        Hủy
+                      </v-btn>
+                      <v-btn color="blue darken-1" text @click="changePassword">
+                        Xác nhận
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-list-item>
+              <router-link :to="{ name: 'SignupAdmin' }">
+                <v-list-item >
+                  <v-list-item-title>
+                    Đăng ký tài khoản admin
+                  </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <router-link :to="{ name: 'ManageAccount' }">
+                <v-list-item>
+                  <v-list-item-title> Quản lý người dùng </v-list-item-title>
+                </v-list-item>
+              </router-link>
+              <v-list-item v-if="token" @click="signout">
+                <v-list-item-title> Đăng xuất </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+      </div>
+      <div
+        class="navbar-right d-flex align-items-center justify-content-end"
+        v-else
+      >
         <router-link
           v-if="token"
           class="text-light nav-item"
@@ -59,13 +189,15 @@
           <font-awesome-icon icon="fa-regular fa-message" class="icon-navbar" />
         </router-link>
         <div id="cart" v-if="token" class="nav-item">
-          <span id="nav-cart-count">{{ this.$store.state.wishList.length }}</span>
+          <span id="nav-cart-count">{{
+            this.$store.state.wishList.length
+          }}</span>
           <router-link class="text-light" :to="{ name: 'Wishlist' }">
             <span class="mr-1">Wishlist</span>
             <font-awesome-icon icon="fa-regular fa-heart" class="icon-navbar" />
           </router-link>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" v-if="token">
           <v-menu bottom :offset-y="true">
             <template v-slot:activator="{ on, attrs }">
               <div v-bind="attrs" v-on="on">
@@ -128,9 +260,71 @@
                   </v-list-item-content>
                 </v-list-item>
               </div>
-              <router-link :to="{ name: 'Admin' }">
+              <v-list-item>
+                <v-dialog
+                  v-model="openDialogChangePass"
+                  persistent
+                  max-width="600px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-list-item-title v-bind="attrs" v-on="on">
+                      Đổi mật khẩu
+                    </v-list-item-title>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">Đổi mật khẩu</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-container>
+                        <PTDInput
+                          label="Mật khẩu(*)"
+                          type="password"
+                          v-model="password.Password"
+                          name="Mật khẩu"
+                          :required="true"
+                          :hasMinLength="true"
+                          :minLength="8"
+                        ></PTDInput>
+                        <PTDInput
+                          label="Mật khẩu mới(*)"
+                          type="password"
+                          v-model="password.NewPassword"
+                          name="Mật khẩu"
+                          :required="true"
+                          :hasMinLength="true"
+                          :minLength="8"
+                        ></PTDInput>
+                        <PTDInput
+                          label="Xác nhận mật khẩu(*)"
+                          type="password"
+                          name="Xác nhận mật khẩu"
+                          :required="true"
+                          v-model="password.VerifyPassword"
+                        ></PTDInput>
+                      </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="openDialogChangePass = false"
+                      >
+                        Hủy
+                      </v-btn>
+                      <v-btn color="blue darken-1" text @click="changePassword">
+                        Xác nhận
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-list-item>
+              <router-link :to="{ name: 'EditUser' }" v-if="token">
                 <v-list-item>
-                  <v-list-item-title> Quản trị viên </v-list-item-title>
+                  <v-list-item-title>
+                    Chỉnh sửa thông tin tài khoản
+                  </v-list-item-title>
                 </v-list-item>
               </router-link>
               <router-link :to="{ name: 'Signin' }" v-if="!token">
@@ -150,84 +344,42 @@
           </v-menu>
         </div>
       </div>
-      <div class="navbar-right d-flex align-items-center justify-content-end" v-else>
-        <div class="nav-item">
-          <v-menu bottom :offset-y="true">
-            <template v-slot:activator="{ on, attrs }">
-              <div v-bind="attrs" v-on="on">
-                <span>Bài đăng</span>
-                <font-awesome-icon
-                  icon="fa-regular fa-file"
-                  class="ml-1 icon-navbar"
-                />
-              </div>
-            </template>
-
-            <v-list>
-              <router-link :to="{ name: 'MyPost' }">
-                <v-list-item>
-                  <v-list-item-title> Quản lý bài đăng</v-list-item-title>
-                </v-list-item>
-              </router-link>
-              <router-link :to="{ name: 'MyPost' }">
-                <v-list-item>
-                  <v-list-item-title> Báo cáo bài đăng</v-list-item-title>
-                </v-list-item>
-              </router-link>
-            </v-list>
-          </v-menu>
-        </div>
-        <div class="nav-item">
-          <v-menu bottom :offset-y="true">
-            <template v-slot:activator="{ on, attrs }">
-              <div v-bind="attrs" v-on="on">
-                <span>Tài khoản</span>
-                <font-awesome-icon
-                  icon="fa-regular fa-circle-user"
-                  class="ml-1"
-                  style="font-size: 25px"
-                />
-              </div>
-            </template>
-
-            <v-list>
-              <router-link :to="{ name: 'Admin' }">
-                <v-list-item>
-                  <v-list-item-title> Quản lý người dùng </v-list-item-title>
-                </v-list-item>
-              </router-link>
-            </v-list>
-          </v-menu>
-        </div>
-      </div>
     </div>
   </nav>
 </template>
 
 <script>
+import axios from "axios";
 import swal from "sweetalert";
+import util from "@/util/util.js";
+import PTDInput from "@/components/Controls/PTDInput.vue";
 export default {
   name: "Navbar",
   props: {
     cartCount: {
       type: Number,
     },
-    role: {
-      type: Number,
-      default: 1,
-    },
   },
   data() {
     return {
       token: null,
       user: {},
+      openDialogChangePass: null,
+      password: {
+        Password: "",
+        VerifyPassword: "",
+        NewPassword: "",
+      },
     };
   },
+  components: { PTDInput },
   methods: {
     signout() {
       localStorage.removeItem("token");
-      document.cookie = "userConfig=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      util.deleteCookie("userConfig");
       this.token = null;
+      this.$store.commit("setUserRole", null);
+      this.$store.dispatch("setUser", {});
       swal("Bạn đã đăng xuất", {
         buttons: false,
         timer: 1500,
@@ -235,6 +387,52 @@ export default {
       }).then(() => {
         this.$router.push({ name: "Home" });
       });
+    },
+    changePassword() {
+      if (
+        !this.password.Password ||
+        !this.password.VerifyPassword ||
+        !this.password.NewPassword
+      ) {
+        swal("", "Chưa điền đẩy đủ thông tin!", "error");
+        return;
+      }
+      if (this.password.NewPassword !== this.password.VerifyPassword) {
+        swal("", "Xác nhận mật khẩu không khớp!", "error");
+        return;
+      }
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      };
+      let url = this.baseUrl + "Login/ChangePassword";
+      axios
+        .post(url, this.password, config)
+        .then((res) => {
+          if (res.data.StatusCode) {
+            if (res.data.Data) {
+              if (res.data.Data.accessToken) {
+                localStorage.setItem("token", res.data.Data.accessToken);
+              }
+              util.alertSuccess("Đổi mật khẩu thành công").then(() => {
+                this.openDialogChangePass = false;
+              });
+            }
+          }
+        })
+        .catch((err) => {
+          let statusCode = err.response.data.StatusCode;
+          switch (statusCode) {
+            case 206:
+              swal("Đổi mật khẩu thất bại", "Sai mật khẩu!", "error");
+              break;
+            default:
+              swal("Đổi mật khẩu thất bại", "", "error");
+              break;
+          }
+        })
+        .finally(() => {});
     },
   },
   mounted() {
@@ -312,3 +510,5 @@ nav {
   height: 85px !important;
 }
 </style>
+
+

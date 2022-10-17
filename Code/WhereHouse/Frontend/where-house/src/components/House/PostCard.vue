@@ -14,7 +14,15 @@
             <v-img
               height="100%"
               width="100%"
-              src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+              src="../../assets/images/no-pictures.png"
+              v-if="!houseImageUrl"
+            ></v-img>
+            <v-img
+              height="100%"
+              width="100%"
+              :src="houseImageUrl"
+              v-if="houseImageUrl"
+              aspect-ratio="1.7"
             ></v-img>
           </div>
           <div class="card-content col-9">
@@ -24,9 +32,17 @@
                 <div>
                   {{ this.post.Descrtiption }}
                 </div>
-                <div>Địa chỉ: {{ this.post.House.Address }}</div>
+                <div>
+                  <span class="font-weight-bold">Địa chỉ:</span>
+                  {{ this.post.House.Address }}
+                </div>
+                <div>
+                  <span class="font-weight-bold">Trạng thái:</span>
+                  {{ this.getStatusPost(this.post.Status) }}
+                </div>
               </v-card-text>
             </div>
+
             <v-btn
               color="white"
               text
@@ -35,18 +51,62 @@
               @click="deletePost"
               >Xóa</v-btn
             >
+            <v-btn
+              color="white"
+              text
+              class="btn-edit"
+              :small="true"
+              @click="editPost"
+              >Sửa</v-btn
+            >
+            <v-dialog
+              v-model="openDialog"
+              persistent
+              max-width="300px"
+              max-height="100px"
+              v-if="this.$props.post.Status ===1"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="white"
+                  text
+                  class="btn-pay"
+                  :small="true"
+                  v-bind="attrs"
+                  v-on="on"
+                  >Thanh toán</v-btn
+                >
+              </template>
+              <v-card>
+                <span class="title-dialog font-weight-bold m-3">Chọn phương thức thanh toán</span>
+                <v-container>
+                  <PayDialog :post="this.$props.post"/>
+                </v-container>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="openDialog = false">
+                    Hủy
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
             <v-divider></v-divider>
             <div class="footer d-flex justify-content-between">
               <div class="d-flex">
-                <div class="price text-danger font-weight-bold">
-                  Giá:
-                  {{ Intl.NumberFormat().format(this.post.House.Price || 0) }}
-                  VNĐ
+                <div class="price text-danger font-weight-bold mr-2">
+                  {{
+                    "Giá:" +
+                    Intl.NumberFormat().format(this.post.House.Price || 0) +
+                    "  VNĐ"
+                  }}
                 </div>
-                <div class="col-1"></div>
                 <div class="area text-sucess font-weight-bold">
-                  Diện tích:
-                  {{ Intl.NumberFormat().format(this.post.House.Area || 0) }} m2
+                  {{
+                    "Diện tích: " +
+                    Intl.NumberFormat().format(this.post.House.Area || 0)
+                  }}
+                  <span>m<sup>2</sup></span>
                 </div>
               </div>
               <div>
@@ -71,13 +131,16 @@
 import axios from "axios";
 import swal from "sweetalert";
 import util from "@/util/util";
+import PayDialog from "@/components/Dialog/PayDialog.vue";
 export default {
   name: "PostCard",
   data() {
     return {
       houseImageUrl: null,
+      openDialog: false,
     };
   },
+  components: { PayDialog },
   props: {
     post: {
       type: Object,
@@ -161,17 +224,37 @@ export default {
               console.log(err);
             })
             .finally(() => {});
-        } else {
-          console.log("hủy");
         }
       });
     },
+    editPost() {
+      this.$router.push({
+        name: "EditHouse",
+        params: {
+          id: this.$props.post.PostId,
+        },
+      });
+    },
+    getStatusPost(status) {
+      switch (status) {
+        case 1:
+          return "Chưa thanh toán";
+        case 2:
+          return "Đã thanh toán, chưa được phê duyệt";
+        case 3:
+          return "Đã được phê duyệt";
+        case 4:
+          return "Đã đóng";
+        default:
+          break;
+      }
+    },
   },
   created() {
-    let post = this.$props.post;
-    this.houseImageUrl = post.House?.HouseImage?.FilePath
-      ? this.baseResourceUrl + post.House?.HouseImage?.FilePath
-      : "";
+    if (this.$props.post && this.$props.post.HouseImageUrl) {
+      this.houseImageUrl =
+        this.baseResourceUrl + this.$props.post.HouseImageUrl;
+    }
   },
 };
 </script>
@@ -188,9 +271,21 @@ export default {
       align-self: stretch;
       .btn-delete {
         position: absolute;
-        top: 0;
+        top: 10px;
         right: 10px;
         background: #f44336;
+      }
+      .btn-edit {
+        position: absolute;
+        top: 40px;
+        right: 10px;
+        background: #ffc107 !important;
+      }
+      .btn-pay {
+        position: absolute;
+        top: 70px;
+        right: 10px;
+        background: #28a745 !important;
       }
       .content {
         height: 75%;
@@ -200,6 +295,9 @@ export default {
         height: 25%;
       }
     }
+  }
+  .title-dialog{
+    font-weight: bold;
   }
 }
 </style>

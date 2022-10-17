@@ -62,9 +62,9 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
                 "region": {
-                  "startLine": 102,
+                  "startLine": 96,
                   "startColumn": 13,
-                  "endLine": 102,
+                  "endLine": 96,
                   "endColumn": 72
                 }
               }
@@ -83,9 +83,9 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
                 "region": {
-                  "startLine": 114,
+                  "startLine": 108,
                   "startColumn": 13,
-                  "endLine": 114,
+                  "endLine": 108,
                   "endColumn": 72
                 }
               }
@@ -104,9 +104,9 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
                 "region": {
-                  "startLine": 127,
+                  "startLine": 121,
                   "startColumn": 13,
-                  "endLine": 127,
+                  "endLine": 121,
                   "endColumn": 72
                 }
               }
@@ -285,6 +285,51 @@
           }
         },
         {
+          "ruleId": "CA1827",
+          "level": "note",
+          "message": "Count() is used where Any() could be used instead to improve performance",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLWishlist.cs",
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 33,
+                  "endLine": 25,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "OperationKey": "OperationBinaryLeft"
+            }
+          }
+        },
+        {
+          "ruleId": "S1125",
+          "level": "warning",
+          "message": "Remove the unnecessary Boolean literal(s).",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
+                "region": {
+                  "startLine": 88,
+                  "startColumn": 31,
+                  "endLine": 88,
+                  "endColumn": 43
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
           "ruleId": "CA1825",
           "level": "note",
           "message": "Avoid unnecessary zero-length array allocations.  Use Array.Empty<Type>() instead.",
@@ -327,6 +372,27 @@
           }
         },
         {
+          "ruleId": "S2971",
+          "level": "warning",
+          "message": "Drop this useless call to 'ToList' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLPost.cs",
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 75,
+                  "endLine": 42,
+                  "endColumn": 81
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
           "ruleId": "S1481",
           "level": "warning",
           "message": "Remove the unused local variable 'obj'.",
@@ -348,27 +414,6 @@
           }
         },
         {
-          "ruleId": "S1125",
-          "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
-                "region": {
-                  "startLine": 94,
-                  "startColumn": 31,
-                  "endLine": 94,
-                  "endColumn": 43
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
           "ruleId": "S108",
           "level": "warning",
           "message": "Either remove or fill this block of code.",
@@ -377,9 +422,9 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
                 "region": {
-                  "startLine": 144,
+                  "startLine": 138,
                   "startColumn": 17,
-                  "endLine": 145,
+                  "endLine": 139,
                   "endColumn": 18
                 }
               }
@@ -390,24 +435,48 @@
           }
         },
         {
-          "ruleId": "S1854",
+          "ruleId": "S1125",
           "level": "warning",
-          "message": "Remove this useless assignment to local variable 'record'.",
+          "message": "Remove the unnecessary Boolean literal(s).",
           "locations": [
             {
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
                 "region": {
-                  "startLine": 91,
-                  "startColumn": 17,
-                  "endLine": 91,
-                  "endColumn": 32
+                  "startLine": 155,
+                  "startColumn": 31,
+                  "endLine": 155,
+                  "endColumn": 43
                 }
               }
             }
           ],
           "properties": {
             "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1827",
+          "level": "note",
+          "message": "Count() is used where Any() could be used instead to improve performance",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLPost.cs",
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 33,
+                  "endLine": 60,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "OperationKey": "OperationBinaryLeft"
+            }
           }
         },
         {
@@ -419,52 +488,52 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
                 "region": {
-                  "startLine": 104,
+                  "startLine": 123,
                   "startColumn": 19,
-                  "endLine": 104,
-                  "endColumn": 90
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2077",
-          "level": "warning",
-          "message": "Make sure using a dynamically formatted SQL query is safe here.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
-                "region": {
-                  "startLine": 116,
-                  "startColumn": 19,
-                  "endLine": 116,
-                  "endColumn": 90
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2077",
-          "level": "warning",
-          "message": "Make sure using a dynamically formatted SQL query is safe here.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
-                "region": {
-                  "startLine": 129,
-                  "startColumn": 19,
-                  "endLine": 129,
+                  "endLine": 123,
                   "endColumn": 87
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2077",
+          "level": "warning",
+          "message": "Make sure using a dynamically formatted SQL query is safe here.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 19,
+                  "endLine": 110,
+                  "endColumn": 90
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2077",
+          "level": "warning",
+          "message": "Make sure using a dynamically formatted SQL query is safe here.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.DL/DatabaseLayer/DLBase.cs",
+                "region": {
+                  "startLine": 98,
+                  "startColumn": 19,
+                  "endLine": 98,
+                  "endColumn": 90
                 }
               }
             }
@@ -480,6 +549,21 @@
           "shortDescription": "Avoid zero-length array allocations",
           "defaultLevel": "note",
           "helpUri": "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1825",
+          "properties": {
+            "category": "Performance",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
+        "CA1827": {
+          "id": "CA1827",
+          "shortDescription": "Do not use Count() or LongCount() when Any() can be used",
+          "fullDescription": "For non-empty collections, Count() and LongCount() enumerate the entire sequence, while Any() stops at the first item or the first item that satisfies a condition.",
+          "defaultLevel": "note",
+          "helpUri": "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1827",
           "properties": {
             "category": "Performance",
             "isEnabledByDefault": true,
@@ -557,23 +641,6 @@
             ]
           }
         },
-        "S1854": {
-          "id": "S1854",
-          "shortDescription": "Unused assignments should be removed",
-          "fullDescription": "A dead store happens when a local variable is assigned a value that is not read by any subsequent instruction. Calculating or retrieving a value only to then overwrite it or throw it away, could indicate a serious error in the code. Even if it’s not an error, it is at best a waste of resources. Therefore all calculated values should be used.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1854",
-          "properties": {
-            "category": "Major Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "SonarWay",
-              "MainSourceScope",
-              "TestSourceScope"
-            ]
-          }
-        },
         "S2077": {
           "id": "S2077",
           "shortDescription": "Formatting SQL queries is security-sensitive",
@@ -597,6 +664,23 @@
           "fullDescription": "readonly fields can only be assigned in a class constructor. If a class has a field that’s not marked readonly but is only set in the constructor, it could cause confusion about the field’s intended use. To avoid confusion, such fields should be marked readonly to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.",
           "defaultLevel": "warning",
           "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2933",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "SonarWay",
+              "MainSourceScope",
+              "TestSourceScope"
+            ]
+          }
+        },
+        "S2971": {
+          "id": "S2971",
+          "shortDescription": "\"IEnumerable\" LINQs should be simplified",
+          "fullDescription": "In the interests of readability, code that can be simplified should be simplified. To that end, there are several ways IEnumerable language integrated queries (LINQ) can be simplified",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2971",
           "properties": {
             "category": "Major Code Smell",
             "isEnabledByDefault": true,

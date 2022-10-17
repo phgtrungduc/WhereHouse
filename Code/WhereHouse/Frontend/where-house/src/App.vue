@@ -5,11 +5,10 @@
         :cartCount="cartCount"
         @resetCartCount="resetCartCount"
         v-if="!['Signup', 'Signin'].includes($route.name)"
-        :role="roleUser"
       />
-      <div class="wrap-loading">
+      <!-- <div class="wrap-loading">
         <LoadingApp v-if="this.$store.state.loadingApp" />
-      </div>
+      </div> -->
       <LoadingFullScreen v-if="this.$store.state.loadingFullScreen" />
       <div class="content" style="min-height: calc(100vh - 177px)">
         <v-snackbar
@@ -25,10 +24,6 @@
           Đăng nhập thành công
         </v-snackbar>
         <router-view
-          :baseURL="baseURL"
-          :products="products"
-          :categories="categories"
-          @fetchData="fetchData"
         >
         </router-view>
       </div>
@@ -40,7 +35,7 @@
 <script>
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
-import LoadingApp from "./components/Controls/LoadingApp.vue";
+// import LoadingApp from "./components/Controls/LoadingApp.vue";
 import LoadingFullScreen from "./components/Controls/LoadingFullScreen.vue";
 import axios from "axios";
 import util from "@/util/util.js";
@@ -51,8 +46,6 @@ export default {
     return {
       baseURL: "https://limitless-lake-55070.herokuapp.com/",
       //baseURL: "http://localhost:8080/",
-      products: null,
-      categories: null,
       key: 0,
       token: null,
       cartCount: 0,
@@ -62,44 +55,13 @@ export default {
         pageSize: 10,
         totalRecords: 0, //Khởi tạo tạm = 0,
         pageLength: 1,
-      },
-      roleUser: PTDConstants.Role.User,
+      }
     };
   },
 
-  components: { Footer, Navbar, LoadingApp, LoadingFullScreen },
+  components: { Footer, Navbar, LoadingFullScreen },
   methods: {
-    async fetchData() {
-      // fetch products
-      let fetchProducts = axios.get(this.baseURL + "product/");
-
-      //fetch categories
-      let fetchCategories = axios.get(this.baseURL + "category/");
-
-      Promise.all([fetchProducts, fetchCategories])
-        .then((responses) => {
-          this.products = responses[0].data;
-          this.categories = responses[1].data;
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          this.$store.commit("showAppLoading", false);
-        });
-      //fetch cart items
-      if (this.token) {
-        await axios.get(`${this.baseURL}cart/?token=${this.token}`).then(
-          (response) => {
-            if (response.status == 200) {
-              // update cart
-              this.cartCount = Object.keys(response.data.cartItems).length;
-            }
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      }
-    },
+    
     async getUserConfig() {
       let token = localStorage.getItem("token");
       if (token) {
@@ -118,11 +80,12 @@ export default {
               JSON.stringify(user)
             );
             start(user.UserId);
-            this.roleUser = user.Role;
+            this.$store.commit("setUserRole", user.Role || PTDConstants.Role.User) ;
             this.$store.dispatch("getWishListUser", this.token);
           })
           .catch((err) => console.log(err))
-          .finally(() => {});
+          .finally(() => {
+          });
       }
     },
     resetCartCount() {
@@ -157,8 +120,10 @@ export default {
 </script>
 
 <style>
+
 html {
   overflow-y: scroll;
+  
 }
 /* width */
 ::-webkit-scrollbar {
@@ -181,5 +146,8 @@ html {
 }
 hr {
   margin: 0 !important;
+}
+*{
+  font-family: sans-serif;
 }
 </style>

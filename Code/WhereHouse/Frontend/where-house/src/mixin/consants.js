@@ -1,9 +1,10 @@
 const PTDConstants = {
     "StatusPost": // Trạng thái bài đăng 
     {
-        "Created": 1,//Được tạo chưa phê duyệt
-        "Accepted": 2, //bài dăng đã được duyệt 
-        "Closed": 3, //Đóng bài đăng khi đã có người thuê
+        Created: 1,//Được tạo chưa phê duyệt
+        Pay: 2,//Được tạo chưa phê duyệt
+        Accepted: 3, //bài dăng đã được duyệt 
+        Closed: 4, //Đóng bài đăng khi đã có người thuê
     },
     "StatusUser": // Trạng thái người dùng 
     {

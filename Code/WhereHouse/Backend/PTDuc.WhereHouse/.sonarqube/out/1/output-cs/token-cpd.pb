@@ -159,7 +159,7 @@ PrimaryKey 
 FlagsAttribute66( 6
 {667 8
 }77 
-}88 ⁄
+}88 Å	
 tD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\DTO\ConversationDTO.cs
 	namespace 	
 PTDuc
@@ -177,6 +177,9 @@ WhereHouse 
 partial		 
 class		 
 ConversationDTO		 (
+:		) *
+
+BaseEntity		+ 5
 {
 
  
@@ -221,7 +224,7 @@ WhereHouse 
 ;? @
 }A B
 } 
-} ó	
+} Ò
 lD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\DTO\FileDTO.cs
 	namespace 	
 PTDuc
@@ -238,6 +241,9 @@ WhereHouse 
 
 class 
 FileDTO 
+: 
+
+BaseEntity %
 {		 
 public
 
@@ -283,28 +289,9 @@ WhereHouse 
 ;$ %
 set& )
 ;) *
-}+ ,
-public 
-string 
-	CreatedBy 
-{  !
-get" %
-;% &
-set' *
-;* +
-}, -
-public 
-DateTime 
-? 
-CreatedDate $
-{% &
-get' *
-;* +
-set, /
-;/ 0
-}1 2
-} 
-} ì
+}+ ,
+} 
+} ◊
 mD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\DTO\HouseDTO.cs
 	namespace 	
 PTDuc
@@ -321,6 +308,9 @@ WhereHouse 
 
 class 
 HouseDTO 
+: 
+
+BaseEntity &
 {		 
 public 
 Guid 
@@ -457,9 +447,55 @@ Horizontal  
 ;' (
 set) ,
 ;, -
-}. /
-} 
-} ¬
+}. /
+public 
+string 
+Title 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
+public 
+string 
+Description !
+{" #
+get$ '
+;' (
+set) ,
+;, -
+}. /
+public 
+Guid 
+? 
+UserId 
+{ 
+get !
+;! "
+set# &
+;& '
+}( )
+public   
+string   
+Address   
+{   
+get    #
+;  # $
+set  % (
+;  ( )
+}  * +
+public!! 
+string!! 
+AddressByGoogle!! %
+{!!& '
+get!!( +
+;!!+ ,
+set!!- 0
+;!!0 1
+}!!2 3
+}"" 
+}## È
 qD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\DTO\HouseTypeDTO.cs
 	namespace 	
 PTDuc
@@ -476,6 +512,9 @@ WhereHouse 
 
 class 
 HouseTypeDTO 
+: 
+
+BaseEntity  *
 {		 
 public
 
@@ -514,7 +553,7 @@ WhereHouse 
 ;. /
 }0 1
 } 
-} í
+} π
 oD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\DTO\MessageDTO.cs
 	namespace 	
 PTDuc
@@ -533,6 +572,9 @@ WhereHouse 
 class		 
 
 MessageDTO		 #
+:		$ %
+
+BaseEntity		& 0
 {
 
  
@@ -603,7 +645,7 @@ MessageDTO		 #
 ;+ ,
 }- .
 } 
-} ‘
+} í
 lD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\DTO\PostDTO.cs
 	namespace 	
 PTDuc
@@ -620,6 +662,9 @@ WhereHouse 
 
 class		 
 PostDTO		 
+:		 
+
+BaseEntity		 %
 {
 
  
@@ -687,9 +732,18 @@ WhereHouse 
 ;& '
 set( +
 ;+ ,
-}- .
-} 
-} ·
+}- .
+public 
+int 
+Status 
+{ 
+get 
+;  
+set! $
+;$ %
+}& '
+} 
+} ‰
 lD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\DTO\UserDTO.cs
 	namespace 	
 PTDuc
@@ -706,6 +760,9 @@ WhereHouse 
 
 class		 
 UserDTO		 
+:		 
+
+BaseEntity		 %
 {
 
  
@@ -827,37 +884,28 @@ WhereHouse 
 set! $
 ;$ %
 }& '
-public 
-DateTime 
-? 
-CreatedDate $
-{% &
-get' *
-;* +
-set, /
-;/ 0
-}1 2
-public 
-string 
-	CreatedBy 
-{  !
-get" %
-;% &
-set' *
-;* +
-}, -
-public 
-virtual 
-File 
-Avatar "
-{# $
-get% (
-;( )
-set* -
-;- .
-}/ 0
-} 
-} Æ	
+public 
+virtual 
+File 
+Avatar "
+{# $
+get% (
+;( )
+set* -
+;- .
+}/ 0
+public 
+bool 
+? 
+IsOnline 
+{ 
+get  #
+;# $
+set% (
+;( )
+}* +
+} 
+} ı
 pD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\DTO\WishlistDTO.cs
 	namespace 	
 PTDuc
@@ -874,6 +922,9 @@ WhereHouse 
 
 class 
 WishlistDTO 
+: 
+
+BaseEntity '
 {		 
 public
 
@@ -920,30 +971,9 @@ WishlistId
 ;  !
 set" %
 ;% &
-}' (
-public 
-DateTime 
-? 
-CreatedDate $
-{% &
-get' *
-;* +
-set, /
-;/ 0
-}1 2
-public 
-DateTime 
-? 
-CreatedTime $
-{% &
-get' *
-;* +
-set, /
-;/ 0
-}1 2
-} 
-} Ë
-
+}' (
+} 
+} ú
 xD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\Enumeration\Enumeration.cs
 	namespace 	
 PTDuc
@@ -997,29 +1027,101 @@ ResultCode 
 NotExistFolder 
 = 
 $num  
-} 	
-public 
-enum 
-	HouseType 
-{ 	
-Street 
-= 
-$num 
-, 
-Alley 
-= 
-$num 
-, 
-Villa 
-= 
-$num 
-, 
-AdjoiningStreet 
-= 
-$num 
-} 	
-} 
-} †
+,  !
+NotHaveRight 
+= 
+$num 
+, 
+
+PostNotPay 
+= 
+$num 
+, 
+} 	
+public 
+enum 
+	HouseType 
+{ 	
+Street 
+= 
+$num 
+, 
+Alley 
+= 
+$num 
+, 
+Villa 
+= 
+$num 
+, 
+AdjoiningStreet 
+= 
+$num 
+}   	
+public!! 
+enum!! 
+
+StatusPost!! 
+{"" 	
+Created## 
+=## 
+$num## 
+,## 
+Pay$$ 
+=$$ 
+$num$$ 
+,$$ 
+Accepted%% 
+=%% 
+$num%% 
+,%% 
+Closed&& 
+=&& 
+$num&& 
+,&& 
+}'' 	
+public(( 
+enum(( 
+
+StatusUser(( 
+{)) 	
+Active** 
+=** 
+$num** 
+,** 
+Blocked++ 
+=++ 
+$num++ 
+,++ 
+},, 	
+public.. 
+enum.. 
+Role.. 
+{// 	
+User00 
+=00 
+$num00 
+,00 
+Admin11 
+=11 
+$num11 
+,11 
+}22 	
+public44 
+enum44 
+StatusReport44  
+{55 	
+Created66 
+=66 
+$num66 
+,66 
+Solved77 
+=77 
+$num77 
+,77 
+}88 	
+}99 
+}:: †
 xD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\Models\Address\District.cs
 	namespace 	
 PTDuc

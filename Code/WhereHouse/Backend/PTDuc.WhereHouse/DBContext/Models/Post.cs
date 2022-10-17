@@ -9,6 +9,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
     {
         public Post()
         {
+            Reports = new HashSet<Report>();
             Wishlists = new HashSet<Wishlist>();
         }
 
@@ -17,11 +18,12 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public string Descrtiption { get; set; }
         public Guid UserId { get; set; }
         public Guid HouseId { get; set; }
-        public int Status { get; set; }
+        public byte Status { get; set; }
         public DateTime? CreatedDate { get; set; }
 
         public virtual House House { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<Report> Reports { get; set; }
         public virtual ICollection<Wishlist> Wishlists { get; set; }
     }
 }

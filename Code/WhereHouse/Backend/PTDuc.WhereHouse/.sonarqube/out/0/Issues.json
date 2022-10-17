@@ -20,9 +20,9 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/DBContext/Models/WhereHouseContext.cs",
                 "region": {
-                  "startLine": 33,
+                  "startLine": 34,
                   "startColumn": 10,
-                  "endLine": 33,
+                  "endLine": 34,
                   "endColumn": 379
                 }
               }
@@ -45,6 +45,27 @@
                   "startColumn": 18,
                   "endLine": 14,
                   "endColumn": 26
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3376",
+          "level": "warning",
+          "message": "Make this class name end with 'Attribute'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/DBContext/EntityModels/BaseEntity.cs",
+                "region": {
+                  "startLine": 21,
+                  "startColumn": 18,
+                  "endLine": 21,
+                  "endColumn": 32
                 }
               }
             }
@@ -104,27 +125,6 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/DBContext/EntityModels/BaseEntity.cs",
                 "region": {
-                  "startLine": 21,
-                  "startColumn": 18,
-                  "endLine": 21,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S3376",
-          "level": "warning",
-          "message": "Make this class name end with 'Attribute'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/DBContext/EntityModels/BaseEntity.cs",
-                "region": {
                   "startLine": 44,
                   "startColumn": 18,
                   "endLine": 44,
@@ -146,9 +146,9 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/DBContext/Models/WhereHouseContext.cs",
                 "region": {
-                  "startLine": 233,
+                  "startLine": 257,
                   "startColumn": 9,
-                  "endLine": 233,
+                  "endLine": 257,
                   "endColumn": 16
                 }
               }
@@ -167,9 +167,9 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/DBContext/Models/WhereHouseContext.cs",
                 "region": {
-                  "startLine": 230,
+                  "startLine": 254,
                   "startColumn": 13,
-                  "endLine": 230,
+                  "endLine": 254,
                   "endColumn": 50
                 }
               }

@@ -20,7 +20,9 @@ namespace PTDuc.WhereHouse.EntityModels
             NotExistFolder = 208,
             NotHaveRight = 209,
             PostNotPay = 210,
-
+            IsInWishlist = 211,
+            HasReport = 212,
+            UserExist = 213,
         }
 
         public enum HouseType
@@ -47,6 +49,12 @@ namespace PTDuc.WhereHouse.EntityModels
         {
             User = 1,//Người dùng bình thường 
             Admin = 2, //Quản trị hệ thống 
+        }
+
+        public enum StatusReport // Trạng thái báo cáo 
+        {
+            Created = 1,//Chưa giải quyết 
+            Solved = 2, //Đã giải quyết 
         }
     }
 }

@@ -19,6 +19,41 @@ namespace PTDuc.WhereHouse.Controllers
         {
             _blConversation = blConversation;
         }
+        [HttpGet("InitChat")]
+        public virtual IActionResult InitChat([FromQuery] string userReceivedId)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = new ServiceResult();
+                res.Data = _blConversation.InitChat(userId, userReceivedId);
+                return Ok(res);
+            }
+            return null;
 
+
+        }
+        [HttpGet("GetAllConversationUser")]
+        public virtual IActionResult GetAllConversationUser([FromQuery] string userReceivedId)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = User.Claims.Where(c => c.Type == "UserId")
+    .Select(x => x.Value).FirstOrDefault();
+                var res = new ServiceResult();
+                res.Data = _blConversation.GetAllConversationUser(userId);
+                return Ok(res);
+            }
+            return null;
+
+
+        }
     }
+
+
 }

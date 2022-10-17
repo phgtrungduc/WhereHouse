@@ -7,7 +7,9 @@
     <div class="row">
       <div class="col-12 justify-content-center d-flex flex-row pt-2">
         <div id="signup-div" class="flex-item border">
-          <h2 class="pt-4 pl-4">Tạo tài khoản</h2>
+          <h2 class="pt-4 pl-4">
+            {{ this.type == "admin" ? "Tạo tài khoản admin" : "Tạo tài khoản" }}
+          </h2>
           <ValidationObserver ref="form">
             <form class="pt-4 pl-4 pr-4 d-flex">
               <div class="form-input">
@@ -17,16 +19,40 @@
                     v-model="user.Username"
                     name="Tên đăng nhập"
                     :required="true"
+                    :hasMinLength="true"
+                    :minLength="6"
                     ref="Username"
                   ></PTDInput>
                 </ValidationProvider>
+                <ValidationProvider
+                  :rules="{
+                    required: true,
+                    regex: /(84|0[3|5|7|8|9])+([0-9]{8})\b/
+                  }"
+                  name="PhoneNumber"
+                >
+                  <PTDInput
+                    label="Số điện thoại(*)"
+                    v-model="user.PhoneNumber"
+                    name="Số điện thoại"
+                    :required="true"
+                    :phoneNumber="true"
+                    ref="PhoneNumber"
+                  ></PTDInput>
+                </ValidationProvider>
                 <PTDInput
-                  label="Số điện thoại"
-                  v-model="user.PhoneNumber"
+                  label="Họ và tên"
+                  v-model="user.FullName"
+                  ref="FullName"
                 ></PTDInput>
-                <PTDInput label="Họ và tên" v-model="user.FullName" ref="FullName"></PTDInput>
                 <ValidationProvider rules="email">
-                  <PTDInput label="Email" v-model="user.Email" ref="Email" :email="true"> </PTDInput>
+                  <PTDInput
+                    label="Email"
+                    v-model="user.Email"
+                    ref="Email"
+                    :email="true"
+                  >
+                  </PTDInput>
                 </ValidationProvider>
                 <ValidationProvider rules="required" name="Password">
                   <PTDInput
@@ -35,6 +61,8 @@
                     type="password"
                     name="Mật khẩu"
                     :required="true"
+                    :hasMinLength="true"
+                    :minLength="8"
                     ref="Password"
                   ></PTDInput>
                 </ValidationProvider>
@@ -45,6 +73,8 @@
                     type="password"
                     name="Xác nhận mật khẩu"
                     :required="true"
+                    :hasMinLength="true"
+                    :minLength="8"
                     ref="VerifyPassword"
                   ></PTDInput>
                 </ValidationProvider>
@@ -89,6 +119,7 @@
                     @change="handleChangeAvatar"
                     ref="avatar"
                     category="avatar"
+                    :changeSuccess="changeImageSuccess"
                   />
                 </div>
               </div>
@@ -100,6 +131,20 @@
                 :disabled="loading"
                 color="success"
                 @click="signup"
+                v-if="type == 'admin'"
+              >
+                Đăng ký
+                <template v-slot:loader>
+                  <span>Loading...</span>
+                </template>
+              </v-btn>
+              <v-btn
+                class="ma-2"
+                :loading="loading"
+                :disabled="loading"
+                color="success"
+                @click="signup"
+                v-else
               >
                 Đăng ký
                 <template v-slot:loader>
@@ -133,6 +178,7 @@ import PTDSelect from "../components/Controls/PTDSelect.vue";
 import PTDInput from "../components/Controls/PTDInput.vue";
 import PTDInputFile from "../components/Controls/PTDInputFile.vue";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
+import util from "@/util/util.js";
 export default {
   name: "Signup",
   components: {
@@ -142,7 +188,12 @@ export default {
     ValidationProvider,
     PTDInputFile,
   },
-  props: ["baseURL"],
+  // props: {
+  //   type: {
+  //     type: String,
+  //     default: "",
+  //   },
+  // },
   data() {
     return {
       user: {
@@ -156,6 +207,7 @@ export default {
       apiDistrict: "Address/GetDistrictByParent?parentCode=",
       apiWard: "Address/GetWardByParent?parentCode=",
       avatarURL: "",
+      type: "",
     };
   },
   methods: {
@@ -166,20 +218,29 @@ export default {
           // call the API
           this.$store.commit("showLoadingFullScreen", true);
           await axios
-            .post(`${this.baseUrl}user`, user)
+            .post(`${this.baseUrl}user/InsertUser`, user)
             .then((res) => {
-              // redirect to home page
-              // this.$router.replace("/");
-              // swal({
-              //   text: "User signup successful. Please Login",
-              //   icon: "success",
-              //   closeOnClickOutside: false,
-              // });.
+              if (res.data.StatusCode) {
+                util.alertSuccess("Thêm tài khoản thành công");
+              }
               this.$store.commit("showLoadingFullScreen", false);
               console.log(res);
             })
             .catch((err) => {
-              console.log(err);
+              let statusCode = err.response.data.StatusCode;
+              this.$store.commit("showLoadingFullScreen", false);
+              switch (statusCode) {
+                case 213:
+                  swal(
+                    "Thêm tài khoản thất bại",
+                    "Tên đăng nhập đã có trên hệ thống!",
+                    "error"
+                  );
+                  break;
+                default:
+                  swal("Thêm tài khoản thất bại", "", "error");
+                  break;
+              }
             });
         } else {
           swal({
@@ -215,7 +276,12 @@ export default {
       if (file) {
         this.avatarURL = URL.createObjectURL(file);
         this.$refs.avatar.handleChange(file);
+      } else {
+        this.user.AvatarId = null;
       }
+    },
+    changeImageSuccess(id) {
+      this.user.AvatarId = id;
     },
   },
   watch: {

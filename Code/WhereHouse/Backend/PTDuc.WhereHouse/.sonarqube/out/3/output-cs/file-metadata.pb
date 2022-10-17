@@ -2,7 +2,8 @@ t
 kD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\DatabaseLayer\DLBase.csutf-8|
 sD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\DatabaseLayer\DLConversation.csutf-8t
 kD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\DatabaseLayer\DLFile.csutf-8u
-lD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\DatabaseLayer\DLHouse.csutf-8w
+lD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\DatabaseLayer\DLHouse.csutf-8y
+pD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\DatabaseLayer\DLHouseType.csutf-8w
 nD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\DatabaseLayer\DLMessage.csutf-8t
 kD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\DatabaseLayer\DLPost.csutf-8t
 kD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\DatabaseLayer\DLUser.csutf-8x
@@ -11,7 +12,8 @@ rD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHous
 iD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\Interfaces\IDLBase.csutf-8z
 qD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\Interfaces\IDLConversation.csutf-8r
 iD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\Interfaces\IDLFile.csutf-8s
-jD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\Interfaces\IDLHouse.csutf-8u
+jD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\Interfaces\IDLHouse.csutf-8w
+nD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\Interfaces\IDLHouseType.csutf-8u
 lD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\Interfaces\IDLMessage.csutf-8r
 iD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\Interfaces\IDLPost.csutf-8r
 iD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.DL\Interfaces\IDLUser.csutf-8v

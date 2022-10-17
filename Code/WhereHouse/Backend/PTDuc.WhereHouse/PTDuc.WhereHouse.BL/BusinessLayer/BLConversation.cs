@@ -7,6 +7,8 @@ using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.Utils;
 using PTDuc.WhereHouse.EntityModels.DTO;
 using AutoMapper;
+using System.Collections.Generic;
+using System;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
@@ -18,9 +20,54 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             _DLConversation = DLConversation;
         }
 
+        public List<ConversationDTO> GetAllConversationUser(string userId)
+        {
+            var data = _DLConversation.GetAllConversationUser(userId);
+            var dataDTO = _mapper.Map<List<ConversationDTO>>(data);
+            dataDTO.ForEach(x=> {
+                if (x.UserId1.ToString() == userId)
+                {
+                    x.UserId = x.UserId2;
+                    x.FullName = x.UserId2Navigation.FullName;
+                    x.UserName = x.UserId2Navigation.UserName;
+                    if (x.UserId2Navigation.Avatar != null)
+                    {
+                        x.AvatarUrl = x.UserId2Navigation.Avatar.FilePath;
+                    }
+                }
+                else {
+                    x.UserId = x.UserId1;
+                    x.FullName = x.UserId1Navigation.FullName;
+                    x.UserName = x.UserId1Navigation.UserName;
+                    if (x.UserId1Navigation.Avatar != null)
+                    {
+                        x.AvatarUrl = x.UserId1Navigation.Avatar.FilePath;
+                    }
+                }
+            });
+            return dataDTO;
+        }
+
         public Conversation GetConversation(string userId1, string userId2)
         {
-            return _DLConversation.GetConversation(userId1,userId2);
+            return _DLConversation.GetConversation(userId1, userId2);
+        }
+
+        public Guid InitChat(string userRecievedId, string userSendId)
+        {
+            var conversation = this.GetConversation(userSendId, userRecievedId);
+            if (conversation != null) return conversation.ConversationId;
+            else
+            {
+                var newid = Guid.NewGuid();
+                this.Insert(new ConversationDTO()
+                {
+                    ConversationId = newid,
+                    UserId1 = Guid.Parse(userSendId),
+                    UserId2 = Guid.Parse(userRecievedId)
+                });
+                return newid;
+            }
         }
     }
 }

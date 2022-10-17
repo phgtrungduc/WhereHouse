@@ -23,6 +23,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public virtual DbSet<HouseType> HouseTypes { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Wishlist> Wishlists { get; set; }
 
@@ -110,7 +111,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
             {
                 entity.ToTable("HouseType");
 
-                entity.Property(e => e.HouseTypeId).ValueGeneratedNever();
+                entity.Property(e => e.HouseTypeId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.HouseTypeName)
                     .IsRequired()
@@ -147,8 +148,6 @@ namespace PTDuc.WhereHouse.DBContext.Models
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Descrtiption).HasMaxLength(255);
-
                 entity.Property(e => e.Status).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Title)
@@ -168,6 +167,30 @@ namespace PTDuc.WhereHouse.DBContext.Models
                     .HasConstraintName("FK_Post_User");
             });
 
+            modelBuilder.Entity<Report>(entity =>
+            {
+                entity.ToTable("Report");
+
+                entity.Property(e => e.ReportId).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Content).IsRequired();
+
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                entity.HasOne(d => d.Post)
+                    .WithMany(p => p.Reports)
+                    .HasForeignKey(d => d.PostId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Report_Post");
+
+                entity.HasOne(d => d.UserReport)
+                    .WithMany(p => p.Reports)
+                    .HasForeignKey(d => d.UserReportId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Report_User");
+            });
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("User");
@@ -184,13 +207,19 @@ namespace PTDuc.WhereHouse.DBContext.Models
 
                 entity.Property(e => e.FullName).HasMaxLength(100);
 
-                entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+                entity.Property(e => e.Password).IsRequired();
+
+                entity.Property(e => e.PhoneNumber)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.ProvinceCode).HasMaxLength(10);
 
                 entity.Property(e => e.Role)
                     .HasDefaultValueSql("((1))")
                     .HasComment("Vai trò(1 - admin, 2-user)");
+
+                entity.Property(e => e.Salt).IsRequired();
 
                 entity.Property(e => e.Status).HasDefaultValueSql("((1))");
 

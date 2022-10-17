@@ -12,45 +12,45 @@
       },
       "results": [
         {
-          "ruleId": "S3376",
+          "ruleId": "CS0108",
           "level": "warning",
-          "message": "Make this class name end with 'Attribute'.",
+          "message": "'HouseDTO.CreatedDate' hides inherited member 'BaseEntity.CreatedDate'. Use the new keyword if hiding was intended.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/Attribute/CustomAttribute.cs",
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/DTO/HouseDTO.cs",
                 "region": {
-                  "startLine": 10,
-                  "startColumn": 18,
-                  "endLine": 10,
-                  "endColumn": 26
+                  "startLine": 22,
+                  "startColumn": 26,
+                  "endLine": 22,
+                  "endColumn": 37
                 }
               }
             }
           ],
           "properties": {
-            "warningLevel": 1
+            "warningLevel": 2
           }
         },
         {
-          "ruleId": "S101",
+          "ruleId": "CS0108",
           "level": "warning",
-          "message": "Rename class 'ConversationDTO' to match pascal case naming rules, consider using 'ConversationDto'.",
+          "message": "'HouseDTO.CreatedBy' hides inherited member 'BaseEntity.CreatedBy'. Use the new keyword if hiding was intended.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/DTO/ConversationDTO.cs",
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/DTO/HouseDTO.cs",
                 "region": {
-                  "startLine": 9,
-                  "startColumn": 26,
-                  "endLine": 9,
-                  "endColumn": 41
+                  "startLine": 23,
+                  "startColumn": 23,
+                  "endLine": 23,
+                  "endColumn": 32
                 }
               }
             }
           ],
           "properties": {
-            "warningLevel": 1
+            "warningLevel": 2
           }
         },
         {
@@ -66,27 +66,6 @@
                   "startColumn": 18,
                   "endLine": 17,
                   "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S101",
-          "level": "warning",
-          "message": "Rename class 'FileDTO' to match pascal case naming rules, consider using 'FileDto'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/DTO/FileDTO.cs",
-                "region": {
-                  "startLine": 8,
-                  "startColumn": 18,
-                  "endLine": 8,
-                  "endColumn": 25
                 }
               }
             }
@@ -125,10 +104,73 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/Attribute/CustomAttribute.cs",
                 "region": {
+                  "startLine": 10,
+                  "startColumn": 18,
+                  "endLine": 10,
+                  "endColumn": 26
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3376",
+          "level": "warning",
+          "message": "Make this class name end with 'Attribute'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/Attribute/CustomAttribute.cs",
+                "region": {
                   "startLine": 32,
                   "startColumn": 18,
                   "endLine": 32,
                   "endColumn": 23
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S101",
+          "level": "warning",
+          "message": "Rename class 'ConversationDTO' to match pascal case naming rules, consider using 'ConversationDto'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/DTO/ConversationDTO.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 26,
+                  "endLine": 9,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S101",
+          "level": "warning",
+          "message": "Rename class 'FileDTO' to match pascal case naming rules, consider using 'FileDto'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/DTO/FileDTO.cs",
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 18,
+                  "endLine": 8,
+                  "endColumn": 25
                 }
               }
             }
@@ -150,48 +192,6 @@
                   "startColumn": 18,
                   "endLine": 40,
                   "endColumn": 27
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S101",
-          "level": "warning",
-          "message": "Rename class 'HouseTypeDTO' to match pascal case naming rules, consider using 'HouseTypeDto'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/DTO/HouseTypeDTO.cs",
-                "region": {
-                  "startLine": 8,
-                  "startColumn": 18,
-                  "endLine": 8,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S101",
-          "level": "warning",
-          "message": "Rename class 'HouseDTO' to match pascal case naming rules, consider using 'HouseDto'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/DTO/HouseDTO.cs",
-                "region": {
-                  "startLine": 8,
-                  "startColumn": 18,
-                  "endLine": 8,
-                  "endColumn": 26
                 }
               }
             }
@@ -245,6 +245,48 @@
         {
           "ruleId": "S101",
           "level": "warning",
+          "message": "Rename class 'HouseDTO' to match pascal case naming rules, consider using 'HouseDto'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/DTO/HouseDTO.cs",
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 18,
+                  "endLine": 8,
+                  "endColumn": 26
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S101",
+          "level": "warning",
+          "message": "Rename class 'HouseTypeDTO' to match pascal case naming rules, consider using 'HouseTypeDto'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse.EntityModels/DTO/HouseTypeDTO.cs",
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 18,
+                  "endLine": 8,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S101",
+          "level": "warning",
           "message": "Rename class 'WishlistDTO' to match pascal case naming rules, consider using 'WishlistDto'.",
           "locations": [
             {
@@ -286,6 +328,21 @@
         }
       ],
       "rules": {
+        "CS0108": {
+          "id": "CS0108",
+          "shortDescription": "Member hides inherited member; missing new keyword",
+          "fullDescription": "A variable was declared with the same name as a variable in a base type. However, the new keyword was not used. This warning informs you that you should use new; the variable is declared as if new had been used in the declaration.",
+          "defaultLevel": "warning",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0108)",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
         "S101": {
           "id": "S101",
           "shortDescription": "Types should be named in PascalCase",

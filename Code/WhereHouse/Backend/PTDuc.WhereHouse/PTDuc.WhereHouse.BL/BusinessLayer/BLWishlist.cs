@@ -9,6 +9,7 @@ using PTDuc.WhereHouse.EntityModels.DTO;
 using AutoMapper;
 using System;
 using static PTDuc.WhereHouse.EntityModels.Enumeration;
+using System.Collections.Generic;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
@@ -48,7 +49,30 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         public ServiceResult GetWishlistByUserId(Guid userId)
         {
             var res = new ServiceResult();
-            res.Data = _DLWishlist.GetWishlistByUserId(userId);
+            var data = _DLWishlist.GetWishlistByUserId(userId);
+            var dataDTO = _mapper.Map<List<WishlistDTO>>(data);
+            dataDTO.ForEach(x=> {
+                if (x.Post != null && x.Post.House != null && x.Post.House.HouseImage != null) {
+                    x.HouseImageUrl = x.Post.House.HouseImage.FilePath;
+                    x.Post.HouseImageUrl = x.Post.House.HouseImage.FilePath;
+                }
+            });
+            res.Data = dataDTO;
+            return res;
+        }
+
+        public ServiceResult InserToWishlist(string userId, WishlistDTO wishlist)
+        {
+            var res = new ServiceResult();
+            var isInWishList = _DLWishlist.CheckInWishlist(userId, wishlist.PostId.ToString());
+            if (!isInWishList)
+            {
+                res.Data = this.Insert(wishlist);
+            }
+            else {
+                res.Data = false;
+                res.StatusCode = (int)Enumeration.ResultCode.IsInWishlist;
+            }
             return res;
         }
     }

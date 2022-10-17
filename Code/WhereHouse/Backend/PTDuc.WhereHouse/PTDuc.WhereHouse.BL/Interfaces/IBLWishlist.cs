@@ -9,5 +9,6 @@ namespace PTDuc.WhereHouse.BL.Interfaces
     {
         public ServiceResult GetWishlistByUserId(Guid userId);
         public ServiceResult DeletePostWishlist(string wishListId, string userId);
+        public ServiceResult InserToWishlist(string userId,WishlistDTO wishlist);
     }
 }

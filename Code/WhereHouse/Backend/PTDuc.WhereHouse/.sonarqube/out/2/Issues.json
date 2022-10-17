@@ -125,48 +125,6 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/Utils/PasswordHash.cs",
                 "region": {
-                  "startLine": 23,
-                  "startColumn": 44,
-                  "endLine": 23,
-                  "endColumn": 45
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1121",
-          "level": "warning",
-          "message": "Extract the assignment of '_hash' from this expression.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/Utils/PasswordHash.cs",
-                "region": {
-                  "startLine": 24,
-                  "startColumn": 51,
-                  "endLine": 24,
-                  "endColumn": 52
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1121",
-          "level": "warning",
-          "message": "Extract the assignment of '_salt' from this expression.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/Utils/PasswordHash.cs",
-                "region": {
                   "startLine": 28,
                   "startColumn": 39,
                   "endLine": 28,
@@ -192,6 +150,48 @@
                   "startColumn": 39,
                   "endLine": 29,
                   "endColumn": 40
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1121",
+          "level": "warning",
+          "message": "Extract the assignment of '_salt' from this expression.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/Utils/PasswordHash.cs",
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 44,
+                  "endLine": 23,
+                  "endColumn": 45
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1121",
+          "level": "warning",
+          "message": "Extract the assignment of '_hash' from this expression.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/Utils/PasswordHash.cs",
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 51,
+                  "endLine": 24,
+                  "endColumn": 52
                 }
               }
             }

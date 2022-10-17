@@ -73,11 +73,75 @@ const util = {
             icon: "success",
         })
     },
-    checkLogin(){
+    checkLogin() {
         let userId = this.getCurrentUserId();
         let token = localStorage.getItem("token");
-        if (userId&& token) return true;
+        if (userId && token) return true;
         return false;
+    },
+    objectEquals(x, y) {
+        if (x === y) return true;
+        // if both x and y are null or undefined and exactly the same
+
+        if (!(x instanceof Object) || !(y instanceof Object)) return false;
+        // if they are not strictly equal, they both need to be Objects
+
+        if (x.constructor !== y.constructor) return false;
+        // they must have the exact same prototype chain, the closest we can do is
+        // test there constructor.
+
+        for (var p in x) {
+            if (!Object.prototype.hasOwnProperty.call(x, p)) continue;
+            // other properties were tested using x.constructor === y.constructor
+
+            if (!Object.prototype.hasOwnProperty.call(y, p)) return false;
+            // allows to compare x[ p ] and y[ p ] when set to undefined
+
+            if (x[p] === y[p]) continue;
+            // if they have the same strict value or identity then they are equal
+
+            if (typeof (x[p]) !== "object") return false;
+            // Numbers, Strings, Functions, Booleans must be strictly equal
+
+            if (!this.objectEquals(x[p], y[p])) return false;
+            // Objects and Arrays must be tested recursively
+        }
+
+        for (p in y)
+            if (Object.prototype.hasOwnProperty.call(y, p) && !Object.prototype.hasOwnProperty.call(x, p))
+                return false;
+        // allows x[ p ] to be set to undefined
+
+        return true;
+    },
+    formatDate(data) {
+        if (data) {
+            let date = new Date(data);
+            let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            let month =
+                date.getMonth() + 1 < 10
+                    ? "0" + (date.getMonth() + 1)
+                    : date.getMonth() + 1;
+            let year = date.getFullYear();
+            let hour = date.getHours();
+            hour = hour < 10 ? "0" + hour : hour;
+            let minute = date.getMinutes();
+            minute = minute < 10 ? "0" + minute : minute;
+            let second = date.getSeconds();
+            second = second < 10 ? "0" + second : second;
+            return hour + ":" + minute + ":" + second + " " + day + "/" + month + "/" + year;
+        }
+    },
+    validatePhoneNumber(phoneNumber) {
+        return String(phoneNumber)
+            .toLowerCase()
+            .match(
+                /(84|0[3|5|7|8|9])+([0-9]{8})\b/
+            );
+    },
+    deleteCookie(c_name) {
+        document.cookie = c_name+'=' + ";expires=Thu, 01 Jan 1970 00:00:01 GMT ;domain=.yourdomain.com;path=/";
+        document.cookie = c_name+'=' + ";expires=Thu, 01 Jan 1970 00:00:01 GMT ;";
     }
 
 }

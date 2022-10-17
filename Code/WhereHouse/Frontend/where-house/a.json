@@ -1,0 +1,124 @@
+{
+    "$id": "1",
+    "Data": {
+        "$id": "2",
+        "$values": [
+            {
+                "$id": "3",
+                "ConversationId": "30a7ebf8-2924-4c1d-8576-a5999293cad2",
+                "UserId1": "4ca9ad3a-65f8-42f0-9c93-0791ef0dfe47",
+                "UserId2": "3f66f2d6-688b-4161-5f92-08c864661f9c",
+                "UserId1Navigation": {
+                    "$id": "4",
+                    "UserId": "4ca9ad3a-65f8-42f0-9c93-0791ef0dfe47",
+                    "UserName": "Carpenter1994",
+                    "PhoneNumber": "979336552",
+                    "FullName": "Phương Trung Đức",
+                    "Email": null,
+                    "ProvinceCode": null,
+                    "DistrictCode": null,
+                    "WardCode": null,
+                    "Password": "Eno83PJHvgdjy/7jmPPyl9eYx+m0zNEiVeCku+Sq2Kfahw3j",
+                    "Salt": "Eno83PJHvgdjy/7jmPPylw==",
+                    "AvatarId": "4ef91980-a5a1-400b-a704-673cc24d06b4",
+                    "Role": 1,
+                    "Status": 1,
+                    "IsOnline": null,
+                    "CreatedDate": "2000-07-18T10:31:32.29",
+                    "CreatedBy": "Adah Jameson",
+                    "Avatar": null,
+                    "ConversationUserId1Navigations": {
+                        "$id": "5",
+                        "$values": [
+                            {
+                                "$ref": "3"
+                            }
+                        ]
+                    },
+                    "ConversationUserId2Navigations": {
+                        "$id": "6",
+                        "$values": []
+                    },
+                    "Houses": {
+                        "$id": "7",
+                        "$values": []
+                    },
+                    "Messages": {
+                        "$id": "8",
+                        "$values": []
+                    },
+                    "Posts": {
+                        "$id": "9",
+                        "$values": []
+                    },
+                    "Reports": {
+                        "$id": "10",
+                        "$values": []
+                    },
+                    "Wishlists": {
+                        "$id": "11",
+                        "$values": []
+                    }
+                },
+                "UserId2Navigation": {
+                    "$id": "12",
+                    "UserId": "3f66f2d6-688b-4161-5f92-08c864661f9c",
+                    "UserName": "Lorretta2028",
+                    "PhoneNumber": "979336552",
+                    "FullName": null,
+                    "Email": null,
+                    "ProvinceCode": null,
+                    "DistrictCode": null,
+                    "WardCode": null,
+                    "Password": "Eno83PJHvgdjy/7jmPPyl9eYx+m0zNEiVeCku+Sq2Kfahw3j",
+                    "Salt": "Eno83PJHvgdjy/7jmPPylw==",
+                    "AvatarId": null,
+                    "Role": 1,
+                    "Status": 1,
+                    "IsOnline": null,
+                    "CreatedDate": "2013-06-12T15:23:59.06",
+                    "CreatedBy": "Alida Jobe",
+                    "Avatar": null,
+                    "ConversationUserId1Navigations": {
+                        "$id": "13",
+                        "$values": []
+                    },
+                    "ConversationUserId2Navigations": {
+                        "$id": "14",
+                        "$values": [
+                            {
+                                "$ref": "3"
+                            }
+                        ]
+                    },
+                    "Houses": {
+                        "$id": "15",
+                        "$values": []
+                    },
+                    "Messages": {
+                        "$id": "16",
+                        "$values": []
+                    },
+                    "Posts": {
+                        "$id": "17",
+                        "$values": []
+                    },
+                    "Reports": {
+                        "$id": "18",
+                        "$values": []
+                    },
+                    "Wishlists": {
+                        "$id": "19",
+                        "$values": []
+                    }
+                },
+                "Messages": {
+                    "$id": "20",
+                    "$values": []
+                }
+            }
+        ]
+    },
+    "Messenger": null,
+    "StatusCode": 1
+}

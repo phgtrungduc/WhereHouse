@@ -32,6 +32,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 if (loginParam != null) {
                     entity.Password = loginParam.HashPassword;
                     entity.Salt = loginParam.Salt;
+                    entity.CreatedDate = DateTime.Now;
                     res =  true;
                 }
             }
@@ -87,7 +88,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return res;
         }
 
-        public ServiceResult BlockUser(string blockUserId, string adminId)
+        public ServiceResult ChangeStatus(string blockUserId, string adminId)
         {
             var res = new ServiceResult();
             var admin = this.GetByID(adminId);
@@ -100,10 +101,20 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                         var user = this.GetByID(blockUserId);
                         if (user != null)
                         {
-                            user.Status = (int)Enumeration.StatusUser.Blocked;
-                            this.Update(user,blockUserId);
-                            res.Data = user;
-                            res.Messenger = "Chặn người dùng thành công";
+                            if (user.Status != (int)Enumeration.StatusUser.Blocked)
+                            {
+                                user.Status = (int)Enumeration.StatusUser.Blocked;
+                                this.Update(user, blockUserId);
+                                res.Data = true;
+                                res.Messenger = "Chặn người dùng thành công";
+                            }
+                            else {
+                                user.Status = (int)Enumeration.StatusUser.Active;
+                                this.Update(user, blockUserId);
+                                res.Data = true;
+                                res.Messenger = "Bỏ chặn người dùng thành công";
+                            }
+                            
                         }
                         else {
                             res.StatusCode = (int)Enumeration.ResultCode.Failed;
@@ -136,16 +147,81 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 {
                     if (admin.Role == (int)Enumeration.Role.Admin)
                     {
-                        var listUser = this.GetAll();
-                        listUser = listUser.Where(x=>x.Role==(int)Enumeration.Role.User);
+                        var listUser = _dlUser.GetAllForAdmin();
+                        listUser = listUser.Where(x=>x.Role==(int)Enumeration.Role.User)?.ToList();
                         res.Data = listUser;
                     }
                     else
                     {
                         res.StatusCode = (int)Enumeration.ResultCode.NotHaveRight;
-                        res.Messenger = "Tài khoản không có quyền phê duyệt bài đăng";
+                        res.Messenger = "Tài khoản không có quyền quản trị hệ thống";
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                res.Messenger = ex.Message;
+                res.StatusCode = (int)(Enumeration.ResultCode.Failed);
+            }
+            return res;
+        }
+        public override UserDTO GetByID(string Id)
+        {
+            var user = base.GetByID(Id);
+            var userDTO = _mapper.Map<UserDTO>(user);
+            if (user.Avatar != null)
+            {
+                userDTO.AvatarPath = user.Avatar.FilePath;
+            }
+            return userDTO;
+        }
+
+        public ServiceResult UpdateUser(string userId, UserDTO user)
+        {
+            var res = new ServiceResult();
+            var userInfo = this.GetByID(userId);
+            if (userInfo != null && userInfo.UserId.ToString() == userId)
+            {
+                userInfo.FullName = user.FullName;
+                userInfo.Email = user.Email;
+                userInfo.AvatarId = user.AvatarId;
+                userInfo.DistrictCode = user.DistrictCode;
+                userInfo.WardCode = user.WardCode;
+                userInfo.ProvinceCode = user.ProvinceCode;
+                userInfo.PhoneNumber = user.PhoneNumber;
+                var isSucess = this.Update(userInfo, userId);
+                if (isSucess)
+                {
+                    res.Data = true;
+                }
+                else
+                {
+                    res.StatusCode = (int)Enumeration.ResultCode.Failed;
+                    res.Data = false;
+                }
+            }
+            else {
+                res.StatusCode = (int)Enumeration.ResultCode.NotHaveRight;
+                res.Data = false;
+            }
+            return res;
+        }
+
+        public ServiceResult InsertUser(UserDTO user)
+        {
+            var res = new ServiceResult();
+            try
+            {
+                var entity = _dlUser.GetUserByUserName(user.UserName);
+                if (entity == null)
+                {
+                    res.Data = this.Insert(user);
+                }
+                else {
+                    res.Data = false;
+                    res.StatusCode = (int)(Enumeration.ResultCode.UserExist);
+                }
+                
             }
             catch (Exception ex)
             {

@@ -10,9 +10,11 @@ namespace PTDuc.WhereHouse.BL.Interfaces
         void AddUserToListOnline(UserDTO user);
         void RemoveUserFromListOnline(UserDTO user);
         List<UserDTO> GetListUserOnline();
-        public ServiceResult BlockUser(string blockUserId, string adminId);
+        public ServiceResult ChangeStatus(string blockUserId, string adminId);
         public ServiceResult InsertAdmin(UserDTO user, string adminId);
+        public ServiceResult InsertUser(UserDTO user);
         public ServiceResult GetListUserForAdmin(string adminId);
+        public ServiceResult UpdateUser(string userId,UserDTO user);
         
     }
 }

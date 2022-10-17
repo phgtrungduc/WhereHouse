@@ -2,5 +2,5 @@ projectKey=WhereHouse
 serverUrl=http://localhost:9000
 serverVersion=9.5.0.56709
 dashboardUrl=http://localhost:9000/dashboard?id=WhereHouse
-ceTaskId=AYH9SU3IjOaUMj8KE9kx
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYH9SU3IjOaUMj8KE9kx
+ceTaskId=AYJ0iwZbnNhYCFSwzBRU
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYJ0iwZbnNhYCFSwzBRU

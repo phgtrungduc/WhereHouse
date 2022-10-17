@@ -19,6 +19,7 @@ namespace PTDuc.WhereHouse.MapperProfile
             CreateMap<Wishlist, WishlistDTO>(); ;
             CreateMap<Message, MessageDTO>(); ;
             CreateMap<Conversation, ConversationDTO>();
+            CreateMap<Report, ReportDTO>();
 
 
             CreateMap<UserDTO, User>();
@@ -29,6 +30,7 @@ namespace PTDuc.WhereHouse.MapperProfile
             CreateMap<WishlistDTO, Wishlist>(); ;
             CreateMap<MessageDTO, Message>(); ;
             CreateMap<ConversationDTO, Conversation>();
+            CreateMap<ReportDTO, Report>();
         }
     }
 }

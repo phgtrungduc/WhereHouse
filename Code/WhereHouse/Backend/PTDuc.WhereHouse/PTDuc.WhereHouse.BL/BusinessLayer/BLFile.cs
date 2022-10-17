@@ -38,7 +38,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 {
                     System.IO.File.Delete(webFilePath);
                     res.Data = true;
-                    var insertSuccess = this.Delete(new DBContext.Models.File { FileId = fileUpload.FileId.Value });
+                    var insertSuccess = this.Delete(fileUpload.FileId.Value.ToString());
                     if (insertSuccess)
                     {
                         res.Data = true;

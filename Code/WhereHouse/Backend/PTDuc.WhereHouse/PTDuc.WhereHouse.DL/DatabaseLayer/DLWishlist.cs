@@ -17,7 +17,15 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
         {
         }
 
-        public IEnumerable<Wishlist> GetWishlistByUserId(Guid userId)
+        public bool CheckInWishlist(string userId, string postId)
+        {
+            _dbSet = _context.Set<Wishlist>();
+            var data = _dbSet.Where(x => x.UserId == Guid.Parse(userId)&&x.PostId == Guid.Parse(postId)).FirstOrDefault();
+            if (data != null) return true;
+            return false;
+        }
+
+        public List<Wishlist> GetWishlistByUserId(Guid userId)
         {
             var res = default(IEnumerable<Wishlist>);
             _dbSet = _context.Set<Wishlist>();
@@ -26,7 +34,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
             {
                 res = data.Include(x => x.Post).ThenInclude(post => post.House).ThenInclude(house=>house.HouseImage);
             }
-            return res;
+            return res?.ToList();
         }
     }
 }

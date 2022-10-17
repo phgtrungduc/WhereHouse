@@ -20,10 +20,10 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/ChatHub/ChattingHub.cs",
                 "region": {
-                  "startLine": 50,
-                  "startColumn": 13,
-                  "endLine": 50,
-                  "endColumn": 77
+                  "startLine": 17,
+                  "startColumn": 9,
+                  "endLine": 17,
+                  "endColumn": 42
                 }
               }
             }
@@ -41,31 +41,10 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/BaseEntityController.cs",
                 "region": {
-                  "startLine": 99,
+                  "startLine": 101,
                   "startColumn": 9,
-                  "endLine": 99,
+                  "endLine": 101,
                   "endColumn": 12
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1118",
-          "level": "warning",
-          "message": "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Program.cs",
-                "region": {
-                  "startLine": 12,
-                  "startColumn": 18,
-                  "endLine": 12,
-                  "endColumn": 25
                 }
               }
             }
@@ -117,18 +96,18 @@
           }
         },
         {
-          "ruleId": "S2933",
+          "ruleId": "S1118",
           "level": "warning",
-          "message": "Make 'ConnectedUsers' 'readonly'.",
+          "message": "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/ChatHub/ChattingHub.cs",
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Program.cs",
                 "region": {
-                  "startLine": 11,
-                  "startColumn": 22,
-                  "endLine": 11,
-                  "endColumn": 36
+                  "startLine": 12,
+                  "startColumn": 18,
+                  "endLine": 12,
+                  "endColumn": 25
                 }
               }
             }
@@ -140,16 +119,58 @@
         {
           "ruleId": "S2933",
           "level": "warning",
-          "message": "Make '_blConversation' 'readonly'.",
+          "message": "Make '_bLUser' 'readonly'.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/ConversationController.cs",
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/ChatHub/ChattingHub.cs",
                 "region": {
-                  "startLine": 17,
+                  "startLine": 14,
+                  "startColumn": 17,
+                  "endLine": 14,
+                  "endColumn": 24
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2933",
+          "level": "warning",
+          "message": "Make '_bLConversation' 'readonly'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/ChatHub/ChattingHub.cs",
+                "region": {
+                  "startLine": 15,
                   "startColumn": 25,
-                  "endLine": 17,
+                  "endLine": 15,
                   "endColumn": 40
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2933",
+          "level": "warning",
+          "message": "Make '_bLMessage' 'readonly'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/ChatHub/ChattingHub.cs",
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 20,
+                  "endLine": 16,
+                  "endColumn": 30
                 }
               }
             }
@@ -167,9 +188,9 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Startup.cs",
                 "region": {
-                  "startLine": 118,
+                  "startLine": 121,
                   "startColumn": 13,
-                  "endLine": 118,
+                  "endLine": 121,
                   "endColumn": 16
                 }
               }
@@ -188,9 +209,9 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Startup.cs",
                 "region": {
-                  "startLine": 144,
+                  "startLine": 147,
                   "startColumn": 13,
-                  "endLine": 144,
+                  "endLine": 147,
                   "endColumn": 41
                 }
               }
@@ -209,52 +230,10 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Startup.cs",
                 "region": {
-                  "startLine": 159,
+                  "startLine": 162,
                   "startColumn": 13,
-                  "endLine": 159,
+                  "endLine": 162,
                   "endColumn": 41
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S4487",
-          "level": "warning",
-          "message": "Remove this unread private field '_blConversation' or refactor the code to use its value.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/ConversationController.cs",
-                "region": {
-                  "startLine": 17,
-                  "startColumn": 25,
-                  "endLine": 17,
-                  "endColumn": 40
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2933",
-          "level": "warning",
-          "message": "Make '_blFile' 'readonly'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/FileController.cs",
-                "region": {
-                  "startLine": 16,
-                  "startColumn": 17,
-                  "endLine": 16,
-                  "endColumn": 24
                 }
               }
             }
@@ -308,48 +287,6 @@
         {
           "ruleId": "S2933",
           "level": "warning",
-          "message": "Make '_blMessage' 'readonly'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/MessageController.cs",
-                "region": {
-                  "startLine": 17,
-                  "startColumn": 20,
-                  "endLine": 17,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2933",
-          "level": "warning",
-          "message": "Make '_BLBase' 'readonly'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/BaseEntityController.cs",
-                "region": {
-                  "startLine": 15,
-                  "startColumn": 32,
-                  "endLine": 15,
-                  "endColumn": 39
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2933",
-          "level": "warning",
           "message": "Make '_bLLogin' 'readonly'.",
           "locations": [
             {
@@ -371,16 +308,16 @@
         {
           "ruleId": "S2933",
           "level": "warning",
-          "message": "Make '_blUser' 'readonly'.",
+          "message": "Make '_blHouseType' 'readonly'.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/UserController.cs",
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/HouseTypeController.cs",
                 "region": {
-                  "startLine": 15,
-                  "startColumn": 17,
-                  "endLine": 15,
-                  "endColumn": 24
+                  "startLine": 18,
+                  "startColumn": 22,
+                  "endLine": 18,
+                  "endColumn": 34
                 }
               }
             }
@@ -392,16 +329,100 @@
         {
           "ruleId": "S4487",
           "level": "warning",
-          "message": "Remove this unread private field '_blUser' or refactor the code to use its value.",
+          "message": "Remove this unread private field '_blHouseType' or refactor the code to use its value.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/UserController.cs",
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/HouseTypeController.cs",
                 "region": {
-                  "startLine": 15,
+                  "startLine": 18,
+                  "startColumn": 22,
+                  "endLine": 18,
+                  "endColumn": 34
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2933",
+          "level": "warning",
+          "message": "Make '_blConversation' 'readonly'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/ConversationController.cs",
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 25,
+                  "endLine": 17,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2933",
+          "level": "warning",
+          "message": "Make '_blFile' 'readonly'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/FileController.cs",
+                "region": {
+                  "startLine": 16,
                   "startColumn": 17,
-                  "endLine": 15,
+                  "endLine": 16,
                   "endColumn": 24
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2933",
+          "level": "warning",
+          "message": "Make '_BLBase' 'readonly'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/BaseEntityController.cs",
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 32,
+                  "endLine": 16,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2933",
+          "level": "warning",
+          "message": "Make '_blMessage' 'readonly'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/MessageController.cs",
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 20,
+                  "endLine": 17,
+                  "endColumn": 30
                 }
               }
             }
@@ -419,52 +440,10 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/HouseController.cs",
                 "region": {
-                  "startLine": 17,
+                  "startLine": 19,
                   "startColumn": 18,
-                  "endLine": 17,
+                  "endLine": 19,
                   "endColumn": 26
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2933",
-          "level": "warning",
-          "message": "Make '_blWishlist' 'readonly'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/WishlistController.cs",
-                "region": {
-                  "startLine": 17,
-                  "startColumn": 21,
-                  "endLine": 17,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S4487",
-          "level": "warning",
-          "message": "Remove this unread private field '_blWishlist' or refactor the code to use its value.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/WishlistController.cs",
-                "region": {
-                  "startLine": 17,
-                  "startColumn": 21,
-                  "endLine": 17,
-                  "endColumn": 32
                 }
               }
             }
@@ -495,18 +474,73 @@
           }
         },
         {
-          "ruleId": "S4487",
+          "ruleId": "S2933",
           "level": "warning",
-          "message": "Remove this unread private field '_blPost' or refactor the code to use its value.",
+          "message": "Make '_blUser' 'readonly'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 17,
+                  "endLine": 18,
+                  "endColumn": 24
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2933",
+          "level": "warning",
+          "message": "Make '_blWishlist' 'readonly'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/WishlistController.cs",
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 21,
+                  "endLine": 17,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S4144",
+          "level": "warning",
+          "message": "Update this method so that its implementation is not identical to 'DeletePostUser'.",
           "locations": [
             {
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/PostController.cs",
                 "region": {
-                  "startLine": 19,
-                  "startColumn": 17,
-                  "endLine": 19,
-                  "endColumn": 24
+                  "startLine": 74,
+                  "startColumn": 30,
+                  "endLine": 74,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/PostController.cs",
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 30,
+                  "endLine": 60,
+                  "endColumn": 44
                 }
               }
             }
@@ -566,10 +600,10 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/MapperProfile/AutoMapperProfile.cs",
                 "region": {
-                  "startLine": 21,
-                  "startColumn": 57,
-                  "endLine": 21,
-                  "endColumn": 58
+                  "startLine": 29,
+                  "startColumn": 49,
+                  "endLine": 29,
+                  "endColumn": 50
                 }
               }
             }
@@ -579,60 +613,18 @@
           }
         },
         {
-          "ruleId": "S108",
+          "ruleId": "S1116",
           "level": "warning",
-          "message": "Either remove or fill this block of code.",
+          "message": "Remove this empty statement.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/ChatHub/ChattingHub.cs",
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/MapperProfile/AutoMapperProfile.cs",
                 "region": {
-                  "startLine": 18,
-                  "startColumn": 13,
-                  "endLine": 18,
-                  "endColumn": 16
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1199",
-          "level": "warning",
-          "message": "Extract this nested code block into a separate method.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/ChatHub/ChattingHub.cs",
-                "region": {
-                  "startLine": 18,
-                  "startColumn": 13,
-                  "endLine": 18,
-                  "endColumn": 14
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1481",
-          "level": "warning",
-          "message": "Remove the unused local variable 'a'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/ChatHub/ChattingHub.cs",
-                "region": {
-                  "startLine": 19,
-                  "startColumn": 16,
-                  "endLine": 19,
-                  "endColumn": 17
+                  "startLine": 30,
+                  "startColumn": 47,
+                  "endLine": 30,
+                  "endColumn": 48
                 }
               }
             }
@@ -669,11 +661,95 @@
           "locations": [
             {
               "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/WishlistController.cs",
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 36,
+                  "endLine": 28,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/ConversationController.cs",
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 36,
+                  "endLine": 28,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/WishlistController.cs",
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 36,
+                  "endLine": 41,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/ConversationController.cs",
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 36,
+                  "endLine": 45,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/HouseController.cs",
                 "region": {
-                  "startLine": 55,
+                  "startLine": 57,
                   "startColumn": 36,
-                  "endLine": 55,
+                  "endLine": 57,
                   "endColumn": 42
                 }
               }
@@ -692,10 +768,157 @@
               "resultFile": {
                 "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/HouseController.cs",
                 "region": {
-                  "startLine": 56,
+                  "startLine": 58,
                   "startColumn": 21,
-                  "endLine": 56,
+                  "endLine": 58,
                   "endColumn": 27
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/PostController.cs",
+                "region": {
+                  "startLine": 65,
+                  "startColumn": 36,
+                  "endLine": 65,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 36,
+                  "endLine": 34,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 79,
+                  "startColumn": 36,
+                  "endLine": 79,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 36,
+                  "endLine": 49,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/UserController.cs",
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 36,
+                  "endLine": 64,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/PostController.cs",
+                "region": {
+                  "startLine": 50,
+                  "startColumn": 36,
+                  "endLine": 50,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'claims'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///D:/Tailieu/projectDoAn/Code/WhereHouse/Backend/PTDuc.WhereHouse/PTDuc.WhereHouse/Controllers/PostController.cs",
+                "region": {
+                  "startLine": 79,
+                  "startColumn": 36,
+                  "endLine": 79,
+                  "endColumn": 42
                 }
               }
             }
@@ -706,23 +929,6 @@
         }
       ],
       "rules": {
-        "S108": {
-          "id": "S108",
-          "shortDescription": "Nested blocks of code should not be left empty",
-          "fullDescription": "Most of the time a block of code is empty when a piece of code is really missing. So such empty block must be either filled or removed.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-108",
-          "properties": {
-            "category": "Major Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "SonarWay",
-              "MainSourceScope",
-              "TestSourceScope"
-            ]
-          }
-        },
         "S1116": {
           "id": "S1116",
           "shortDescription": "Empty statements should be removed",
@@ -748,23 +954,6 @@
           "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1118",
           "properties": {
             "category": "Major Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "SonarWay",
-              "MainSourceScope",
-              "TestSourceScope"
-            ]
-          }
-        },
-        "S1199": {
-          "id": "S1199",
-          "shortDescription": "Nested code blocks should not be used",
-          "fullDescription": "Nested code blocks can be used to create a new scope and restrict the visibility of the variables defined inside it. Using this feature in a method typically indicates that the method has too many responsibilities, and should be refactored into smaller methods.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1199",
-          "properties": {
-            "category": "Minor Code Smell",
             "isEnabledByDefault": true,
             "tags": [
               "C#",
@@ -833,6 +1022,23 @@
           "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3604",
           "properties": {
             "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "SonarWay",
+              "MainSourceScope",
+              "TestSourceScope"
+            ]
+          }
+        },
+        "S4144": {
+          "id": "S4144",
+          "shortDescription": "Methods should not have identical implementations",
+          "fullDescription": "When two methods have the same implementation, either it was a mistake - something else was intended - or the duplication was intentional, but may be confusing to maintainers. In the latter case, one implementation should invoke the other.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-4144",
+          "properties": {
+            "category": "Major Code Smell",
             "isEnabledByDefault": true,
             "tags": [
               "C#",

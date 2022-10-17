@@ -1,4 +1,4 @@
-﻿using PTDuc.WhereHouse.DL.Models;
+﻿
 using PTDuc.WhereHouse.EntityModels;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace PTDuc.WhereHouse.BL.Interfaces.Login
     public interface IBLLogin : IBLBase<LoginParam,LoginParam>
     {
         ServiceResult Login(LoginParam entity);
-        bool ChangePassword(string username, string oldPassword, string newPassword, ServiceResult serviceResult);
+        ServiceResult ChangePassword(string userId, string oldPassword, string newPassword);
 
 
     }

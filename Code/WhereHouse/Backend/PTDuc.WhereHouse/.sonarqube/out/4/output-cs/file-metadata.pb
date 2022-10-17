@@ -4,7 +4,8 @@ nD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHous
 kD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\BusinessLayer\BLBase.csutf-8|
 sD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\BusinessLayer\BLConversation.csutf-8t
 kD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\BusinessLayer\BLFile.csutf-8u
-lD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\BusinessLayer\BLHouse.csutf-8w
+lD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\BusinessLayer\BLHouse.csutf-8y
+pD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\BusinessLayer\BLHouseType.csutf-8w
 nD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\BusinessLayer\BLMessage.csutf-8t
 kD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\BusinessLayer\BLPost.csutf-8t
 kD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\BusinessLayer\BLUser.csutf-8x
@@ -15,7 +16,8 @@ lD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHous
 iD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\Interfaces\IBLBase.csutf-8z
 qD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\Interfaces\IBLConversation.csutf-8r
 iD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\Interfaces\IBLFile.csutf-8s
-jD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\Interfaces\IBLHouse.csutf-8u
+jD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\Interfaces\IBLHouse.csutf-8w
+nD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\Interfaces\IBLHouseType.csutf-8u
 lD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\Interfaces\IBLMessage.csutf-8r
 iD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\Interfaces\IBLPost.csutf-8r
 iD:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\Interfaces\IBLUser.csutf-8v

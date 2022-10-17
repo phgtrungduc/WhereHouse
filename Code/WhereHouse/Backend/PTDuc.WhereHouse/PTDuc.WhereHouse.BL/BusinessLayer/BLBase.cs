@@ -1,19 +1,20 @@
 ﻿using PTDuc.WhereHouse.BL.Interfaces;
 using System;
 using PTDuc.WhereHouse.DL.Interfaces;
-using PTDuc.WhereHouse.DL.Models;
 using PTDuc.WhereHouse.EntityModels;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
+using PTDuc.WhereHouse.DBContext.Models;
+using PTDuc.WhereHouse.EntityModels.Attribute;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
-    public class BLBase<TEntity, TDTO> : IBLBase<TEntity,TDTO>
+    public class BLBase<TEntity, TDTO> : IBLBase<TEntity, TDTO> where TDTO : BaseEntity
     {
-        protected IDLBase<TEntity,TDTO> _dlBase;
+        protected IDLBase<TEntity, TDTO> _dlBase;
         protected ServiceResult _serviceResult = new ServiceResult();
 
         protected readonly IMapper _mapper;
@@ -26,6 +27,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
 
         public virtual bool BeforeInsert(ref TDTO entity)
         {
+            entity.CreatedDate = DateTime.Now;
             return true;
         }
 
@@ -34,9 +36,9 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return true;
         }
 
-        public bool Delete(TEntity entity)
+        public bool Delete(string id)
         {
-            return _dlBase.Delete(entity);
+            return _dlBase.Delete(id);
         }
 
         public IEnumerable<TDTO> GetAll()
@@ -47,14 +49,15 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
 
         public ServiceResult GetByPaging(int page, int pageSize)
         {
-            return _dlBase.GetByPaging(page,pageSize);
+            return _dlBase.GetByPaging(page, pageSize);
         }
 
-        public TDTO GetByID(string Id)
+        public virtual TDTO GetByID(string Id)
         {
             var data = _dlBase.GetByID(Id);
             var res = default(TDTO);
-            if (data != null) {
+            if (data != null)
+            {
                 res = _mapper.Map<TDTO>(data);
             }
             return res;
@@ -62,7 +65,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
 
         public IEnumerable<TEntity> GetByKey(string key, string value)
         {
-            var res = _dlBase.GetByKey(key, value); 
+            var res = _dlBase.GetByKey(key, value);
             return res;
         }
 
@@ -89,10 +92,10 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
             return res;
         }
 
-        public bool Update(TDTO entity,string id )
+        public bool Update(TDTO entity, string id)
         {
             var mapEntity = _mapper.Map<TEntity>(entity);
-            return _dlBase.Update(mapEntity,id);
+            return _dlBase.Update(mapEntity, id);
         }
 
 
@@ -110,7 +113,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 var propertyName = property.Name;
                 //sử dụng để kiểm tra attribute DisplayName cuả các thuộc tính Customer hay entity
                 var displayName = property.GetCustomAttributes(false)
-                .OfType<DisplayNameAttribute>()
+                .OfType<System.ComponentModel.DisplayNameAttribute>()
                 .FirstOrDefault(); ;
 
                 // Kiểm tra xem có attribute cần phải validate không:
@@ -186,4 +189,3 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         }
     }
 }
-    

@@ -1,154 +1,88 @@
 <template>
   <div class="dialog-chat">
-    <div class="wrapper-mobile">
-      <div class="mobile">
-        <img src="../../assets/images/img/lone-logo.svg" />Chưa đáp ứng màn hình
-        mobile devices.
-      </div>
-    </div>
     <div class="wrapper">
-      <main>
-        <div class="col-left">
+      <main class="row">
+        <div class="col-left col-2">
           <div class="col-content">
             <div class="messages">
-              <h2 class="ml-4">Danh sách chat</h2>
-              <DialogChat />
-              <DialogChat />
+              <h3 class="ml-4">Danh sách chat</h3>
+              <DialogChat
+                v-for="(item, index) in listConversation"
+                :key="index"
+                :conversation="item"
+                @click="changeConversation(item)"
+              />
             </div>
           </div>
         </div>
 
-        <div class="col">
-          <div class="col-content">
-            <section class="message">
-              <div class="grid-message">
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>Ok.</p>
-                  </div>
-                  <div class="message-received">
-                    <p>Do you play EVE Online?</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>Not anymore.</p>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>But, can you?</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>
-                      I guess if I had some practice I could again. It's been
-                      years.
-                    </p>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>Dat titan though...</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>Trombone, guitar, titan?</p>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>Niiiiice.</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <div class="">
-                      <p>
-                        Do you care if I use the last few minutes of our
-                        conversation as dummy text for this thing I'm coding?
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>Sure go ahead.</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>Okay.</p>
-                  </div>
-                  <div class="message-sent">
-                    <p>I'll send you some ISK when I'm done.</p>
-                  </div>
-                  <div class="message-sent">
-                    <p>It's cool.</p>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>Ok.</p>
-                  </div>
-                  <div class="message-received">
-                    <p>Do you play EVE Online?</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>Not anymore.</p>
-                  </div>
-                </div>
-                <div class="col-message-received">
-                  <div class="message-received">
-                    <p>But, can you?</p>
-                  </div>
-                </div>
-                <div class="col-message-sent">
-                  <div class="message-sent">
-                    <p>
-                      I guess if I had some practice I could again. It's been
-                      years.
-                    </p>
+        <div class="detail-info col-10 d-flex" v-if="otherUser">
+          <div class="d-flex col-9 flex-column">
+            <div class="col-content" ref="chatContent">
+              <DetailChat
+                :listMessage="listMessage"
+                :scrollToBottom="scrollToBottom"
+              />
+            </div>
+            <div class="col-foot">
+              <div class="compose">
+                <input placeholder="Nhập tin nhắn ..." v-model="message" />
+                <div class="compose-dock">
+                  <div class="dock">
+                    <font-awesome-icon
+                      icon="fa-solid fa-paper-plane"
+                      size="2x"
+                      id="sendMessage"
+                      @click="sendMessage"
+                    />
                   </div>
                 </div>
               </div>
-            </section>
+            </div>
           </div>
 
-          <div class="col-foot">
-            <div class="compose">
-              <input placeholder="Nhập tin nhắn ..." />
-              <div class="compose-dock">
-                <div class="dock">
-                  <font-awesome-icon
-                    icon="fa-solid fa-paper-plane"
-                    size="2x"
-                    id="sendMessage"
-                  />
+          <div class="col-right col-3">
+            <div class="col-content">
+              <div class="user-panel" v-if="otherUser">
+                <div class="avatar">
+                  <div class="avatar-image">
+                    <v-img
+                      v-if="!otherUserAvatarUrl"
+                      src="../../assets/images/no-pictures.png"
+                      class="rounded-circle img border"
+                      aspect-ratio="1.7"
+                      width="60"
+                      height="60"
+                      max-height="60"
+                      max-width="60"
+                    >
+                    </v-img>
+                    <v-img
+                      v-if="otherUserAvatarUrl"
+                      class="rounded-circle img border"
+                      :src="otherUserAvatarUrl"
+                      width="60"
+                      height="60"
+                      max-height="60"
+                      max-width="60"
+                    >
+                    </v-img>
+                  </div>
+
+                  <h3>{{ otherUser.FullName }}</h3>
+                  <p>{{ otherUser.UserName }}</p>
+                  <p>{{ otherUser.PhoneNumber }}</p>
+                  <p>{{ otherUser.Email }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="col-right">
-          <div class="col-content">
-            <div class="user-panel">
-              <div class="avatar">
-                <div class="avatar-image">
-                  <img src="../../assets/images/img/avatar.png" />
-                </div>
-
-                <h3>Theresa Hudson</h3>
-                <p>London, United Kingdom</p>
-              </div>
-            </div>
-          </div>
+        <div class="no-detail-info col-10" v-if="!otherUser">
+          <div class="icon"></div>
+          <h4 class="content">Chọn một cuộc hội thoại trong danh sách chat</h4>
         </div>
+        <div></div>
       </main>
     </div>
   </div>
@@ -157,72 +91,249 @@
 <script>
 import DialogChat from "../../components/Chat/DialogChat.vue";
 import util from "../../util/util";
+import { connection } from "@/chathub/ChatHub.js";
+import axios from "axios";
+import DetailChat from "../../components/Chat/DetailChat.vue";
 export default {
   name: "Dialog",
-  components: { DialogChat },
+  components: { DialogChat, DetailChat },
   data() {
     return {
-      currentUserSendId: util.getCurrentUserId(),
-      currentUserReceivedId: null,
+      currentUserId: util.getCurrentUserId(),
+      otherUserId: null,
+      listMessage: [],
+      message: "",
+      currentConversationId: "",
+      listConversation: [],
+      otherUser: null,
+      otherUserAvatarUrl: "",
     };
   },
-  created(){
-    this.currentUserReceivedId = this.$route.params.id;
-  }
+  methods: {
+    waitForChat() {
+      let me = this;
+      connection.on("ReceivedPrivateMessage", (userSendId, message) => {
+        if (me.currentUserId && me.currentUserId != userSendId) {
+          me.listMessage.push({ message: message, type: 2 });
+          this.scrollToBottom();
+        }
+      });
+    },
+    sendMessage() {
+      if (this.message) {
+        connection.invoke(
+          "SendPrivateMessage",
+          this.currentUserId,
+          this.currentConversationId,
+          this.message
+        );
+        this.listMessage.push({ message: this.message, type: 1 });
+        this.message = "";
+      }
+    },
+    async initChat(curentUserId, otherUserId) {
+      let config1 = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+        params: { userReceivedId: otherUserId },
+      };
+      let conversationIdData = await axios.get(
+        `${this.baseUrl}conversation/initchat`,
+        config1
+      );
+      let conversationId = conversationIdData.data.Data;
+      this.currentConversationId = conversationId;
+      let config2 = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      };
+      await axios
+        .get(
+          `${this.baseUrl}message/GetMessagesByConversationId/${conversationId}`,
+          config2
+        )
+        .then(
+          (res) => {
+            if (res.data.StatusCode) {
+              if (res.data.Data) {
+                let listChat = res.data.Data.$values;
+                if (listChat && listChat.length) {
+                  listChat.forEach((message) => {
+                    if (message.UserId == curentUserId) {
+                      this.listMessage.push({
+                        message: message.Content,
+                        type: 1,
+                      });
+                    } else {
+                      this.listMessage.push({
+                        message: message.Content,
+                        type: 2,
+                      });
+                    }
+                  });
+                }
+              }
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    async changeConversation(conversation) {
+      let config = {
+          headers: {
+            Authorization: "Bearer " + this.token,
+          },
+        },
+        curentUserId = util.getCurrentUserId(),
+        otherUserId = "";
+      this.currentConversationId = conversation.ConversationId;
+      this.listMessage = [];
+      if (conversation.UserId1 == this.currentUserId) {
+        otherUserId = conversation.UserId2;
+      } else {
+        otherUserId = conversation.UserId1;
+      }
+      this.getOtherUserInfo(otherUserId);
+      await axios
+        .get(
+          `${this.baseUrl}message/GetMessagesByConversationId/${conversation.ConversationId}`,
+          config
+        )
+        .then(
+          (res) => {
+            if (res.data.StatusCode) {
+              if (res.data.Data) {
+                let listChat = res.data.Data.$values;
+                if (listChat && listChat.length) {
+                  listChat.forEach((message) => {
+                    if (message.UserId == curentUserId) {
+                      this.listMessage.push({
+                        message: message.Content,
+                        type: 1,
+                      });
+                    } else {
+                      this.listMessage.push({
+                        message: message.Content,
+                        type: 2,
+                      });
+                    }
+                  });
+                }
+              }
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    async getListConversationForUser() {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      };
+      await axios
+        .get(`${this.baseUrl}Conversation/GetAllConversationUser`, config)
+        .then(
+          (res) => {
+            if (res.data.StatusCode) {
+              if (res.data.Data) {
+                this.listConversation = res.data.Data.$values;
+              }
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    },
+    scrollToBottom() {
+      let contentChat = this.$refs.chatContent;
+      contentChat.scrollTop = contentChat.scrollHeight;
+    },
+    async getOtherUserInfo(userId) {
+      let config = {
+        headers: {
+          Authorization: "Bearer " + this.token,
+        },
+      };
+      await axios
+        .get(`${this.baseUrl}user/` + userId, config)
+        .then((res) => {
+          this.otherUser = res.data;
+          if (res.data.AvatarPath) {
+            this.otherUserAvatarUrl =
+              this.baseResourceUrl + res.data.AvatarPath;
+          }
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {});
+    },
+  },
+  created() {
+    let otherUserId = this.$route.params.userRecievedId;
+    if (otherUserId) {
+      let currentUserId = this.currentUserId || util.getCurrentUserId();
+      if (otherUserId && currentUserId) {
+        this.initChat(currentUserId, otherUserId);
+        this.waitForChat();
+        this.getOtherUserInfo(otherUserId);
+      }
+    }
+    this.getListConversationForUser();
+  },
+
+  mounted() {},
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
   outline: 0;
   -webkit-box-sizing: inherit;
   box-sizing: inherit;
+  &:before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+  }
+  &:after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+  }
 }
-
-*:before,
-*:after {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-}
-
 html {
   height: 100%;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 body {
   height: 100%;
   color: #3b414d;
   font-family: sans-serif;
   letter-spacing: 0.03em;
 }
-
-h3 {
-  font-size: 15px;
-  font-weight: 600;
-}
-
 p {
   font-size: 82%;
 }
-
-input::-webkit-input-placeholder {
-  color: #cccccc;
+input {
+  &::-webkit-input-placeholder {
+    color: #cccccc;
+  }
+  &::-moz-placeholder {
+    color: #cccccc;
+  }
+  &:-ms-input-placeholder {
+    color: #cccccc;
+  }
+  &:-moz-placeholder {
+    color: #cccccc;
+  }
 }
-
-input::-moz-placeholder {
-  color: #cccccc;
-}
-
-input:-ms-input-placeholder {
-  color: #cccccc;
-}
-
-input:-moz-placeholder {
-  color: #cccccc;
-}
-
 .wrapper {
   height: 100%;
   display: -webkit-box;
@@ -233,194 +344,52 @@ input:-moz-placeholder {
   -ms-flex-direction: column;
   flex-direction: column;
 }
-
-header {
-  -webkit-box-shadow: 0 0px 13px rgba(0, 0, 0, 0.06);
-  box-shadow: 0 0px 13px rgba(0, 0, 0, 0.06);
-  -webkit-box-flex: 0;
-  width: 100%;
-  overflow: hidden;
-  z-index: 2;
-  position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  -ms-flex: 0 0 70px;
-  flex: 0 0 70px;
-}
-
 .container {
   position: relative;
   display: block;
   padding-left: 20px;
   padding-right: 20px;
 }
-
-header > div {
-  z-index: 2;
-  height: 70px;
-  margin: 0 auto;
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-header .middle {
-  position: absolute;
-  text-align: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-}
-
-header .middle h3 {
-  margin-bottom: 3px;
-}
-
-header .middle p {
-  margin-bottom: 0px;
-  color: #9197a5;
-}
-
-header .right {
-  height: 70px;
-  overflow: hidden;
-  line-height: 70px;
-  text-align: right;
-  width: auto;
-  float: right;
-  position: relative;
-}
-
-header .avatar {
-  margin-left: 15px;
-  display: inline-block;
-  float: right;
-}
-
-header .avatar img {
-  vertical-align: middle;
-  width: 30px;
-  border-radius: 100%;
-  height: 30px;
-}
-
-header .settings {
-  display: inline-block;
-  float: left;
-  position: relative;
-}
-
-header .settings:after {
-  content: "";
-  background-color: #000;
-  opacity: 0.2;
-  height: 20px;
-  width: 1px;
-  margin-top: 25px;
-  margin-left: 25px;
-  display: inline-block;
-  margin-right: 25px;
-}
-
-header .username {
-  display: inline-block;
-  height: 70px;
-  font-size: 14px;
-  line-height: 72px;
-  font-weight: 600;
-}
-
-header .username img {
-  width: 16px;
-  float: left;
-  height: 70px;
-  opacity: 0.5;
-}
-
-header .left {
-  width: 130px;
-  float: left;
-  position: relative;
-}
-
-header .left img {
-  display: inline-block;
-  height: 70px;
-  width: 100%;
-}
-
 .user-panel {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px;
+  .avatar {
+    text-align: center;
+    position: relative;
+    .avatar-image {
+      position: relative;
+      width: 60px;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  p {
+    color: #9197a5;
+  }
+  h3 {
+    margin-bottom: 7px;
+  }
 }
-
-.user-panel .avatar {
-  text-align: center;
-  position: relative;
+.col-left {
+  .messages {
+    li {
+      padding-top: 10px;
+      width: 100%;
+      display: block;
+      overflow: hidden;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+    }
+  }
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px);
 }
-
-.user-panel .avatar .avatar-image {
-  position: relative;
-  width: 60px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.user-panel .avatar img {
-  width: 60px;
-  border-radius: 100%;
-  height: 60px;
-}
-
-.user-panel p {
-  color: #9197a5;
-}
-
-.user-panel h3 {
-  margin-bottom: 7px;
-}
-
-.col-left .messages li {
-  padding-top: 10px;
-  width: 100%;
-  display: block;
-  overflow: hidden;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 10px;
-}
-
-/* .col-left .messages li .avatar {
-  position: relative;
-}
-
-.col-left .messages li .avatar .avatar-image {
-  position: relative;
-  width: 40px;
-  overflow: hidden;
-  float: left;
-  margin-right: 13px;
-}
-
-.col-left .messages li .avatar .status {
-  height: 12px;
-  width: 12px;
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  border-radius: 100%;
-  border: 3px solid #ffffff;
-}
-
-.col-left .messages li .avatar img {
-  width: 36px;
-  border-radius: 100%;
-  height: 36px;
-} */
-
 main {
   -webkit-box-flex: 1;
   -ms-flex: 1;
@@ -433,52 +402,31 @@ main {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  .detail-info {
+    height: calc(100vh - 70px);
+    display: flex;
+    padding: 0 !important;
+  }
+  .no-detail-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .icon {
+      background: url("../../assets/images/message.png") no-repeat;
+      background-position: center;
+      width: 100%;
+      height: 200px;
+    }
+    height: calc(100vh - 70px);
+  }
 }
-
-.col-left {
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 300px;
-  flex: 0 0 300px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: calc(100vh - 70px);
-}
-
 .col-right {
   border-left: 1px solid rgba(0, 0, 0, 0.1);
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 300px;
-  flex: 0 0 300px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
   height: calc(100vh - 70px);
 }
-
-.col {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 60%;
-  flex: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: calc(100vh - 70px);
-}
-
 .col-content {
   -webkit-box-flex: 1;
   padding: 0px;
@@ -486,187 +434,44 @@ main {
   flex: 1;
   overflow-y: auto;
 }
-
 .col-foot {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 50px;
   flex: 0 0 50px;
-}
-
-.message-sent,
-.message-received {
-  clear: both;
-  position: relative;
-}
-
-.message-sent::before,
-.message-received::before,
-.message-sent::after,
-.message-received::after {
-  content: "";
-  display: table;
-}
-
-[class^="grid-"] {
-  display: -ms-flexbox;
-  display: -webkit-box;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex-direction: row;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-}
-
-.grid-message > [class^="col-"] {
-  margin-top: 1em;
-  margin-right: 1em;
-}
-
-.grid-message > [class^="col-"]:nth-child(-n + 1) {
-  margin-top: 0;
-}
-
-.grid-message > [class^="col-"]:nth-child(1n) {
-  margin-right: 0;
-}
-
-.col-message-sent {
-  margin-left: calc(8.33333333% + 0.08333333em) !important;
-}
-
-.col-message-received {
-  margin-right: calc(8.33333333% + 0.08333333em) !important;
-}
-
-.col-message-sent,
-.col-message-received {
-  width: calc(91.66666667% - 0.08235677em);
-}
-
-.message-sent,
-.message-received {
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
-  padding: 0.5em 0.6em;
-}
-
-.message-sent p,
-.message-received p {
-  margin: 0;
-  line-height: 1.5;
-}
-
-.message-sent {
-  float: right;
-  color: white;
-  background-color: #0181ff;
-  border-radius: 0.5em 0.25em 0.25em 0.5em;
-}
-
-.message-sent:first-child {
-  border-radius: 0.5em 0.5em 0.25em 0.5em;
-}
-
-.message-sent:last-child {
-  border-radius: 0.25em 0.25em 0.5em 0.5em;
-}
-
-.message-sent:only-child {
-  border-radius: 0.5em;
-}
-
-.message-received {
-  float: left;
-  color: black;
-  background-color: #e6e6e6;
-  border-radius: 0.25em 0.5em 0.5em 0.25em;
-}
-
-.message-received:first-child {
-  border-radius: 0.5em 0.5em 0.5em 0.25em;
-  margin-top: 0px;
-}
-
-.message-received:last-child {
-  border-radius: 0.25em 0.5em 0.5em 0.5em;
-}
-
-.message-received:only-child {
-  border-radius: 0.5em;
-}
-
-.col-message-sent,
-.col-message-received {
-  margin-top: 0.25em !important;
-}
-
-.message {
-  min-height: 53.33203125em;
-  display: -ms-flexbox;
-  display: -webkit-box;
-  display: flex;
-  padding: 20px;
-}
-
-.wrapper-mobile {
-  height: 100vh;
-  display: none;
-  position: relative;
-  color: #9197a5;
-  text-align: center;
-  line-height: 22px;
-}
-
-.wrapper-mobile .mobile {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-}
-
-.wrapper-mobile .mobile img {
-  width: 54px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
 }
 
 .compose {
   padding: 20px;
   position: relative;
-}
-
-.compose input {
-  width: 100%;
-  border: 0px;
-  font-size: 17px;
-  padding-right: 80px;
-}
-
-.compose .compose-dock .dock {
-  position: absolute;
-  right: 25px;
-  top: 20px;
-}
-
-.compose .compose-dock img {
-  width: 20px;
-  margin-left: 12px;
-  opacity: 0.2;
-}
-
-.compose .compose-dock img:hover {
-  opacity: 0.5;
+  input {
+    width: 100%;
+    border: 0px;
+    font-size: 14px;
+    padding-right: 80px;
+  }
+  .compose-dock {
+    .dock {
+      position: absolute;
+      right: 25px;
+      top: 15px;
+    }
+    img {
+      width: 20px;
+      margin-left: 12px;
+      opacity: 0.2;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
 }
 #sendMessage {
   cursor: pointer;
 }
-@media only screen and (max-width: 1250px) {
+p {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+/* @media only screen and (max-width: 1250px) {
   .wrapper {
     display: none;
   }
@@ -674,5 +479,5 @@ main {
   .wrapper-mobile {
     display: block;
   }
-}
+} */
 </style>
