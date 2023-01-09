@@ -32,7 +32,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
                 x.FullName = x.UserReport.FullName;
                 x.UserName = x.UserReport.UserName;
             });
-            return dataDTO;
+            return dataDTO?.OrderByDescending(x=>x.CreatedDate);
         }
     }
 }

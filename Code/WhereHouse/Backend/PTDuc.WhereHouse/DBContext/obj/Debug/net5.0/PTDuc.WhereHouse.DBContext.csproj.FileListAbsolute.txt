@@ -42,4 +42,4 @@ D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\De
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.pdb
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\PTDuc.WhereHouse.DBContext.genruntimeconfig.cache
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\ref\PTDuc.WhereHouse.DBContext.dll
-D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Debug\net5.0\ref\PTDuc.WhereHouse.DBContext.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Debug\net5.0\refint\PTDuc.WhereHouse.DBContext.dll

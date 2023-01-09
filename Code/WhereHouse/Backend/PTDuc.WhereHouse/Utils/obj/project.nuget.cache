@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RHqVh1WIe04HyhWxrXcaj5NjzhnpNdFj4EH4togdCNkzMTsIHFqK9W1I4PTz8WKKjp2zEOCmN4M9LlsZxGEtfA==",
+  "dgSpecHash": "yx+X6poSKSczmKmEDYHEY86BXpRearF89WMy1e3symiuk5dw31uPwo/ZkXl39HFlYLULMwAYL4aUf8ONBjTN5w==",
   "success": true,
   "projectFilePath": "D:\\Tailieu\\projectDoAn\\Code\\WhereHouse\\Backend\\PTDuc.WhereHouse\\Utils\\PTDuc.WhereHouse.Utils.csproj",
   "expectedPackageFiles": [
@@ -113,7 +113,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'EntityFramework 5.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'EntityFramework 5.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "EntityFramework",
       "targetGraphs": [
         "net5.0"

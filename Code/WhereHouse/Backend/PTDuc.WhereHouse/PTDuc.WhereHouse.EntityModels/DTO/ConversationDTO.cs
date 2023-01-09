@@ -12,6 +12,7 @@ namespace PTDuc.WhereHouse.EntityModels.DTO
         public Guid ConversationId { get; set; }
         public Guid UserId1 { get; set; }
         public Guid UserId2 { get; set; }
+        public DateTime LastTimeMessage { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
         public virtual User UserId1Navigation { get; set; }
         public virtual User UserId2Navigation { get; set; }

@@ -1,0 +1,15 @@
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Release\net5.0\PTDuc.WhereHouse.DBContext.deps.json
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Release\net5.0\PTDuc.WhereHouse.DBContext.runtimeconfig.json
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Release\net5.0\PTDuc.WhereHouse.DBContext.runtimeconfig.dev.json
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Release\net5.0\PTDuc.WhereHouse.DBContext.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\bin\Release\net5.0\PTDuc.WhereHouse.DBContext.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Release\net5.0\PTDuc.WhereHouse.DBContext.csproj.AssemblyReference.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Release\net5.0\PTDuc.WhereHouse.DBContext.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Release\net5.0\PTDuc.WhereHouse.DBContext.AssemblyInfoInputs.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Release\net5.0\PTDuc.WhereHouse.DBContext.AssemblyInfo.cs
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Release\net5.0\PTDuc.WhereHouse.DBContext.csproj.CoreCompileInputs.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Release\net5.0\PTDuc.WhereHouse.DBContext.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Release\net5.0\refint\PTDuc.WhereHouse.DBContext.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Release\net5.0\PTDuc.WhereHouse.DBContext.pdb
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Release\net5.0\PTDuc.WhereHouse.DBContext.genruntimeconfig.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\DBContext\obj\Release\net5.0\ref\PTDuc.WhereHouse.DBContext.dll

@@ -2,6 +2,7 @@
 using PTDuc.WhereHouse.EntityModels;
 using PTDuc.WhereHouse.EntityModels.DTO;
 using System;
+using System.Collections.Generic;
 
 namespace PTDuc.WhereHouse.BL.Interfaces
 {
@@ -15,5 +16,6 @@ namespace PTDuc.WhereHouse.BL.Interfaces
         public ServiceResult GetListPostForAdmin(string adminId);
         public ServiceResult ReportPost(string userId, ReportDTO report);
         public ServiceResult ChangeStatusReport(string userId, string reportId);
+        List<PostDTO> GetSearchResult(string search);
     }
 }

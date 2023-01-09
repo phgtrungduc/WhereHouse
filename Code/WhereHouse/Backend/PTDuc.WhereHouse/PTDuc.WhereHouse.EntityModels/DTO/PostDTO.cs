@@ -18,5 +18,7 @@ namespace PTDuc.WhereHouse.EntityModels.DTO
         public virtual User User { get; set; }
         public int Status { get; set; }
         public string HouseImageUrl { get; set; }
+
+        public string UserName { get; set; }
     }
 }

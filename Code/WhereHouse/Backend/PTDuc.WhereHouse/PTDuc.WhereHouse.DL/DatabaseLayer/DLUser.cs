@@ -67,7 +67,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
                     x.NumberOfPosts = x.Posts.Count();
                 }
             });
-            return dataMapper;
+            return dataMapper?.OrderByDescending(x => x.CreatedDate).ToList();
         }
     }
 }

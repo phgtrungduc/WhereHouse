@@ -31,6 +31,7 @@ namespace PTDuc.WhereHouse.DL.DatabaseLayer
         public DLBase(WhereHouseContext context, IMapper mapper)
         {
             _context = context;
+            context.ChangeTracker.LazyLoadingEnabled = false;
             tableName = typeof(TEntity).Name;
             _mapper = mapper;
         }

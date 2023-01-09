@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
 #nullable disable
 
 namespace PTDuc.WhereHouse.DBContext.Models
@@ -15,6 +14,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
         public WhereHouseContext(DbContextOptions<WhereHouseContext> options)
             : base(options)
         {
+            this.ChangeTracker.LazyLoadingEnabled = false;
         }
 
         public virtual DbSet<Conversation> Conversations { get; set; }
@@ -45,7 +45,7 @@ namespace PTDuc.WhereHouse.DBContext.Models
                 entity.ToTable("Conversation");
 
                 entity.Property(e => e.ConversationId).ValueGeneratedOnAdd();
-
+                entity.Property(e => e.LastTimeMessage).IsRequired();
                 entity.HasOne(d => d.UserId1Navigation)
                     .WithMany(p => p.ConversationUserId1Navigations)
                     .HasForeignKey(d => d.UserId1)

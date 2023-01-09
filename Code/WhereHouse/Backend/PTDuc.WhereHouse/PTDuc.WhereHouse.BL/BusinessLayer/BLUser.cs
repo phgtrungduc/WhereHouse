@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
-    public class BLUser : BLBase<User,UserDTO>,IBLUser
+    public class BLUser : BLBase<User, UserDTO>, IBLUser
     {
         IDLUser _dlUser;
         List<UserDTO> userOnline;
@@ -26,23 +26,27 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
         public override bool BeforeInsert(ref UserDTO entity)
         {
             var res = false;
-            if (!string.IsNullOrEmpty(entity.Password)) {
+            if (!string.IsNullOrEmpty(entity.Password))
+            {
                 LoginParam loginParam = new LoginParam();
                 loginParam = PasswordHash.HashPassword(entity.Password);
-                if (loginParam != null) {
+                if (loginParam != null)
+                {
                     entity.Password = loginParam.HashPassword;
                     entity.Salt = loginParam.Salt;
                     entity.CreatedDate = DateTime.Now;
-                    res =  true;
+                    res = true;
                 }
             }
             return res;
         }
         public void AddUserToListOnline(UserDTO user)
         {
-            if (user != null) {
-                var isExist =  userOnline.FindIndex(x => x.UserId == user.UserId);
-                if (isExist == -1) {
+            if (user != null)
+            {
+                var isExist = userOnline.FindIndex(x => x.UserId == user.UserId);
+                if (isExist == -1)
+                {
                     userOnline.Add(user);
                 }
             }
@@ -50,7 +54,8 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
 
         public void RemoveUserFromListOnline(UserDTO user)
         {
-            if (user != null) {
+            if (user != null)
+            {
                 userOnline.RemoveAll(x => x.UserId == user.UserId);
             }
         }
@@ -70,13 +75,23 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 {
                     if (admin.Role == (int)Enumeration.Role.Admin)
                     {
-                        user.Role = (int)Enumeration.Role.Admin;
-                        res.Data = this.Insert(user);
+                        var entity = _dlUser.GetUserByUserName(user.UserName);
+                        if (entity == null)
+                        {
+                            user.Role = (int)Enumeration.Role.Admin;
+                            res.Data = this.Insert(user);
+                        }
+                        else
+                        {
+                            res.Data = false;
+                            res.StatusCode = (int)(Enumeration.ResultCode.UserExist);
+                        }
+
                     }
                     else
                     {
                         res.StatusCode = (int)Enumeration.ResultCode.NotHaveRight;
-                        res.Messenger = "Tài khoản không có quyền phê duyệt bài đăng";
+                        res.Messenger = "Tài khoản không có quyền thêm admin";
                     }
                 }
             }
@@ -108,19 +123,21 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                                 res.Data = true;
                                 res.Messenger = "Chặn người dùng thành công";
                             }
-                            else {
+                            else
+                            {
                                 user.Status = (int)Enumeration.StatusUser.Active;
                                 this.Update(user, blockUserId);
                                 res.Data = true;
                                 res.Messenger = "Bỏ chặn người dùng thành công";
                             }
-                            
+
                         }
-                        else {
+                        else
+                        {
                             res.StatusCode = (int)Enumeration.ResultCode.Failed;
                             res.Messenger = "Không tồn tại người dùng";
                         }
-                        
+
                     }
                     else
                     {
@@ -148,7 +165,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                     if (admin.Role == (int)Enumeration.Role.Admin)
                     {
                         var listUser = _dlUser.GetAllForAdmin();
-                        listUser = listUser.Where(x=>x.Role==(int)Enumeration.Role.User)?.ToList();
+                        listUser = listUser.Where(x => x.Role == (int)Enumeration.Role.User || x.Role == (int)Enumeration.Role.Admin)?.ToList();
                         res.Data = listUser;
                     }
                     else
@@ -200,7 +217,8 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                     res.Data = false;
                 }
             }
-            else {
+            else
+            {
                 res.StatusCode = (int)Enumeration.ResultCode.NotHaveRight;
                 res.Data = false;
             }
@@ -217,11 +235,12 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 {
                     res.Data = this.Insert(user);
                 }
-                else {
+                else
+                {
                     res.Data = false;
                     res.StatusCode = (int)(Enumeration.ResultCode.UserExist);
                 }
-                
+
             }
             catch (Exception ex)
             {

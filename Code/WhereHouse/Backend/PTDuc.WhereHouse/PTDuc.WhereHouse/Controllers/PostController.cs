@@ -146,5 +146,13 @@ namespace PTDuc.WhereHouse.Controllers
             }
             return BadRequest(new ServiceResult() { Data = false });
         }
+
+        [AllowAnonymous]
+        [HttpGet("GetSearchResult")]
+        public IActionResult GetSearchResult([FromQuery]string search)
+        {
+            var res = _blPost.GetSearchResult(search);
+            return Ok(new ServiceResult() { StatusCode = 1, Data = res });
+        }
     }
 }

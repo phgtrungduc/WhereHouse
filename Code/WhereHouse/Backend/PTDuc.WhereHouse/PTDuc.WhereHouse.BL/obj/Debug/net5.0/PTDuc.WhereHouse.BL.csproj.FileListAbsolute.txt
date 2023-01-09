@@ -60,4 +60,4 @@ D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\PTDuc.WhereHouse.BL.dll
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\PTDuc.WhereHouse.BL.pdb
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\ref\PTDuc.WhereHouse.BL.dll
-D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\bin\Debug\net5.0\ref\PTDuc.WhereHouse.BL.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.BL\obj\Debug\net5.0\refint\PTDuc.WhereHouse.BL.dll

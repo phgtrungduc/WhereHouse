@@ -9,6 +9,7 @@ using PTDuc.WhereHouse.EntityModels.DTO;
 using AutoMapper;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace PTDuc.WhereHouse.BL.BusinessLayer
 {
@@ -45,7 +46,7 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                     }
                 }
             });
-            return dataDTO;
+            return dataDTO.OrderByDescending(x=>x.LastTimeMessage)?.ToList();
         }
 
         public Conversation GetConversation(string userId1, string userId2)
@@ -64,8 +65,9 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 {
                     ConversationId = newid,
                     UserId1 = Guid.Parse(userSendId),
-                    UserId2 = Guid.Parse(userRecievedId)
-                });
+                    UserId2 = Guid.Parse(userRecievedId),
+                    LastTimeMessage = DateTime.Now
+                }) ;
                 return newid;
             }
         }

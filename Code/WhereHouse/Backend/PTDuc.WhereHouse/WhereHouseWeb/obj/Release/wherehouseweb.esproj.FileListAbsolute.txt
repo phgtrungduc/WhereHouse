@@ -1,0 +1,2 @@
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\WhereHouseWeb\obj\Release\wherehouseweb.esproj.SuggestedBindingRedirects.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\WhereHouseWeb\obj\Release\wherehouseweb.esproj.CoreCompileInputs.cache

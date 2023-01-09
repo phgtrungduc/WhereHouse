@@ -156,7 +156,15 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 if (admin != null)
                 {
                     var listPost = _DLPost.GetListPostForAdmin();
-                    res.Data = listPost;
+                    var listPostDTO = _mapper.Map<List<PostDTO>>(listPost);
+                    listPostDTO.ForEach(x =>
+                    {
+                        if (x.User != null)
+                        {
+                            x.UserName = x.User.UserName;
+                        }
+                    });
+                    res.Data = listPostDTO;
                 }
             }
             catch (Exception ex)
@@ -290,6 +298,20 @@ namespace PTDuc.WhereHouse.BL.BusinessLayer
                 }
             }
             return res;
+        }
+
+        public List<PostDTO> GetSearchResult(string search)
+        {
+            var data =  _DLPost.GetSearchResult(search);
+            var dataDTO = _mapper.Map<List<PostDTO>>(data);
+            dataDTO.ForEach(post =>
+            {
+                if (post.House != null && post.House.HouseImage != null)
+                {
+                    post.HouseImageUrl = post.House.HouseImage.FilePath;
+                }
+            });
+            return dataDTO;
         }
     }
 }

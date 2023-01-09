@@ -42,4 +42,4 @@ D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.dll
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\PTDuc.WhereHouse.EntityModels.pdb
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\ref\PTDuc.WhereHouse.EntityModels.dll
-D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\bin\Debug\net5.0\ref\PTDuc.WhereHouse.EntityModels.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse.EntityModels\obj\Debug\net5.0\refint\PTDuc.WhereHouse.EntityModels.dll

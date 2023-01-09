@@ -10,6 +10,7 @@ namespace PTDuc.WhereHouse.DL.Interfaces
     {
         public List<Post> GetUserPost(Guid userId);
         public IEnumerable<Post> GetListPostForAdmin();
+        public List<Post> GetSearchResult(string search);
 
     }
 }

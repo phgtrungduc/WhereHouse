@@ -64,6 +64,11 @@ namespace PTDuc.WhereHouse.ChatHub
                 Time = DateTime.Now
             };
             _bLMessage.Insert(newMessage);
+            var conversation = _bLConversation.GetByID(groupName);
+            if (conversation != null) {
+                conversation.LastTimeMessage = DateTime.Now;
+                _bLConversation.Update(conversation,groupName);
+            }
         }
 
         public async Task InitPrivateChat(string userSendId, string userReceivedId, string connectionId)

@@ -288,6 +288,13 @@ D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.pdb
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\PTDuc.WhereHouse.genruntimeconfig.cache
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\ref\PTDuc.WhereHouse.dll
-D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\ref\PTDuc.WhereHouse.dll
 D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.AspNet.SignalR.Core.dll
-D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\staticwebassets\PTDuc.WhereHouse.StaticWebAssets.xml
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Owin.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Microsoft.Owin.Security.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\bin\Debug\net5.0\Owin.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\refint\PTDuc.WhereHouse.dll
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\staticwebassets\PTDuc.WhereHouse.StaticWebAssets.Pack.cache
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\staticwebassets\msbuild.PTDuc.WhereHouse.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\staticwebassets\msbuild.build.PTDuc.WhereHouse.props
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.PTDuc.WhereHouse.props
+D:\Tailieu\projectDoAn\Code\WhereHouse\Backend\PTDuc.WhereHouse\PTDuc.WhereHouse\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.PTDuc.WhereHouse.props
