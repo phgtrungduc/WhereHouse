@@ -13,7 +13,16 @@
         :footer-props="{
           'items-per-page-text': 'Số lượng bài đăng mỗi trang',
         }"
+        :search="search"
+        :custom-filter="filter"
       >
+        <template v-slot:top>
+          <v-text-field
+            v-model="search"
+            label="Tìm kiếm"
+            class="mx-4"
+          ></v-text-field>
+        </template>
         <template v-slot:item.Status="{ item }">
           <div
             :class="
@@ -99,10 +108,12 @@ export default {
       listPost: [],
       headers: [
         { text: "Tiêu đề", value: "Title" },
-        { text: "Ngày tạo", value: "CreatedDate" },
+        { text: "Tài khoản đăng", value: "UserName" },
+        { text: "Ngày đăng", value: "CreatedDate" },
         { text: "Trạng thái", value: "Status", align: "center" },
         { text: "", value: "actions", sortable: false },
       ],
+      search: "",
     };
   },
   methods: {
@@ -161,12 +172,12 @@ export default {
         axios.get(`${this.baseUrl}Post/GetListPostForAdmin`, config).then(
           (res) => {
             if (res.data.StatusCode == 1) {
-              if (res.data.Data){
-                res.data.Data.$values.forEach(x=>{
+              if (res.data.Data) {
+                res.data.Data.$values.forEach((x) => {
                   x.CreatedDate = util.formatDate(x.CreatedDate);
-                })
+                });
               }
-               this.listPost = res.data.Data.$values;
+              this.listPost = res.data.Data.$values;
             }
           },
           (error) => {
@@ -226,6 +237,12 @@ export default {
             .finally(() => {});
         }
       });
+    },
+    filter(value, search) {
+      let searchKey = search.toLowerCase();
+      if (value != null && search != null) {
+        return value.toString().toLowerCase().indexOf(searchKey) !== -1;
+      }
     },
   },
   created() {

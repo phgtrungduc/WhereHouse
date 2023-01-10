@@ -26,12 +26,12 @@
             </div>
             <div class="col-foot">
               <div class="compose">
-                <input placeholder="Nhập tin nhắn ..." v-model="message" />
+                <input placeholder="Nhập tin nhắn ..." v-model="message" @keyup.enter="sendMessage"/>
                 <div class="compose-dock">
                   <div class="dock">
                     <font-awesome-icon
                       icon="fa-solid fa-paper-plane"
-                      size="2x"
+                      style="font-size:20px;"
                       id="sendMessage"
                       @click="sendMessage"
                     />
@@ -91,7 +91,7 @@
 <script>
 import DialogChat from "../../components/Chat/DialogChat.vue";
 import util from "../../util/util";
-import { connection } from "@/chathub/ChatHub.js";
+import { connection, InitPrivateChat } from "@/chathub/ChatHub.js";
 import axios from "axios";
 import DetailChat from "../../components/Chat/DetailChat.vue";
 export default {
@@ -115,7 +115,6 @@ export default {
       connection.on("ReceivedPrivateMessage", (userSendId, message) => {
         if (me.currentUserId && me.currentUserId != userSendId) {
           me.listMessage.push({ message: message, type: 2 });
-          this.scrollToBottom();
         }
       });
     },
@@ -129,6 +128,20 @@ export default {
         );
         this.listMessage.push({ message: this.message, type: 1 });
         this.message = "";
+        this.updateConversationList();
+      }
+    },
+    updateConversationList() {
+      let conversation = this.listConversation.find(
+        (element) => element.ConversationId == this.currentConversationId
+      );
+      if (conversation) {
+        conversation.LastTimeMessage = new Date();
+        this.listConversation.sort((a,b)=>{
+          let time1 = a.LastTimeMessage.getTime();
+          let time2 = b.LastTimeMessage.getTime();
+          return time2 - time1;
+        })
       }
     },
     async initChat(curentUserId, otherUserId) {
@@ -143,6 +156,7 @@ export default {
         config1
       );
       let conversationId = conversationIdData.data.Data;
+      InitPrivateChat(curentUserId,otherUserId,conversationId);
       this.currentConversationId = conversationId;
       let config2 = {
         headers: {
@@ -244,6 +258,11 @@ export default {
             if (res.data.StatusCode) {
               if (res.data.Data) {
                 this.listConversation = res.data.Data.$values;
+                this.listConversation.forEach((x) => {
+                  if (x.LastTimeMessage) {
+                    x.LastTimeMessage = new Date(x.LastTimeMessage);
+                  }
+                });
               }
             }
           },
@@ -281,11 +300,11 @@ export default {
       let currentUserId = this.currentUserId || util.getCurrentUserId();
       if (otherUserId && currentUserId) {
         this.initChat(currentUserId, otherUserId);
-        this.waitForChat();
         this.getOtherUserInfo(otherUserId);
       }
     }
     this.getListConversationForUser();
+    this.waitForChat();
   },
 
   mounted() {},

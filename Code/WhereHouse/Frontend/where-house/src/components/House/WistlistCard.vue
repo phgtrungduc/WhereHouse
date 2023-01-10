@@ -162,6 +162,7 @@ export default {
                       : "Xóa khỏi danh sách yêu thích thành công";
                   this.$props.updateParentComponent();
                   util.alertSuccess(title);
+                  this.$store.dispatch("getWishListUser", this.token);
                 }
               }
             })

@@ -46,6 +46,12 @@ export default {
       },
     },
   },
+  updated() {
+    if (this.$props.conversation && this.$props.conversation.AvatarUrl) {
+      this.avatarURL =
+        this.baseResourceUrl + this.$props.conversation.AvatarUrl;
+    }
+  },
   created() {
     if (this.$props.conversation && this.$props.conversation.AvatarUrl) {
       this.avatarURL =

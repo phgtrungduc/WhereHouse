@@ -46,7 +46,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-card>
-        <div>
+        <div class="d-flex flex-column align-items-end">
           <v-menu bottom left transition="slide-y-transition" class="more">
             <template v-slot:activator="{ on, attrs }">
               <v-btn icon v-bind="attrs" v-on="on">
@@ -115,6 +115,9 @@
               </v-list-item-group>
             </v-list>
           </v-menu>
+          <div class="created-date" v-if="postData.CreatedDate">
+            Ngày đăng: {{ this.postData.CreatedDate }}
+          </div>
         </div>
       </div>
 
@@ -207,8 +210,9 @@
           :v-if="markers.length"
           :key="index"
           v-for="(m, index) in markers"
-          :position="m"
-          @click="center = m"
+          :position="m.position"
+          :icon="m.icon"
+          @click="clickMarker(m)"
         />
 
         <DirectionsRenderer
@@ -217,6 +221,17 @@
           :origin="directionObject.origin"
           :destination="directionObject.destination"
         />
+        <gmap-info-window
+          :options="{
+            maxWidth: 300,
+            pixelOffset: { width: 0, height: -35 },
+          }"
+          :opened="infoWindow.open"
+          @closeclick="infoWindow.open = false"
+          :position="infoWindow.position"
+        >
+          <div v-html="infoWindow.template"></div>
+        </gmap-info-window>
       </GmapMap>
       <v-btn style="width: 100%" @click="directFromCurrentPostion"
         >Chỉ đường từ vị trí hiện tại</v-btn
@@ -254,6 +269,11 @@ export default {
       contentReport: "",
       openDialogReport: false,
       isOwnUser: null,
+      infoWindow: {
+        open: false,
+        position: { lat: 0, lng: 0 },
+        template: ''
+      },
     };
   },
   props: ["baseURL", "products", "categories"],
@@ -287,6 +307,9 @@ export default {
         .then((res) => {
           if (res.data.Data) {
             let data = res.data.Data;
+            data.CreatedDate = data.CreatedDate
+              ? util.formatDate(data.CreatedDate)
+              : null;
             this.postData = data;
             this.houseData = data.House;
             this.userOwner = data.House?.UserOwner;
@@ -300,7 +323,10 @@ export default {
             if (data.House.AddressByGoogle) {
               let address = JSON.parse(data.House.AddressByGoogle);
               this.houseAddress = address;
-              this.markers.push(address);
+              this.markers.push({
+                position: address,
+              });
+              this.getMoreAboutLocation(address);
             }
             this.checkRoleUser();
           }
@@ -361,6 +387,7 @@ export default {
             if (res.data.StatusCode) {
               if (res.data.Data) {
                 util.alertSuccess("Đã thêm vào danh sách yêu thích");
+                this.$store.dispatch("getWishListUser", this.token);
               } else {
                 swal({
                   text: "Lỗi hệ thống!",
@@ -518,17 +545,36 @@ export default {
         },
       });
     },
-    getMoreAboutLocation() {
-      //   let directionsService = new window.google.maps.DirectionsService(),
-      //     request = {
-      //       location: "-33.8670522%2C151.1957362",
-      //       fields: ["name", "formatted_address", "place_id", "geometry"],
-      //     };
-      //   directionsService.nearby(request, (place, status) => {
-      //     console.log(place);
-      //     console.log(status);
-      //   });
-      console.log("fix tam");
+    getMoreAboutLocation(location) {
+      let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json",
+        params = {
+          radius: 5000,
+          key: "AIzaSyAAENizOFK6HhjXS0W2wtOFLpAvpUyIJUY",
+          location: `${location.lat},${location.lng}`,
+          type: "restaurant|store|supermarket",
+          ranky: "distance",
+        };
+      axios.get(url, { params: params }).then((res) => {
+        if (res.data.results) {
+          res.data.results.forEach((x) => {
+            let icon = {
+              url: x.icon
+            };
+            if (window.google){
+              icon.scaledSize= new window.google.maps.Size(20, 20); // scaled size
+              icon.origin= new window.google.maps.Point(0, 0); // origin
+              icon.anchor= new window.google.maps.Point(0, 0); // anchor
+            }
+            
+            this.markers.push({ position: x.geometry.location, icon: icon,name:x.name,vicinity:x.vicinity });
+          });
+        }
+      });
+    },
+    clickMarker(marker) {
+      this.infoWindow.open = true;
+      this.infoWindow.position = marker.position;
+      this.infoWindow.template = `<p class='font-weight-bold'>${marker.name}</p><p>Địa chỉ: ${marker.vicinity}</p>`
     },
   },
   created() {
@@ -536,7 +582,6 @@ export default {
     this.id = id;
     this.getData(id);
     this.token = localStorage.getItem("token");
-    this.getMoreAboutLocation();
   },
   computed: {
     userOwnerName() {
@@ -567,6 +612,9 @@ export default {
     padding-right: 50px;
     .title-item {
       font-weight: bold;
+    }
+    .created-date {
+      font-size: 12px;
     }
   }
   .house-map {

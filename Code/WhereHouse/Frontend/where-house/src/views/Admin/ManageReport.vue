@@ -13,7 +13,16 @@
         :footer-props="{
           'items-per-page-text': 'Số lượng báo cáo mỗi trang',
         }"
+        :search="search"
+        :custom-filter="filter"
       >
+        <template v-slot:top>
+          <v-text-field
+            v-model="search"
+            label="Tìm kiếm"
+            class="mx-4"
+          ></v-text-field>
+        </template>
         <template v-slot:item.Status="{ item }">
           <div :class="item.Status == 1 ? 'status is-block' : 'status active'">
             {{ item.Status == 1 ? "Chưa giải quyết" : "Đã giải quyết" }}
@@ -31,7 +40,7 @@
                 <font-awesome-icon
                   icon="fa-solid fa-rotate"
                   class="action-table"
-                  style="font-size:20px"
+                  style="font-size: 20px"
                 />
               </v-btn>
             </template>
@@ -60,8 +69,9 @@ export default {
         { text: "Trạng thái", value: "Status" },
         { text: "Tài khoản báo cáo", value: "UserName" },
         { text: "Tên người báo cáo", value: "FullName" },
-        { text: "", value: "actions", sortable: false },
+        { text: "", value: "actions", sortable: false, align: "left" },
       ],
+      search: "",
     };
   },
   methods: {
@@ -84,6 +94,9 @@ export default {
         axios.get(`${this.baseUrl}Report`, config).then(
           (res) => {
             if (res.data.StatusCode == 1) {
+              res.data.Data.$values.forEach((x) => {
+                x.CreatedDate = util.formatDate(x.CreatedDate);
+              });
               this.listReport = res.data.Data.$values;
               this.$store.commit("showLoadingFullScreen", false);
             }
@@ -145,6 +158,12 @@ export default {
         });
       }
     },
+    filter(value, search) {
+      let searchKey = search.toLowerCase();
+      if (value != null && search != null) {
+        return value.toString().toLowerCase().indexOf(searchKey) !== -1;
+      }
+    },
   },
   created() {
     this.getListReport();
@@ -168,7 +187,7 @@ export default {
     font-weight: 400;
     padding-bottom: 5px;
   }
-  .v-btn{
+  .v-btn {
     font-size: 10px !important;
   }
 }

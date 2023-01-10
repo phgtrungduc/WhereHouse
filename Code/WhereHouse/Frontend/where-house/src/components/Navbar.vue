@@ -19,17 +19,17 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="form-inline ml-auto mr-auto">
+      <div class="form-inline ml-auto mr-auto">
         <div class="input-group">
           <input
             size="100"
             type="text"
             class="form-control"
-            placeholder="Tìm kiếm nội dung ..."
-            aria-label="Username"
-            aria-describedby="basic-addon1"
+            placeholder="Tìm kiếm bài đăng ..."
+            v-model="search"
+            @keyup.enter="getSearchResult"
           />
-          <div class="input-group-prepend">
+          <div class="input-group-prepend" @click="getSearchResult">
             <span class="input-group-text" id="search-button-navbar">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@
             </span>
           </div>
         </div>
-      </form>
+      </div>
 
       <div
         class="navbar-right d-flex align-items-center justify-content-end"
@@ -158,7 +158,7 @@
                 </v-dialog>
               </v-list-item>
               <router-link :to="{ name: 'SignupAdmin' }">
-                <v-list-item >
+                <v-list-item>
                   <v-list-item-title>
                     Đăng ký tài khoản admin
                   </v-list-item-title>
@@ -370,6 +370,7 @@ export default {
         VerifyPassword: "",
         NewPassword: "",
       },
+      search:''
     };
   },
   components: { PTDInput },
@@ -433,6 +434,12 @@ export default {
           }
         })
         .finally(() => {});
+    },
+    getSearchResult() {
+      if (this.search) {
+        this.$router.push({ name: "SearchResult",params:{search:this.search} });
+        this.search = '';
+      }
     },
   },
   mounted() {

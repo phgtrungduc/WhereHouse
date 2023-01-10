@@ -13,14 +13,25 @@
         :footer-props="{
           'items-per-page-text': 'Số lượng người dùng mỗi trang',
         }"
+        :search="search"
+        :custom-filter="filter"
       >
+        <template v-slot:top>
+          <v-text-field
+            v-model="search"
+            label="Tìm kiếm"
+            class="mx-4"
+          ></v-text-field>
+        </template>
         <template v-slot:item.Status="{ item }">
           <div :class="item.Status == 2 ? 'status is-block' : 'status active'">
             {{ item.Status == 2 ? "Đã bị chặn" : "Đang hoạt động" }}
           </div>
         </template>
         <template v-slot:item.Role="{ item }">
-          {{ item.Role == 2 ? "Quản trị viên" : "Người dùng" }}
+          <div :class="item.Role == 2?'font-weight-bold text-danger':''">
+            {{ item.Role == 2 ? "Quản trị viên" : "Người dùng" }}
+          </div>
         </template>
         <template v-slot:item.actions="{ item }">
           <v-tooltip bottom>
@@ -68,8 +79,10 @@ export default {
         { text: "Điện thoại", value: "PhoneNumber" },
         { text: "Trạng thái", value: "Status", align: "center" },
         { text: "Vai trò", value: "Role" },
+        { text: "Ngày tạo", value: "CreatedDate" },
         { text: "", value: "actions", sortable: false },
       ],
+      search: "",
     };
   },
   methods: {
@@ -83,6 +96,9 @@ export default {
         axios.get(`${this.baseUrl}User/GetListUserForAdmin`, config).then(
           (res) => {
             if (res.data.StatusCode == 1) {
+              res.data.Data.$values.forEach((x) => {
+                x.CreatedDate = util.formatDate(x.CreatedDate);
+              });
               this.listUser = res.data.Data.$values;
             }
           },
@@ -114,7 +130,7 @@ export default {
               .then((res) => {
                 if (res.data.StatusCode) {
                   if (res.data.Data) {
-                    util.alertSuccess(text+" thành công").then(() => {
+                    util.alertSuccess(text + " thành công").then(() => {
                       this.getListUserForAdmin();
                     });
                   }
@@ -151,7 +167,6 @@ export default {
             axios
               .delete(url, config)
               .then((res) => {
-                console.log(res);
                 if (res.data.StatusCode) {
                   if (res.data.Data) {
                     util.alertSuccess("Xóa người dùng thành công").then(() => {
@@ -172,10 +187,15 @@ export default {
         });
       }
     },
+    filter(value, search) {
+      let searchKey = search.toLowerCase();
+      if (value != null && search != null) {
+        return value.toString().toLowerCase().indexOf(searchKey) !== -1;
+      }
+    },
   },
   created() {
     this.getListUserForAdmin();
-    console.log(this.listUser);
   },
 };
 </script>

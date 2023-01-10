@@ -10,7 +10,7 @@
         <LoadingApp v-if="this.$store.state.loadingApp" />
       </div> -->
       <LoadingFullScreen v-if="this.$store.state.loadingFullScreen" />
-      <div class="content" style="min-height: calc(100vh - 177px)">
+      <div class="content" style="min-height: calc(100vh - 164px)">
         <v-snackbar
           v-model="showSnackbar"
           transition="v-slide-x-reverse-transition"
@@ -39,7 +39,6 @@ import Footer from "./components/Footer.vue";
 import LoadingFullScreen from "./components/Controls/LoadingFullScreen.vue";
 import axios from "axios";
 import util from "@/util/util.js";
-import PTDConstants from "@/mixin/consants.js";
 import {start} from "@/chathub/ChatHub.js";
 export default {
   data() {
@@ -80,7 +79,7 @@ export default {
               JSON.stringify(user)
             );
             start(user.UserId);
-            this.$store.commit("setUserRole", user.Role || PTDConstants.Role.User) ;
+            this.$store.commit("setUserRole", user.Role) ;
             this.$store.dispatch("getWishListUser", this.token);
           })
           .catch((err) => console.log(err))

@@ -12,14 +12,11 @@
         <div class="row">
           <div class="card-image col-3">
             <v-img
-              height="100%"
-              width="100%"
               src="../../assets/images/no-pictures.png"
               v-if="!houseImageUrl"
+              aspect-ratio="1.7"
             ></v-img>
             <v-img
-              height="100%"
-              width="100%"
               :src="houseImageUrl"
               v-if="houseImageUrl"
               aspect-ratio="1.7"
@@ -64,7 +61,7 @@
               persistent
               max-width="300px"
               max-height="100px"
-              v-if="this.$props.post.Status ===1"
+              v-if="this.$props.post.Status === 1"
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -78,9 +75,11 @@
                 >
               </template>
               <v-card>
-                <span class="title-dialog font-weight-bold m-3">Chọn phương thức thanh toán</span>
+                <span class="title-dialog font-weight-bold m-3"
+                  >Chọn phương thức thanh toán</span
+                >
                 <v-container>
-                  <PayDialog :post="this.$props.post"/>
+                  <PayDialog :post="this.$props.post" />
                 </v-container>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -296,7 +295,7 @@ export default {
       }
     }
   }
-  .title-dialog{
+  .title-dialog {
     font-weight: bold;
   }
 }

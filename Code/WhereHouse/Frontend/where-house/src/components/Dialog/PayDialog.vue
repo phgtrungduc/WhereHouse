@@ -2,23 +2,6 @@
   <div class="pay-dialog d-flex">
     <!-- <h4>Chọn phương thức thanh toán</h4> -->
     <div class="payment d-flex justify-content-center">
-      <div class="zalopay method">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-img
-              height="50"
-              width="50"
-              max-height="50"
-              max-width="50"
-              src="../../assets/images/ZaloPay-icon.png"
-              v-bind="attrs"
-              v-on="on"
-              @click="payByZalopay"
-            ></v-img>
-          </template>
-          <span>Thanh tooán bằng ZaloPay</span>
-        </v-tooltip>
-      </div>
       <div class="momo method">
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
@@ -34,6 +17,23 @@
             ></v-img>
           </template>
           <span>Thanh tooán bằng MoMo</span>
+        </v-tooltip>
+      </div>
+      <div class="zalopay method">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-img
+              height="50"
+              width="50"
+              max-height="50"
+              max-width="50"
+              src="../../assets/images/ZaloPay-icon.png"
+              v-bind="attrs"
+              v-on="on"
+              @click="payByZalopay"
+            ></v-img>
+          </template>
+          <span>Thanh tooán bằng ZaloPay</span>
         </v-tooltip>
       </div>
     </div>
@@ -72,8 +72,8 @@ export default {
             config
           )
           .then((res) => {
-            if (res.data){
-              window.open(res.data)
+            if (res.data) {
+              window.open(res.data);
             }
             // window.open(res);
           })

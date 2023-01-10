@@ -27,7 +27,7 @@
                 <ValidationProvider
                   :rules="{
                     required: true,
-                    regex: /(84|0[3|5|7|8|9])+([0-9]{8})\b/
+                    regex: /(84|0[3|5|7|8|9])+([0-9]{8})\b/,
                   }"
                   name="PhoneNumber"
                 >
@@ -221,7 +221,9 @@ export default {
             .post(`${this.baseUrl}user/InsertUser`, user)
             .then((res) => {
               if (res.data.StatusCode) {
-                util.alertSuccess("Thêm tài khoản thành công");
+                util
+                  .alertSuccess("Thêm tài khoản thành công")
+                  .then(() => this.$router.push({ name: "Signin" }));
               }
               this.$store.commit("showLoadingFullScreen", false);
               console.log(res);

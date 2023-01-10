@@ -35,10 +35,10 @@ export function receivedPrivateMessage() {
         console.log(message);
     });
 }
-export async function InitPrivateChat(userSendId,userReceivedId) {
+export async function InitPrivateChat(userSendId,userReceivedId,conversationId) {
     // connection.on("ReceivedPrivateMessage", (groupName, message) => {
     //     console.log(groupName);
     //     console.log(message);
     // });
-    await connection.invoke("InitPrivateChat",userSendId,userReceivedId)
+    await connection.invoke("InitPrivateChat",userSendId,userReceivedId,conversationId)
 }

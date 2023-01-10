@@ -25,7 +25,7 @@
                 <ValidationProvider
                   :rules="{
                     required: true,
-                    regex: /(84|0[3|5|7|8|9])+([0-9]{8})\b/
+                    regex: /(84|0[3|5|7|8|9])+([0-9]{8})\b/,
                   }"
                   name="PhoneNumber"
                 >
@@ -205,11 +205,18 @@ export default {
         if (user.Password == user.VerifyPassword) {
           // call the API
           this.$store.commit("showLoadingFullScreen", true);
+          let config = {
+            headers: {
+              Authorization: "Bearer " + this.token,
+            },
+          };
           await axios
-            .post(`${this.baseUrl}user/InsertAdmin`, user)
+            .post(`${this.baseUrl}user/InsertAdmin`, user, config)
             .then((res) => {
-              if (res.data.StatusCode) {
-                util.alertSuccess("Thêm tài khoản thành công");
+              if (res.data.Data.StatusCode) {
+                util
+                  .alertSuccess("Thêm tài khoản thành công")
+                  .then(() => this.$router.push({ name: "Signin" }));
               }
               this.$store.commit("showLoadingFullScreen", false);
               console.log(res);

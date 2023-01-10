@@ -12,6 +12,7 @@ import EditHouse from '../views/House/EditHouse.vue'
 import Wishlist from '../views/Wishlist/Wishlist.vue'
 import MyPost from '../views/House/MyPost.vue'
 
+import SearchResult from '../views/SearchResult.vue'
 import Signup from '../views/Signup.vue'
 import SignupAdmin from '../views/SignupAdmin.vue'
 import Signin from '../views/Signin.vue'
@@ -30,7 +31,7 @@ import ManagePost from "../views/Admin/ManagePost.vue";
 import ManageReport from "../views/Admin/ManageReport.vue";
 import NotHaveRole from "../views/NotHaveRole.vue";
 
-import store from '@/store/index.js';
+// import store from '@/store/index.js';
 
 Vue.use(Router);
 
@@ -58,7 +59,12 @@ const routes = [
     component: Signup,
   },
   {
-    path: '/signupadmin',
+    path: '/searchresult',
+    name: 'SearchResult',
+    component: SearchResult,
+  },
+  {
+    path: 'admin/signupadmin',
     name: 'SignupAdmin',
     component: SignupAdmin,
     params: true
@@ -121,7 +127,7 @@ const routes = [
     component: PaymentResult
   },
   {
-    path: '/notehaverole',
+    path: '/nothaverole',
     name: 'NotHaveRole',
     component: NotHaveRole
     // get component() {
@@ -176,23 +182,23 @@ router.push = function push(location, onResolve, onReject) {
 }
 
 
-router.beforeEach((to, from, next) => {
-  // access store via `router.app.$store` here.
-  // if (router.app.$store.get) next();
-  // else next({ name: 'login' });
-  // window.scrollTo(0, 0);
-  console.log(store.state.userRole);
-  // if (to.path.includes('admin')) {
-  //   if (store.state.userRole == 2) {
-  //     next();
-  //   }
-  //   else {
-  //     next('/notehaverole')
-  //   }
-  // } else {
-  //   next();
-  // }
-  next();
-})
+// router.beforeEach((to, from, next) => {
+//   // access store via `router.app.$store` here.
+//   // if (router.app.$store.get) next();
+//   // else next({ name: 'login' });
+//   // window.scrollTo(0, 0);
+//   console.log(store.state.userRole);
+//   if (to.path.includes('admin')) {
+//     if (store.state.userRole == 2) {
+//       next();
+//     }
+//     else {
+//       next('/nothaverole')
+//     }
+//   } else {
+//     next();
+//   }
+//   next();
+// })
 
 export default router

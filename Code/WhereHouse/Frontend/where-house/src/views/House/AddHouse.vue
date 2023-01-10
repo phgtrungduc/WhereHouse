@@ -259,7 +259,7 @@ export default {
       if (this.validateForm()) {
         swal({
           title: "Thêm bài đăng",
-          text: "Khi thêm bài đăng, bạn sẽ phải thanh toán một khoản phí là 3000d. Tiếp tục?",
+          text: "Khi thêm bài đăng, bạn sẽ phải thanh toán một khoản phí là 3000đ. Tiếp tục?",
           icon: "warning",
           buttons: true,
           dangerMode: true,
@@ -279,7 +279,7 @@ export default {
                     timer: 500,
                     icon: "success",
                   }).then(() => {
-                    this.$router.push({ name: "Home" });
+                    this.$router.push({ name: "MyPost" });
                   });
                 }
               })
